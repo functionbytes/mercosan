@@ -76,7 +76,7 @@
                 <x-core::button
                     tag="a"
                     data-bb-toggle="store-locator-show"
-                    class="btn-link p-0"
+                    class="btn-primary"
                     data-type="create"
                     data-load-form="{{ route('ecommerce.store-locators.form') }}"
                 >

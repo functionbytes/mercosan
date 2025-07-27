@@ -67,7 +67,7 @@ export default {
         return {
             isLoading: true,
             earningSales: [],
-            colors: ['#fcb800', '#80bc00'],
+            colors: ['#fe0000', '#fe0000'],
             chart: null,
             filtering: '',
             chartFromDate: null,

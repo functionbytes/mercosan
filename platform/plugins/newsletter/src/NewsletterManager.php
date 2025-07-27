@@ -5,7 +5,7 @@ namespace Botble\Newsletter;
 use Botble\Base\Facades\AdminHelper;
 use Botble\Media\Facades\RvMedia;
 use Botble\Newsletter\Contracts\Factory;
-use Botble\Newsletter\Drivers\MailChimp;
+use Botble\Newsletter\Drivers\Mailjet;
 use Botble\Newsletter\Drivers\SendGrid;
 use Botble\Theme\Events\RenderingThemeOptionSettings;
 use Botble\Theme\Facades\Theme;
@@ -24,11 +24,11 @@ use InvalidArgumentException;
 
 class NewsletterManager extends Manager implements Factory
 {
-    protected function createMailChimpDriver(): MailChimp
+    protected function createmailjetDriver(): Mailjet
     {
-        return new MailChimp(
-            setting('newsletter_mailchimp_api_key'),
-            setting('newsletter_mailchimp_list_id')
+        return new Mailjet(
+            setting('newsletter_mailjet_api_key'),
+            setting('newsletter_mailjet_list_id')
         );
     }
 

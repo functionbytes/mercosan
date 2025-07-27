@@ -15,33 +15,17 @@ class NewsletterSettingForm extends SettingForm
     {
         parent::setup();
 
-        $mailchimpContactList = [];
+        $mailjetContactList = [];
 
-        if (setting('newsletter_mailchimp_api_key')) {
+        if (setting('newsletter_mailjet_api_key')) {
             try {
-                $contacts = collect(NewsletterFacade::driver('mailchimp')->contacts());
+                $contacts = collect(NewsletterFacade::driver('mailjet')->contacts());
 
-                if (! setting('newsletter_mailchimp_list_id')) {
-                    setting()->set(['newsletter_mailchimp_list_id' => Arr::get($contacts, 'id')])->save();
+                if (! setting('newsletter_mailjet_list_id')) {
+                    setting()->set(['newsletter_mailjet_list_id' => Arr::get($contacts, 'id')])->save();
                 }
 
-                $mailchimpContactList = $contacts->pluck('name', 'id')->all();
-            } catch (Exception $exception) {
-                BaseHelper::logError($exception);
-            }
-        }
-
-        $sendGridContactList = [];
-
-        if (setting('newsletter_sendgrid_api_key')) {
-            try {
-                $contacts = collect(NewsletterFacade::driver('sendgrid')->contacts());
-
-                if (! setting('newsletter_sendgrid_list_id')) {
-                    setting()->set(['newsletter_sendgrid_list_id' => Arr::get($contacts->first(), 'id')])->save();
-                }
-
-                $sendGridContactList = $contacts->pluck('name', 'id')->all();
+                $mailjetContactList = $contacts->pluck('name', 'id')->all();
             } catch (Exception $exception) {
                 BaseHelper::logError($exception);
             }
@@ -52,7 +36,7 @@ class NewsletterSettingForm extends SettingForm
             ->setSectionDescription(trans('plugins/newsletter::newsletter.settings.description'))
             ->setValidatorClass(NewsletterSettingRequest::class)
             ->add('newsletter_contacts_list_api_fields', 'html', [
-                'html' => view('plugins/newsletter::partials.newsletter-contacts-list-api-fields', compact('mailchimpContactList', 'sendGridContactList')),
+                'html' => view('plugins/newsletter::partials.newsletter-contacts-list-api-fields', compact('mailjetContactList')),
                 'wrapper' => [
                     'class' => 'mb-0',
                 ],

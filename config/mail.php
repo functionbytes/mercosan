@@ -1,5 +1,7 @@
 <?php
 
+use Botble\Newsletter\Drivers\Mailjet;
+
 return [
 
     /*
@@ -55,6 +57,17 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+        ],
+
+        //'mailjet' => [
+        //    'key'    => env('MAILJET_APIKEY'),
+        //    'secret' => env('MAILJET_SECRET'),
+        //    'list'   => env('MAILJET_LIST_ID'),
+        //],
+
+
+        'mailjet' => [
+            'driver' => Mailjet::class,
         ],
 
         'postmark' => [

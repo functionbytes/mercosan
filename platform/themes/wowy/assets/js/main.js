@@ -174,22 +174,31 @@
 
         $(sliderID).slick({
             dots: false,
+            arrows: false,
             rtl: isRTL,
-            arrows: true,
             autoplay: slickOptions.autoplay === 'yes',
             infinite: slickOptions.infinite === 'yes',
-            speed: slickOptions.speed ? slickOptions.speed : 1000,
-            autoplaySpeed: slickOptions.autoplaySpeed ? slickOptions.autoplaySpeed : 3000,
-            slidesToShow: 6,
+            speed: slickOptions.speed || 1000,
+            autoplaySpeed: slickOptions.autoplaySpeed || 3000,
+            slidesToShow: 4, // Solo 4 por fila
             slidesToScroll: 1,
-            loop: true,
             adaptiveHeight: true,
+            rows: 1, // <-- Esto es clave: solo 1 fila
             responsive: [
                 {
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        rows: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        rows: 1
                     }
                 },
                 {
@@ -197,13 +206,12 @@
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
+                        rows: 1
                     }
                 }
-            ],
-            prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
-            nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
-            appendArrows: appendArrowsClassName,
+            ]
         });
+
     });
 
     /* Carousel 4 columns */

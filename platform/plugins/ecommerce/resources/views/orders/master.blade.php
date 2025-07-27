@@ -23,7 +23,7 @@
 
     <style>
         :root {
-            --primary-color: {{ $primaryColor = theme_option('primary_color', '#58b3f0') }};
+            --primary-color: {{ $primaryColor = theme_option('primary_color', '#fe0000') }};
             --primary-color-rgb: {{ implode(',', BaseHelper::hexToRgb($primaryColor)) }};
         }
     </style>

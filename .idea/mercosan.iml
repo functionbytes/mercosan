@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/tests/Feature" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/acl/src" isTestSource="false" packagePrefix="Botble\ACL\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/base/src" isTestSource="false" packagePrefix="Botble\Base\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/base/src/Ziggy" isTestSource="false" packagePrefix="Tightenco\Ziggy\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/base/tests" isTestSource="false" packagePrefix="Botble\Base\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/chart/src" isTestSource="false" packagePrefix="Botble\Chart\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/dashboard/src" isTestSource="false" packagePrefix="Botble\Dashboard\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/icon/src" isTestSource="false" packagePrefix="Botble\Icon\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/js-validation/src" isTestSource="false" packagePrefix="Botble\JsValidation\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/media/src" isTestSource="false" packagePrefix="Botble\Media\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/setting/src" isTestSource="false" packagePrefix="Botble\Setting\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/support/src" isTestSource="false" packagePrefix="Botble\Support\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/core/table/src" isTestSource="false" packagePrefix="Botble\Table\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/get-started/src" isTestSource="false" packagePrefix="Botble\GetStarted\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/installer/src" isTestSource="false" packagePrefix="Botble\Installer\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/menu/src" isTestSource="false" packagePrefix="Botble\Menu\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/optimize/src" isTestSource="false" packagePrefix="Botble\Optimize\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/page/src" isTestSource="false" packagePrefix="Botble\Page\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/plugin-management/src" isTestSource="false" packagePrefix="Botble\PluginManagement\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/revision/src" isTestSource="false" packagePrefix="Botble\Revision\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/seo-helper/src" isTestSource="false" packagePrefix="Botble\SeoHelper\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/shortcode/src" isTestSource="false" packagePrefix="Botble\Shortcode\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/sitemap/src" isTestSource="false" packagePrefix="Botble\Sitemap\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/slug/src" isTestSource="false" packagePrefix="Botble\Slug\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/theme/src" isTestSource="false" packagePrefix="Botble\Theme\" />
+      <sourceFolder url="file://$MODULE_DIR$/platform/packages/widget/src" isTestSource="false" packagePrefix="Botble\Widget\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

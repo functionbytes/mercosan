@@ -79,22 +79,30 @@
         </section>
     @elseif ($style == 'style-2')
         <section class="home-slider bg-grey-9 position-relative">
-            <div class="hero-slider-1 style-2 dot-style-1 dot-style-1-position-1" data-autoplay="{{ $shortcode->is_autoplay ?: 'yes' }}" data-autoplay-speed="{{ in_array($shortcode->autoplay_speed, theme_get_autoplay_speed_options()) ? $shortcode->autoplay_speed : 3000 }}">
+            <div class="hero-slider-1 style-2 dot-style-1 dot-style-1-position-1"
+                 data-autoplay="{{ $shortcode->is_autoplay ?: 'yes' }}"
+                 data-autoplay-speed="{{ in_array($shortcode->autoplay_speed, theme_get_autoplay_speed_options()) ? $shortcode->autoplay_speed : 3000 }}">
+
                 @foreach($sliders as $slider)
-                    <div class="single-hero-slider single-animation-wrap">
+                    <div class="single-hero-slider single-animation-wrap position-relative">
+
+                        {{-- Imagen como fondo --}}
+                        {!! Theme::partial('shortcodes.sliders.includes.image', compact('slider', 'style')) !!}
+
                         <div class="container">
                             <div class="slider-1-height-2 slider-animated-1">
                                 {!! Theme::partial('shortcodes.sliders.content', compact('slider')) !!}
-                                <div class="single-slider-img single-slider-img-1">
-                                    {!! Theme::partial('shortcodes.sliders.includes.image', compact('slider')) !!}
-                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
+
             </div>
             <div class="slider-arrow hero-slider-1-arrow"></div>
         </section>
+
+
+
     @else
         <section class="home-slider bg-grey-9 position-relative">
             {!! Theme::partial('shortcodes.sliders.grid', compact('sliders', 'shortcode')) !!}

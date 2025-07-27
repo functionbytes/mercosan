@@ -309,7 +309,7 @@ class CheckoutForm extends FormFront
                                             $form
                                                 ->addWrapper(
                                                     'footer_actions_left_wrapper',
-                                                    '<div class="order-2 order-md-1 col-md-6 text-center text-md-start mb-4 mb-md-0">',
+                                                    '<div class="order-2 order-md-1 col-md-12 text-center text-md-start mb-4 mb-md-0">',
                                                     '</div>',
                                                     function (CheckoutForm $form) use ($model): void {
                                                         $form
@@ -327,7 +327,7 @@ class CheckoutForm extends FormFront
                                                 )
                                                 ->addWrapper(
                                                     'footer_actions_right_wrapper',
-                                                    '<div class="order-1 order-md-2 col-md-6">',
+                                                    '<div class="order-1 order-md-2 col-md-12">',
                                                     '</div>',
                                                     function (CheckoutForm $form): void {
                                                         $form->add(

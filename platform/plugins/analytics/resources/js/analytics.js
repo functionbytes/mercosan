@@ -35,7 +35,7 @@ class PluginAnalytics {
                 backgroundColor: 'transparent',
                 regionStyle: {
                     initial: {
-                        fill: '#f6f8fb',
+                        fill: '#fbfbfb',
                         stroke: '#dce1e7',
                         'stroke-width': 2,
                     },
@@ -44,7 +44,7 @@ class PluginAnalytics {
                     regions: [
                         {
                             values: visitorsData,
-                            scale: ['#ffffff', '#206bc4'],
+                            scale: ['#ffffff', '#fe0000'],
                             normalizeFunction: 'polynomial',
                         },
                     ],

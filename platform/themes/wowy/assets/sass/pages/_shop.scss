@@ -654,8 +654,8 @@
             -webkit-align-items: center;
             -ms-flex-align: center;
             align-items: center;
-            background: #f7f8f9;
-            border: 1px solid #f7f8f9;
+            background: #fbfbfb;
+            border: 1px solid #fbfbfb;
             color: #777;
             padding: 11px 16px 11px 16px;
             border-radius: 26px;
@@ -1393,7 +1393,7 @@
             font-size: 12px;
 
             & + li {
-                border-top: 1px solid #f7f8f9;
+                border-top: 1px solid #fbfbfb;
                 padding-top: 5px;
                 margin-top: 5px;
             }
@@ -1441,7 +1441,7 @@
 
 .toggle_info {
     padding: 20px;
-    background-color: #f7f8f9;
+    background-color: #fbfbfb;
     border-radius: 10px;
     border: 1px solid #eee;
 }

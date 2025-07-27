@@ -51,7 +51,7 @@
             100% { transform: rotate(360deg); }
         }
         .debug {
-            background: #f8f9fa;
+            background: #fbfbfb;
             padding: 15px;
             margin: 20px 0;
             border-radius: 10px;

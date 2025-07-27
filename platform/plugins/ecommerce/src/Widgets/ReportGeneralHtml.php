@@ -43,7 +43,7 @@ class ReportGeneralHtml extends Html
                 'label' => PaymentStatusEnum::COMPLETED()->label(),
                 'value' => $revenueCompleted ? (int) $revenueCompleted->revenue : 0,
                 'status' => true,
-                'color' => '#80bc00',
+                'color' => '#fe0000',
             ],
             [
                 'label' => PaymentStatusEnum::PENDING()->label(),
@@ -60,7 +60,7 @@ class ReportGeneralHtml extends Html
         $earningSales = collect();
         $period = CarbonPeriod::create($this->startDate->startOfDay(), $this->endDate->endOfDay());
 
-        $colors = ['#fcb800', '#80bc00'];
+        $colors = ['#fe0000', '#fe0000'];
 
         $data = [
             'name' => get_application_currency()->title,

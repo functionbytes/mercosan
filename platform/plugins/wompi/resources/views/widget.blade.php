@@ -46,7 +46,7 @@
             padding: 2rem;
         }
         .payment-summary {
-            background: #f8f9fa;
+            background: #fbfbfb;
             border-radius: 10px;
             padding: 1.5rem;
             margin-bottom: 2rem;
@@ -297,7 +297,7 @@
 
             @if(app()->environment('local'))
                 <!-- Debug info (solo en desarrollo) -->
-                <div class="mt-4 p-3" style="background: #f8f9fa; border-radius: 10px; font-size: 0.85rem;">
+                <div class="mt-4 p-3" style="background: #fbfbfb; border-radius: 10px; font-size: 0.85rem;">
                     <strong>{{ __('Debug Info') }} (Solo en desarrollo):</strong><br>
                     <strong>Entorno:</strong> {{ $widgetData['is_sandbox'] ? 'Sandbox' : 'Producción' }}<br>
                     <strong>Public Key:</strong> {{ substr($widgetData['public_key'], 0, 20) }}...<br>

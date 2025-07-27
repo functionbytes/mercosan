@@ -60,6 +60,7 @@
                 ${message}
             </div>`;
 
+
             $('#alert-container').append(html).ready(() => {
                 window.setTimeout(() => {
                     $(`#alert-container #${alertId}`).remove();
