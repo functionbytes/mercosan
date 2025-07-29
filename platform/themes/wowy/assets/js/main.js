@@ -174,16 +174,19 @@
 
         $(sliderID).slick({
             dots: false,
-            arrows: false,
+            arrows: true,
             rtl: isRTL,
             autoplay: slickOptions.autoplay === 'yes',
             infinite: slickOptions.infinite === 'yes',
             speed: slickOptions.speed || 1000,
             autoplaySpeed: slickOptions.autoplaySpeed || 3000,
-            slidesToShow: 4, // Solo 4 por fila
+            slidesToShow: 4, // Mostrar solo 4 productos
             slidesToScroll: 1,
+            rows: 1, // Una sola fila
             adaptiveHeight: true,
-            rows: 1, // <-- Esto es clave: solo 1 fila
+            prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
+            nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
+            appendArrows: appendArrowsClassName,
             responsive: [
                 {
                     breakpoint: 1024,
@@ -211,7 +214,6 @@
                 }
             ]
         });
-
     });
 
     /* Carousel 4 columns */

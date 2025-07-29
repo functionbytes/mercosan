@@ -24,11 +24,10 @@
                     ],
                 ]) }}">
                 @foreach($categories as $category)
-
                     <div class="category-item">
                         <div class="card-1  hover-up p-20 category-thumb">
                             <a href="{{ $category->url }}">
-                                <img src="{{ RvMedia::getImageUrl($category->image, 'thumb', false, RvMedia::getDefaultImage()) }}"alt="{{ $category->name }}" >
+                                <img src="{{ RvMedia::getImageUrl($category->image, 'thumb', false, RvMedia::getDefaultImage()) }}" alt="{{ $category->name }}" >
                             </a>
                         </div>
                         <div class="category-content">
@@ -37,8 +36,6 @@
                             </a>
                         </div>
                     </div>
-
-
                 @endforeach
             </div>
         </div>
