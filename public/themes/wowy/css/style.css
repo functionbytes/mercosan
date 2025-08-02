@@ -590,7 +590,7 @@ button.submit,button[type=submit] {
 }
 
 .btn-brand:hover,button.submit:hover,button[type=submit]:hover {
-    background-color: var(--color-primary)!important
+    background-color: var(--color-primary);
 }
 
 .btn-login {
@@ -626,7 +626,7 @@ button.submit,button[type=submit] {
     display: inline-block;
     font-size: 14px;
     font-weight: 500;
-    padding: 12px 54px;
+    padding: 10px 20px;
     text-transform: uppercase;
     transition: all .3s linear 0s
 }
@@ -2582,7 +2582,8 @@ table .product-thumbnail img {
     transition: .2s;
     -moz-transition: .2s;
     -webkit-transition: .2s;
-    -o-transition: .2s
+    -o-transition: .2s;
+    overflow: visible !important;
 }
 
 .product-cart-wrap:hover {
@@ -4781,9 +4782,9 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 }
 
 .search-style-2 form button {
-    background-color: transparent;
+    background-color: transparent !important;
     border: none;
-    color: var(--color-brand);
+    color: #dcdcdc;
     font-size: 20px;
     height: 100%;
     padding: 5px 17px;
@@ -10589,6 +10590,184 @@ a:hover {
     font-size: 15px;
     margin-top: 10px;
     position: relative;
-    display: grid
-;
+    display: grid;
 }
+
+
+
+.shopping-modal .modal-content {
+    border-radius: 4px
+}
+
+.shopping-modal .modal-content .modal-header {
+    background: #fe0000
+}
+
+.shopping-modal .modal-content .modal-header .close {
+    padding: 1rem;
+    margin: -1rem 0rem -1rem auto;
+    background: transparent;
+    border: none;
+    font-size: 25px;
+}
+
+.shopping-modal .modal-content .modal-header .close span {
+    color: #fff
+}
+
+.shopping-modal .modal-content .modal-header .modal-title {
+    text-transform: uppercase;
+    margin-bottom: 0;
+    line-height: normal;
+    color: #fff;
+    text-align: left;
+    font-size: 13px
+}
+
+.shopping-modal .modal-content .modal-body {
+    margin: 25px 20px
+}
+
+.shopping-modal .modal-content .modal-body .product-gallery img {
+    width: 100%
+}
+
+.shopping-modal .modal-content .modal-body .product-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%
+}
+
+.shopping-modal .modal-content .modal-body .product-form .btn {
+    width: 100%;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background-color: #fe0000;
+    color: #FFF;
+    border-color: #fe0000
+}
+
+.shopping-modal .modal-content .modal-body .product-form .btn:last-child {
+    margin-bottom: 0
+}
+
+.shopping-modal .modal-content .modal-body .product-form .btn-cart {
+    border-radius: 4px;
+    border-color: #292929;
+    background: #292929;
+    color: #FFF
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-price {
+    display: flex;
+    margin: 10px 0 15px
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.shopping-modal .modal-content .modal-body .product-details .border-top {
+    border-top: 1px solid #dee2e666 !important;
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-price .price {
+    font-size: 18px;
+    color: #4C4C4C;
+    font-weight: 700;
+    line-height: 12px;
+    padding-left: 0;
+    margin-top: 5px;
+    display: inline-flex;
+    margin-right: 10px
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-price .price.has-discount {
+    color: #585858
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-price .regular-price {
+    font-size: 13px;
+    color: #585858;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-decoration: line-through;
+    display: block
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-price .discount-amount {
+    background-color: #fe0000;
+    font-size: 14px;
+    color: #FFF;
+    font-weight: 700;
+    border-radius: 4px;
+    padding: 3px 7px;
+    margin-left: 10px;
+    display: inline-flex;
+    line-height: normal
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-price .has-discount {
+    color: #585858
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-meta .product-reference {
+    color: #fe0000;
+    font-size: 14px
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-meta .product-reference span {
+    color: #4C4C4C;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0
+}
+
+.shopping-modal .modal-content .modal-body .product-details .product-meta .product-attribute span {
+    color: #4C4C4C;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0
+}
+
+.shopping-modal .modal-content .modal-body .modal-divider {
+    margin: 1.4rem 0 2rem
+}
+
+.shopping-modal .modal-content .modal-body .complementary {
+    margin-top: 20px;
+    width: 100%
+}
+
+.btn-primary:hover {
+    border-color: transparent !important;
+}
+
+.product-cart-wrap .product-action-1 a.action-btn,
+.product-cart-wrap .product-action-1 button {
+    position: relative;
+    z-index: 1; /* Asegura que el botón esté debajo del tooltip */
+    overflow: visible; /* IMPORTANTE: permite que el tooltip sobresalga */
+}
+
+/* Tooltip */
+.product-cart-wrap .product-action-1 a.action-btn:after,
+.product-cart-wrap .product-action-1 button:after {
+    z-index: 10; /* Más alto que el botón */
+}
+
+/* Flechita del tooltip */
+.product-cart-wrap .product-action-1 a.action-btn:before,
+.product-cart-wrap .product-action-1 button:before {
+    z-index: 10; /* También más alto que el botón */
+}
+

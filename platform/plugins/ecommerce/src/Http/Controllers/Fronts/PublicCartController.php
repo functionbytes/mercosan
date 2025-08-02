@@ -181,6 +181,7 @@ class PublicCartController extends BaseController
 
         $cartItems = OrderHelper::handleAddCart($product, $request);
 
+
         $cartItem = Arr::first(array_filter($cartItems, fn ($item) => $item['id'] == $product->id));
 
         $response->setMessage(__(
@@ -188,9 +189,24 @@ class PublicCartController extends BaseController
             ['product' => $originalProduct->name ?: $product->name]
         ));
 
+
+        $token = OrderHelper::getOrderSessionToken();
+
+        if (!session('tracked_start_checkout')) {
+            session(['tracked_start_checkout' => $token]);
+        }
+
+        $checkout = route('public.checkout.information', session('tracked_start_checkout'));
+
+        $modalContent = view(
+            EcommerceHelper::viewPath('modal'),
+            compact('checkout', 'cartItem')
+        )->render();
+
         $responseData = [
             'status' => true,
             'content' => $cartItems,
+            'content_modal' => $modalContent,
         ];
 
         app(GoogleTagManager::class)->addToCart(
@@ -205,7 +221,7 @@ class PublicCartController extends BaseController
             $cartItem['subtotal'],
         );
 
-        $token = OrderHelper::getOrderSessionToken();
+
         $nextUrl = route('public.checkout.information', $token);
 
         if (EcommerceHelper::getQuickBuyButtonTarget() == 'cart') {
@@ -362,6 +378,7 @@ class PublicCartController extends BaseController
                 compact('products', 'promotionDiscountAmount', 'couponDiscountAmount', 'crossSellProducts')
             )->render();
         }
+
 
         return apply_filters('ecommerce_cart_data_for_response', [
             'count' => Cart::instance('cart')->count(),

@@ -38,6 +38,9 @@ class HookServiceProvider extends ServiceProvider
         // Agregar el método de pago a la lista de métodos disponibles
         add_filter(PAYMENT_FILTER_ADDITIONAL_PAYMENT_METHODS, function (?string $html, array $data): ?string {
             if (get_payment_setting('status', WompiServiceProvider::MODULE_NAME)) {
+                // Debug log para método de pago
+                file_put_contents(storage_path('logs/wompi-method-registration.log'), "[" . date('Y-m-d H:i:s') . "] Payment method being registered\n", FILE_APPEND);
+
                 PaymentMethods::method(WompiServiceProvider::MODULE_NAME, [
                     'html' => view(
                         'plugins/wompi::method',
@@ -53,51 +56,54 @@ class HookServiceProvider extends ServiceProvider
 
         // Registrar el servicio de pago de Wompi
         add_filter(PAYMENT_FILTER_GET_SERVICE_CLASS, function (?string $data, string $value): ?string {
+            // Debug log forzado - TODAS las llamadas
+            file_put_contents(storage_path('logs/wompi-service-registration.log'), "[" . date('Y-m-d H:i:s') . "] Service filter called for: '{$value}', current data: '{$data}', wompi module: '" . WompiServiceProvider::MODULE_NAME . "'\n", FILE_APPEND);
+
             if ($value === WompiServiceProvider::MODULE_NAME) {
                 $data = WompiPaymentService::class;
+                file_put_contents(storage_path('logs/wompi-service-registration.log'), "[" . date('Y-m-d H:i:s') . "] MATCH! Returning: {$data}\n", FILE_APPEND);
             }
             return $data;
         }, 20, 2);
 
-        // Procesar el checkout para Wompi
-        add_filter(PAYMENT_FILTER_AFTER_POST_CHECKOUT, function (array $data, Request $request): array {
-            if ($data['type'] !== WompiServiceProvider::MODULE_NAME) {
-                return $data;
-            }
-
-            $paymentData = apply_filters(PAYMENT_FILTER_PAYMENT_DATA, [], $request);
-
-            try {
-                $wompiService = new WompiService();
-
-                // Preparar datos para el Web Checkout de Wompi
-                $wompiService->withData([
-                    'reference'        => $paymentData['order_id'][0], // Usar el primer ID de orden como referencia
-                    'amount'           => (float) $paymentData['amount'],
-                    'currency'         => $paymentData['currency'] ?? 'COP',
-                    'customer_email'   => $paymentData['address']['email'],
-                    'customer_name'    => trim(($paymentData['address']['first_name'] ?? '') . ' ' . ($paymentData['address']['last_name'] ?? '')),
-                    'customer_phone'   => $paymentData['address']['phone'] ?? '',
-                    'redirect_url'     => route('payment.wompi.callback'),
-                    'tax'              => $this->calculateTax($paymentData['amount']),
-                    // Datos completos de dirección de envío
-                    'shipping_address' => $paymentData['address']['address'] ?? '',
-                    'shipping_city'    => $paymentData['address']['city'] ?? '',
-                    'shipping_region'  => $paymentData['address']['state'] ?? $paymentData['address']['region'] ?? '',
-                    'shipping_phone'   => $paymentData['address']['phone'] ?? '',
-                    'shipping_country' => $paymentData['address']['country'] ?? 'CO', // Colombia por defecto
-                ]);
-
-                // Redirigir al Web Checkout
-                $wompiService->redirectToCheckoutPage();
-
-            } catch (Throwable $exception) {
-                $data['error'] = true;
-                $data['message'] = $exception->getMessage();
-            }
-
+        // Debug hook para interceptar checkout data
+        add_filter(PAYMENT_FILTER_PAYMENT_DATA, function (array $data, $request): array {
+            file_put_contents(storage_path('logs/wompi-checkout-data.log'), "[" . date('Y-m-d H:i:s') . "] Payment data filter called: " . json_encode($data) . "\n", FILE_APPEND);
             return $data;
         }, 999, 2);
+
+        // Implementar checkout con Wompi (como PayPal)
+        add_filter(PAYMENT_FILTER_AFTER_POST_CHECKOUT, [$this, 'checkoutWithWompi'], 2, 2);
+    }
+
+    /**
+     * Handle Wompi checkout (similar to PayPal)
+     */
+    public function checkoutWithWompi(array $data, Request $request): array
+    {
+        if ($data['type'] !== WompiServiceProvider::MODULE_NAME) {
+            return $data;
+        }
+
+        file_put_contents(storage_path('logs/wompi-checkout-handler.log'), "[" . date('Y-m-d H:i:s') . "] checkoutWithWompi called\n", FILE_APPEND);
+
+        try {
+            $wompiService = $this->app->make(WompiPaymentService::class);
+
+            file_put_contents(storage_path('logs/wompi-checkout-handler.log'), "[" . date('Y-m-d H:i:s') . "] WompiPaymentService created, calling execute()\n", FILE_APPEND);
+
+            $result = $wompiService->execute($request);
+
+            file_put_contents(storage_path('logs/wompi-checkout-handler.log'), "[" . date('Y-m-d H:i:s') . "] execute() completed, result: " . ($result ?: 'NULL') . "\n", FILE_APPEND);
+
+        } catch (\Exception $e) {
+            file_put_contents(storage_path('logs/wompi-checkout-handler.log'), "[" . date('Y-m-d H:i:s') . "] Exception: " . $e->getMessage() . "\n", FILE_APPEND);
+
+            $data['error'] = true;
+            $data['message'] = $e->getMessage();
+        }
+
+        return $data;
     }
 
     /**

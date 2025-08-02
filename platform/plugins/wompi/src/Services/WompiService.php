@@ -6,6 +6,7 @@ use Functionbytes\Wompi\Providers\WompiServiceProvider;
 
 class WompiService
 {
+    protected string $eventSecret;
     protected string $publicKey;
     protected string $privateKey;
     protected string $integritySecret;
@@ -15,10 +16,12 @@ class WompiService
 
     public function __construct()
     {
-        $this->publicKey = get_payment_setting('public_key', WompiServiceProvider::MODULE_NAME);
-        $this->privateKey = get_payment_setting('private_key', WompiServiceProvider::MODULE_NAME);
-        $this->integritySecret = get_payment_setting('integrity_secret', WompiServiceProvider::MODULE_NAME);
-        $this->isSandbox = get_payment_setting('mode', WompiServiceProvider::MODULE_NAME) === 'sandbox';
+        // Priorizar configuración del panel administrativo, fallback a .env
+        $this->publicKey = $this->getConfigValue('public_key', 'WOMPI_PUBLIC_KEY');
+        $this->privateKey = $this->getConfigValue('private_key', 'WOMPI_PRIVATE_KEY');
+        $this->integritySecret = $this->getConfigValue('integrity_secret', 'WOMPI_INTEGRITY_SECRET');
+        $this->eventSecret = $this->getConfigValue('event_secret', 'WOMPI_EVENT_SECRET');
+        $this->isSandbox = $this->getConfigValue('mode', 'WOMPI_MODE') === 'sandbox';
 
         // Log para debug de credenciales
         \Log::info('Wompi Service Initialization', [
@@ -26,21 +29,29 @@ class WompiService
             'public_key_preview' => substr($this->publicKey, 0, 20) . '...',
             'private_key_set' => !empty($this->privateKey),
             'integrity_secret_set' => !empty($this->integritySecret),
+            'event_secret_set' => !empty($this->eventSecret),
             'is_sandbox' => $this->isSandbox,
-            'env_vars' => [
-                'WOMPI_PUBLIC_KEY' => env('WOMPI_PUBLIC_KEY') ? 'SET' : 'NOT SET',
-                'WOMPI_INTEGRITY_SECRET' => env('WOMPI_INTEGRITY_SECRET') ? 'SET' : 'NOT SET',
-                'WOMPI_MODE' => env('WOMPI_MODE', 'not set')
+            'config_source' => [
+                'public_key' => $this->getConfigSource('public_key', 'WOMPI_PUBLIC_KEY'),
+                'private_key' => $this->getConfigSource('private_key', 'WOMPI_PRIVATE_KEY'),
+                'integrity_secret' => $this->getConfigSource('integrity_secret', 'WOMPI_INTEGRITY_SECRET'),
+                'event_secret' => $this->getConfigSource('event_secret', 'WOMPI_EVENT_SECRET'),
+                'mode' => $this->getConfigSource('mode', 'WOMPI_MODE')
             ]
         ]);
 
-        // Validar credenciales con mensajes más específicos
+        // Validar credenciales esenciales
         if (empty($this->publicKey)) {
-            throw new \Exception('Wompi public key is not configured. Check WOMPI_PUBLIC_KEY in .env file');
+            throw new \Exception('Wompi public key is not configured. Configure it in Admin Panel > Payment Methods > Wompi or set WOMPI_PUBLIC_KEY in .env file');
         }
 
         if (empty($this->integritySecret)) {
-            throw new \Exception('Wompi integrity secret is not configured. Check WOMPI_INTEGRITY_SECRET in .env file');
+            throw new \Exception('Wompi integrity secret is not configured. Configure it in Admin Panel > Payment Methods > Wompi or set WOMPI_INTEGRITY_SECRET in .env file');
+        }
+
+        // Event secret es opcional para pagos básicos pero requerido para webhooks
+        if (empty($this->eventSecret)) {
+            \Log::warning('Wompi Event Secret not configured. Webhook validation will not work.');
         }
 
         // Validar formato de public key
@@ -51,7 +62,115 @@ class WompiService
         $this->baseUrl = $this->isSandbox
             ? 'https://sandbox.wompi.co/v1'
             : 'https://production.wompi.co/v1';
+
     }
+
+    private function getConfigValue(string $settingKey, string $envKey): string
+    {
+        // Prioridad 1: Configuración del panel administrativo
+        $adminValue = get_payment_setting($settingKey, WompiServiceProvider::MODULE_NAME);
+
+        if (!empty($adminValue)) {
+            return $adminValue;
+        }
+
+        // Prioridad 2: Variable de entorno
+        return env($envKey, '');
+    }
+
+
+    /**
+     * Verify webhook signature using event secret
+     */
+    public function verifyWebhookSignature(array $payload, string $signature): bool
+    {
+        if (empty($this->eventSecret)) {
+            \Log::warning('Cannot verify webhook signature: Event Secret not configured');
+            return false;
+        }
+
+        if (!isset($payload['data']['transaction'])) {
+            return false;
+        }
+
+        $transaction = $payload['data']['transaction'];
+
+        $concatenatedString = implode('', [
+            $transaction['id'] ?? '',
+            $transaction['status'] ?? '',
+            $transaction['amount_in_cents'] ?? '',
+            $transaction['currency'] ?? '',
+            $payload['signature']['checksum'] ?? '',
+        ]);
+
+        $expectedSignature = hash_hmac('sha256', $concatenatedString, $this->eventSecret);
+
+        return hash_equals($expectedSignature, $signature);
+    }
+
+
+
+    private function getConfigSource(string $settingKey, string $envKey): string
+    {
+        $adminValue = get_payment_setting($settingKey, WompiServiceProvider::MODULE_NAME);
+
+        if (!empty($adminValue)) {
+            return 'admin_panel';
+        }
+
+        if (!empty(env($envKey))) {
+            return 'env_file';
+        }
+
+        return 'not_set';
+    }
+
+    /**
+     * Validar que toda la configuración esté correcta
+     */
+    public function validateConfiguration(): array
+    {
+        $errors = [];
+        $warnings = [];
+
+        // Validar public key
+        if (empty($this->publicKey)) {
+            $errors[] = 'Public Key no configurada';
+        } elseif (!$this->validatePublicKeyFormat($this->publicKey)) {
+            $errors[] = 'Public Key tiene formato inválido';
+        }
+
+        // Validar private key
+        if (empty($this->privateKey)) {
+            $errors[] = 'Private Key no configurada';
+        }
+
+        // Validar integrity secret
+        if (empty($this->integritySecret)) {
+            $errors[] = 'Integrity Secret no configurado';
+        }
+
+        // Verificar consistencia de modo (sandbox/production)
+        $publicKeyMode = str_contains($this->publicKey, 'test') ? 'sandbox' : 'production';
+        $configMode = $this->isSandbox ? 'sandbox' : 'production';
+
+        if ($publicKeyMode !== $configMode) {
+            $warnings[] = "Public Key es de $publicKeyMode pero el modo está configurado como $configMode";
+        }
+
+        return [
+            'valid' => empty($errors),
+            'errors' => $errors,
+            'warnings' => $warnings,
+            'config_sources' => [
+                'public_key' => $this->getConfigSource('public_key', 'WOMPI_PUBLIC_KEY'),
+                'private_key' => $this->getConfigSource('private_key', 'WOMPI_PRIVATE_KEY'),
+                'integrity_secret' => $this->getConfigSource('integrity_secret', 'WOMPI_INTEGRITY_SECRET'),
+                'mode' => $this->getConfigSource('mode', 'WOMPI_MODE')
+            ]
+        ];
+    }
+
 
     /**
      * Validar el formato de la public key
@@ -86,22 +205,27 @@ class WompiService
 
     /**
      * Generate integrity signature for Web Checkout
+     * According to Wompi docs: Reference + AmountInCents + Currency + IntegritySecret
      */
     public function generateIntegritySignature(int $amountInCents, string $currency = 'COP'): string
     {
         $reference = $this->data['reference'];
 
-        // Concatenate in the exact order required by Wompi
+        // Concatenate in the exact order required by Wompi:
+        // <Reference><AmountInCents><Currency><IntegritySecret>
+        // NOTE: expiration_time is NOT included in signature generation
         $concatenatedString = $reference . $amountInCents . $currency . $this->integritySecret;
 
         $signature = hash('sha256', $concatenatedString);
 
-        \Log::info('Wompi Signature Generation', [
+        \Log::info('Wompi Signature Generation (CORRECTED)', [
             'reference' => $reference,
             'amount_in_cents' => $amountInCents,
             'currency' => $currency,
             'concatenated_string' => $concatenatedString,
-            'signature' => $signature
+            'signature' => $signature,
+            'integrity_secret_length' => strlen($this->integritySecret),
+            'expiration_time_included' => 'NO - Per Wompi docs, expiration_time should NOT be included in signature'
         ]);
 
         return $signature;
@@ -112,9 +236,9 @@ class WompiService
      */
     public function getWebCheckoutUrl(): string
     {
-        return $this->isSandbox
-            ? 'https://checkout.sandbox.wompi.co/p/'
-            : 'https://checkout.wompi.co/p/';
+        // CORREGIDO: Solo existe checkout.wompi.co para ambos entornos
+        // La diferenciación se hace por credenciales, no por subdominio
+        return 'https://checkout.wompi.co/p/';
     }
 
     /**
@@ -156,12 +280,28 @@ class WompiService
      */
     private function renderWidgetPage(array $widgetData): void
     {
+        // LOG CRÍTICO: Verificar qué llega exactamente al widget
+        \Log::critical('Wompi Widget Page Render - DATOS COMPLETOS', [
+            'widget_data_keys' => array_keys($widgetData),
+            'public_key_exists' => isset($widgetData['public_key']),
+            'public_key_value' => $widgetData['public_key'] ?? 'NOT_SET',
+            'public_key_length' => isset($widgetData['public_key']) ? strlen($widgetData['public_key']) : 0,
+            'signature_exists' => isset($widgetData['signature_integrity']),
+            'signature_value' => $widgetData['signature_integrity'] ?? 'NOT_SET',
+            'reference_value' => $widgetData['reference'] ?? 'NOT_SET',
+            'full_widget_data' => $widgetData
+        ]);
+
         // Verificar que los datos críticos estén presentes
         $requiredFields = ['public_key', 'amount_in_cents', 'reference', 'signature_integrity'];
 
         foreach ($requiredFields as $field) {
             if (empty($widgetData[$field])) {
-                \Log::error("Wompi Widget: Missing required field: {$field}");
+                \Log::error("Wompi Widget: Missing required field: {$field}", [
+                    'field' => $field,
+                    'value' => $widgetData[$field] ?? 'NOT_SET',
+                    'all_fields' => array_keys($widgetData)
+                ]);
                 throw new \Exception("Missing required field for widget: {$field}");
             }
         }
@@ -173,6 +313,43 @@ class WompiService
         ])->render();
 
         exit();
+    }
+
+    /**
+     * Prepare widget page but return content instead of exit
+     */
+    public function getWidgetPageContent(): string
+    {
+        try {
+            // Preparar datos para el Widget
+            $widgetData = $this->prepareWidgetData();
+
+            \Log::info('Wompi Widget Data Full Debug', [
+                'widget_data' => $widgetData,
+                'public_key_valid' => !empty($widgetData['public_key']),
+                'signature_generated' => !empty($widgetData['signature_integrity'])
+            ]);
+
+            // Renderizar página con Widget y retornar contenido
+            return view('plugins/wompi::widget', [
+                'widgetData' => $widgetData,
+                'originalAmount' => $this->data['amount'],
+                'originalCurrency' => $this->data['currency'] ?? 'USD'
+            ])->render();
+
+        } catch (\Exception $e) {
+            \Log::error('Error in Wompi Widget', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'data' => $this->data,
+                'public_key_set' => !empty($this->publicKey),
+                'integrity_secret_set' => !empty($this->integritySecret)
+            ]);
+
+            return view('plugins/wompi::error', [
+                'message' => $e->getMessage()
+            ])->render();
+        }
     }
 
     /**
@@ -268,6 +445,19 @@ class WompiService
 
     private function prepareWidgetData(): array
     {
+        // Validar configuración antes de proceder
+        $validation = $this->validateConfiguration();
+
+        if (!$validation['valid']) {
+            \Log::error('Wompi Configuration Error', $validation);
+            throw new \Exception('Configuración de Wompi inválida: ' . implode(', ', $validation['errors']));
+        }
+
+        if (!empty($validation['warnings'])) {
+            \Log::warning('Wompi Configuration Warnings', $validation['warnings']);
+        }
+
+
         $originalAmount = $this->data['amount'];
         $originalCurrency = $this->data['currency'] ?? 'USD';
 
@@ -323,9 +513,26 @@ class WompiService
         // Preparar datos del cliente con teléfono formateado
         $customerData = $this->prepareCustomerData();
 
-        // Preparar datos base - IMPORTANTE: verificar que public_key no esté vacía
+        // VERIFICAR CREDENCIALES ANTES DE CREAR WIDGET DATA
         if (empty($this->publicKey)) {
-            throw new \Exception('Public key is empty during widget data preparation');
+            throw new \Exception('Public key está vacía');
+        }
+
+        if (empty($this->integritySecret)) {
+            throw new \Exception('Integrity Secret está vacío');
+        }
+
+        if (empty($this->data['reference'])) {
+            throw new \Exception('Reference está vacía');
+        }
+
+        $expirationTime = $this->generateExpirationTime();
+
+        $signature = $this->generateIntegritySignature($amountInCents, $currency);
+
+
+        if (empty($signature)) {
+            throw new \Exception('No se pudo generar la firma de integridad');
         }
 
         $widgetData = [
@@ -333,10 +540,15 @@ class WompiService
             'currency' => $currency,
             'amount_in_cents' => $amountInCents,
             'reference' => $this->data['reference'],
-            'signature_integrity' => $this->generateIntegritySignature($amountInCents, $currency),
+            'signature_integrity' => $signature,
+            'expiration_time' => $expirationTime, // Agregar fecha de expiración
             'redirect_url' => $this->data['redirect_url'],
             'customer_data' => $customerData,
-            'is_sandbox' => $this->isSandbox
+            'customer_email' => $this->data['customer_email'],
+            'customer_name' => $this->data['customer_name'] ?? '',
+            'customer_phone' => $this->data['customer_phone'] ?? '',
+            'is_sandbox' => $this->isSandbox,
+            'widget_url' => $this->getWidgetUrl()
         ];
 
         // Solo agregar impuestos si son válidos (mayor a 0)
@@ -364,6 +576,14 @@ class WompiService
 
         return $widgetData;
     }
+
+    public function getWidgetUrl(): string
+    {
+        // CORREGIDO: Solo existe checkout.wompi.co para ambos entornos
+        // La diferenciación se hace por credenciales, no por subdominio
+        return 'https://checkout.wompi.co/widget.js';
+    }
+
 
     /**
      * Preparar datos del cliente con formato de teléfono requerido por Wompi
@@ -398,6 +618,14 @@ class WompiService
 
         return $customerData;
     }
+
+    private function generateExpirationTime(int $hoursFromNow = 24): string
+    {
+        // Formato ISO 8601 exacto que espera Wompi
+        // Ejemplo: 2021-12-30T09:30:00.000Z
+        return now()->addHours($hoursFromNow)->format('Y-m-d\TH:i:s.000\Z');
+    }
+
 
     /**
      * Parsear número de teléfono para separar código de país y número
@@ -499,37 +727,4 @@ class WompiService
         return $shippingAddress;
     }
 
-    private function renderBladeForm(array $formData): void
-    {
-        $checkoutUrl = $this->getWebCheckoutUrl();
-
-        $debugInfo = null;
-        if (app()->environment('local')) {
-            $debugInfo = [
-                'reference' => $formData['reference'] ?? 'N/A',
-                'amount' => ($formData['amount-in-cents'] ?? 0) / 100,
-                'currency' => $formData['currency'] ?? 'COP',
-                'email' => $formData['customer-email'] ?? 'N/A',
-            ];
-        }
-
-        echo view('plugins/wompi::redirect', [
-            'checkoutUrl' => $checkoutUrl,
-            'formData' => $formData,
-            'debugInfo' => $debugInfo,
-            'redirectDelay' => 3, // segundos antes de auto-redirect
-        ])->render();
-
-        exit();
-    }
-
-    private function generateIntegritySignatureWithCOP(string $currency, int $amountInCents): string
-    {
-        $reference = $this->data['reference'];
-
-        // Concatenate in the exact order required by Wompi
-        $concatenatedString = $reference . $amountInCents . $currency . $this->integritySecret;
-
-        return hash('sha256', $concatenatedString);
-    }
 }

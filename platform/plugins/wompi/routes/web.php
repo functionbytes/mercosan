@@ -21,8 +21,12 @@ Route::middleware(['web', 'core'])
             ->name('transaction.check');
 
         // Endpoint para simular webhook en desarrollo local
-        if (app()->environment('local')) {
+        if (app()->environment(['local', 'testing']) || config('app.debug')) {
             Route::get('simulate-webhook/{transactionId}', [WompiController::class, 'simulateWebhook'])
                 ->name('simulate.webhook');
+
+            // Debug endpoint para verificar configuración
+            Route::get('debug-config', [WompiController::class, 'debugConfig'])
+                ->name('debug.config');
         }
     });

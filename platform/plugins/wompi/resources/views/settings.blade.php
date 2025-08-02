@@ -1,9 +1,8 @@
-
 @php
     $name = 'Wompi';
     $description = 'Customer can buy product and pay directly using Visa, Credit card via Wompi (Colombian payment gateway)';
     $link = 'https://comercios.wompi.co/';
-    $image = asset('vendor/core/plugins/wompi/images/wompi.png');
+    $image = asset('vendor/core/plugins/wompi/images/wompi.svg');
     $moduleName = \Functionbytes\Wompi\Providers\WompiServiceProvider::MODULE_NAME;
     $status = (bool) get_payment_setting('status', $moduleName);
 @endphp
@@ -60,10 +59,16 @@
                                         </a>
                                     </li>
                                     <li style="list-style-type:decimal">
-                                        <p>After registration at <a href="https://comercios.wompi.co/" target="_blank">Wompi</a>, you will have Public Key, Private Key and Integrity Secret</p>
+                                        <p>Después del registro en <a href="https://comercios.wompi.co/" target="_blank">Wompi</a>, tendrás acceso a:</p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Public Key:</strong> Para identificar tu comercio</li>
+                                            <li><strong>Private Key:</strong> Para consultas API privadas</li>
+                                            <li><strong>Integrity Secret:</strong> Para generar firmas de integridad en pagos</li>
+                                            <li><strong>Event Secret:</strong> Para validar webhooks de eventos</li>
+                                        </ul>
                                     </li>
                                     <li style="list-style-type:decimal">
-                                        <p>Enter the Public Key, Private Key and Integrity Secret in the form below</p>
+                                        <p>Ingresa todas las credenciales en el formulario de abajo</p>
                                     </li>
                                 </ul>
                             </li>
@@ -97,23 +102,35 @@
                                 :name="'payment_' . $moduleName . '_public_key'"
                                 :label="'Public Key'"
                                 :value="get_payment_setting('public_key', $moduleName)"
-                                placeholder="pub_sandbox_..."
+                                placeholder="pub_sandbox_... o pub_prod_..."
+                                helper="Clave pública para identificar tu comercio"
                             />
 
                             <x-core-setting::text-input
                                 :name="'payment_' . $moduleName . '_private_key'"
                                 :label="'Private Key'"
                                 :value="get_payment_setting('private_key', $moduleName)"
-                                placeholder="prv_sandbox_..."
+                                placeholder="prv_sandbox_... o prv_prod_..."
                                 type="password"
+                                helper="Clave privada para consultas API"
                             />
 
                             <x-core-setting::text-input
                                 :name="'payment_' . $moduleName . '_integrity_secret'"
                                 :label="'Integrity Secret'"
                                 :value="get_payment_setting('integrity_secret', $moduleName)"
-                                placeholder="sandbox_integrity_..."
+                                placeholder="sandbox_integrity_... o prod_integrity_..."
                                 type="password"
+                                helper="Secreto para generar firmas de integridad en pagos"
+                            />
+
+                            <x-core-setting::text-input
+                                :name="'payment_' . $moduleName . '_event_secret'"
+                                :label="'Event Secret'"
+                                :value="get_payment_setting('event_secret', $moduleName)"
+                                placeholder="sandbox_events_... o prod_events_..."
+                                type="password"
+                                helper="Secreto para validar webhooks de eventos"
                             />
 
                             {!! apply_filters(PAYMENT_METHOD_SETTINGS_CONTENT, null, $moduleName) !!}
@@ -124,13 +141,21 @@
                 @if (get_payment_setting('status', $moduleName) == 1)
                     <div class="col-12 bg-white">
                         <div class="alert alert-warning">
-                            <strong>Important URLs for Wompi configuration:</strong>
+                            <strong>URLs importantes para configurar en Wompi:</strong>
                             <ul class="m-0 pl-4">
                                 <li><strong>Callback URL:</strong> <code>{{ route('payment.wompi.callback') }}</code></li>
                                 <li><strong>Webhook URL:</strong> <code>{{ route('payment.wompi.webhook') }}</code></li>
                             </ul>
-                            <small class="text-muted">Configure these URLs in your Wompi merchant dashboard to receive payment notifications.</small>
-                            <br><small class="text-info"><strong>Note:</strong> For local development, webhooks won't work. Use the callback URL only.</small>
+                            <small class="text-muted">Configura estas URLs en tu panel de comercio de Wompi para recibir notificaciones de pago.</small>
+                            <br><small class="text-info"><strong>Nota:</strong> Para desarrollo local, los webhooks no funcionarán. Usa solo la callback URL.</small>
+                        </div>
+
+                        <div class="alert alert-info mt-3">
+                            <strong>💡 Diferencia entre secretos:</strong>
+                            <ul class="m-0 pl-4">
+                                <li><strong>Integrity Secret:</strong> Se usa para generar la firma que valida los datos del pago</li>
+                                <li><strong>Event Secret:</strong> Se usa para validar que los webhooks provienen realmente de Wompi</li>
+                            </ul>
                         </div>
                     </div>
                 @endif

@@ -3,9 +3,12 @@
     id="newsletter-popup"
     tabindex="-1"
     aria-hidden="true"
-    data-delay="{{ theme_option('newsletter_popup_delay', 5) }}"
-    title="{{ theme_option('newsletter_popup_title') }}"
+    data-delay="{{ setting('newsletter_popup_delay', 3) }}"
+    title="{{ setting('newsletter_popup_title', trans('plugins/newsletter::newsletter.popup.title')) }}"
     data-url="{{ route('public.ajax.newsletter-popup') }}"
 >
+
+
+
 </div>
 

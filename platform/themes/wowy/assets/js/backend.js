@@ -399,6 +399,8 @@
                 },
                 dataType: 'json',
                 success: res => {
+
+                    alert('as');
                     _self.prop('disabled', false).removeClass('button-loading').addClass('active');
 
                     if (res.error) {

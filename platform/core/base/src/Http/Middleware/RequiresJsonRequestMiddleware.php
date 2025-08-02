@@ -12,6 +12,7 @@ class RequiresJsonRequestMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (! $request->expectsJson()) {
+
             return BaseHttpResponse::make()->setNextUrl(url('/'));
         }
 

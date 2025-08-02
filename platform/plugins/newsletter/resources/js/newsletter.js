@@ -25,6 +25,12 @@ $(() => {
                 return response.json();
             })
             .then(({ data }) => {
+                // Solo mostrar el popup si show_popup es true
+                if (data.show_popup === false) {
+                    console.log('Usuario ya suscrito o no debe mostrar popup:', data.message);
+                    return;
+                }
+
                 $newsletterPopup.html(data.html);
 
                 if (typeof Theme !== 'undefined' && typeof Theme.lazyLoadInstance !== 'undefined') {

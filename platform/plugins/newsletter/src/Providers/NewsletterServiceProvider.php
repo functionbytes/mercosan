@@ -26,6 +26,7 @@ class NewsletterServiceProvider extends ServiceProvider implements DeferrablePro
 
     public function register(): void
     {
+
         $this->app->singleton(NewsletterInterface::class, function () {
             return new NewsletterRepository(new Newsletter());
         });
@@ -46,6 +47,7 @@ class NewsletterServiceProvider extends ServiceProvider implements DeferrablePro
             ->publishAssets()
             ->loadAndPublishViews()
             ->loadMigrations();
+
 
         $this->app->register(EventServiceProvider::class);
 
@@ -75,6 +77,11 @@ class NewsletterServiceProvider extends ServiceProvider implements DeferrablePro
 
         $this->app->booted(function (): void {
             EmailHandler::addTemplateSettings(NEWSLETTER_MODULE_SCREEN_NAME, config('plugins.newsletter.email', []));
+            
+            // Registrar el popup del newsletter
+            if (defined('THEME_MODULE_SCREEN_NAME')) {
+                $this->app->make(Factory::class)->registerNewsletterPopup();
+            }
         });
 
         FormFrontManager::register(NewsletterForm::class, NewsletterRequest::class);

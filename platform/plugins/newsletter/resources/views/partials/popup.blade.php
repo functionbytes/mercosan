@@ -1,5 +1,7 @@
 @php
-    $title = theme_option('newsletter_popup_title');
+    $title = setting('newsletter_popup_title', trans('plugins/newsletter::newsletter.popup.title'));
+    $subtitle = setting('newsletter_popup_subtitle', trans('plugins/newsletter::newsletter.popup.subtitle'));
+    $description = setting('newsletter_popup_description', trans('plugins/newsletter::newsletter.popup.description'));
     $image = theme_option('newsletter_popup_image');
 @endphp
 
@@ -17,7 +19,7 @@
 
         <div class="newsletter-popup-content">
             <div class="modal-header flex-column align-items-start border-0 p-0">
-                @if ($subtitle = theme_option('newsletter_popup_subtitle'))
+                @if ($subtitle)
                     <span class="modal-subtitle">{!! BaseHelper::clean($subtitle) !!}</span>
                 @endif
 
@@ -25,12 +27,14 @@
                     <h5 class="modal-title fs-2" id="newsletterPopupModalLabel">{!! BaseHelper::clean($title) !!}</h5>
                 @endif
 
-                @if ($description = theme_option('newsletter_popup_description'))
+                @if ($description)
                     <p class="modal-text text-muted">{!! BaseHelper::clean($description) !!}</p>
                 @endif
             </div>
             <div class="modal-body p-0">
                 {!! $newsletterForm->setFormOption('class', 'bb-newsletter-popup-form')->renderForm() !!}
+                <div class="newsletter-success-message" style="display: none;"></div>
+                <div class="newsletter-error-message" style="display: none;"></div>
             </div>
         </div>
     </div>

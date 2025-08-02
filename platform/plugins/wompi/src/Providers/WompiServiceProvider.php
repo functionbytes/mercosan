@@ -13,6 +13,7 @@ class WompiServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+
         if (! is_plugin_active('payment')) {
             return;
         }
@@ -21,7 +22,7 @@ class WompiServiceProvider extends ServiceProvider
             ->loadAndPublishTranslations()
             ->loadAndPublishViews()
             ->publishAssets()
-            ->loadRoutes(); // <-- FIX: Corrected to use Botble's standard route loading.
+            ->loadRoutes();
 
         $this->app->booted(function () {
             $this->app->register(HookServiceProvider::class);
