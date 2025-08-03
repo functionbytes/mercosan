@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea7d47d-6cd6-4aa1-ad51-6068c53ef329" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/css/front-ecommerce.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/css/front-ecommerce.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/css/front-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/css/front-theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Forms/Fronts/CheckoutForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Forms/Fronts/CheckoutForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/wompi/resources/views/method.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/wompi/resources/views/method.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/assets/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/assets/js/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/partials/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/partials/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/wowy/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/wowy/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/js/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/cache_keys.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/cache_keys.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -381,7 +369,7 @@
       <workItem from="1753657468085" duration="5746000" />
       <workItem from="1753904061130" duration="45433000" />
       <workItem from="1754163643335" duration="13949000" />
-      <workItem from="1754226571900" duration="2728000" />
+      <workItem from="1754226571900" duration="2858000" />
     </task>
     <servers />
   </component>
