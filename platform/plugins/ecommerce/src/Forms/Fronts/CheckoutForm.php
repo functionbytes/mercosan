@@ -48,7 +48,6 @@ class CheckoutForm extends FormFront
 
                     try {
                         $mobileDetect = new MobileDetect();
-
                         $isMobile = $mobileDetect->isMobile();
                     } catch (Throwable) {
                         $isMobile = false;
@@ -87,7 +86,7 @@ class CheckoutForm extends FormFront
                         })
                         ->addWrapper(
                             'left_column_wrapper',
-                            $isMobile ? '<div class="form-checkout col-lg-7">' : '<div class="form-checkout col-lg-7 col-md-6">',
+                            $isMobile ? '<div class="form-checkout col-lg-12">' : '<div class="form-checkout col-lg-7 col-md-6">',
                             '</div>',
                             function (CheckoutForm $form) use ($isMobile, $discountFormHtml, $cartItemHtml, $token, $model): void {
                                 $form

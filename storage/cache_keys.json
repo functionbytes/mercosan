@@ -19,5 +19,9 @@
     ],
     "Botble\\ACL\\Models\\UserMeta": [
         "65b83ad065dbeb5292d94ab9580d9273@user-meta-1"
+    ],
+    "Botble\\Ecommerce\\Services\\HandleShippingFeeService": [
+        "66d6c800acf0bbfe034c13e9e2145ba3@065db8f344dec266e0e357f92cae9bdb",
+        "66d6c800acf0bbfe034c13e9e2145ba3@0a354bb6f6d8a4d5ab4f4048cb0350e3"
     ]
 }

@@ -58,6 +58,9 @@
             "sec": "{{ __('sec') }}",
             "No reviews!": "{{ __('No reviews!') }}"
         };
+        
+        window.trackedStartCheckout = '{{ session("tracked_start_checkout") }}';
+        window.siteUrl = '{{ url("/") }}';
     </script>
 
     {!! Theme::place('footer') !!}
