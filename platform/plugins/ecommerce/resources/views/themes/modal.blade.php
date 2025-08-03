@@ -47,7 +47,7 @@
                         <a href="{{ $checkout }}" class="btn btn-primary btn-block py-2 mb-1 w-100">
                             Realizar Pedido
                         </a>
-                        <a href="#" data-dismiss="modal" class="btn btn-secondary btn-secundary py-2  w-100" id="add-more-btn">
+                        <a href="/" data-dismiss="modal" class="btn btn-secondary btn-secundary py-2  w-100" id="add-more-btn">
                             Seguir Comprando
                         </a>
                     </div>

@@ -7,12 +7,19 @@ use Botble\Ecommerce\Facades\Cart;
 use Botble\Ecommerce\Facades\OrderHelper;
 use Botble\Ecommerce\Services\HandleCheckoutOrderData;
 use Botble\Ecommerce\Services\HandleTaxService;
+use Botble\Ecommerce\Services\DynamicShippingValidationService;
+use Botble\Ecommerce\Services\FreeShippingAutoHandler;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class PublicUpdateCheckoutController extends BaseController
 {
-    public function __invoke(Request $request, HandleCheckoutOrderData $handleCheckoutOrderData)
+    public function __invoke(
+        Request $request, 
+        HandleCheckoutOrderData $handleCheckoutOrderData,
+        DynamicShippingValidationService $dynamicShippingValidation,
+        FreeShippingAutoHandler $freeShippingHandler
+    )
     {
         $sessionCheckoutData = OrderHelper::getOrderSessionData(
             $token = OrderHelper::getOrderSessionToken()
@@ -31,6 +38,39 @@ class PublicUpdateCheckoutController extends BaseController
         );
 
         app(HandleTaxService::class)->execute($products, $sessionCheckoutData);
+        
+        // Validate and enhance shipping methods based on order total and location
+        $shippingData = [
+            'order_total' => $checkoutOrderData->orderAmount,
+            'city' => data_get($sessionCheckoutData, 'city'),
+            'state' => data_get($sessionCheckoutData, 'state'),
+            'country' => data_get($sessionCheckoutData, 'country'),
+            'weight' => $products->sum('weight'),
+        ];
+        
+        // Check if free shipping should be auto-applied
+        $shouldAutoApplyFreeShipping = $freeShippingHandler->shouldAutoApplyFreeShipping($shippingData);
+        
+        if ($shouldAutoApplyFreeShipping) {
+            // Auto-apply free shipping and skip selection process
+            $validatedShipping = $freeShippingHandler->createAutoFreeShippingMethod($shippingData);
+            $skipShippingSelection = true;
+        } else {
+            // Normal shipping validation
+            $validatedShipping = $dynamicShippingValidation->validateShippingMethods($shippingData);
+            $skipShippingSelection = false;
+        }
+        
+        $shippingSummary = $dynamicShippingValidation->getShippingMethodsSummary(
+            $checkoutOrderData->orderAmount,
+            data_get($sessionCheckoutData, 'city')
+        );
+        
+        // Override summary if free shipping is auto-applied
+        if ($shouldAutoApplyFreeShipping) {
+            $shippingSummary['skip_delivery_selection'] = true;
+            $shippingSummary['auto_applied_free_shipping'] = true;
+        }
 
         add_filter('payment_order_total_amount', function () use ($checkoutOrderData) {
             return $checkoutOrderData->orderAmount - $checkoutOrderData->paymentFee;
@@ -54,9 +94,12 @@ class PublicUpdateCheckoutController extends BaseController
                     'orderAmount' => $checkoutOrderData->orderAmount,
                 ])->render(),
                 'shipping_methods' => view('plugins/ecommerce::orders.partials.shipping-methods', [
-                    'shipping' => $checkoutOrderData->shipping,
-                    'defaultShippingOption' => $checkoutOrderData->defaultShippingOption,
-                    'defaultShippingMethod' => $checkoutOrderData->defaultShippingMethod,
+                    'shipping' => $validatedShipping ?: $checkoutOrderData->shipping,
+                    'defaultShippingOption' => $shouldAutoApplyFreeShipping ? 'free_shipping_auto' : $checkoutOrderData->defaultShippingOption,
+                    'defaultShippingMethod' => $shouldAutoApplyFreeShipping ? 'default' : $checkoutOrderData->defaultShippingMethod,
+                    'shippingSummary' => $shippingSummary,
+                    'orderTotal' => $checkoutOrderData->orderAmount,
+                    'skipShippingSelection' => $skipShippingSelection ?? false,
                 ])->render(),
             ]);
     }

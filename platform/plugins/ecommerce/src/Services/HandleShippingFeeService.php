@@ -70,14 +70,17 @@ class HandleShippingFeeService
             return $response ? [$response] : [];
         }
 
-        if (get_ecommerce_setting('hide_other_shipping_options_if_it_has_free_shipping', false)) {
+        // Enhanced logic for hiding options and auto-selection
+        $hideOtherOptionsIfFree = get_ecommerce_setting('hide_other_shipping_options_if_it_has_free_shipping', false);
+        $autoSelectSingleMethod = get_ecommerce_setting('auto_select_single_shipping_method', true);
+        
+        if ($hideOtherOptionsIfFree) {
             $hasFreeShipping = false;
 
             foreach ($result as $item) {
                 foreach ($item as $option) {
                     if ((float) $option['price'] == 0) {
                         $hasFreeShipping = true;
-
                         break;
                     }
                 }
@@ -90,6 +93,20 @@ class HandleShippingFeeService
                             Arr::forget($result, $itemKey . '.' . $optionKey);
                         }
                     }
+                }
+            }
+        }
+        
+        // Mark for auto-selection if only one option available
+        $totalMethods = 0;
+        foreach ($result as $item) {
+            $totalMethods += count($item);
+        }
+        
+        if ($autoSelectSingleMethod && $totalMethods === 1) {
+            foreach ($result as $itemKey => $item) {
+                foreach ($item as $optionKey => $option) {
+                    $result[$itemKey][$optionKey]['auto_select'] = true;
                 }
             }
         }
@@ -199,14 +216,21 @@ class HandleShippingFeeService
                     ->where('is_enabled', 1)
                     ->first();
                 if ($ruleDetail) {
+                    $finalPrice = $rule->price + $ruleDetail->adjustment_price;
                     $result[$rule->id] = [
                         'name' => $rule->name,
-                        'price' => $rule->price + $ruleDetail->adjustment_price,
+                        'price' => $finalPrice,
+                        'city_specific' => true,
+                        'city_name' => $ruleDetail->city_name ?? null,
+                        'state_name' => $ruleDetail->state_name ?? null,
+                        'rule_type' => $rule->type->getValue(),
                     ];
                 } else {
                     $result[$rule->id] = [
                         'name' => $rule->name,
                         'price' => $rule->price,
+                        'city_specific' => false,
+                        'rule_type' => $rule->type->getValue(),
                     ];
                 }
             } else {
@@ -307,14 +331,23 @@ class HandleShippingFeeService
                     }
 
                     if ($ruleItem) {
+                        $finalPrice = max($rule->price + $ruleItem->adjustment_price, 0);
                         $result[$rule->id] = [
                             'name' => $rule->name,
-                            'price' => max($rule->price + $ruleItem->adjustment_price, 0),
+                            'price' => $finalPrice,
+                            'city_specific' => true,
+                            'city_name' => $ruleItem->city_name ?? null,
+                            'state_name' => $ruleItem->state_name ?? null,
+                            'rule_type' => $rule->type->getValue(),
+                            'adjustment_price' => $ruleItem->adjustment_price,
+                            'base_price' => $rule->price,
                         ];
                     } else {
                         $result[$rule->id] = [
                             'name' => $rule->name,
                             'price' => $rule->price,
+                            'city_specific' => false,
+                            'rule_type' => $rule->type->getValue(),
                         ];
                     }
                 }

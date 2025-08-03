@@ -131,11 +131,11 @@
                                         </table>
                                     </div>
                                     <button type="submit" name="checkout" class="btn w-100"> <i class="fa fa-share-square mr-10"></i> {{ __('Proceed To Checkout') }}</button>
+                                    <div class="mt-10">
+                                        <a  class="btn btn-primary w-100" href="{{ route('public.products') }}"><i class="fa fa-arrow-left me-2"></i>{{ __('Continue Shopping') }}</a>
+                                    </div>
                                 </div>
 
-                                <div class="mt-30">
-                                    <a href="{{ route('public.products') }}"><i class="fa fa-arrow-left me-2"></i>{{ __('Continue Shopping') }}</a>
-                                </div>
                             </div>
                         </div>
                     @endif

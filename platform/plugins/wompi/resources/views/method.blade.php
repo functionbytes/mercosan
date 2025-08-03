@@ -12,7 +12,7 @@
         {{ trans('Pagar con Wompi') }}
     </label>
     <div class="payment-method-logo">
-        <img src="{{ asset('vendor/core/plugins/wompi/images/wompi.svg') }}" alt="Wompi" style="height: 20px;">
+        <img src="{{ asset('vendor/core/plugins/wompi/images/wompi.png') }}" alt="Wompi" >
     </div>
 
 

@@ -36,6 +36,10 @@ class CheckoutSettingRequest extends Request
             'checkout_product_quantity_editable' => $onOffRule,
             'show_terms_and_policy_checkbox' => $onOffRule,
             'terms_and_policy_checkbox_checked_by_default' => $onOffRule,
+            'filter_cities_by_state' => $onOffRule,
+            'default_state_for_city_filter' => ['nullable', 'string'],
+            'selected_cities_for_checkout' => ['sometimes', 'array'],
+            'selected_cities_for_checkout.*' => ['nullable', 'integer'],
         ];
     }
 }

@@ -252,6 +252,8 @@
             });
         });
 
+        window.trackedStartCheckout = '{{ session("tracked_start_checkout") }}';
+        window.siteUrl = '{{ url("/") }}';
 
         $(document).on('change', '.switch-currency', function () {
             $(this).closest('form').submit();

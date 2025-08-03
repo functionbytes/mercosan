@@ -216,9 +216,5 @@
 .payment-method-item .payment-method-logo img {
   max-width: 100%;
   height: auto;
-  max-height: 28px;
-}
-.text-warning {
-    --bs-text-opacity: 1;
-    color: rgb(223 37 9) !important;
+  max-height: 38px;
 }

@@ -4,7 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea7d47d-6cd6-4aa1-ad51-6068c53ef329" name="Changes" comment="" />
+    <list default="true" id="2ea7d47d-6cd6-4aa1-ad51-6068c53ef329" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@botble/core/public/libraries/select2/css/select2-bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@botble/core/public/libraries/select2/css/select2-bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/core/base/public/libraries/select2/css/select2-bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/libraries/select2/css/select2-bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/contact/public/css/contact-public.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/contact/public/css/contact-public.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/contact/resources/sass/contact-public.scss" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/contact/resources/sass/contact-public.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/assets/sass/ecommerce.scss" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/assets/sass/ecommerce.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/shipping.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/shipping.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/checkout/product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/checkout/product.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/address-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/address-form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-methods.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-methods.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-option.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-option.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/table-item.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/table-item.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/rules/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/rules/form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/themes/modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/themes/modal.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Forms/Settings/CheckoutSettingForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Forms/Settings/CheckoutSettingForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Fronts/PublicUpdateCheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Fronts/PublicUpdateCheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Settings/CheckoutSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Settings/CheckoutSettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Requests/Settings/CheckoutSettingRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Requests/Settings/CheckoutSettingRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Providers/CommandServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Providers/CommandServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/HandleShippingFeeService.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/HandleShippingFeeService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Supports/EcommerceHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Supports/EcommerceHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/webpack.mix.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/location/src/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/location/src/Http/Controllers/CityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/newsletter/public/css/newsletter.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/newsletter/public/css/newsletter.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/wompi/resources/views/method.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/wompi/resources/views/method.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/assets/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/assets/js/backend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/js/backend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/views/ecommerce/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/views/ecommerce/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/themes/wowy/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/themes/wowy/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/js/backend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/core.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/core.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/select2/css/select2-bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/select2/css/select2-bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/toast.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/toast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/ecommerce.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/ecommerce.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/newsletter/css/newsletter.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/newsletter/css/newsletter.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/cache_keys.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/cache_keys.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -367,7 +423,7 @@
       <workItem from="1753657468085" duration="5746000" />
       <workItem from="1753904061130" duration="45433000" />
       <workItem from="1754163643335" duration="13949000" />
-      <workItem from="1754226571900" duration="3482000" />
+      <workItem from="1754226571900" duration="17159000" />
     </task>
     <servers />
   </component>

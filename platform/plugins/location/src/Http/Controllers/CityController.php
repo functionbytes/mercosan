@@ -9,6 +9,7 @@ use Botble\Base\Supports\Breadcrumb;
 use Botble\Location\Forms\CityForm;
 use Botble\Location\Http\Requests\CityRequest;
 use Botble\Location\Http\Resources\CityResource;
+use Botble\Ecommerce\Facades\EcommerceHelper;
 use Botble\Location\Models\City;
 use Botble\Location\Tables\CityTable;
 use Illuminate\Http\Request;
@@ -104,6 +105,14 @@ class CityController extends BaseController
             ->orderBy('name');
 
         $stateId = $request->input('state_id');
+
+        // Check if ecommerce city filtering is enabled
+        if (is_plugin_active('ecommerce') && EcommerceHelper::isFilterCitiesByStateEnabled()) {
+            $defaultStateId = EcommerceHelper::getDefaultStateForCityFilter();
+            if ($defaultStateId) {
+                $stateId = $defaultStateId;
+            }
+        }
 
         if ($stateId && $stateId != 'null') {
             $data = $data->where('state_id', $stateId);

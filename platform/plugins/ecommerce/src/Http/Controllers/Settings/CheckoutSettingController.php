@@ -21,6 +21,9 @@ class CheckoutSettingController extends SettingController
             'mandatory_form_fields_at_checkout' => $request->input('mandatory_form_fields_at_checkout', []),
             'hide_form_fields_at_checkout' => $request->input('hide_form_fields_at_checkout', []),
             'available_countries' => $request->boolean('available_countries_all') ? [] : $request->input('available_countries', []),
+            'filter_cities_by_state' => $request->input('filter_cities_by_state', false),
+            'default_state_for_city_filter' => $request->input('default_state_for_city_filter'),
+            'selected_cities_for_checkout' => json_encode($request->input('selected_cities_for_checkout', [])),
         ]);
     }
 }

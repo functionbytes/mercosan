@@ -13,6 +13,7 @@ mix
     .js(source + '/resources/assets/js/admin-review.js', dist + '/js')
     .js(source + '/resources/assets/js/front/order-return.js', dist + '/js')
     .js(source + '/resources/assets/js/front-review.js', dist + '/js')
+    .js(source + '/resources/js/dynamic-shipping-selector.js', dist + '/js')
 
 if (mix.inProduction()) {
     mix
@@ -22,6 +23,7 @@ if (mix.inProduction()) {
         .copy(dist + '/js/admin-review.js', source + '/public/js')
         .copy(dist + '/js/order-return.js', source + '/public/js')
         .copy(dist + '/js/front-review.js', source + '/public/js')
+        .copy(dist + '/js/dynamic-shipping-selector.js', source + '/public/js')
 }
 
 const scripts = [

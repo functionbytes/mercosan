@@ -259,6 +259,13 @@ return [
             'show_terms_and_policy_checkbox_helper' => 'If enabled, customers must agree to the terms and policy before placing an order. Please setup Terms and Privacy Policy URL in Appearance -> Theme options first.',
             'terms_and_policy_checkbox_checked_by_default' => 'Terms and policy checkbox checked by default',
             'terms_and_policy_checkbox_checked_by_default_helper' => 'If enabled, the terms and policy checkbox will be pre-checked when the checkout form loads.',
+            'filter_cities_by_state' => 'Filter cities by state',
+            'filter_cities_by_state_helper' => 'When enabled, only cities from the selected state will be shown in the checkout city dropdown.',
+            'default_state_for_city_filter' => 'Default state for city filtering',
+            'default_state_for_city_filter_placeholder' => 'Select a state',
+            'default_state_for_city_filter_help' => 'Select the state to filter cities by. Only active cities from this state will be shown in checkout.',
+            'selected_cities_for_checkout' => 'Select specific cities for checkout',
+            'selected_cities_for_checkout_helper' => 'Choose which cities from the selected state should be available in the checkout. If none are selected, all active cities from the state will be shown.',
         ],
     ],
     'return' => [

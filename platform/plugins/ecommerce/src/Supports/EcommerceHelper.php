@@ -249,7 +249,17 @@ class EcommerceHelper
             return $this->getFirstCountryId();
         }
 
-        return get_ecommerce_setting('default_country_at_checkout_page') ?: $this->getFirstCountryId();
+        return get_ecommerce_setting('default_country_at_checkout_page', 'CO') ?: $this->getFirstCountryId();
+    }
+
+    public function isFilterCitiesByStateEnabled(): bool
+    {
+        return (bool) get_ecommerce_setting('filter_cities_by_state', false);
+    }
+
+    public function getDefaultStateForCityFilter(): int|string|null
+    {
+        return get_ecommerce_setting('default_state_for_city_filter', '28');
     }
 
     public function getAvailableStatesByCountry(int|string|null $countryId): array
@@ -281,30 +291,64 @@ class EcommerceHelper
 
     public function getAvailableCitiesByState(int|string|null $stateId, int|string|null $countryId = null): array
     {
-        if (! $this->loadCountriesStatesCitiesFromPluginLocation() || (! $stateId && ! $countryId)) {
+        if (! $this->loadCountriesStatesCitiesFromPluginLocation()) {
             return [];
         }
 
-        return City::query()
-            ->wherePublished()
-            ->when(
-                $stateId,
-                fn ($query) => $query->where('state_id', $stateId),
-                function ($query) use ($countryId): void {
-                    $query->when($countryId, function ($query) use ($countryId) {
-                        return $query->whereHas('state.country', function ($query) use ($countryId) {
-                            return $query
-                                ->where('id', $countryId)
-                                ->orWhere('code', $countryId);
-                        });
-                    });
-                }
-            )
-            ->orderBy('order')
+        // If city filtering by state is enabled, use the configured state and selected cities
+        if ($this->isFilterCitiesByStateEnabled()) {
+            $defaultStateId = $this->getDefaultStateForCityFilter();
+            if ($defaultStateId) {
+                $stateId = $defaultStateId;
+            }
+            
+            // Check if specific cities are selected for checkout
+            $selectedCitiesJson = get_ecommerce_setting('selected_cities_for_checkout', '[]');
+            $selectedCities = json_decode($selectedCitiesJson, true) ?: [];
+            
+            if (!empty($selectedCities)) {
+                // Use only the selected cities
+                return City::query()
+                    ->whereIn('id', $selectedCities)
+                    ->wherePublished()
+                    ->orderBy('name')
+                    ->select('name', 'id')
+                    ->get()
+                    ->mapWithKeys(fn (City $item) => [$item->getKey() => $item->name])
+                    ->all();
+            } else {
+                // If no specific cities selected, use all cities from the configured state
+                return City::query()
+                    ->where('state_id', $stateId)
+                    ->wherePublished()
+                    ->orderBy('name')
+                    ->select('name', 'id')
+                    ->get()
+                    ->mapWithKeys(fn (City $item) => [$item->getKey() => $item->name])
+                    ->all();
+            }
+        }
+
+        // Default behavior: use provided state or country
+        if (!$stateId && !$countryId) {
+            return [];
+        }
+
+        $query = City::query()->wherePublished();
+
+        if ($stateId) {
+            $query->where('state_id', $stateId);
+        } elseif ($countryId) {
+            $query->whereHas('state.country', function ($query) use ($countryId) {
+                return $query->where('id', $countryId)->orWhere('code', $countryId);
+            });
+        }
+
+        return $query->orderBy('order')
             ->oldest('name')
             ->select('name', 'id')
             ->get()
-            ->mapWithKeys(fn (City $item) => [$item->getKey() => $item->name]) // @phpstan-ignore-line
+            ->mapWithKeys(fn (City $item) => [$item->getKey() => $item->name])
             ->all();
     }
 
@@ -571,7 +615,7 @@ class EcommerceHelper
             return false;
         }
 
-        $this->loadLocationDataFromPluginLocation = (bool) get_ecommerce_setting('load_countries_states_cities_from_location_plugin', 0);
+        $this->loadLocationDataFromPluginLocation = (bool) get_ecommerce_setting('load_countries_states_cities_from_location_plugin', 1);
 
         return $this->loadLocationDataFromPluginLocation;
     }

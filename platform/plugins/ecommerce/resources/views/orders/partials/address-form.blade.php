@@ -261,7 +261,7 @@
                                     required
                                 >
                                     <option value="">{{ __('Select city...') }}</option>
-                                    @if (old('address.state', Arr::get($sessionCheckoutData, 'state')) || in_array('state', EcommerceHelper::getHiddenFieldsAtCheckout()))
+                                    @if (old('address.state', Arr::get($sessionCheckoutData, 'state')) || in_array('state', EcommerceHelper::getHiddenFieldsAtCheckout()) || EcommerceHelper::isFilterCitiesByStateEnabled())
                                         @foreach (EcommerceHelper::getAvailableCitiesByState(old('address.state', Arr::get($sessionCheckoutData, 'state')), old('address.country', Arr::get($sessionCheckoutData, 'country'))) as $cityId => $cityName)
                                             <option
                                                 value="{{ $cityId }}"
