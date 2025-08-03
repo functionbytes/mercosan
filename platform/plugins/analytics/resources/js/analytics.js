@@ -17,7 +17,7 @@ class PluginAnalytics {
                 xkey: 'axis',
                 ykeys: ['visitors', 'pageViews'],
                 labels: [analyticsData.translations.visits, analyticsData.translations.pageViews],
-                lineColors: ['#d6336c', '#4299e1'],
+                lineColors: ['#d6336c', '#000000'],
                 hideHover: 'auto',
                 parseTime: false,
             })

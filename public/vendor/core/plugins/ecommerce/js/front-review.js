@@ -1,1 +1,176 @@
-$((function(){var e=$(".review-list-container"),a=[],t=function(e){e.lightGallery({thumbnail:!0})},i=function(a,i){a&&$.ajax({url:a,method:"GET",beforeSend:function(){e.append('<div class="loading-spinner"></div>')},success:function(a){var n=a.data,r=a.message;e.find("h4").text(r),e.find(".review-list").html(n),void 0!==Theme.lazyLoadInstance&&Theme.lazyLoadInstance.update(),t(e.find(".review-images")),i&&i()},complete:function(){e.find(".loading-spinner").remove()}})},n=function(e){for(var t=new ClipboardEvent("").clipboardData||new DataTransfer,i=0,n=a;i<n.length;i++){var r=n[i];t.items.add(r)}e.files=t.files,function(e){var a=$(".image-upload__text"),t=$(e).data("max-files"),i=e.files.length;t?(i>=t?a.closest(".image-upload__uploader-container").addClass("d-none"):a.closest(".image-upload__uploader-container").removeClass("d-none"),a.text(i+"/"+t)):a.text(i);var n=$(".image-viewer__list"),r=$("#review-image-template").html();if(n.find(".image-viewer__item").remove(),i){for(var o=i-1;o>=0;o--)n.prepend(r.replace("__id__",o));for(var s=function(a){var t=new FileReader;t.onload=function(e){n.find(".image-viewer__item[data-id="+a+"]").find("img").attr("src",e.target.result)},t.readAsDataURL(e.files[a])},l=i-1;l>=0;l--)s(l)}}(e)};e.length&&(t($(".review-images")),i(e.data("ajax-url"))),e.on("click",".pagination a",(function(a){a.preventDefault();var t=$(a.currentTarget).prop("href");i(t,(function(){$("html, body").animate({scrollTop:e.offset().top-130})}))})),$(document).on("submit",".product-review-container form",(function(t){t.preventDefault(),t.stopPropagation();var n=$(t.currentTarget),r=n.find('button[type="submit"]');$.ajax({type:"POST",cache:!1,url:n.prop("action"),data:new FormData(n[0]),contentType:!1,processData:!1,beforeSend:function(){r.prop("disabled",!0).addClass("loading")},success:function(t){var r=t.error,o=t.message;r?Theme.showError(o):(n.find("select").val(0),n.find("textarea").val(""),n.find("input[type=file]").val(""),n.find("input.custom-field").val(""),a=[],Theme.showSuccess(o),i(e.data("ajax-url"),(function(){$(".review-list").length||setTimeout((function(){return window.location.reload()}),1e3)})))},error:function(e){Theme.handleError(e,n)},complete:function(){r.prop("disabled",!1).removeClass("loading")}})})),$(document).on("change",".product-review-container form input[type=file]",(function(e){e.preventDefault();var t=this,i=$(t),r=i.data("max-size");Object.keys(t.files).map((function(e){if(r&&t.files[e].size/1024>r){var n=i.data("max-size-message").replace("__attribute__",t.files[e].name).replace("__max__",r);Theme.showError(n)}else a.push(t.files[e])}));var o=a.length,s=i.data("max-files");s&&o>s&&a.splice(o-s-1,o-s),n(t)})),$(document).on("click",".product-review-container form .image-viewer__icon-remove",(function(e){e.preventDefault();var t=$(e.currentTarget).closest(".image-viewer__item").data("id");a.splice(t,1);var i=$(".product-review-container form input[type=file]")[0];n(i)})),sessionStorage.reloadReviewsTab&&($('#product-detail-tabs a[href="#product-reviews"]').length&&new bootstrap.Tab($('#product-detail-tabs a[href="#product-reviews"]')[0]).show(),sessionStorage.reloadReviewsTab=!1)}));
+/******/ (() => { // webpackBootstrap
+/*!************************************************************************!*\
+  !*** ./platform/plugins/ecommerce/resources/assets/js/front-review.js ***!
+  \************************************************************************/
+$(function () {
+  var $reviewListContainer = $('.review-list-container');
+  var imagesReviewBuffer = [];
+  var initLightGallery = function initLightGallery(element) {
+    element.lightGallery({
+      thumbnail: true
+    });
+  };
+  var getReviewList = function getReviewList(url, successCallback) {
+    if (!url) {
+      return;
+    }
+    $.ajax({
+      url: url,
+      method: 'GET',
+      beforeSend: function beforeSend() {
+        $reviewListContainer.append('<div class="loading-spinner"></div>');
+      },
+      success: function success(_ref) {
+        var data = _ref.data,
+          message = _ref.message;
+        $reviewListContainer.find('h4').text(message);
+        $reviewListContainer.find('.review-list').html(data);
+        if (typeof Theme.lazyLoadInstance !== 'undefined') {
+          Theme.lazyLoadInstance.update();
+        }
+        initLightGallery($reviewListContainer.find('.review-images'));
+        if (successCallback) {
+          successCallback();
+        }
+      },
+      complete: function complete() {
+        $reviewListContainer.find('.loading-spinner').remove();
+      }
+    });
+  };
+  var loadPreviewImage = function loadPreviewImage(input) {
+    var $uploadText = $('.image-upload__text');
+    var maxFiles = $(input).data('max-files');
+    var filesAmount = input.files.length;
+    if (maxFiles) {
+      if (filesAmount >= maxFiles) {
+        $uploadText.closest('.image-upload__uploader-container').addClass('d-none');
+      } else {
+        $uploadText.closest('.image-upload__uploader-container').removeClass('d-none');
+      }
+      $uploadText.text(filesAmount + '/' + maxFiles);
+    } else {
+      $uploadText.text(filesAmount);
+    }
+    var viewerList = $('.image-viewer__list');
+    var $template = $('#review-image-template').html();
+    viewerList.find('.image-viewer__item').remove();
+    if (filesAmount) {
+      for (var i = filesAmount - 1; i >= 0; i--) {
+        viewerList.prepend($template.replace('__id__', i));
+      }
+      var _loop = function _loop(j) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          viewerList.find('.image-viewer__item[data-id=' + j + ']').find('img').attr('src', event.target.result);
+        };
+        reader.readAsDataURL(input.files[j]);
+      };
+      for (var j = filesAmount - 1; j >= 0; j--) {
+        _loop(j);
+      }
+    }
+  };
+  var setImagesFormReview = function setImagesFormReview(input) {
+    var dT = new ClipboardEvent('').clipboardData || new DataTransfer();
+    for (var _i = 0, _imagesReviewBuffer = imagesReviewBuffer; _i < _imagesReviewBuffer.length; _i++) {
+      var file = _imagesReviewBuffer[_i];
+      dT.items.add(file);
+    }
+    input.files = dT.files;
+    loadPreviewImage(input);
+  };
+  if ($reviewListContainer.length) {
+    initLightGallery($('.review-images'));
+    getReviewList($reviewListContainer.data('ajax-url'));
+  }
+  $reviewListContainer.on('click', '.pagination a', function (e) {
+    e.preventDefault();
+    var url = $(e.currentTarget).prop('href');
+    getReviewList(url, function () {
+      $('html, body').animate({
+        scrollTop: $reviewListContainer.offset().top - 130
+      });
+    });
+  });
+  $(document).on('submit', '.product-review-container form', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var $form = $(e.currentTarget);
+    var $button = $form.find('button[type="submit"]');
+    $.ajax({
+      type: 'POST',
+      cache: false,
+      url: $form.prop('action'),
+      data: new FormData($form[0]),
+      contentType: false,
+      processData: false,
+      beforeSend: function beforeSend() {
+        $button.prop('disabled', true).addClass('loading');
+      },
+      success: function success(_ref2) {
+        var error = _ref2.error,
+          message = _ref2.message;
+        if (!error) {
+          $form.find('select').val(0);
+          $form.find('textarea').val('');
+          $form.find('input[type=file]').val('');
+          $form.find('input.custom-field').val('');
+          imagesReviewBuffer = [];
+          Theme.showSuccess(message);
+          getReviewList($reviewListContainer.data('ajax-url'), function () {
+            if (!$('.review-list').length) {
+              setTimeout(function () {
+                return window.location.reload();
+              }, 1000);
+            }
+          });
+        } else {
+          Theme.showError(message);
+        }
+      },
+      error: function error(_error) {
+        Theme.handleError(_error, $form);
+      },
+      complete: function complete() {
+        $button.prop('disabled', false).removeClass('loading');
+      }
+    });
+  });
+  $(document).on('change', '.product-review-container form input[type=file]', function (event) {
+    event.preventDefault();
+    var input = this;
+    var $input = $(input);
+    var maxSize = $input.data('max-size');
+    Object.keys(input.files).map(function (i) {
+      if (maxSize && input.files[i].size / 1024 > maxSize) {
+        var message = $input.data('max-size-message').replace('__attribute__', input.files[i].name).replace('__max__', maxSize);
+        Theme.showError(message);
+      } else {
+        imagesReviewBuffer.push(input.files[i]);
+      }
+    });
+    var filesAmount = imagesReviewBuffer.length;
+    var maxFiles = $input.data('max-files');
+    if (maxFiles && filesAmount > maxFiles) {
+      imagesReviewBuffer.splice(filesAmount - maxFiles - 1, filesAmount - maxFiles);
+    }
+    setImagesFormReview(input);
+  });
+  $(document).on('click', '.product-review-container form .image-viewer__icon-remove', function (event) {
+    event.preventDefault();
+    var $this = $(event.currentTarget);
+    var id = $this.closest('.image-viewer__item').data('id');
+    imagesReviewBuffer.splice(id, 1);
+    var input = $('.product-review-container form input[type=file]')[0];
+    setImagesFormReview(input);
+  });
+  if (sessionStorage.reloadReviewsTab) {
+    if ($('#product-detail-tabs a[href="#product-reviews"]').length) {
+      new bootstrap.Tab($('#product-detail-tabs a[href="#product-reviews"]')[0]).show();
+    }
+    sessionStorage.reloadReviewsTab = false;
+  }
+});
+/******/ })()
+;

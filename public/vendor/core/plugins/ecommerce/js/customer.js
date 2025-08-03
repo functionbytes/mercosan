@@ -1,1 +1,39 @@
-$((function(){$(document).on("click",".verify-customer-email-button",(function(o){o.preventDefault(),$("#confirm-verify-customer-email-button").data("action",$(o.currentTarget).prop("href")),$("#verify-customer-email-modal").modal("show")})),$(document).on("click","#confirm-verify-customer-email-button",(function(o){o.preventDefault();var e=$(o.currentTarget);e.addClass("button-loading"),$.ajax({type:"POST",cache:!1,url:e.data("action"),success:function(o){o.error?Botble.showError(o.message):(Botble.showSuccess(o.message),setTimeout((function(){window.location.reload()}),2e3)),e.removeClass("button-loading"),e.closest(".modal").modal("hide")},error:function(o){Botble.handleError(o),e.removeClass("button-loading")}})}))}));
+/******/ (() => { // webpackBootstrap
+/*!********************************************************************!*\
+  !*** ./platform/plugins/ecommerce/resources/assets/js/customer.js ***!
+  \********************************************************************/
+$(function () {
+  $(document).on('click', '.verify-customer-email-button', function (event) {
+    event.preventDefault();
+    $('#confirm-verify-customer-email-button').data('action', $(event.currentTarget).prop('href'));
+    $('#verify-customer-email-modal').modal('show');
+  });
+  $(document).on('click', '#confirm-verify-customer-email-button', function (event) {
+    event.preventDefault();
+    var _self = $(event.currentTarget);
+    _self.addClass('button-loading');
+    $.ajax({
+      type: 'POST',
+      cache: false,
+      url: _self.data('action'),
+      success: function success(res) {
+        if (!res.error) {
+          Botble.showSuccess(res.message);
+          setTimeout(function () {
+            window.location.reload();
+          }, 2000);
+        } else {
+          Botble.showError(res.message);
+        }
+        _self.removeClass('button-loading');
+        _self.closest('.modal').modal('hide');
+      },
+      error: function error(res) {
+        Botble.handleError(res);
+        _self.removeClass('button-loading');
+      }
+    });
+  });
+});
+/******/ })()
+;

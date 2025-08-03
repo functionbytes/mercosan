@@ -6,6 +6,9 @@ return [
         'name' => 'General',
         'description' => 'Ver y actualizar su configuración general',
     ],
+    'abandoned_cart' => [
+        'enable' => 'Habilitar correos electrónicos de carritos abandonados',
+    ],
     'currency' => [
         'name' => 'Monedas',
         'description' => 'Ver y actualizar la configuración de moneda',
@@ -64,6 +67,7 @@ return [
             'how_to_display_product_variation_images_helper' => 'Elija si desea mostrar solo imágenes específicas de la variación o incluir imágenes de la variación y del producto principal.',
             'show_out_of_stock_products_helper' => 'Si está habilitado, los productos fuera de stock se mostrarán en la página de listado de productos.',
             'show_number_of_products_helper' => 'Muestra el número total de productos en la página de detalles del producto.',
+            'enable_product_specification' => 'Habilitar la especificación del producto',
         ],
     ],
     'product_search' => [
@@ -81,6 +85,7 @@ return [
             'max_product_price_for_filter_placeholder' => 'Si está vacío o es cero, obtendrá el precio máximo del producto de sus productos existentes.',
             'max_product_price_for_filter' => 'Precio máximo del producto para el filtro',
             'enable_filter_products_by_price' => 'Habilitar el filtro de productos por precio',
+            'enable_filter_products_by_categories' => 'Habilitar el filtro de productos por categorías',
         ],
     ],
     'digital_product' => [
@@ -139,6 +144,7 @@ return [
             'enable_cart_helper' => 'Si está deshabilitado, se eliminará el botón del carrito y su sitio pasará a ser solo una pantalla de catálogo.',
             'cart_destroy_on_logout_helper' => 'El carrito se destruirá cuando el cliente cierre la sesión.',
             'hide_product_price' => 'Ocultar el precio del producto',
+            'enable_payment_proof' => 'Habilitar la carga de comprobante de pago',
         ],
     ],
     'checkout' => [
@@ -277,6 +283,7 @@ return [
             'default_avatar_helper' => 'Avatar predeterminado para el cliente cuando no tiene avatar. Si no selecciona ninguna imagen, se generará con su logotipo o la primera letra del nombre del cliente.',
             'keep_email_field_in_registration_form' => 'Mantener el campo de correo electrónico en el formulario de registro',
             'keep_email_field_in_registration_form_helper' => 'Cuando está deshabilitado, el campo de correo electrónico se ocultará en el formulario de registro cuando la opción de inicio de sesión sea "Iniciar sesión con teléfono".',
+            'enable_customer_registration' => 'Habilitar el registro de cliente',
         ],
     ],
     'shipping' => [

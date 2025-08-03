@@ -252,6 +252,29 @@ AdminHelper::registerRoutes(function (): void {
                     'uses' => 'FlashSaleSettingController@update',
                     'permission' => 'ecommerce.settings.flash-sale',
                 ]);
+
+                Route::get('abandoned-cart', [
+                    'as' => 'ecommerce.settings.abandoned-cart',
+                    'uses' => 'AbandonedCartSettingController@edit',
+                ]);
+
+                Route::put('abandoned-cart', [
+                    'as' => 'ecommerce.settings.abandoned-cart.update',
+                    'uses' => 'AbandonedCartSettingController@update',
+                    'permission' => 'ecommerce.settings.abandoned-cart',
+                ]);
+
+                Route::post('abandoned-cart/send-test-email', [
+                    'as' => 'ecommerce.settings.abandoned-cart.send-test-email',
+                    'uses' => 'AbandonedCartSettingController@sendTestEmail',
+                    'permission' => 'ecommerce.settings.abandoned-cart',
+                ]);
+
+                Route::post('abandoned-cart/bulk-send', [
+                    'as' => 'ecommerce.settings.abandoned-cart.bulk-send',
+                    'uses' => 'AbandonedCartSettingController@sendBulkAbandonedCartEmails',
+                    'permission' => 'ecommerce.settings.abandoned-cart',
+                ]);
             });
         });
     });

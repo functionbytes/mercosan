@@ -12,7 +12,6 @@ class ShoppingSettingRequest extends Request
     {
         return [
             'shopping_cart_enabled' => $onOffRule = new OnOffRule(),
-            'cart_destroy_on_logout' => $onOffRule,
             'wishlist_enabled' => $onOffRule,
             'wishlist_sharing' => $onOffRule,
             'shared_wishlist_lifetime' => [Rule::when($this->boolean('wishlist_sharing'), 'required', 'nullable'), 'integer', 'min:0'],

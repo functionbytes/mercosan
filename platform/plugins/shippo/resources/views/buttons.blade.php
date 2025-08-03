@@ -3,7 +3,7 @@
         $url = route(app(\Botble\Shippo\Shippo::class)->getRoutePrefixByFactor() . 'shippo.show', $shipment->id);
     @endphp
     <button
-        class="btn btn-primary"
+        class="btn btn-primary w-100"
         data-bs-toggle="modal"
         data-bs-target="#shippo-view-n-create-transaction"
         data-url="{{ $url }}"

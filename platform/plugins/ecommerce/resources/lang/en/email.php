@@ -34,6 +34,9 @@ return [
 
     'order_recover_title' => 'Incomplete order',
     'order_recover_description' => 'Send to custom to remind them about incomplete orders',
+    
+    'abandoned_cart_title' => 'Abandoned Cart Recovery',
+    'abandoned_cart_description' => 'Send personalized emails to customers who left items in their shopping cart',
     'view_order' => 'View order',
     'link_go_to_our_shop' => 'or <a href=":link">Go to our shop</a>',
     'order_number' => 'Order number: <strong>:order_id</strong>',
@@ -60,6 +63,7 @@ return [
     'order_confirmation_subject' => 'Your order has been confirmed {{ order_id }}',
     'payment_confirmation_subject' => 'Your payment has been confirmed {{ order_id }}',
     'order_recover_subject' => 'You have incomplete order(s) at {{ site_title }}',
+    'abandoned_cart_subject' => 'Your cart is waiting for you at {{ site_title }}',
     'order_return_request_subject' => 'Your order return request {{ order_id }}',
     'list_order_products' => 'List of products',
     'invoice_payment_created_title' => 'Invoice payment created',

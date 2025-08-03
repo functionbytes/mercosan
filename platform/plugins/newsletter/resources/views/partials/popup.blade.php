@@ -24,7 +24,7 @@
                 @endif
 
                 @if ($title)
-                    <h5 class="modal-title fs-2" id="newsletterPopupModalLabel">{!! BaseHelper::clean($title) !!}</h5>
+                    <h5 class="modal-title" id="newsletterPopupModalLabel">{!! BaseHelper::clean($title) !!}</h5>
                 @endif
 
                 @if ($description)

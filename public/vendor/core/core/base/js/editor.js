@@ -1,1 +1,707 @@
-(()=>{"use strict";function t(e){return t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},t(e)}function e(t,e){for(var r=0;r<e.length;r++){var i=e[r];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,n(i.key),i)}}function n(e){var n=function(e,n){if("object"!=t(e)||!e)return e;var r=e[Symbol.toPrimitive];if(void 0!==r){var i=r.call(e,n||"default");if("object"!=t(i))return i;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===n?String:Number)(e)}(e,"string");return"symbol"==t(n)?n:n+""}const r=function(){return t=function t(e,n,r){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,t),this.loader=e,this.url=n,this.t=r},(n=[{key:"upload",value:function(){var t=this;return this.loader.file.then((function(e){return new Promise((function(n,r){t._initRequest(),t._initListeners(n,r,e),t._sendRequest(e)}))}))}},{key:"abort",value:function(){this.xhr&&this.xhr.abort()}},{key:"_initRequest",value:function(){var t=this.xhr=new XMLHttpRequest;t.open("POST",this.url,!0),t.responseType="json"}},{key:"_initListeners",value:function(t,e,n){var r=this.xhr,i=this.loader,o=(0,this.t)("Cannot upload file:")+" ".concat(n.name,".");r.addEventListener("error",(function(){return e(o)})),r.addEventListener("abort",(function(){return e()})),r.addEventListener("load",(function(){var n=r.response;if(!n||!n.uploaded)return e(n&&n.error&&n.error.message?n.error.message:o);t({default:n.url})})),r.upload&&r.upload.addEventListener("progress",(function(t){t.lengthComputable&&(i.uploadTotal=t.total,i.uploaded=t.loaded)}))}},{key:"_sendRequest",value:function(t){var e=new FormData;e.append("upload",t),e.append("_token",$('meta[name="csrf-token"]').attr("content")),this.xhr.send(e)}}])&&e(t.prototype,n),r&&e(t,r),Object.defineProperty(t,"prototype",{writable:!1}),t;var t,n,r}();function i(t){return i="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i(t)}function o(t,e){var n=Object.keys(t);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(t);e&&(r=r.filter((function(e){return Object.getOwnPropertyDescriptor(t,e).enumerable}))),n.push.apply(n,r)}return n}function a(t,e,n){return(e=h(e))in t?Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}function l(){/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */l=function(){return e};var t,e={},n=Object.prototype,r=n.hasOwnProperty,o=Object.defineProperty||function(t,e,n){t[e]=n.value},a="function"==typeof Symbol?Symbol:{},c=a.iterator||"@@iterator",u=a.asyncIterator||"@@asyncIterator",s=a.toStringTag||"@@toStringTag";function d(t,e,n){return Object.defineProperty(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}),t[e]}try{d({},"")}catch(t){d=function(t,e,n){return t[e]=n}}function f(t,e,n,r){var i=e&&e.prototype instanceof b?e:b,a=Object.create(i.prototype),l=new P(r||[]);return o(a,"_invoke",{value:S(t,n,l)}),a}function h(t,e,n){try{return{type:"normal",arg:t.call(e,n)}}catch(t){return{type:"throw",arg:t}}}e.wrap=f;var p="suspendedStart",g="suspendedYield",m="executing",y="completed",v={};function b(){}function w(){}function k(){}var E={};d(E,c,(function(){return this}));var _=Object.getPrototypeOf,C=_&&_(_(R([])));C&&C!==n&&r.call(C,c)&&(E=C);var x=k.prototype=b.prototype=Object.create(E);function O(t){["next","throw","return"].forEach((function(e){d(t,e,(function(t){return this._invoke(e,t)}))}))}function L(t,e){function n(o,a,l,c){var u=h(t[o],t,a);if("throw"!==u.type){var s=u.arg,d=s.value;return d&&"object"==i(d)&&r.call(d,"__await")?e.resolve(d.__await).then((function(t){n("next",t,l,c)}),(function(t){n("throw",t,l,c)})):e.resolve(d).then((function(t){s.value=t,l(s)}),(function(t){return n("throw",t,l,c)}))}c(u.arg)}var a;o(this,"_invoke",{value:function(t,r){function i(){return new e((function(e,i){n(t,r,e,i)}))}return a=a?a.then(i,i):i()}})}function S(e,n,r){var i=p;return function(o,a){if(i===m)throw Error("Generator is already running");if(i===y){if("throw"===o)throw a;return{value:t,done:!0}}for(r.method=o,r.arg=a;;){var l=r.delegate;if(l){var c=j(l,r);if(c){if(c===v)continue;return c}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if(i===p)throw i=y,r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);i=m;var u=h(e,n,r);if("normal"===u.type){if(i=r.done?y:g,u.arg===v)continue;return{value:u.arg,done:r.done}}"throw"===u.type&&(i=y,r.method="throw",r.arg=u.arg)}}}function j(e,n){var r=n.method,i=e.iterator[r];if(i===t)return n.delegate=null,"throw"===r&&e.iterator.return&&(n.method="return",n.arg=t,j(e,n),"throw"===n.method)||"return"!==r&&(n.method="throw",n.arg=new TypeError("The iterator does not provide a '"+r+"' method")),v;var o=h(i,e.iterator,n.arg);if("throw"===o.type)return n.method="throw",n.arg=o.arg,n.delegate=null,v;var a=o.arg;return a?a.done?(n[e.resultName]=a.value,n.next=e.nextLoc,"return"!==n.method&&(n.method="next",n.arg=t),n.delegate=null,v):a:(n.method="throw",n.arg=new TypeError("iterator result is not an object"),n.delegate=null,v)}function I(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function T(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function P(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(I,this),this.reset(!0)}function R(e){if(e||""===e){var n=e[c];if(n)return n.call(e);if("function"==typeof e.next)return e;if(!isNaN(e.length)){var o=-1,a=function n(){for(;++o<e.length;)if(r.call(e,o))return n.value=e[o],n.done=!1,n;return n.value=t,n.done=!0,n};return a.next=a}}throw new TypeError(i(e)+" is not iterable")}return w.prototype=k,o(x,"constructor",{value:k,configurable:!0}),o(k,"constructor",{value:w,configurable:!0}),w.displayName=d(k,s,"GeneratorFunction"),e.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return!!e&&(e===w||"GeneratorFunction"===(e.displayName||e.name))},e.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,k):(t.__proto__=k,d(t,s,"GeneratorFunction")),t.prototype=Object.create(x),t},e.awrap=function(t){return{__await:t}},O(L.prototype),d(L.prototype,u,(function(){return this})),e.AsyncIterator=L,e.async=function(t,n,r,i,o){void 0===o&&(o=Promise);var a=new L(f(t,n,r,i),o);return e.isGeneratorFunction(n)?a:a.next().then((function(t){return t.done?t.value:a.next()}))},O(x),d(x,s,"Generator"),d(x,c,(function(){return this})),d(x,"toString",(function(){return"[object Generator]"})),e.keys=function(t){var e=Object(t),n=[];for(var r in e)n.push(r);return n.reverse(),function t(){for(;n.length;){var r=n.pop();if(r in e)return t.value=r,t.done=!1,t}return t.done=!0,t}},e.values=R,P.prototype={constructor:P,reset:function(e){if(this.prev=0,this.next=0,this.sent=this._sent=t,this.done=!1,this.delegate=null,this.method="next",this.arg=t,this.tryEntries.forEach(T),!e)for(var n in this)"t"===n.charAt(0)&&r.call(this,n)&&!isNaN(+n.slice(1))&&(this[n]=t)},stop:function(){this.done=!0;var t=this.tryEntries[0].completion;if("throw"===t.type)throw t.arg;return this.rval},dispatchException:function(e){if(this.done)throw e;var n=this;function i(r,i){return l.type="throw",l.arg=e,n.next=r,i&&(n.method="next",n.arg=t),!!i}for(var o=this.tryEntries.length-1;o>=0;--o){var a=this.tryEntries[o],l=a.completion;if("root"===a.tryLoc)return i("end");if(a.tryLoc<=this.prev){var c=r.call(a,"catchLoc"),u=r.call(a,"finallyLoc");if(c&&u){if(this.prev<a.catchLoc)return i(a.catchLoc,!0);if(this.prev<a.finallyLoc)return i(a.finallyLoc)}else if(c){if(this.prev<a.catchLoc)return i(a.catchLoc,!0)}else{if(!u)throw Error("try statement without catch or finally");if(this.prev<a.finallyLoc)return i(a.finallyLoc)}}}},abrupt:function(t,e){for(var n=this.tryEntries.length-1;n>=0;--n){var i=this.tryEntries[n];if(i.tryLoc<=this.prev&&r.call(i,"finallyLoc")&&this.prev<i.finallyLoc){var o=i;break}}o&&("break"===t||"continue"===t)&&o.tryLoc<=e&&e<=o.finallyLoc&&(o=null);var a=o?o.completion:{};return a.type=t,a.arg=e,o?(this.method="next",this.next=o.finallyLoc,v):this.complete(a)},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&e&&(this.next=e),v},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var n=this.tryEntries[e];if(n.finallyLoc===t)return this.complete(n.completion,n.afterLoc),T(n),v}},catch:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var n=this.tryEntries[e];if(n.tryLoc===t){var r=n.completion;if("throw"===r.type){var i=r.arg;T(n)}return i}}throw Error("illegal catch attempt")},delegateYield:function(e,n,r){return this.delegate={iterator:R(e),resultName:n,nextLoc:r},"next"===this.method&&(this.arg=t),v}},e}function c(t,e,n,r,i,o,a){try{var l=t[o](a),c=l.value}catch(t){return void n(t)}l.done?e(c):Promise.resolve(c).then(r,i)}function u(t){return function(){var e=this,n=arguments;return new Promise((function(r,i){var o=t.apply(e,n);function a(t){c(o,r,i,a,l,"next",t)}function l(t){c(o,r,i,a,l,"throw",t)}a(void 0)}))}}function s(t,e){var n="undefined"!=typeof Symbol&&t[Symbol.iterator]||t["@@iterator"];if(!n){if(Array.isArray(t)||(n=function(t,e){if(t){if("string"==typeof t)return d(t,e);var n={}.toString.call(t).slice(8,-1);return"Object"===n&&t.constructor&&(n=t.constructor.name),"Map"===n||"Set"===n?Array.from(t):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?d(t,e):void 0}}(t))||e&&t&&"number"==typeof t.length){n&&(t=n);var r=0,i=function(){};return{s:i,n:function(){return r>=t.length?{done:!0}:{done:!1,value:t[r++]}},e:function(t){throw t},f:i}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var o,a=!0,l=!1;return{s:function(){n=n.call(t)},n:function(){var t=n.next();return a=t.done,t},e:function(t){l=!0,o=t},f:function(){try{a||null==n.return||n.return()}finally{if(l)throw o}}}}function d(t,e){(null==e||e>t.length)&&(e=t.length);for(var n=0,r=Array(e);n<e;n++)r[n]=t[n];return r}function f(t,e){for(var n=0;n<e.length;n++){var r=e[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(t,h(r.key),r)}}function h(t){var e=function(t,e){if("object"!=i(t)||!t)return t;var n=t[Symbol.toPrimitive];if(void 0!==n){var r=n.call(t,e||"default");if("object"!=i(r))return r;throw new TypeError("@@toPrimitive must return a primitive value.")}return("string"===e?String:Number)(t)}(t,"string");return"symbol"==i(e)?e:e+""}var p=function(){return t=function t(){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,t),this.CKEDITOR={},this.ckEditorConfigCallbacks=[],this.ckEditorInitialCallbacks=[],this.ckFinderCallback=null,this.tinyMceConfigCallbacks=[],this.tinyMceInitialCallbacks=[],document.dispatchEvent(new CustomEvent("core-editor-init",{detail:this}))},e=[{key:"ckEditorConfigUsing",value:function(t){this.ckEditorConfigCallbacks.push(t)}},{key:"ckEditorInitialUsing",value:function(t){this.ckEditorInitialCallbacks.push(t)}},{key:"ckEditorConfig",value:function(t){var e,n=s(this.ckEditorConfigCallbacks);try{for(n.s();!(e=n.n()).done;)t=(0,e.value)(t)}catch(t){n.e(t)}finally{n.f()}return t}},{key:"ckFinderUsing",value:function(t){this.ckFinderCallback=t}},{key:"ckFinderInitial",value:(d=u(l().mark((function t(e,n){var i,o,a;return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:if(!this.ckFinderCallback){t.next=2;break}return t.abrupt("return",this.ckFinderCallback(e,n));case 2:(i=e.plugins.get("FileRepository"))&&"undefined"!=typeof RV_MEDIA_URL&&RV_MEDIA_URL.media_upload_from_editor&&(i.createUploadAdapter=function(t){return new r(t,RV_MEDIA_URL.media_upload_from_editor,e.t)}),o=e.commands.get("ckfinder"),a=$("#".concat(n)).parent().find('.btn_gallery[data-action="media-insert-ckeditor"]'),o&&a.length?o.execute=function(){return a.trigger("click")}:o.execute=function(){return Botble.showError("Not available.")};case 7:case"end":return t.stop()}}),t,this)}))),function(t,e){return d.apply(this,arguments)})},{key:"initCkEditor",value:function(t,e){var n=this;if(this.CKEDITOR[t]||!$("#"+t).is(":visible"))return!1;var r=document.querySelector("#"+t),i=function(t){for(var e=1;e<arguments.length;e++){var n=null!=arguments[e]?arguments[e]:{};e%2?o(Object(n),!0).forEach((function(e){a(t,e,n[e])})):Object.getOwnPropertyDescriptors?Object.defineProperties(t,Object.getOwnPropertyDescriptors(n)):o(Object(n)).forEach((function(e){Object.defineProperty(t,e,Object.getOwnPropertyDescriptor(n,e))}))}return t}({fontSize:{options:[9,10,11,12,13,"default",15,16,17,18,19,20,21,22,23,24]},alignment:{options:["left","right","center","justify"]},heading:{options:[{model:"paragraph",title:"Paragraph",class:"ck-heading_paragraph"},{model:"heading1",view:"h1",title:"Heading 1",class:"ck-heading_heading1"},{model:"heading2",view:"h2",title:"Heading 2",class:"ck-heading_heading2"},{model:"heading3",view:"h3",title:"Heading 3",class:"ck-heading_heading3"},{model:"heading4",view:"h4",title:"Heading 4",class:"ck-heading_heading4"},{model:"heading5",view:"h5",title:"Heading 5",class:"ck-heading_heading4"},{model:"heading6",view:"h6",title:"Heading 6",class:"ck-heading_heading4"}]},placeholder:" ",toolbar:{items:["heading","|","fontColor","fontSize","fontBackgroundColor","fontFamily","bold","italic","underline","link","strikethrough","bulletedList","numberedList","|","alignment","direction","shortcode","outdent","indent","|","htmlEmbed","imageInsert","ckfinder","blockQuote","insertTable","mediaEmbed","bootstrapGrid","undo","redo","findAndReplace","removeFormat","sourceEditing","codeBlock","fullScreen"],shouldNotGroupWhenFull:!0},language:{ui:window.siteEditorLocale||"en",content:window.siteEditorLocale||"en"},image:{toolbar:["imageTextAlternative","imageStyle:inline","imageStyle:block","imageStyle:side","imageStyle:wrapText","imageStyle:breakText","toggleImageCaption","ImageResize"],upload:{types:["jpeg","png","gif","bmp","webp","tiff","svg+xml"]}},codeBlock:{languages:[{language:"plaintext",label:"Plain text"},{language:"c",label:"C"},{language:"cs",label:"C#"},{language:"cpp",label:"C++"},{language:"css",label:"CSS"},{language:"diff",label:"Diff"},{language:"html",label:"HTML"},{language:"java",label:"Java"},{language:"javascript",label:"JavaScript"},{language:"php",label:"PHP"},{language:"python",label:"Python"},{language:"ruby",label:"Ruby"},{language:"typescript",label:"TypeScript"},{language:"xml",label:"XML"},{language:"dart",label:"Dart",class:"language-dart"}]},link:{defaultProtocol:"http://",decorators:{openInNewTab:{mode:"manual",label:"Open in a new tab",attributes:{target:"_blank",rel:"noopener noreferrer"}}}},table:{contentToolbar:["tableColumn","tableRow","mergeTableCells","tableCellProperties","tableProperties"]},htmlSupport:{allow:[{name:/.*/,attributes:!0,classes:!0,styles:!0}]},mediaEmbed:{extraProviders:[{name:"tiktok",url:"^.*https:\\/\\/(?:m|www|vm)?\\.?tiktok\\.com\\/((?:.*\\b(?:(?:usr|v|embed|user|video)\\/|\\?shareId=|\\&item_id=)(\\d+))|\\w+)",html:function(t){return'<iframe src="https://www.tiktok.com/embed/v2/'.concat(t[1],'" width="100%" height="400" frameborder="0"></iframe>')}}]}},e);i=this.ckEditorConfig(i),ClassicEditor.create(r,i).then(function(){var e=u(l().mark((function e(r){var i,o,a;return l().wrap((function(e){for(;;)switch(e.prev=e.next){case 0:return r.insertHtml=function(t){var e=r.data.processor.toView(t),n=r.data.toModel(e);r.model.insertContent(n)},window.editor=r,n.CKEDITOR[t]=r,i=90*$("#"+t).prop("rows"),o="ckeditor-".concat(t,"-inline"),$(r.ui.view.editable.element).addClass(o).after("\n                    <style>\n                        .ck-editor__editable_inline {\n                            min-height: ".concat(i-100,"px;\n                            max-height: ").concat(i+100,"px;\n                        }\n                    </style>\n                ")),r.model.document.on("change:data",(function(){clearTimeout(a),a=setTimeout((function(){r.updateSourceElement()}),150)})),r.commands._commands.get("mediaEmbed").execute=function(t){r.execute("shortcode",'[media url="'.concat(t,'"][/media]'))},e.next=10,n.ckEditorInitialUsing(r);case 10:return e.next=12,n.ckFinderInitial(r,t);case 12:case"end":return e.stop()}}),e)})));return function(t){return e.apply(this,arguments)}}()).catch((function(t){console.error(t)}))}},{key:"uploadImageFromEditor",value:function(t,e){var n=new FormData;"function"==typeof t.blob?n.append("upload",t.blob(),t.filename()):n.append("upload",t),$httpClient.make().postForm(RV_MEDIA_URL.media_upload_from_editor,n).then((function(t){var n=t.data;n.uploaded&&e(n.url)}))}},{key:"tinyMceConfigUsing",value:function(t){this.tinyMceConfigCallbacks.push(t)}},{key:"tinyMceInitialUsing",value:function(t){this.tinyMceInitialCallbacks.push(t)}},{key:"tinyMceConfig",value:function(t){var e,n=s(this.tinyMceConfigCallbacks);try{for(n.s();!(e=n.n()).done;)t=(0,e.value)(t)}catch(t){n.e(t)}finally{n.f()}return t}},{key:"tinyMceInitial",value:(c=u(l().mark((function t(e){return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return t.abrupt("return",e);case 1:case"end":return t.stop()}}),t)}))),function(t){return c.apply(this,arguments)})},{key:"initTinyMce",value:(i=u(l().mark((function t(e){var n,r,i=this;return l().wrap((function(t){for(;;)switch(t.prev=t.next){case 0:return n={menubar:!0,selector:"#".concat(e),min_height:110*$("#".concat(e)).prop("rows"),resize:"vertical",plugins:"code autolink advlist visualchars link image media table charmap hr pagebreak nonbreaking anchor insertdatetime lists wordcount imagetools visualblocks",extended_valid_elements:"input[id|name|value|type|class|style|required|placeholder|autocomplete|onclick]",toolbar:"formatselect | bold italic strikethrough forecolor backcolor | link image table | alignleft aligncenter alignright alignjustify  | numlist bullist indent  |  visualblocks code",convert_urls:!1,image_caption:!0,image_advtab:!0,image_title:!0,placeholder:"",contextmenu:"link image inserttable | cell row column deletetable",images_upload_url:RV_MEDIA_URL.media_upload_from_editor,automatic_uploads:!0,block_unsupported_drop:!1,file_picker_types:"file image media",images_upload_handler:this.uploadImageFromEditor.bind(this),file_picker_callback:function(t){$('<input type="file" accept="image/*" />').click().on("change",(function(e){i.uploadImageFromEditor(e.target.files[0],t)}))},directionality:$("body").prop("dir")||"ltr"},"dark"===localStorage.getItem("themeMode")&&(n.skin="oxide-dark",n.content_css="dark"),n=this.tinyMceConfig(n),r=tinymce.init(n),t.next=6,this.tinyMceInitial(r);case 6:case"end":return t.stop()}}),t,this)}))),function(t){return i.apply(this,arguments)})},{key:"initEditor",value:function(t,e,n){if(!t.length)return!1;var r=this;switch(n){case"ckeditor":$.each(t,(function(t,n){r.initCkEditor($(n).prop("id"),e)}));break;case"tinymce":$.each(t,(function(t,e){r.initTinyMce($(e).prop("id"))}))}}},{key:"init",value:function(){var t=this,e=$(document).find(".editor-ckeditor"),n=$(document).find(".editor-tinymce"),r=this;return e.length>0&&r.initEditor(e,{},"ckeditor"),n.length>0&&r.initEditor(n,{},"tinymce"),$(document).off("click",".show-hide-editor-btn").on("click",".show-hide-editor-btn",(function(e){e.preventDefault();var n=$(e.currentTarget).data("result"),i=$("#"+n);if(i.hasClass("editor-ckeditor")){var o=$(".editor-action-item");t.CKEDITOR[n]&&void 0!==t.CKEDITOR[n]?(t.CKEDITOR[n].destroy(),t.CKEDITOR[n]=null,o.not(".action-show-hide-editor").hide()):(r.initCkEditor(n,{},"ckeditor"),o.not(".action-show-hide-editor").show())}else i.hasClass("editor-tinymce")&&tinymce.execCommand("mceToggleEditor",!1,n)})),this}}],e&&f(t.prototype,e),n&&f(t,n),Object.defineProperty(t,"prototype",{writable:!1}),t;var t,e,n,i,c,d}();$((function(){window.EDITOR=(new p).init(),window.EditorManagement=window.EditorManagement||p,$(document).on("shown.bs.modal",(function(){window.EDITOR.init()}))}))})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./platform/core/base/resources/js/ckeditor-upload-adapter.js":
+/*!********************************************************************!*\
+  !*** ./platform/core/base/resources/js/ckeditor-upload-adapter.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+/**
+ * Upload file adapter for Botble ckeditor
+ */
+var CKEditorUploadAdapter = /*#__PURE__*/function () {
+  /**
+   * Creates a new adapter instance.
+   *
+   */
+  function CKEditorUploadAdapter(loader, url, t) {
+    _classCallCheck(this, CKEditorUploadAdapter);
+    /**
+     * FileLoader instance to use during the upload.
+     */
+    this.loader = loader;
+
+    /**
+     * Upload URL.
+     *
+     * @member {String} #url
+     */
+    this.url = url;
+
+    /**
+     * Locale translation method.
+     */
+    this.t = t;
+  }
+
+  /**
+   * Starts the upload process.
+   *
+   * @returns {Promise.<Object>}
+   */
+  return _createClass(CKEditorUploadAdapter, [{
+    key: "upload",
+    value: function upload() {
+      var _this = this;
+      return this.loader.file.then(function (file) {
+        return new Promise(function (resolve, reject) {
+          _this._initRequest();
+          _this._initListeners(resolve, reject, file);
+          _this._sendRequest(file);
+        });
+      });
+    }
+
+    /**
+     * Aborts the upload process.
+     *
+     */
+  }, {
+    key: "abort",
+    value: function abort() {
+      if (this.xhr) {
+        this.xhr.abort();
+      }
+    }
+
+    /**
+     * Initializes the XMLHttpRequest object.
+     *
+     * @private
+     */
+  }, {
+    key: "_initRequest",
+    value: function _initRequest() {
+      var xhr = this.xhr = new XMLHttpRequest();
+      xhr.open('POST', this.url, true);
+      xhr.responseType = 'json';
+    }
+
+    /**
+     * Initializes XMLHttpRequest listeners.
+     *
+     * @private
+     * @param {Function} resolve Callback function to be called when the request is successful.
+     * @param {Function} reject Callback function to be called when the request cannot be completed.
+     * @param {File} file File instance to be uploaded.
+     */
+  }, {
+    key: "_initListeners",
+    value: function _initListeners(resolve, reject, file) {
+      var xhr = this.xhr;
+      var loader = this.loader;
+      var t = this.t;
+      var genericError = t('Cannot upload file:') + " ".concat(file.name, ".");
+      xhr.addEventListener('error', function () {
+        return reject(genericError);
+      });
+      xhr.addEventListener('abort', function () {
+        return reject();
+      });
+      xhr.addEventListener('load', function () {
+        var response = xhr.response;
+        if (!response || !response.uploaded) {
+          return reject(response && response.error && response.error.message ? response.error.message : genericError);
+        }
+        resolve({
+          "default": response.url
+        });
+      });
+
+      // Upload progress when it's supported.
+      /* istanbul ignore else */
+      if (xhr.upload) {
+        xhr.upload.addEventListener('progress', function (evt) {
+          if (evt.lengthComputable) {
+            loader.uploadTotal = evt.total;
+            loader.uploaded = evt.loaded;
+          }
+        });
+      }
+    }
+
+    /**
+     * Prepares the data and sends the request.
+     *
+     * @private
+     * @param {File} file File instance to be uploaded.
+     */
+  }, {
+    key: "_sendRequest",
+    value: function _sendRequest(file) {
+      // Prepare form data.
+      var data = new FormData();
+      data.append('upload', file);
+      data.append('_token', $('meta[name="csrf-token"]').attr('content')); // laravel token
+
+      // Send request.
+      this.xhr.send(data);
+    }
+  }]);
+}();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CKEditorUploadAdapter);
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!***************************************************!*\
+  !*** ./platform/core/base/resources/js/editor.js ***!
+  \***************************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ckeditor_upload_adapter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ckeditor-upload-adapter */ "./platform/core/base/resources/js/ckeditor-upload-adapter.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+var EditorManagement = /*#__PURE__*/function () {
+  function EditorManagement() {
+    _classCallCheck(this, EditorManagement);
+    this.CKEDITOR = {};
+    this.ckEditorConfigCallbacks = [];
+    this.ckEditorInitialCallbacks = [];
+    this.ckFinderCallback = null;
+    this.tinyMceConfigCallbacks = [];
+    this.tinyMceInitialCallbacks = [];
+    document.dispatchEvent(new CustomEvent('core-editor-init', {
+      detail: this
+    }));
+  }
+  return _createClass(EditorManagement, [{
+    key: "ckEditorConfigUsing",
+    value: function ckEditorConfigUsing(callback) {
+      this.ckEditorConfigCallbacks.push(callback);
+    }
+  }, {
+    key: "ckEditorInitialUsing",
+    value: function ckEditorInitialUsing(callback) {
+      this.ckEditorInitialCallbacks.push(callback);
+    }
+  }, {
+    key: "ckEditorConfig",
+    value: function ckEditorConfig(config) {
+      var _iterator = _createForOfIteratorHelper(this.ckEditorConfigCallbacks),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var callback = _step.value;
+          config = callback(config);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return config;
+    }
+  }, {
+    key: "ckFinderUsing",
+    value: function ckFinderUsing(callback) {
+      this.ckFinderCallback = callback;
+    }
+  }, {
+    key: "ckFinderInitial",
+    value: function () {
+      var _ckFinderInitial = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(editor, element) {
+        var ckFileRepository, ckfinder, btnGalleries;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!this.ckFinderCallback) {
+                _context.next = 2;
+                break;
+              }
+              return _context.abrupt("return", this.ckFinderCallback(editor, element));
+            case 2:
+              ckFileRepository = editor.plugins.get('FileRepository');
+              if (ckFileRepository && typeof RV_MEDIA_URL != 'undefined' && RV_MEDIA_URL.media_upload_from_editor) {
+                ckFileRepository.createUploadAdapter = function (loader) {
+                  return new _ckeditor_upload_adapter__WEBPACK_IMPORTED_MODULE_0__["default"](loader, RV_MEDIA_URL.media_upload_from_editor, editor.t);
+                };
+              }
+              ckfinder = editor.commands.get('ckfinder');
+              btnGalleries = $("#".concat(element)).parent().find('.btn_gallery[data-action="media-insert-ckeditor"]');
+              if (ckfinder && btnGalleries.length) {
+                ckfinder.execute = function () {
+                  return btnGalleries.trigger('click');
+                };
+              } else {
+                ckfinder.execute = function () {
+                  return Botble.showError('Not available.');
+                };
+              }
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function ckFinderInitial(_x, _x2) {
+        return _ckFinderInitial.apply(this, arguments);
+      }
+      return ckFinderInitial;
+    }()
+  }, {
+    key: "initCkEditor",
+    value: function initCkEditor(element, extraConfig) {
+      var _this = this;
+      if (this.CKEDITOR[element] || !$('#' + element).is(':visible')) {
+        return false;
+      }
+      var editor = document.querySelector('#' + element);
+      var config = _objectSpread({
+        fontSize: {
+          options: [9, 10, 11, 12, 13, 'default', 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+        },
+        alignment: {
+          options: ['left', 'right', 'center', 'justify']
+        },
+        heading: {
+          options: [{
+            model: 'paragraph',
+            title: 'Paragraph',
+            "class": 'ck-heading_paragraph'
+          }, {
+            model: 'heading1',
+            view: 'h1',
+            title: 'Heading 1',
+            "class": 'ck-heading_heading1'
+          }, {
+            model: 'heading2',
+            view: 'h2',
+            title: 'Heading 2',
+            "class": 'ck-heading_heading2'
+          }, {
+            model: 'heading3',
+            view: 'h3',
+            title: 'Heading 3',
+            "class": 'ck-heading_heading3'
+          }, {
+            model: 'heading4',
+            view: 'h4',
+            title: 'Heading 4',
+            "class": 'ck-heading_heading4'
+          }, {
+            model: 'heading5',
+            view: 'h5',
+            title: 'Heading 5',
+            "class": 'ck-heading_heading4'
+          }, {
+            model: 'heading6',
+            view: 'h6',
+            title: 'Heading 6',
+            "class": 'ck-heading_heading4'
+          }]
+        },
+        placeholder: ' ',
+        toolbar: {
+          items: ['heading', '|', 'fontColor', 'fontSize', 'fontBackgroundColor', 'fontFamily', 'bold', 'italic', 'underline', 'link', 'strikethrough', 'bulletedList', 'numberedList', '|', 'alignment', 'direction', 'shortcode', 'outdent', 'indent', '|', 'htmlEmbed', 'imageInsert', 'ckfinder', 'blockQuote', 'insertTable', 'mediaEmbed', 'bootstrapGrid', 'undo', 'redo', 'findAndReplace', 'removeFormat', 'sourceEditing', 'codeBlock', 'fullScreen'],
+          shouldNotGroupWhenFull: true
+        },
+        language: {
+          ui: window.siteEditorLocale || 'en',
+          content: window.siteEditorLocale || 'en'
+        },
+        image: {
+          toolbar: ['imageTextAlternative', 'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', 'imageStyle:wrapText', 'imageStyle:breakText', 'toggleImageCaption', 'ImageResize'],
+          upload: {
+            types: ['jpeg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'svg+xml']
+          }
+        },
+        codeBlock: {
+          languages: [{
+            language: 'plaintext',
+            label: 'Plain text'
+          }, {
+            language: 'c',
+            label: 'C'
+          }, {
+            language: 'cs',
+            label: 'C#'
+          }, {
+            language: 'cpp',
+            label: 'C++'
+          }, {
+            language: 'css',
+            label: 'CSS'
+          }, {
+            language: 'diff',
+            label: 'Diff'
+          }, {
+            language: 'html',
+            label: 'HTML'
+          }, {
+            language: 'java',
+            label: 'Java'
+          }, {
+            language: 'javascript',
+            label: 'JavaScript'
+          }, {
+            language: 'php',
+            label: 'PHP'
+          }, {
+            language: 'python',
+            label: 'Python'
+          }, {
+            language: 'ruby',
+            label: 'Ruby'
+          }, {
+            language: 'typescript',
+            label: 'TypeScript'
+          }, {
+            language: 'xml',
+            label: 'XML'
+          }, {
+            language: 'dart',
+            label: 'Dart',
+            "class": 'language-dart'
+          }]
+        },
+        link: {
+          defaultProtocol: 'http://',
+          decorators: {
+            openInNewTab: {
+              mode: 'manual',
+              label: 'Open in a new tab',
+              attributes: {
+                target: '_blank',
+                rel: 'noopener noreferrer'
+              }
+            }
+          }
+        },
+        table: {
+          contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableCellProperties', 'tableProperties']
+        },
+        htmlSupport: {
+          allow: [{
+            name: /.*/,
+            attributes: true,
+            classes: true,
+            styles: true
+          }]
+        },
+        mediaEmbed: {
+          extraProviders: [{
+            name: 'tiktok',
+            url: '^.*https:\\/\\/(?:m|www|vm)?\\.?tiktok\\.com\\/((?:.*\\b(?:(?:usr|v|embed|user|video)\\/|\\?shareId=|\\&item_id=)(\\d+))|\\w+)',
+            html: function html(match) {
+              return "<iframe src=\"https://www.tiktok.com/embed/v2/".concat(match[1], "\" width=\"100%\" height=\"400\" frameborder=\"0\"></iframe>");
+            }
+          }]
+        }
+      }, extraConfig);
+      config = this.ckEditorConfig(config);
+      ClassicEditor.create(editor, config).then(/*#__PURE__*/function () {
+        var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(editor) {
+          var minHeight, className, timeout;
+          return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+            while (1) switch (_context2.prev = _context2.next) {
+              case 0:
+                // create function insert html
+                editor.insertHtml = function (html) {
+                  var viewFragment = editor.data.processor.toView(html);
+                  var modelFragment = editor.data.toModel(viewFragment);
+                  editor.model.insertContent(modelFragment);
+                };
+                window.editor = editor;
+                _this.CKEDITOR[element] = editor;
+                minHeight = $('#' + element).prop('rows') * 90;
+                className = "ckeditor-".concat(element, "-inline");
+                $(editor.ui.view.editable.element).addClass(className).after("\n                    <style>\n                        .ck-editor__editable_inline {\n                            min-height: ".concat(minHeight - 100, "px;\n                            max-height: ").concat(minHeight + 100, "px;\n                        }\n                    </style>\n                "));
+
+                // debounce content for ajax ne
+
+                editor.model.document.on('change:data', function () {
+                  clearTimeout(timeout);
+                  timeout = setTimeout(function () {
+                    editor.updateSourceElement();
+                  }, 150);
+                });
+
+                // insert media embed
+                editor.commands._commands.get('mediaEmbed').execute = function (url) {
+                  editor.execute('shortcode', "[media url=\"".concat(url, "\"][/media]"));
+                };
+                _context2.next = 10;
+                return _this.ckEditorInitialUsing(editor);
+              case 10:
+                _context2.next = 12;
+                return _this.ckFinderInitial(editor, element);
+              case 12:
+              case "end":
+                return _context2.stop();
+            }
+          }, _callee2);
+        }));
+        return function (_x3) {
+          return _ref.apply(this, arguments);
+        };
+      }())["catch"](function (error) {
+        console.error(error);
+      });
+    }
+  }, {
+    key: "uploadImageFromEditor",
+    value: function uploadImageFromEditor(blobInfo, callback) {
+      var formData = new FormData();
+      if (typeof blobInfo.blob === 'function') {
+        formData.append('upload', blobInfo.blob(), blobInfo.filename());
+      } else {
+        formData.append('upload', blobInfo);
+      }
+      $httpClient.make().postForm(RV_MEDIA_URL.media_upload_from_editor, formData).then(function (_ref2) {
+        var data = _ref2.data;
+        if (data.uploaded) {
+          callback(data.url);
+        }
+      });
+    }
+  }, {
+    key: "tinyMceConfigUsing",
+    value: function tinyMceConfigUsing(callback) {
+      this.tinyMceConfigCallbacks.push(callback);
+    }
+  }, {
+    key: "tinyMceInitialUsing",
+    value: function tinyMceInitialUsing(callback) {
+      this.tinyMceInitialCallbacks.push(callback);
+    }
+  }, {
+    key: "tinyMceConfig",
+    value: function tinyMceConfig(config) {
+      var _iterator2 = _createForOfIteratorHelper(this.tinyMceConfigCallbacks),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var callback = _step2.value;
+          config = callback(config);
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      return config;
+    }
+  }, {
+    key: "tinyMceInitial",
+    value: function () {
+      var _tinyMceInitial = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(editor) {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", editor);
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }));
+      function tinyMceInitial(_x4) {
+        return _tinyMceInitial.apply(this, arguments);
+      }
+      return tinyMceInitial;
+    }()
+  }, {
+    key: "initTinyMce",
+    value: function () {
+      var _initTinyMce = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(element) {
+        var _this2 = this;
+        var options, tinymceInstance;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              options = {
+                menubar: true,
+                selector: "#".concat(element),
+                min_height: $("#".concat(element)).prop('rows') * 110,
+                resize: 'vertical',
+                plugins: 'code autolink advlist visualchars link image media table charmap hr pagebreak nonbreaking anchor insertdatetime lists wordcount imagetools visualblocks',
+                extended_valid_elements: 'input[id|name|value|type|class|style|required|placeholder|autocomplete|onclick]',
+                toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link image table | alignleft aligncenter alignright alignjustify  | numlist bullist indent  |  visualblocks code',
+                convert_urls: false,
+                image_caption: true,
+                image_advtab: true,
+                image_title: true,
+                placeholder: '',
+                contextmenu: 'link image inserttable | cell row column deletetable',
+                images_upload_url: RV_MEDIA_URL.media_upload_from_editor,
+                automatic_uploads: true,
+                block_unsupported_drop: false,
+                file_picker_types: 'file image media',
+                images_upload_handler: this.uploadImageFromEditor.bind(this),
+                file_picker_callback: function file_picker_callback(callback) {
+                  var $input = $('<input type="file" accept="image/*" />').click();
+                  $input.on('change', function (e) {
+                    _this2.uploadImageFromEditor(e.target.files[0], callback);
+                  });
+                },
+                directionality: $('body').prop('dir') || 'ltr'
+              };
+              if (localStorage.getItem('themeMode') === 'dark') {
+                options.skin = 'oxide-dark';
+                options.content_css = 'dark';
+              }
+              options = this.tinyMceConfig(options);
+              tinymceInstance = tinymce.init(options);
+              _context4.next = 6;
+              return this.tinyMceInitial(tinymceInstance);
+            case 6:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, this);
+      }));
+      function initTinyMce(_x5) {
+        return _initTinyMce.apply(this, arguments);
+      }
+      return initTinyMce;
+    }()
+  }, {
+    key: "initEditor",
+    value: function initEditor(element, extraConfig, type) {
+      if (!element.length) {
+        return false;
+      }
+      var current = this;
+      switch (type) {
+        case 'ckeditor':
+          $.each(element, function (index, item) {
+            current.initCkEditor($(item).prop('id'), extraConfig);
+          });
+          break;
+        case 'tinymce':
+          $.each(element, function (index, item) {
+            current.initTinyMce($(item).prop('id'));
+          });
+          break;
+      }
+    }
+  }, {
+    key: "init",
+    value: function init() {
+      var _this3 = this;
+      var $ckEditor = $(document).find('.editor-ckeditor');
+      var $tinyMce = $(document).find('.editor-tinymce');
+      var current = this;
+      if ($ckEditor.length > 0) {
+        current.initEditor($ckEditor, {}, 'ckeditor');
+      }
+      if ($tinyMce.length > 0) {
+        current.initEditor($tinyMce, {}, 'tinymce');
+      }
+      $(document).off('click', '.show-hide-editor-btn').on('click', '.show-hide-editor-btn', function (event) {
+        event.preventDefault();
+        var editorInstance = $(event.currentTarget).data('result');
+        var $result = $('#' + editorInstance);
+        if ($result.hasClass('editor-ckeditor')) {
+          var $editorActionItem = $('.editor-action-item');
+          if (_this3.CKEDITOR[editorInstance] && typeof _this3.CKEDITOR[editorInstance] !== 'undefined') {
+            _this3.CKEDITOR[editorInstance].destroy();
+            _this3.CKEDITOR[editorInstance] = null;
+            $editorActionItem.not('.action-show-hide-editor').hide();
+          } else {
+            current.initCkEditor(editorInstance, {}, 'ckeditor');
+            $editorActionItem.not('.action-show-hide-editor').show();
+          }
+        } else if ($result.hasClass('editor-tinymce')) {
+          tinymce.execCommand('mceToggleEditor', false, editorInstance);
+        }
+      });
+      return this;
+    }
+  }]);
+}();
+$(function () {
+  window.EDITOR = new EditorManagement().init();
+  window.EditorManagement = window.EditorManagement || EditorManagement;
+  $(document).on('shown.bs.modal', function () {
+    window.EDITOR.init();
+  });
+});
+})();
+
+/******/ })()
+;

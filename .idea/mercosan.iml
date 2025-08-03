@@ -33,6 +33,7 @@
       <sourceFolder url="file://$MODULE_DIR$/platform/packages/theme/src" isTestSource="false" packagePrefix="Botble\Theme\" />
       <sourceFolder url="file://$MODULE_DIR$/platform/packages/widget/src" isTestSource="false" packagePrefix="Botble\Widget\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/botble/platform" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

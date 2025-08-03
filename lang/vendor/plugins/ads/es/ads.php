@@ -5,8 +5,10 @@ return [
     'create' => 'Nuevo',
     'edit' => 'Editar',
     'location' => 'Localización',
+    'location_helper' => 'Location is used to display ads on the site, it is registered in theme. You can use this location to display ads on the site.',
     'url' => 'URL',
     'expired_at' => 'Expira el',
+    'expired_at_helper' => 'The ads will be automatically disabled after this date. If Ads type is Google Adsense, it will be never expired.',
     'key' => 'Llave',
     'shortcode' => 'Código corto',
     'clicked' => 'Clicks',
@@ -27,5 +29,6 @@ return [
         'google_adsense_unit_ads_client_id' => 'ID de cliente de los Anuncios de Unidad de Google AdSense',
         'title' => 'Configuraciones de anuncios',
         'description' => 'Gestionar configuraciones de anuncios',
+        'google_adsense_txt_file' => 'Tus anuncios de Google Adsense.txt',
     ],
 ];

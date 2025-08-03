@@ -6,6 +6,75 @@ return [
         'name' => 'General',
         'description' => 'View and update your general settings',
     ],
+    'abandoned_cart' => [
+        'name' => 'Abandoned Cart Recovery',
+        'description' => 'Automatically recover lost sales by sending targeted emails to customers who abandoned their shopping carts',
+        
+        // Section titles
+        'general_settings' => 'General Settings',
+        'timing_settings' => 'Timing & Scheduling',
+        'email_settings' => 'Email Configuration',
+        'advanced_settings' => 'Advanced Options',
+        'testing_tools' => 'Testing & Tools',
+        
+        // General settings
+        'enable' => 'Enable Abandoned Cart Emails',
+        'enable_help' => 'Turn on automated abandoned cart recovery emails. When enabled, the system will automatically detect abandoned carts and send recovery emails.',
+        
+        // Timing settings
+        'delay_hours' => 'Initial Delay (hours)',
+        'delay_hours_help' => 'Wait this many hours after cart abandonment before sending the first recovery email. Recommended: 1-2 hours.',
+        'max_hours' => 'Maximum Cart Age (hours)',
+        'max_hours_help' => 'Don\'t send emails for carts older than this. After this time, carts are considered too old to recover. Default: 168 hours (7 days).',
+        'email_limit' => 'Batch Email Limit',
+        'email_limit_help' => 'Maximum number of emails to send in each automated run. Helps control server load and email sending limits.',
+        
+        // Email configuration
+        'email_template' => 'Email Template',
+        'email_template_help' => 'Choose the design and style for your abandoned cart emails. Modern template includes incentives and better conversion elements.',
+        'template_modern' => 'Modern Template (Recommended)',
+        'template_classic' => 'Classic Template',
+        'email_subject' => 'Email Subject Line',
+        'email_subject_help' => 'The subject line that appears in customers\' inboxes. Use compelling language to encourage opens.',
+        'max_emails' => 'Max Emails per Cart',
+        'max_emails_help' => 'Maximum number of follow-up emails to send for a single abandoned cart. Prevents spam and email fatigue.',
+        'email_interval' => 'Email Interval (hours)',
+        'email_interval_help' => 'Time to wait between sending follow-up emails for the same cart. Recommended: 24-72 hours.',
+        
+        // Advanced settings
+        'offer_free_shipping' => 'Include Free Shipping Offer',
+        'offer_free_shipping_help' => 'Show a free shipping incentive in the email template to encourage completion. This is just a display option.',
+        'exclude_categories' => 'Exclude Product Categories',
+        'exclude_categories_help' => 'Comma-separated list of category slugs to exclude from abandoned cart emails (e.g., digital-downloads, gift-cards).',
+        
+        // Testing tools
+        'test_email' => 'Test Email Address',
+        'test_email_help' => 'Enter an email address to send a test abandoned cart email and preview how it looks.',
+        
+        // Messages
+        'no_sample_order' => 'No sample abandoned cart found to send test email',
+        'template_not_found' => 'Email template ":template" not found or not enabled',
+        'test_email_sent' => '✅ Test email sent successfully to :email',
+        'test_email_failed' => '❌ Failed to send test email: :error',
+        'dry_run_result' => 'Preview: Found :count abandoned cart(s) that would receive emails',
+        'emails_queued' => '📧 Successfully queued :count abandoned cart email(s) for sending',
+        'bulk_send_failed' => '❌ Failed to queue abandoned cart emails: :error',
+        
+        // Validation messages
+        'validation' => [
+            'delay_hours_min' => 'Delay must be at least 1 hour',
+            'delay_hours_max' => 'Delay cannot exceed 72 hours',
+            'max_hours_min' => 'Maximum age must be at least 24 hours',
+            'max_hours_max' => 'Maximum age cannot exceed 30 days',
+            'email_limit_min' => 'Email limit must be at least 1',
+            'email_limit_max' => 'Email limit cannot exceed 500',
+            'template_invalid' => 'Invalid email template selected',
+            'max_emails_min' => 'Maximum emails must be at least 1',
+            'max_emails_max' => 'Maximum emails cannot exceed 10',
+            'interval_min' => 'Email interval must be at least 1 hour',
+            'interval_max' => 'Email interval cannot exceed 7 days',
+        ],
+    ],
     'currency' => [
         'name' => 'Currencies',
         'description' => 'View and update currency settings',

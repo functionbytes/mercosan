@@ -2,7 +2,7 @@
 
 return [
     'settings' => 'Ajustes',
-    'name' => 'Comercio electrónico',
+    'name' => 'Comercio',
     'phone' => 'Teléfono',
     'email' => 'Correo electrónico',
     'country' => 'País',

@@ -79,6 +79,7 @@ return [
         'receiver_emails' => 'Correos electrónicos del receptor',
         'receiver_emails_placeholder' => 'Puedes ingresar más de 1 correo electrónico (separados por coma)',
         'receiver_emails_helper' => 'Estos correos electrónicos se recibirán por correo electrónico desde el formulario de contacto. Déjelo en blanco y el correo electrónico se enviará al correo electrónico del administrador.',
+        'show_terms_checkbox_helper' => 'Habilite para mostrar la casilla de verificación "Acepto los Términos y la Política de Privacidad" en el formulario de contacto.',
     ],
     'no_reply' => '¡Aún no hay respuesta!',
     'reply' => 'Responder',

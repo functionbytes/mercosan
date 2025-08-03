@@ -22,7 +22,7 @@ return [
         'recaptcha_warning' => 'Debe usar reCAPTCHA en la configuración de credenciales. Tenga cuidado, la configuración incorrecta provocará la interrupción del sistema de inicio de sesión.',
         'show_disclaimer' => '¿Mostrar el descargo de responsabilidad de reCAPTCHA?',
         'enable_math_captcha' => '¿Habilitar Captcha matemático?',
-        'enable_for_form' => 'Enable for :form?',
+        'enable_for_form' => 'Habilitar :form?',
     ],
     'numbers' => [
         'Cero',

@@ -5,7 +5,7 @@ return [
     'menu' => 'Deslizadores',
     'simple_slider_description' => 'Administre su sistema con controles deslizantes simples',
     'settings' => [
-        'title' => 'Simple sliders',
+        'title' => 'Controles deslizantes simples',
         'description' => 'Configuración',
         'using_assets' => '¿Utilizar configuración predeterminada?',
         'using_assets_description' => 'Si usas configuración predeterminada, los siguientes scripts se agregarán automáticamente al sitio.',

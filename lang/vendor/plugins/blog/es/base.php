@@ -16,6 +16,9 @@ return [
         'description' => 'Ver y actualizar la configuración del blog',
         'enable_blog_post_schema' => '¿Habilitar esquema de publicaciones de blog?',
         'enable_blog_post_schema_description' => 'Obtenga más información: https://schema.org/Article',
-        'schema_type' => 'tipo de esquema',
+        'schema_type' => 'Tipo de esquema',
     ],
+    'blog_posts' => 'Blog posts',
+    'blog_categories' => 'Blog categories',
+    'blog_tags' => 'Blog tags',
 ];

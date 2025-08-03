@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'product_specification' => 'Especificación del producto',
+    'product_specification' => 'Especificación',
     'specification_groups' => [
         'title' => 'Specification Groups',
         'create' => [

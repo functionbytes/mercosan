@@ -137,6 +137,12 @@ class SettingEcommercePanelSection extends PanelSection
                     ->withDescription(trans('plugins/ecommerce::setting.flash_sale.description'))
                     ->withPriority(190)
                     ->withRoute('ecommerce.settings.flash-sale'),
+                PanelSectionItem::make('settings.ecommerce.abandoned_cart')
+                    ->setTitle(trans('plugins/ecommerce::setting.abandoned_cart.name'))
+                    ->withIcon('ti ti-shopping-cart-plus')
+                    ->withDescription(trans('plugins/ecommerce::setting.abandoned_cart.description'))
+                    ->withPriority(200)
+                    ->withRoute('ecommerce.settings.abandoned-cart'),
             ]);
     }
 }

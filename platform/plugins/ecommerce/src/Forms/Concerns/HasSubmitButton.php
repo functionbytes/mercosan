@@ -11,7 +11,7 @@ trait HasSubmitButton
         $this->add('submit', 'submit', [
             'label' => ($icon ? BaseHelper::renderIcon($icon) . ' ' : '') . $label,
             'attr' => [
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary  w-100',
             ],
             ...$attributes,
         ]);

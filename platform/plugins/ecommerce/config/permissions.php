@@ -568,6 +568,11 @@ return [
         'parent_flag' => 'ecommerce.settings',
     ],
     [
+        'name' => 'Abandoned Cart',
+        'flag' => 'ecommerce.settings.abandoned-cart',
+        'parent_flag' => 'ecommerce.settings',
+    ],
+    [
         'name' => 'Product Specification',
         'flag' => 'ecommerce.settings.product-specification',
         'parent_flag' => 'ecommerce.settings',

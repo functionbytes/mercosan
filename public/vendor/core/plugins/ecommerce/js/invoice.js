@@ -1,1 +1,18 @@
-$((function(){$(document).on("click",".invoice-generate",(function(e){e.preventDefault();var t=$(e.currentTarget),a=$(t.find("span[data-trigger]")).data("url");$httpClient.make().withButtonLoading(t).get(a).then((function(e){var t=e.data;Botble.showSuccess(t.message),window.LaravelDataTables["botble-ecommerce-tables-invoice-table"].draw()}))}))}));
+/******/ (() => { // webpackBootstrap
+/*!*******************************************************************!*\
+  !*** ./platform/plugins/ecommerce/resources/assets/js/invoice.js ***!
+  \*******************************************************************/
+$(function () {
+  $(document).on('click', '.invoice-generate', function (event) {
+    event.preventDefault();
+    var _self = $(event.currentTarget);
+    var url = $(_self.find('span[data-trigger]')).data('url');
+    $httpClient.make().withButtonLoading(_self).get(url).then(function (_ref) {
+      var data = _ref.data;
+      Botble.showSuccess(data.message);
+      window.LaravelDataTables['botble-ecommerce-tables-invoice-table'].draw();
+    });
+  });
+});
+/******/ })()
+;
