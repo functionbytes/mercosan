@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/storage
 /storage/*.key
 /vendor
 .DS_Store
@@ -23,6 +24,7 @@ __MACOSX
 /.phpintel
 /.php_cs.cache
 
+public/vendor/core
 
 _ide_helper.php
 yarn.lock
@@ -31,6 +33,7 @@ bun.lockb
 
 public/mix-manifest.json
 
+public/themes
 public/docs
 resources/docs
 
