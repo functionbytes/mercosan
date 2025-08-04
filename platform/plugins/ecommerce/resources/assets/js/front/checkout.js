@@ -161,7 +161,14 @@ class MainCheckout {
                     console.log('AJAX success response:', data)
                     $('.cart-item-wrapper').html(data.amount)
                     $('[data-bb-toggle="checkout-payment-methods-area"]').html(data.payment_methods)
-                    $('[data-bb-toggle="checkout-shipping-methods-area"]').html(data.shipping_methods)
+                    
+                    // Update shipping methods and clear any animation styles
+                    const $shippingArea = $('[data-bb-toggle="checkout-shipping-methods-area"]')
+                    $shippingArea.html(data.shipping_methods)
+                    
+                    // Remove any WOW.js animation styles that might interfere
+                    $shippingArea.find('*').removeAttr('style').removeClass('wow animated')
+                    $shippingArea.removeAttr('style').removeClass('wow animated')
                 },
                 error: (xhr, status, error) => {
                     console.error('AJAX error:', error, xhr.responseText)

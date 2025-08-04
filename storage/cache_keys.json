@@ -39,7 +39,8 @@
         "66d6c800acf0bbfe034c13e9e2145ba3@d48e271a7a10ce1f9183e428f95e3de9",
         "66d6c800acf0bbfe034c13e9e2145ba3@f7f353d59a533f301e2c91a19dbdffc4",
         "66d6c800acf0bbfe034c13e9e2145ba3@8fbef0dbe6f123ee65feb8d6c2ee1d68",
-        "66d6c800acf0bbfe034c13e9e2145ba3@e65cfc574d2a2381e9486dca8e9b5ada"
+        "66d6c800acf0bbfe034c13e9e2145ba3@e65cfc574d2a2381e9486dca8e9b5ada",
+        "66d6c800acf0bbfe034c13e9e2145ba3@a9fcd15b318ae04b7f88333d8d1d63d8"
     ],
     "Botble\\Base\\Models\\AdminNotification": [
         "91ca94b722506f03892a158294e61ceb@admin-notifications-count"

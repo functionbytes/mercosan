@@ -60,7 +60,7 @@
   };
 
   /*------ Wow Active ----*/
-  new WOW().init();
+  // Removed duplicate WOW initialization - see bottom of file
 
   //sidebar sticky
   if ($('.sticky-sidebar').length) {
@@ -598,8 +598,51 @@
       });
     }
   };
-  /* WOW active */
-  new WOW().init();
+  /* WOW active - Initialize with configuration to prevent conflicts */
+  if (typeof WOW !== 'undefined') {
+    try {
+      // First, remove any existing wow classes that might be causing visibility issues
+      $('.wow').removeClass('wow animated').removeAttr('style');
+
+      // Initialize WOW with custom configuration
+      var wow = new WOW({
+        boxClass: 'wow-animate',
+        // Use different class to avoid conflicts
+        animateClass: 'animated',
+        // default
+        offset: 0,
+        // default
+        mobile: true,
+        // default
+        live: true,
+        // default
+        callback: function callback(box) {
+          // Callback after animation - ensure element is visible
+          $(box).css('visibility', 'visible');
+        },
+        scrollContainer: null // optional scroll container selector, otherwise use window
+      });
+
+      // Don't initialize WOW automatically to prevent hiding elements
+      // Instead, manually handle animations without hiding elements
+      console.log('WOW.js disabled for homepage compatibility');
+    } catch (e) {
+      console.warn('WOW.js initialization failed:', e);
+    }
+  } else {
+    // If WOW is not available, ensure all elements are visible
+    $('.wow').removeClass('wow animated').removeAttr('style').css('visibility', 'visible');
+  }
+
+  // Force all elements to be visible on page load
+  $(document).ready(function () {
+    $('.wow').each(function () {
+      $(this).css({
+        'visibility': 'visible',
+        'animation-name': 'none'
+      }).removeClass('wow animated');
+    });
+  });
 
   //Load functions
   $(document).ready(function () {
