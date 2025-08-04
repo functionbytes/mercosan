@@ -4427,6 +4427,16 @@ h6.post-title {
     margin-left: 15px
 }
 
+
+.main-categories-wrap>a:hover>i {
+    color: #fff;
+}
+
+.main-categories-wrap>a:hover {
+    color: #fff;
+}
+
+
 header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i {
     display: none
 }
@@ -10797,4 +10807,15 @@ a:hover {
 .form-control.is-valid:focus, .was-validated .form-control:valid:focus {
     border-color: var(--bs-form-valid-border-color);
     box-shadow: 0 0 0 .25rem rgb(255 0 0 / 25%);
+}
+.btn-check:active+.btn-primary,.btn-check:checked+.btn-primary,.btn-primary.active,.btn-primary:active,.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #000000;
+    border-color: #000000;
+    box-shadow: 0 0 0 .25rem rgba(49, 132, 253, .5);
 }

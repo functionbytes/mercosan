@@ -134,11 +134,17 @@ class MainCheckout {
         }
 
         const calculateShippingFee = (methods) => {
+            console.log('calculateShippingFee called with methods:', methods)
             const formData = new FormData($checkoutForm.get(0))
 
             for (let key in methods) {
                 formData.set(key, methods[key])
+                console.log('Setting formData:', key, '=', methods[key])
             }
+            
+            // Log current form values for debugging
+            console.log('Current city value:', $('select[name="address[city]"]').val() || $('input[name="address[city]"]').val())
+            console.log('Current state value:', $('select[name="address[state]"]').val() || $('input[name="address[state]"]').val())
 
             $.ajax({
                 url: $checkoutForm.data('update-url'),
@@ -147,13 +153,18 @@ class MainCheckout {
                 contentType: false,
                 data: formData,
                 beforeSend: () => {
+                    console.log('Sending AJAX request to:', $checkoutForm.data('update-url'))
                     disablePaymentMethodsForm()
                     $('.shipping-info-loading').show()
                 },
                 success: ({ data }) => {
+                    console.log('AJAX success response:', data)
                     $('.cart-item-wrapper').html(data.amount)
                     $('[data-bb-toggle="checkout-payment-methods-area"]').html(data.payment_methods)
                     $('[data-bb-toggle="checkout-shipping-methods-area"]').html(data.shipping_methods)
+                },
+                error: (xhr, status, error) => {
+                    console.error('AJAX error:', error, xhr.responseText)
                 },
                 complete: () => {
                     enablePaymentMethodsForm()
@@ -257,8 +268,24 @@ class MainCheckout {
                     contentType: false,
                     processData: false,
                     success: ({ error }) => {
-                        if (!error && (/country|state|city|address/.test($(event.target).prop('name')))) {
-                            calculateShippingFee()
+                        if (!error && (/country|state|city|address|address\[country\]|address\[state\]|address\[city\]|address\[zip_code\]/.test($(event.target).prop('name')))) {
+                            // Get current payment method and shipping method
+                            const currentPaymentMethod = $(document).find('input[name=payment_method]:checked').val()
+                            const currentShippingMethod = $(document).find('input[name=shipping_method]:checked').val()
+                            const currentShippingOption = $(document).find('input[name=shipping_method]:checked').data('option')
+                            
+                            const data = {}
+                            if (currentPaymentMethod) {
+                                data.payment_method = currentPaymentMethod
+                            }
+                            if (currentShippingMethod) {
+                                data.shipping_method = currentShippingMethod
+                            }
+                            if (currentShippingOption) {
+                                data.shipping_option = currentShippingOption
+                            }
+                            
+                            calculateShippingFee(data)
                         }
                     },
                     error: (response) => {
@@ -268,10 +295,19 @@ class MainCheckout {
             }
         }
 
-        $(document).on('change', '#address_country, #address_state, #address_city, #address_zip_code', (event) => {
+        $(document).on('change', '#address_country, #address_state, #address_city, #address_zip_code, select[name="address[country]"], select[name="address[state]"], select[name="address[city]"], input[name="address[city]"], input[name="address[zip_code]"]', (event) => {
             const _self = $(event.currentTarget)
             const $form = _self.closest('form')
 
+            console.log('=== ADDRESS CHANGE EVENT TRIGGERED ===')
+            console.log('Element that triggered change:', _self[0])
+            console.log('Element ID:', _self.attr('id'))
+            console.log('Element name:', _self.attr('name'))
+            console.log('New value:', _self.val())
+            console.log('Form found:', $form.length > 0)
+
+            // Update taxes
+            console.log('Making tax update AJAX call...')
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -280,12 +316,42 @@ class MainCheckout {
                 contentType: false,
                 processData: false,
                 success: ({ data }) => {
+                    console.log('Tax update successful')
                     $('.cart-item-wrapper').html(data.amount)
                 },
                 error: (response) => {
+                    console.error('Tax update error:', response)
                     MainCheckout.handleError(response, $form)
                 },
             })
+
+            // Calculate shipping fee when address changes
+            const fieldName = _self.prop('name')
+            console.log('Field changed:', fieldName, 'Value:', _self.val())
+            
+            if (/address_city|address_state|address_country|address_zip_code|address\[city\]|address\[state\]|address\[country\]|address\[zip_code\]/.test(fieldName)) {
+                console.log('Address field detected, recalculating shipping...')
+                setTimeout(() => {
+                    // Get current payment method and shipping method
+                    const currentPaymentMethod = $(document).find('input[name=payment_method]:checked').val()
+                    const currentShippingMethod = $(document).find('input[name=shipping_method]:checked').val()
+                    const currentShippingOption = $(document).find('input[name=shipping_method]:checked').data('option')
+                    
+                    const data = {}
+                    if (currentPaymentMethod) {
+                        data.payment_method = currentPaymentMethod
+                    }
+                    if (currentShippingMethod) {
+                        data.shipping_method = currentShippingMethod
+                    }
+                    if (currentShippingOption) {
+                        data.shipping_option = currentShippingOption
+                    }
+                    
+                    console.log('Calling calculateShippingFee with data:', data)
+                    calculateShippingFee(data)
+                }, 500) // Small delay to ensure tax calculation completes first
+            }
         })
 
         $(document).on('change', `${customerShippingAddressForm} .form-control`, (event) => {

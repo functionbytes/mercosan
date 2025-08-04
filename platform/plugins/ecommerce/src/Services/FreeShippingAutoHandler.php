@@ -27,17 +27,20 @@ class FreeShippingAutoHandler
     /**
      * Get applicable free shipping rules
      */
-    protected function getFreeShippingRules(float $orderTotal, ?string $city, ?string $state, string $country): array
+    protected function getFreeShippingRules(float $orderTotal, ?string $city, ?string $state, ?string $country): array
     {
         $applicableRules = [];
         
         // Find rules with price = 0 that match the criteria
-        $rules = ShippingRule::where('price', 0)
-            ->whereHas('shipping', function ($query) use ($country) {
+        $rulesQuery = ShippingRule::where('price', 0);
+        
+        if ($country) {
+            $rulesQuery->whereHas('shipping', function ($query) use ($country) {
                 $query->where('country', $country);
-            })
-            ->with(['items', 'shipping'])
-            ->get();
+            });
+        }
+        
+        $rules = $rulesQuery->with(['items', 'shipping'])->get();
             
         foreach ($rules as $rule) {
             if ($this->ruleAppliesToOrder($rule, $orderTotal, $city, $state)) {

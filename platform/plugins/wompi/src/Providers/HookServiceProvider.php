@@ -106,6 +106,7 @@ class HookServiceProvider extends ServiceProvider
         return $data;
     }
 
+
     /**
      * Calculate tax based on Colombian tax rules
      */

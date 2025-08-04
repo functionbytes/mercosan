@@ -9,6 +9,7 @@ use Botble\Ecommerce\Services\HandleCheckoutOrderData;
 use Botble\Ecommerce\Services\HandleTaxService;
 use Botble\Ecommerce\Services\DynamicShippingValidationService;
 use Botble\Ecommerce\Services\FreeShippingAutoHandler;
+use Botble\Ecommerce\Models\ShippingRule;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,41 @@ class PublicUpdateCheckoutController extends BaseController
         FreeShippingAutoHandler $freeShippingHandler
     )
     {
+        \Log::info('PublicUpdateCheckoutController: AJAX request received', [
+            'request_data' => $request->all(),
+            'url' => $request->url(),
+            'method' => $request->method()
+        ]);
+
         $sessionCheckoutData = OrderHelper::getOrderSessionData(
             $token = OrderHelper::getOrderSessionToken()
         );
+        
+        // Handle address data - support both nested address format and direct fields
+        $addressData = $request->input('address', []);
+        
+        // If city/state/country are sent directly (not nested in address), merge them
+        if (!isset($addressData['city']) && $request->has('city')) {
+            $addressData['city'] = $request->input('city');
+        }
+        if (!isset($addressData['state']) && $request->has('state')) {
+            $addressData['state'] = $request->input('state');
+        }
+        if (!isset($addressData['country']) && $request->has('country')) {
+            $addressData['country'] = $request->input('country');
+        }
+        
+        // Update session data with address information
+        if (!empty($addressData)) {
+            $sessionCheckoutData = array_merge($sessionCheckoutData, $addressData);
+            OrderHelper::setOrderSessionData($token, $sessionCheckoutData);
+        }
+        
+        \Log::info('PublicUpdateCheckoutController: Updated session data', [
+            'session_data' => $sessionCheckoutData,
+            'address_data' => $addressData,
+            'token' => $token
+        ]);
 
         /**
          * @var Collection $products
@@ -44,22 +77,17 @@ class PublicUpdateCheckoutController extends BaseController
             'order_total' => $checkoutOrderData->orderAmount,
             'city' => data_get($sessionCheckoutData, 'city'),
             'state' => data_get($sessionCheckoutData, 'state'),
-            'country' => data_get($sessionCheckoutData, 'country'),
+            'country' => data_get($sessionCheckoutData, 'country') ?: 'CO', // Default to Colombia
             'weight' => $products->sum('weight'),
         ];
         
-        // Check if free shipping should be auto-applied
-        $shouldAutoApplyFreeShipping = $freeShippingHandler->shouldAutoApplyFreeShipping($shippingData);
+        // First check normal shipping validation to see if city-specific rates are available
+        $validatedShipping = $dynamicShippingValidation->validateShippingMethods($shippingData);
         
-        if ($shouldAutoApplyFreeShipping) {
-            // Auto-apply free shipping and skip selection process
-            $validatedShipping = $freeShippingHandler->createAutoFreeShippingMethod($shippingData);
-            $skipShippingSelection = true;
-        } else {
-            // Normal shipping validation
-            $validatedShipping = $dynamicShippingValidation->validateShippingMethods($shippingData);
-            $skipShippingSelection = false;
-        }
+        // Always disable free shipping auto-handler when we have city-specific shipping logic
+        $hasCitySpecificRates = $this->hasCitySpecificRates($shippingData['city']);
+        $shouldAutoApplyFreeShipping = false; // Disable auto free shipping completely
+        $skipShippingSelection = false;
         
         $shippingSummary = $dynamicShippingValidation->getShippingMethodsSummary(
             $checkoutOrderData->orderAmount,
@@ -75,6 +103,32 @@ class PublicUpdateCheckoutController extends BaseController
         add_filter('payment_order_total_amount', function () use ($checkoutOrderData) {
             return $checkoutOrderData->orderAmount - $checkoutOrderData->paymentFee;
         }, 120);
+
+        $shippingViewData = [
+            'shipping' => $validatedShipping ?: $checkoutOrderData->shipping,
+            'defaultShippingOption' => $shouldAutoApplyFreeShipping ? 'free_shipping_auto' : $checkoutOrderData->defaultShippingOption,
+            'defaultShippingMethod' => $shouldAutoApplyFreeShipping ? 'default' : $checkoutOrderData->defaultShippingMethod,
+            'shippingSummary' => $shippingSummary,
+            'orderTotal' => $checkoutOrderData->orderAmount,
+            'skipShippingSelection' => $skipShippingSelection ?? false,
+        ];
+        
+        \Log::info('PublicUpdateCheckoutController: Template view data', [
+            'shipping_count' => is_array($shippingViewData['shipping']) ? count($shippingViewData['shipping']) : 0,
+            'shipping_data' => $shippingViewData['shipping'],
+            'defaultShippingOption' => $shippingViewData['defaultShippingOption'],
+            'defaultShippingMethod' => $shippingViewData['defaultShippingMethod'],
+            'skipShippingSelection' => $shippingViewData['skipShippingSelection']
+        ]);
+        
+        $shippingMethodsHtml = view('plugins/ecommerce::orders.partials.shipping-methods', $shippingViewData)->render();
+        
+        \Log::info('PublicUpdateCheckoutController: Response data', [
+            'shipping_methods_html_length' => strlen($shippingMethodsHtml),
+            'shipping_data_count' => is_array($validatedShipping) ? count($validatedShipping) : 0,
+            'has_validated_shipping' => !empty($validatedShipping),
+            'original_shipping_count' => is_array($checkoutOrderData->shipping) ? count($checkoutOrderData->shipping) : 0
+        ]);
 
         return $this
             ->httpResponse()
@@ -93,14 +147,30 @@ class PublicUpdateCheckoutController extends BaseController
                 'payment_methods' => view('plugins/ecommerce::orders.partials.payment-methods', [
                     'orderAmount' => $checkoutOrderData->orderAmount,
                 ])->render(),
-                'shipping_methods' => view('plugins/ecommerce::orders.partials.shipping-methods', [
-                    'shipping' => $validatedShipping ?: $checkoutOrderData->shipping,
-                    'defaultShippingOption' => $shouldAutoApplyFreeShipping ? 'free_shipping_auto' : $checkoutOrderData->defaultShippingOption,
-                    'defaultShippingMethod' => $shouldAutoApplyFreeShipping ? 'default' : $checkoutOrderData->defaultShippingMethod,
-                    'shippingSummary' => $shippingSummary,
-                    'orderTotal' => $checkoutOrderData->orderAmount,
-                    'skipShippingSelection' => $skipShippingSelection ?? false,
-                ])->render(),
+                'shipping_methods' => $shippingMethodsHtml,
             ]);
+    }
+    
+    /**
+     * Check if the selected city has specific shipping rates configured
+     */
+    protected function hasCitySpecificRates(?string $city): bool
+    {
+        if (!$city) {
+            return false;
+        }
+        
+        // Check if there are any shipping rules with items that match this city
+        $hasRules = ShippingRule::whereHas('items', function ($query) use ($city) {
+            $query->where('is_enabled', true)
+                  ->where('city', $city);
+        })->exists();
+        
+        \Log::info('PublicUpdateCheckoutController: City-specific rates check', [
+            'city' => $city,
+            'has_city_specific_rates' => $hasRules
+        ]);
+        
+        return $hasRules;
     }
 }

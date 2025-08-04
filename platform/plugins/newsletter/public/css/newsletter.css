@@ -27,7 +27,7 @@
     .newsletter-popup .modal-dialog .modal-content .newsletter-popup-content {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
-        padding: 4.5rem 3rem;
+        padding: 2.5rem 3rem 1.5rem 3rem;
     }
 }
 .newsletter-popup .modal-dialog .modal-content .captcha-disclaimer {
@@ -40,10 +40,28 @@
 .newsletter-popup .modal-dialog .modal-content .modal-subtitle {
     letter-spacing: 1px;
     font-size: 15px;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 12px;
+    background: #fb0000;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+.newsletter-popup .modal-dialog .modal-content .modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 22px;
 }
 .newsletter-popup .modal-dialog .modal-content .modal-text {
-    font-size: 16px;
+    font-size: 13px;
 }
+
+.newsletter-popup .modal-dialog .modal-content .modal-body {
+    margin-top: 20px;
+}
+
 .newsletter-popup .modal-dialog .modal-content form label {
     font-size: 14px;
     font-weight: 500;

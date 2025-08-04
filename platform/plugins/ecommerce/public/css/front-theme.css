@@ -209,8 +209,8 @@ select.form-control {
     top: -7px;
     width: 25px;
     height: 25px;
-    border: 1px solid #a2a2a2;
-    background: #a2a2a2;
+    border: 1px solid #ff0000;
+    background: #ff0000;
     color: #ffffff;
     border-radius: 50%;
     -webkit-border-radius: 50%;
@@ -486,15 +486,14 @@ body,
 .customer-address-payment-form .form-input-wrapper label,
 .billing-address-form-wrapper .form-input-wrapper label,
 .customer-tax-information-form .form-input-wrapper label {
-    font-size: 14px;
-    color: #6b7078;
-    padding: 14px;
-    position: absolute;
-    top: 0;
-    inset-inline-start: 0;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background: #fff;
+    padding: 0 4px;
+    font-size: 0.75rem;
+    color: #444;
     pointer-events: none;
 }
 .customer-address-payment-form .select--arrow .form-control.is-valid,
@@ -546,11 +545,13 @@ body,
     cursor: pointer;
     transition: all 0.2s;
     min-width: 16rem;
-    box-shadow: 0 0 4px 0 rgba(205, 205, 205, 0.75);
+    box-shadow: 0 0 20px rgba(0,0,0,.08);
 }
 .checkout__coupon-item.active {
-    background-color: var(--bs-primary);
     color: #ffffff;
+    border: 2px dashed #fe0000;
+    border-radius: 8px;
+    background: #fff5f5;
 }
 .checkout__coupon-item:hover {
     border-color: var(--bs-primary);
@@ -567,7 +568,7 @@ body,
     color: var(--bs-primary);
 }
 .checkout__coupon-item.active .checkout__coupon-item-title h4 {
-    color: #ffffff;
+    color: #ff0000;
 }
 .checkout__coupon-item-count {
     display: inline-block;
@@ -583,23 +584,23 @@ body,
     transition: 0.2s all;
 }
 .checkout__coupon-item.active .checkout__coupon-item-description {
-    color: #ffffff;
+    color: #ff0000;
 }
 .checkout__coupon-item-code {
     margin-top: 0.5rem;
-    background: rgb(239, 239, 239);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
     border-radius: 4px;
+    background-color: #fbfbfb;
+    border: 1px solid #f2f2f2;
 }
 .checkout__coupon-item-code span {
     font-weight: bold;
 }
 .checkout__coupon-item.active .checkout__coupon-item-code {
     background: var(--bs-primary);
-    filter: brightness(85%);
 }
 .checkout__coupon-item-code button {
     background: var(--bs-primary);
@@ -616,6 +617,7 @@ body,
     background: #ffffff;
     color: var(--bs-primary);
     border: 1px solid var(--bs-primary);
+    opacity: 1;
 }
 .checkout-form .magic-radio,
 .checkout-form .magic-checkbox {
@@ -656,6 +658,7 @@ body,
     animation-duration: 0.4s;
     animation-fill-mode: both;
     animation-name: hover-color;
+    border-color: #fb0000 !important;
 }
 .checkout-form .magic-radio[disabled] + label,
 .checkout-form .magic-checkbox[disabled] + label {
@@ -863,3 +866,181 @@ body,
     top: 0;
     width: var(--bb-rating-size);
 }
+
+
+
+
+.checkout-order-info .alert-success {
+    --bs-alert-color: #ffffff;
+    --bs-alert-bg: #ff0000;
+    --bs-alert-border-color: #ff0000;
+    --bs-alert-link-color: #ff0000;
+}
+
+.checkout-order-info .alert {
+    --bs-alert-bg: transparent;
+    --bs-alert-padding-x: 1rem;
+    --bs-alert-padding-y: 1rem;
+    --bs-alert-margin-bottom: 1rem;
+    --bs-alert-color: inherit;
+    --bs-alert-border-color: transparent;
+    --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+    --bs-alert-border-radius: var(--bs-border-radius);
+    --bs-alert-link-color: inherit;
+    position: relative;
+    padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+    margin-bottom: var(--bs-alert-margin-bottom);
+    color: #fff;
+    background-color: #ff0000;
+    border: var(--bs-alert-border);
+    border-radius: var(--bs-alert-border-radius);
+}
+
+
+
+.checkout-order-info .cart-item-wrapper {
+    background-color: #fbfbfb;
+    border-bottom: 1px solid #f2f2f2;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .08);
+}
+
+
+.checkout-order-info .cart-item-wrapper .cart-item .cart-item-title {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.checkout-order-info .cart-item-wrapper .cart-item .cart-item-price {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.checkout-order-info .cart-item-wrapper .discount-amount,
+.checkout-order-info .cart-item-wrapper .total-discount-amount-text{
+    color: #fb0000;
+}
+
+.form-check-input:focus {
+    border-color: #ff0000;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem rgb(255 0 0 / 23%);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #fbfbfb inset !important;
+    box-shadow: 0 0 0 1000px #fbfbfb inset !important;
+    -webkit-text-fill-color: fieldtext !important;
+    background-image: none !important;
+}
+
+
+
+
+.form-input-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+/* Select “nativo” con estilo parecido a Select2 */
+.form-input-wrapper select.form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 10px 40px 10px 12px; /* espacio para la flecha SVG */
+    border: var(--bs-border-width) solid var(--bs-border-color); /* rojo */
+    border-radius: 6px;
+    background-color: #fff;
+    outline: none;
+    font-size: 1rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.08);
+}
+
+/* Estado de foco */
+.form-input-wrapper select.form-control:focus {
+    border-color: #b71c1c;
+    box-shadow: 0 0 0 3px rgba(229,57,53,.25);
+}
+
+/* Hover ligero para dar feedback visual */
+.form-input-wrapper select.form-control:hover {
+    filter: brightness(1.03);
+}
+
+/* Etiqueta flotante (si la usas) */
+.form-input-wrapper label {
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background: #fff;
+    padding: 0 4px;
+    font-size: 0.75rem;
+    color: #444;
+    pointer-events: none;
+}
+
+/* SVG de flecha */
+.form-input-wrapper svg {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    color: #555;
+}
+
+/* Mensaje de error/feedback (ya lo tienes) */
+.invalid-feedback {
+    font-size: .75rem;
+    margin-top: 4px;
+    display: block;
+}
+
+/* Para simular el dropdown en una versión custom (opcional si no usas el nativo) */
+.custom-dropdown {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    margin-top: 4px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    max-height: 220px;
+    overflow-y: auto;
+    font-size: .95rem;
+}
+
+.custom-dropdown .item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.custom-dropdown .item:hover {
+    background: rgba(229,57,53,.1);
+}
+
+.custom-dropdown .item.selected {
+    background: #e53935;
+    color: #fff;
+}
+

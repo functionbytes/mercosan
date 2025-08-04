@@ -27,11 +27,33 @@ class DynamicShippingValidationService
         $state = Arr::get($data, 'state');
         $country = Arr::get($data, 'country');
         
+        // Log incoming data for debugging
+        \Log::info('DynamicShippingValidation: validateShippingMethods called', [
+            'order_total' => $orderTotal,
+            'city' => $city,
+            'state' => $state,
+            'country' => $country,
+            'all_data' => $data
+        ]);
+        
         // Get all available shipping methods
         $shippingMethods = $this->shippingFeeService->execute($data);
         
+        \Log::info('DynamicShippingValidation: Available shipping methods', [
+            'methods_count' => count($shippingMethods),
+            'methods' => array_keys($shippingMethods)
+        ]);
+        
         // Filter methods based on order total and location
         $validMethods = $this->filterMethodsByOrderTotal($shippingMethods, $orderTotal, $city, $state, $country);
+        
+        \Log::info('DynamicShippingValidation: Filtered methods', [
+            'original_count' => count($shippingMethods),
+            'filtered_count' => count($validMethods),
+            'valid_methods' => array_keys($validMethods),
+            'original_methods_detail' => $shippingMethods,
+            'filtered_methods_detail' => $validMethods
+        ]);
         
         // Apply auto-selection logic
         $validMethods = $this->applyAutoSelectionLogic($validMethods);
@@ -67,6 +89,14 @@ class DynamicShippingValidationService
                     $rule = ShippingRule::find($optionKey);
                     if ($rule) {
                         $isValid = $this->validateLocationRule($rule, $city, $state);
+                        \Log::info('DynamicShippingValidation: Location rule validation', [
+                            'rule_id' => $rule->id,
+                            'rule_name' => $rule->name,
+                            'option_key' => $optionKey,
+                            'method_key' => $methodKey,
+                            'city' => $city,
+                            'is_valid' => $isValid
+                        ]);
                     }
                 }
                 
@@ -106,24 +136,73 @@ class DynamicShippingValidationService
             return true;
         }
         
+        // Log para debugging
+        \Log::info('DynamicShippingValidation: Validating location rule', [
+            'rule_id' => $rule->id,
+            'rule_name' => $rule->name,
+            'city' => $city,
+            'state' => $state,
+            'city_is_numeric' => is_numeric($city)
+        ]);
+        
         // Check if rule has specific items for this location
+        // Handle both numeric city IDs and string city names
         $hasLocationItem = $rule->items()
             ->where('is_enabled', true)
             ->where(function ($query) use ($city, $state) {
-                $query->where('city', $city);
+                // Compare city as both ID and name
+                if (is_numeric($city)) {
+                    $query->where('city', $city);
+                } else {
+                    // If city is a string, try both exact match and case-insensitive
+                    $query->where('city', $city)
+                          ->orWhere('city', 'like', '%' . $city . '%');
+                }
+                
                 if ($state) {
-                    $query->where('state', $state);
+                    if (is_numeric($state)) {
+                        $query->where('state', $state);
+                    } else {
+                        $query->where('state', $state)
+                              ->orWhere('state', 'like', '%' . $state . '%');
+                    }
                 }
             })
             ->exists();
+            
+        // Log rule items for debugging
+        $ruleItems = $rule->items()
+            ->where('is_enabled', true)
+            ->select('city', 'state', 'is_enabled')
+            ->get()
+            ->toArray();
+            
+        \Log::info('DynamicShippingValidation: Rule items', [
+            'rule_id' => $rule->id,
+            'items' => $ruleItems,
+            'has_location_item' => $hasLocationItem
+        ]);
             
         // If no specific location item, check if rule applies to all locations in this state
         if (!$hasLocationItem && $state) {
             $hasStateItem = $rule->items()
                 ->where('is_enabled', true)
-                ->where('state', $state)
+                ->where(function ($query) use ($state) {
+                    if (is_numeric($state)) {
+                        $query->where('state', $state);
+                    } else {
+                        $query->where('state', $state)
+                              ->orWhere('state', 'like', '%' . $state . '%');
+                    }
+                })
                 ->whereIn('city', ['', null, 0])
                 ->exists();
+                
+            \Log::info('DynamicShippingValidation: State-only rule check', [
+                'rule_id' => $rule->id,
+                'state' => $state,
+                'has_state_item' => $hasStateItem
+            ]);
                 
             return $hasStateItem;
         }
@@ -138,19 +217,23 @@ class DynamicShippingValidationService
     {
         $totalMethods = 0;
         $hasFreeShipping = false;
+        $hasCitySpecificRate = false;
         
-        // Count methods and check for free shipping
+        // Count methods and check for free shipping and city-specific rates
         foreach ($methods as $methodOptions) {
             $totalMethods += count($methodOptions);
             foreach ($methodOptions as $option) {
                 if ((float) $option['price'] === 0.0) {
                     $hasFreeShipping = true;
                 }
+                if (Arr::get($option, 'rule_type') === ShippingRuleTypeEnum::BASED_ON_LOCATION) {
+                    $hasCitySpecificRate = true;
+                }
             }
         }
         
-        // If free shipping is available, mark it for auto-selection and skip delivery process
-        if ($hasFreeShipping) {
+        // Don't auto-apply free shipping if city-specific rates are available
+        if ($hasFreeShipping && !$hasCitySpecificRate) {
             foreach ($methods as $methodKey => $methodOptions) {
                 foreach ($methodOptions as $optionKey => $option) {
                     if ((float) $option['price'] === 0.0) {
@@ -161,7 +244,7 @@ class DynamicShippingValidationService
                 }
             }
         }
-        // If only one method available (and not free), mark it for auto-selection
+        // If only one method available (and not conflicting with city rates), mark it for auto-selection
         elseif ($totalMethods === 1) {
             foreach ($methods as $methodKey => $methodOptions) {
                 foreach ($methodOptions as $optionKey => $option) {
@@ -224,12 +307,14 @@ class DynamicShippingValidationService
         $freeShippingThreshold = get_ecommerce_setting('free_shipping_threshold', 200000);
         $hasFreeShipping = $orderTotal >= $freeShippingThreshold;
         
+        // Always disable automatic free shipping messages when city-specific rates are available
         $summary = [
-            'has_free_shipping' => $hasFreeShipping,
+            'has_free_shipping' => false, // Disable automatic free shipping
             'free_shipping_threshold' => $freeShippingThreshold,
-            'amount_to_free_shipping' => max(0, $freeShippingThreshold - $orderTotal),
+            'amount_to_free_shipping' => 0, // Don't show amount needed for free shipping
             'city_based_rates_available' => $this->hasCityBasedRates($city),
-            'skip_delivery_selection' => $hasFreeShipping, // Skip delivery process when free
+            'skip_delivery_selection' => false, // Always allow delivery selection
+            'auto_applied_free_shipping' => false, // Never auto-apply
         ];
         
         return $summary;

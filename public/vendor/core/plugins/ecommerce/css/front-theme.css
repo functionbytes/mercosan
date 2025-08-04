@@ -486,15 +486,14 @@ body,
 .customer-address-payment-form .form-input-wrapper label,
 .billing-address-form-wrapper .form-input-wrapper label,
 .customer-tax-information-form .form-input-wrapper label {
-    font-size: 14px;
-    color: #6b7078;
-    padding: 14px;
-    position: absolute;
-    top: 0;
-    inset-inline-start: 0;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background: #fff;
+    padding: 0 4px;
+    font-size: 0.75rem;
+    color: #444;
     pointer-events: none;
 }
 .customer-address-payment-form .select--arrow .form-control.is-valid,
@@ -1044,5 +1043,4 @@ input:-webkit-autofill:active {
     background: #e53935;
     color: #fff;
 }
-
 

@@ -4,61 +4,350 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea7d47d-6cd6-4aa1-ad51-6068c53ef329" name="Changes" comment="">
+    <list default="true" id="d18d8964-a658-4f5c-8f04-7b62ea70ece7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@botble/core/public/css/libraries/select2.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@botble/core/public/libraries/select2/css/select2-bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/@botble/core/public/libraries/select2/css/select2-bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/css/libraries/select2.rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/core/base/public/libraries/select2/css/select2-bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/libraries/select2/css/select2-bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/contact/public/css/contact-public.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/contact/public/css/contact-public.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/contact/resources/sass/contact-public.scss" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/contact/resources/sass/contact-public.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/libraries/bootstrap/bootstrap.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/assets/sass/ecommerce.scss" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/assets/sass/ecommerce.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/shipping.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/lang/en/shipping.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/checkout/product.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/checkout/product.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/address-form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/address-form.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/vendor/themes/wowy/es.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/vendor/themes/wowy/es.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/acorn" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/acorn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/acorn.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/acorn.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/acorn.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/acorn.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/ansi-html" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/ansi-html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/ansi-html.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/ansi-html.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/ansi-html.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/ansi-html.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/autoprefixer" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/autoprefixer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/autoprefixer.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/autoprefixer.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/autoprefixer.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/autoprefixer.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/blade-formatter" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/blade-formatter" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/blade-formatter.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/blade-formatter.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/blade-formatter.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/blade-formatter.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/browserslist" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/browserslist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/browserslist.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/browserslist.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/browserslist.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/browserslist.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/concat" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/concat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/concat.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/concat.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/concat.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/concat.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cross-env" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cross-env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cross-env-shell" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cross-env-shell" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cross-env-shell.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cross-env-shell.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cross-env-shell.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cross-env-shell.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cross-env.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cross-env.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cross-env.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cross-env.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/css-beautify" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/css-beautify" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/css-beautify.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/css-beautify.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/css-beautify.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/css-beautify.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cssesc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cssesc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cssesc.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cssesc.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/cssesc.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/cssesc.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/detect-libc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/detect-libc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/detect-libc.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/detect-libc.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/detect-libc.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/detect-libc.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/editorconfig.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/editorconfig.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/editorconfig.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/editorconfig.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/envinfo" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/envinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/envinfo.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/envinfo.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/envinfo.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/envinfo.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/flat" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/flat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/flat.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/flat.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/flat.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/flat.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/glob" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/glob" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/glob.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/glob.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/glob.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/glob.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/he" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/he" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/he.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/he.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/he.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/he.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/html-beautify" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/html-beautify" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/html-beautify.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/html-beautify.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/html-beautify.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/html-beautify.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/html-minifier-terser" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/html-minifier-terser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/html-minifier-terser.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/html-minifier-terser.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/html-minifier-terser.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/html-minifier-terser.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/import-local-fixture" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/import-local-fixture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/import-local-fixture.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/import-local-fixture.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/import-local-fixture.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/import-local-fixture.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/is-docker" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/is-docker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/is-docker.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/is-docker.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/is-docker.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/is-docker.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jiti" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jiti" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jiti.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jiti.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jiti.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jiti.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/js-beautify" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/js-beautify" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/js-beautify.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/js-beautify.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/js-beautify.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/js-beautify.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jsesc" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jsesc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jsesc.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jsesc.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/jsesc.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/jsesc.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/json5" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/json5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/json5.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/json5.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/json5.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/json5.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/laravel-mix" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/laravel-mix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/laravel-mix.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/laravel-mix.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/laravel-mix.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/laravel-mix.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/miller-rabin" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/miller-rabin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/miller-rabin.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/miller-rabin.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/miller-rabin.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/miller-rabin.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mime" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mime.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mime.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mime.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mix" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mix" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mix.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mix.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/mix.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/mix.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/multicast-dns" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/multicast-dns" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/multicast-dns.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/multicast-dns.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/multicast-dns.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/multicast-dns.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nanoid" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nanoid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nanoid.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nanoid.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nanoid.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nanoid.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/node-which" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/node-which" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/node-which.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/node-which.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/node-which.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/node-which.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nopt" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nopt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nopt.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nopt.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/nopt.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/nopt.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/parser" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/parser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/parser.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/parser.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/parser.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/parser.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/prettier" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/prettier" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/prettier.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/prettier.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/prettier.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/prettier.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/purgecss" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/purgecss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/purgecss.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/purgecss.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/purgecss.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/purgecss.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/regjsparser" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/regjsparser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/regjsparser.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/regjsparser.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/regjsparser.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/regjsparser.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/resolve" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/resolve" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/resolve.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/resolve.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/resolve.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/resolve.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rimraf" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rimraf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rimraf.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rimraf.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rimraf.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rimraf.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rtlcss" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rtlcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rtlcss.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rtlcss.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/rtlcss.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/rtlcss.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sass" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sass.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sass.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sass.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sass.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/semver" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/semver.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/semver.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/semver.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sha.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sha.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sha.js.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sha.js.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sha.js.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sha.js.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sucrase" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sucrase" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sucrase-node" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sucrase-node" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sucrase-node.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sucrase-node.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sucrase-node.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sucrase-node.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sucrase.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sucrase.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/sucrase.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/sucrase.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/svgo" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/svgo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/svgo.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/svgo.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/svgo.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/svgo.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/tailwind" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/tailwind" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/tailwind.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/tailwind.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/tailwind.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/tailwind.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/tailwindcss" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/tailwindcss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/tailwindcss.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/tailwindcss.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/tailwindcss.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/tailwindcss.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/terser" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/terser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/terser.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/terser.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/terser.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/terser.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/update-browserslist-db" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/update-browserslist-db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/update-browserslist-db.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/update-browserslist-db.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/update-browserslist-db.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/update-browserslist-db.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uuid" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/uuid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uuid.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/uuid.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/uuid.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/uuid.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack-cli" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack-cli" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack-cli.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack-cli.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack-cli.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack-cli.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack-dev-server" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack-dev-server" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack-dev-server.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack-dev-server.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack-dev-server.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack-dev-server.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.bin/webpack.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.bin/webpack.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/core/base/public/libraries/fslightbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/libraries/fslightbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/core/base/public/libraries/tagify/tagify.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/core/base/public/libraries/tagify/tagify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/css/front-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/css/front-theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/js/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/js/checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/public/js/report.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/public/js/report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/assets/js/front/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/assets/js/front/checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/js/dynamic-shipping-selector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-methods.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-methods.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-option.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/orders/partials/shipping-option.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/table-item.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/items/table-item.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/rules/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/shipping/rules/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/themes/modal.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/themes/modal.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Forms/Settings/CheckoutSettingForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Forms/Settings/CheckoutSettingForm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Fronts/PublicUpdateCheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Fronts/PublicUpdateCheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Settings/CheckoutSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Controllers/Settings/CheckoutSettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Requests/Settings/CheckoutSettingRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Http/Requests/Settings/CheckoutSettingRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Providers/CommandServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Providers/CommandServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Providers/HookServiceProvider.php.new" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/DynamicShippingValidationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/DynamicShippingValidationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/FreeShippingAutoHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/FreeShippingAutoHandler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/HandleShippingFeeService.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Services/HandleShippingFeeService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Supports/EcommerceHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/src/Supports/EcommerceHelper.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/plugins/ecommerce/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/ecommerce/webpack.mix.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/location/src/Http/Controllers/CityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/location/src/Http/Controllers/CityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/plugins/newsletter/public/css/newsletter.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/newsletter/public/css/newsletter.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/plugins/wompi/resources/views/method.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/wompi/resources/views/method.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/newsletter/public/js/newsletter.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/newsletter/public/js/newsletter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/payment/public/css/payment.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/payment/public/css/payment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/plugins/wompi/src/Providers/HookServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/plugins/wompi/src/Providers/HookServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/themes/wowy/assets/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/assets/js/backend.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/js/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/public/plugins/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/platform/themes/wowy/views/ecommerce/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/platform/themes/wowy/views/ecommerce/cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/wowy/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/themes/wowy/js/backend.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/js/backend.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/themes/wowy/plugins/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/acl/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/acl/js/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/acl/js/role.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/acl/js/role.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/core.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/core.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/core.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/core.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/crop-image.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/crop-image.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/error-pages.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/error-pages.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/libraries/select2.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/libraries/select2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/libraries/select2.rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/libraries/select2.rtl.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/css/tree-category.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/css/tree-category.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/cache.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/cache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/cleanup.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/cleanup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/core-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/core-ui.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/core.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/core.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/select2/css/select2-bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/select2/css/select2-bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/crop-image.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/crop-image.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/global-search.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/global-search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/license-activation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/license-activation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/notification.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/notification.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/phone-number-field.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/phone-number-field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/repeater-field.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/repeater-field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/system-info.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/system-info.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/system-update.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/system-update.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/tags.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/tags.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/tree-category.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/tree-category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/js/vue-app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/js/vue-app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/fslightbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/fslightbox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/tagify/tagify.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/tagify/tagify.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/vue.global.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/base/libraries/vue.global.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/dashboard/js/check-for-updates.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/dashboard/js/check-for-updates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/dashboard/js/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/dashboard/js/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/js-validation/js/js-validation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/js-validation/js/js-validation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/media/css/media.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/media/css/media.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/media/js/integrate.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/media/js/integrate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/media/js/media.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/media/js/media.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/setting/css/admin-email.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/setting/css/admin-email.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/setting/js/admin-email.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/setting/js/admin-email.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/setting/js/email-template.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/setting/js/email-template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/setting/js/email.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/setting/js/email.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/setting/js/license-component.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/setting/js/license-component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/setting/js/media.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/setting/js/media.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/table/css/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/table/css/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/table/js/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/table/js/filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/core/table/js/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/core/table/js/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/get-started/css/get-started.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/get-started/css/get-started.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/get-started/js/get-started.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/get-started/js/get-started.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/installer/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/installer/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/menu/css/menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/menu/css/menu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/menu/js/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/menu/js/menu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/plugin-management/js/marketplace.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/plugin-management/js/marketplace.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/plugin-management/js/plugin.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/plugin-management/js/plugin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/revision/css/revision.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/revision/css/revision.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/revision/js/revision.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/revision/js/revision.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/seo-helper/css/seo-helper.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/seo-helper/css/seo-helper.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/seo-helper/js/seo-helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/seo-helper/js/seo-helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/shortcode/css/shortcode.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/shortcode/css/shortcode.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/shortcode/js/shortcode-fields.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/shortcode/js/shortcode-fields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/shortcode/js/shortcode.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/shortcode/js/shortcode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/slug/css/slug.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/slug/css/slug.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/slug/js/front-slug.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/slug/js/front-slug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/slug/js/slug.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/slug/js/slug.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/css/admin-bar.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/css/admin-bar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/css/guideline.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/css/guideline.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/css/theme-options.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/css/theme-options.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/icons-field.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/icons-field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/theme-options.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/theme-options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/theme.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/toast.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/theme/js/toast.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/widget/css/widget.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/widget/css/widget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/packages/widget/js/widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/packages/widget/js/widget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/analytics/js/analytics.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/analytics/js/analytics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/analytics/js/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/analytics/js/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/audit-log/js/audit-log.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/audit-log/js/audit-log.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/backup/js/backup.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/backup/js/backup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/blog/js/blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/blog/js/blog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/contact/css/contact-public.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/contact/css/contact-public.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/contact/css/contact.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/contact/css/contact.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/contact/js/contact-public.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/contact/js/contact-public.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/contact/js/contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/contact/js/contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/contact/js/custom-field.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/contact/js/custom-field.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/cookie-consent/css/cookie-consent.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/cookie-consent/css/cookie-consent.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/cookie-consent/js/cookie-consent.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/cookie-consent/js/cookie-consent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/currencies.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/currencies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/customer.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/customer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/ecommerce-product-attributes.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/ecommerce-product-attributes.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/ecommerce.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/ecommerce.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-auth.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-auth.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce-missing-bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce-missing-bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce-rtl.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-ecommerce.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-faq.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-faq.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-review.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-review.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme-rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme-rtl.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/front-theme.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.rtl.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/libraries/bootstrap/bootstrap.rtl.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/order-return.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/order-return.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/report.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/report.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/review.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/review.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/widget.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/css/widget.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/address.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/address.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/admin-review.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/admin-review.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/avatar.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/avatar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/bulk-import.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/bulk-import.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/change-product-options.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/change-product-options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/change-product-swatches.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/change-product-swatches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/checkout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/currencies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/customer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/dashboard-widgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/dashboard-widgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/discount.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/discount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/ecommerce-product-attributes.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/ecommerce-product-attributes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/edit-product-collection.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/edit-product-collection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/edit-product.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/edit-product.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/export.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/export.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/flash-sale.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/flash-sale.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/front-ecommerce.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/front-ecommerce.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/front-review.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/front-review.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/global-option.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/global-option.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/invoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/invoice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order-create.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order-create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order-incomplete.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order-incomplete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order-return.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order-return.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/order.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/payment-method.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/payment-method.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/product-bulk-editable-table.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/product-bulk-editable-table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/product-option.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/product-option.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/report.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/review.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/review.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/setting.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/setting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/shipment.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/shipment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/shipping.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/shipping.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/store-locator.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/store-locator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/tax.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/tax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/utilities.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/ecommerce/js/utilities.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/faq/js/faq.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/faq/js/faq.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/language/css/language-public.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/language/css/language-public.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/language/css/language.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/language/css/language.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/language/js/language-global.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/language/js/language-global.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/language/js/language-public.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/language/js/language-public.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/language/js/language.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/language/js/language.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/location/js/bulk-import.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/location/js/bulk-import.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/location/js/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/location/js/location.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/newsletter/css/newsletter.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/newsletter/css/newsletter.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/newsletter/js/newsletter.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/newsletter/js/newsletter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment-setting.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment-setting.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/css/payment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/js/payment-detail.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/js/payment-detail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/js/payment-methods.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/js/payment-methods.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/payment/js/payment.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/payment/js/payment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/simple-slider/css/simple-slider.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/simple-slider/css/simple-slider.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/simple-slider/js/simple-slider-admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/simple-slider/js/simple-slider-admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/simple-slider/js/simple-slider.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/simple-slider/js/simple-slider.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/social-login/css/social-login.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/social-login/css/social-login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/translation/css/translation.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/translation/css/translation.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/translation/js/locales.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/translation/js/locales.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor/core/plugins/translation/js/translation.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/core/plugins/translation/js/translation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/cache_keys.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/cache_keys.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,45 +355,8 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerConfigs">
-    <option name="configs">
-      <option value="$PROJECT_DIR$/platform/packages/get-started/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/theme/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/analytics/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/slug/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/sitemap/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/paystack/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/optimize/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/stripe/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/razorpay/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/revision/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/shippo/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/mollie/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/menu/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/translation/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/paypal/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/shortcode/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/location/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/ecommerce/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/plugin-management/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/installer/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/page/composer.json" />
-      <option value="$PROJECT_DIR$/platform/core/composer.json" />
-      <option value="$PROJECT_DIR$/platform/packages/widget/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/social-login/composer.json" />
-      <option value="$PROJECT_DIR$/platform/plugins/payment/composer.json" />
-    </option>
-  </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
-    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  <component name="ComposerSettings">
     <execution />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="PHP File" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -114,335 +366,22 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;functionbytes&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/functionbytes/mercosan.git",
+    "accountId": "6041cce5-0809-4c6a-bc3c-82e1fb0bf6aa"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/functionbytes/mercosan.git&quot;,
-    &quot;accountId&quot;: &quot;da4ef8b7-0772-4019-8e94-580c51fd8488&quot;
+}]]></component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP">
-    <include_path>
-      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
-      <path value="$PROJECT_DIR$/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/vendor/google/grpc-gcp" />
-      <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
-      <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
-      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
-      <path value="$PROJECT_DIR$/vendor/razorpay/razorpay" />
-      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
-      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-buttons" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
-      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-html" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
-      <path value="$PROJECT_DIR$/vendor/aws/aws-crt-php" />
-      <path value="$PROJECT_DIR$/vendor/aws/aws-sdk-php" />
-      <path value="$PROJECT_DIR$/vendor/ezyang/htmlpurifier" />
-      <path value="$PROJECT_DIR$/vendor/wikimedia/composer-merge-plugin" />
-      <path value="$PROJECT_DIR$/vendor/dompdf/php-svg-lib" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
-      <path value="$PROJECT_DIR$/vendor/dompdf/php-font-lib" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
-      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
-      <path value="$PROJECT_DIR$/vendor/grpc/grpc" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/uri-template" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
-      <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
-      <path value="$PROJECT_DIR$/vendor/paypal/paypal-checkout-sdk" />
-      <path value="$PROJECT_DIR$/vendor/carbonphp/carbon-doctrine-types" />
-      <path value="$PROJECT_DIR$/vendor/paypal/paypalhttp" />
-      <path value="$PROJECT_DIR$/vendor/fruitcake/php-cors" />
-      <path value="$PROJECT_DIR$/vendor/dasprid/enum" />
-      <path value="$PROJECT_DIR$/vendor/mews/purifier" />
-      <path value="$PROJECT_DIR$/vendor/spatie/simple-excel" />
-      <path value="$PROJECT_DIR$/vendor/maennchen/zipstream-php" />
-      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
-      <path value="$PROJECT_DIR$/vendor/psy/psysh" />
-      <path value="$PROJECT_DIR$/vendor/bacon/bacon-qr-code" />
-      <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
-      <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
-      <path value="$PROJECT_DIR$/vendor/mpdf/mpdf" />
-      <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
-      <path value="$PROJECT_DIR$/vendor/stripe/stripe-php" />
-      <path value="$PROJECT_DIR$/vendor/phpseclib/bcmath_compat" />
-      <path value="$PROJECT_DIR$/vendor/mpdf/psr-log-aware-trait" />
-      <path value="$PROJECT_DIR$/vendor/mpdf/psr-http-message-shim" />
-      <path value="$PROJECT_DIR$/vendor/phpseclib/phpseclib" />
-      <path value="$PROJECT_DIR$/vendor/symfony/clock" />
-      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-exporter" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php83" />
-      <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mailgun-mailer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/error-handler" />
-      <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/vendor/predis/predis" />
-      <path value="$PROJECT_DIR$/vendor/symfony/postmark-mailer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-kernel" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
-      <path value="$PROJECT_DIR$/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
-      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
-      <path value="$PROJECT_DIR$/vendor/league/uri" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem-local" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem" />
-      <path value="$PROJECT_DIR$/vendor/league/config" />
-      <path value="$PROJECT_DIR$/vendor/league/oauth1-client" />
-      <path value="$PROJECT_DIR$/vendor/league/flysystem-aws-s3-v3" />
-      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
-      <path value="$PROJECT_DIR$/vendor/brick/math" />
-      <path value="$PROJECT_DIR$/vendor/league/uri-interfaces" />
-      <path value="$PROJECT_DIR$/vendor/rmccue/requests" />
-      <path value="$PROJECT_DIR$/vendor/nunomaduro/termwind" />
-      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
-      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
-      <path value="$PROJECT_DIR$/vendor/nette/schema" />
-      <path value="$PROJECT_DIR$/vendor/nette/utils" />
-      <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/constant_time_encoding" />
-      <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
-      <path value="$PROJECT_DIR$/vendor/botble/shortcode" />
-      <path value="$PROJECT_DIR$/vendor/google/common-protos" />
-      <path value="$PROJECT_DIR$/vendor/laravel/sanctum" />
-      <path value="$PROJECT_DIR$/vendor/botble/optimize" />
-      <path value="$PROJECT_DIR$/vendor/google/longrunning" />
-      <path value="$PROJECT_DIR$/vendor/laravel/prompts" />
-      <path value="$PROJECT_DIR$/vendor/botble/sitemap" />
-      <path value="$PROJECT_DIR$/vendor/google/gax" />
-      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
-      <path value="$PROJECT_DIR$/vendor/botble/api" />
-      <path value="$PROJECT_DIR$/vendor/google/auth" />
-      <path value="$PROJECT_DIR$/vendor/laravel/tinker" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/botble/form-builder" />
-      <path value="$PROJECT_DIR$/vendor/google/analytics-data" />
-      <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
-      <path value="$PROJECT_DIR$/vendor/botble/page" />
-      <path value="$PROJECT_DIR$/vendor/botble/installer" />
-      <path value="$PROJECT_DIR$/vendor/botble/slug" />
-      <path value="$PROJECT_DIR$/vendor/botble/assets" />
-      <path value="$PROJECT_DIR$/vendor/botble/plugin-management" />
-      <path value="$PROJECT_DIR$/vendor/botble/seo-helper" />
-      <path value="$PROJECT_DIR$/vendor/google/protobuf" />
-      <path value="$PROJECT_DIR$/vendor/botble/widget" />
-      <path value="$PROJECT_DIR$/vendor/laravel/framework" />
-      <path value="$PROJECT_DIR$/vendor/botble/menu" />
-      <path value="$PROJECT_DIR$/vendor/botble/revision" />
-      <path value="$PROJECT_DIR$/vendor/botble/theme" />
-      <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/vendor/botble/get-started" />
-      <path value="$PROJECT_DIR$/vendor/mollie/laravel-mollie" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
-      <path value="$PROJECT_DIR$/vendor/botble/data-synchronize" />
-      <path value="$PROJECT_DIR$/vendor/mollie/mollie-api-php" />
-      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
-      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
-      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
-      <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
-      <path value="$PROJECT_DIR$/vendor/mtdowling/jmespath.php" />
-      <path value="$PROJECT_DIR$/vendor/psr/clock" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-factory" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-client" />
-      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
-      <path value="$PROJECT_DIR$/vendor/psr/simple-cache" />
-      <path value="$PROJECT_DIR$/vendor/khaled.alshamaa/ar-php" />
-      <path value="$PROJECT_DIR$/vendor/shippo/shippo-php" />
-      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/uuid" />
-      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
-      <path value="$PROJECT_DIR$/vendor/setasign/fpdi" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/intervention/gif" />
-      <path value="$PROJECT_DIR$/vendor/tightenco/ziggy" />
-      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
-      <path value="$PROJECT_DIR$/vendor/openspout/openspout" />
-      <path value="$PROJECT_DIR$/vendor/intervention/image" />
-      <path value="$PROJECT_DIR$/vendor/rector/rector" />
-      <path value="$PROJECT_DIR$/vendor/phpstan/phpstan" />
-      <path value="$PROJECT_DIR$/vendor/driftingly/rector-laravel" />
-      <path value="$PROJECT_DIR$/vendor/botble/git-commit-checker" />
-      <path value="$PROJECT_DIR$/vendor/botble/dev-tool" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
-      <path value="$PROJECT_DIR$/vendor/larastan/larastan" />
-      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
-      <path value="$PROJECT_DIR$/vendor/iamcal/sql-parser" />
-      <path value="$PROJECT_DIR$/vendor/php-debugbar/php-debugbar" />
-      <path value="$PROJECT_DIR$/vendor/laravel/pint" />
-      <path value="$PROJECT_DIR$/vendor/filp/whoops" />
-      <path value="$PROJECT_DIR$/vendor/staabm/side-effects-detector" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/complexity" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/cli-parser" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/type" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
-      <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/version" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/lines-of-code" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-reflector" />
-      <path value="$PROJECT_DIR$/vendor/sebastian/object-enumerator" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/version" />
-      <path value="$PROJECT_DIR$/vendor/phar-io/manifest" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
-      <path value="$PROJECT_DIR$/vendor/phpunit/php-invoker" />
-      <path value="$PROJECT_DIR$/vendor/spatie/flare-client-php" />
-      <path value="$PROJECT_DIR$/vendor/spatie/laravel-ignition" />
-      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
-      <path value="$PROJECT_DIR$/vendor/spatie/ignition" />
-      <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
-      <path value="$PROJECT_DIR$/vendor/hamcrest/hamcrest-php" />
-      <path value="$PROJECT_DIR$/vendor/spatie/backtrace" />
-      <path value="$PROJECT_DIR$/vendor/spatie/error-solutions" />
-      <path value="$PROJECT_DIR$/vendor/laravel/sail" />
-      <path value="$PROJECT_DIR$/vendor/laravel/pail" />
-      <path value="$PROJECT_DIR$/vendor/nunomaduro/collision" />
-      <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
-      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/symfony/css-selector" />
-      <path value="$PROJECT_DIR$/vendor/botble/platform" />
-    </include_path>
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
-}</component>
-  <component name="ProjectId" id="2zyCWB8VRqtMUnlt1Pj1fuTDuKO" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/functionbytes/Function/Coding/mercosan/platform/plugins/ecommerce/resources/views/themes&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/platform/plugins/ecommerce/resources/views/themes" />
-      <recent name="$PROJECT_DIR$/platform/plugins/wompi/public/images" />
-      <recent name="C:\Users\functionbytes\Herd\mercosan" />
-      <recent name="C:\Users\functionbytes\Herd\mercosan\platform\plugins\wompi\resources\views" />
-      <recent name="C:\Users\functionbytes\Herd\mercosan\platform\plugins\payu\resources\views" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\functionbytes\Herd\mercosan\platform\plugins\wompi\src\Services" />
-      <recent name="C:\Users\functionbytes\Herd\mercosan\platform\plugins\payu\src" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
-      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
-      <method v="2" />
-    </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-PS-251.26927.60" />
-        <option value="bundled-php-predefined-a98d8de5180a-e5747d4f5a45-com.jetbrains.php.sharedIndexes-PS-251.26927.60" />
-      </set>
-    </attachedChunks>
-  </component>
+}]]></component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="2ea7d47d-6cd6-4aa1-ad51-6068c53ef329" name="Changes" comment="" />
-      <created>1752693954292</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1752693954292</updated>
-      <workItem from="1752693955569" duration="13000" />
-      <workItem from="1752694581313" duration="9907000" />
-      <workItem from="1752705546722" duration="5304000" />
-      <workItem from="1752787245029" duration="1273000" />
-      <workItem from="1752831696252" duration="1031000" />
-      <workItem from="1752845227861" duration="1192000" />
-      <workItem from="1753048906437" duration="46000" />
-      <workItem from="1753049038081" duration="6000" />
-      <workItem from="1753202015256" duration="15446000" />
-      <workItem from="1753356601602" duration="4000" />
-      <workItem from="1753557279455" duration="1919000" />
-      <workItem from="1753559526272" duration="16737000" />
-      <workItem from="1753625664599" duration="10293000" />
-      <workItem from="1753648425335" duration="1318000" />
-      <workItem from="1753653556576" duration="1991000" />
-      <workItem from="1753657468085" duration="5746000" />
-      <workItem from="1753904061130" duration="45433000" />
-      <workItem from="1754163643335" duration="13949000" />
-      <workItem from="1754226571900" duration="17159000" />
-    </task>
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

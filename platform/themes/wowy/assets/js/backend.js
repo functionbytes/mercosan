@@ -553,9 +553,8 @@
                     }
 
 
-                    showProductAddedModal(res.data.content_modal);
 
-                    //window.showAlert('alert-success', res.message);
+                    showProductAddedModal(res.data.content_modal);
 
                     if (res.data.next_url !== undefined) {
                         window.location.href = res.data.next_url;
