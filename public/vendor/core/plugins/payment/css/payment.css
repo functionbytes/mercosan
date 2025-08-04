@@ -218,3 +218,8 @@
   height: auto;
   max-height: 38px;
 }
+
+.text-warning {
+    --bs-text-opacity: 1;
+    color: #fb0000 !important;
+}

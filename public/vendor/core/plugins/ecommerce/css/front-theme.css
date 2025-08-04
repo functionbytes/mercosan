@@ -962,7 +962,7 @@ input:-webkit-autofill:active {
     -moz-appearance: none;
     width: 100%;
     padding: 10px 40px 10px 12px; /* espacio para la flecha SVG */
-    border: 2px solid #e53935; /* rojo */
+    border: var(--bs-border-width) solid var(--bs-border-color); /* rojo */
     border-radius: 6px;
     background-color: #fff;
     outline: none;
@@ -1044,4 +1044,5 @@ input:-webkit-autofill:active {
     background: #e53935;
     color: #fff;
 }
+
 

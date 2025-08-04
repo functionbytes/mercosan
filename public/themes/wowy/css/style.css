@@ -4427,6 +4427,16 @@ h6.post-title {
     margin-left: 15px
 }
 
+
+.main-categories-wrap>a:hover>i {
+    color: #fff;
+}
+
+.main-categories-wrap>a:hover {
+    color: #fff;
+}
+
+
 header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i {
     display: none
 }
