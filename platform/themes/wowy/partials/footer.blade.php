@@ -25,7 +25,7 @@
     </footer>
 
     <!-- Quick view -->
-    <div class="modal fade custom-modal" id="quick-view-modal" tabindex="-1" aria-labelledby="quick-view-modal-label" aria-hidden="true">
+    <div class="modal fade custom-modal quick-view-modal" id="quick-view-modal" tabindex="-1" aria-labelledby="quick-view-modal-label" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -58,6 +58,9 @@
             "sec": "{{ __('sec') }}",
             "No reviews!": "{{ __('No reviews!') }}"
         };
+        
+        window.trackedStartCheckout = '{{ session("tracked_start_checkout") }}';
+        window.siteUrl = '{{ url("/") }}';
     </script>
 
     {!! Theme::place('footer') !!}

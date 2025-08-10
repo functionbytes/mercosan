@@ -32,14 +32,6 @@ class ShoppingSettingForm extends SettingForm
             )
             ->addOpenCollapsible('shopping_cart_enabled', '1', $shoppingCartEnabled == '1')
             ->add(
-                'cart_destroy_on_logout',
-                OnOffCheckboxField::class,
-                OnOffFieldOption::make()
-                    ->label(trans('plugins/ecommerce::setting.shopping.form.cart_destroy_on_logout'))
-                    ->helperText(trans('plugins/ecommerce::setting.shopping.form.cart_destroy_on_logout_helper'))
-                    ->value(get_ecommerce_setting('cart_destroy_on_logout', false))
-            )
-            ->add(
                 'order_tracking_enabled',
                 OnOffCheckboxField::class,
                 OnOffFieldOption::make()

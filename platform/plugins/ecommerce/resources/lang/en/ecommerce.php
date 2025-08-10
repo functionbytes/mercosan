@@ -24,6 +24,12 @@ return [
     'payment_detail' => 'Payment detail',
     'shipping_method' => 'Shipping method',
     'payment_method' => 'Payment method',
+    'order_amount' => 'Order amount',
+    'order_recover_link' => 'Order recovery link',
+    'site_title' => 'Site title',
+    'site_url' => 'Site URL',
+    'site_email' => 'Site email',
+    'site_phone' => 'Site phone',
     'select_state' => 'Select state...',
     'select_city' => 'Select city...',
     'theme_options' => [

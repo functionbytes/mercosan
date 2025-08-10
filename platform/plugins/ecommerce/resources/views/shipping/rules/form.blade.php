@@ -9,6 +9,7 @@
         class="input-sync-text-item"
         data-target=".label-rule-item-name"
         :value="$rule ? $rule->name : null"
+        :helper-text="trans('plugins/ecommerce::shipping.shipping_rule_name_helper')"
     />
 
     <x-core::form-group>
@@ -75,11 +76,24 @@
         data-target=".rule-price-item"
         :value="$rule ? $rule->price : 0"
         :group-flat="true"
+        :helper-text="trans('plugins/ecommerce::shipping.shipping_fee_helper')"
     >
         <x-slot:prepend>
             <span class="input-group-text">{{ get_application_currency()->symbol }}</span>
         </x-slot:prepend>
     </x-core::form.text-input>
+
+    @if($rule && $rule->type && $rule->type->allowRuleItems())
+        <div class="alert location-based-alert mt-3 shipping-rule-form">
+            <div class="d-flex align-items-center">
+                <x-core::icon name="ti ti-info-circle" class="alert-icon me-2" />
+                <div>
+                    <strong>{{ trans('plugins/ecommerce::shipping.location_based_shipping') }}</strong><br>
+                    <small>{{ trans('plugins/ecommerce::shipping.location_based_shipping_description') }}</small>
+                </div>
+            </div>
+        </div>
+    @endif
 
     @if ($rule)
         <div class="btn-list justify-content-between">

@@ -23,7 +23,7 @@
 
     <style>
         :root {
-            --primary-color: {{ $primaryColor = theme_option('primary_color', '#58b3f0') }};
+            --primary-color: {{ $primaryColor = theme_option('primary_color', '#fe0000') }};
             --primary-color-rgb: {{ implode(',', BaseHelper::hexToRgb($primaryColor)) }};
         }
     </style>
@@ -44,6 +44,7 @@
 
     {!! Html::style('vendor/core/core/base/libraries/toastr/toastr.min.css?v=' . $assetsVersion) !!}
 
+    {!! Html::script('vendor/core/core/base/libraries/jquery.min.js?v=' . $assetsVersion) !!}
     {!! Html::script('vendor/core/plugins/ecommerce/js/checkout.js?v=' . $assetsVersion) !!}
 
     @if (EcommerceHelper::loadCountriesStatesCitiesFromPluginLocation())

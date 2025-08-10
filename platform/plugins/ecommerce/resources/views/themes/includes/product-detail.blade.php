@@ -65,18 +65,6 @@
 
                     @if(EcommerceHelper::isWishlistEnabled() || EcommerceHelper::isCompareEnabled())
                         <div class="d-flex gap-4 mb-3">
-                            @if (EcommerceHelper::isCompareEnabled())
-                                <button
-                                    @class(['btn bb-btn-compare bb-btn-product-actions-icon', 'active' => EcommerceHelper::isProductInCompare($product->original_product->id)])
-                                    style="border: 0 !important;"
-                                    data-bb-toggle="add-to-compare" title="Add to compare"
-                                    data-url="{{ route('public.compare.add', $product) }}"
-                                    data-remove-url="{{ route('public.compare.remove', $product) }}"
-                                >
-                                    <x-core::icon name="ti ti-refresh"/>
-                                    {{ __('Compare') }}
-                                </button>
-                            @endif
                             @if (EcommerceHelper::isWishlistEnabled())
                                 <button
                                     class="btn bb-btn-wishlist bb-btn-product-actions-icon"

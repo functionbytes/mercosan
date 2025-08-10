@@ -62,7 +62,7 @@
     }
 
     /*------ Wow Active ----*/
-    new WOW().init();
+    // Removed duplicate WOW initialization - see bottom of file
 
     //sidebar sticky
     if ($('.sticky-sidebar').length) {
@@ -174,22 +174,34 @@
 
         $(sliderID).slick({
             dots: false,
-            rtl: isRTL,
             arrows: true,
+            rtl: isRTL,
             autoplay: slickOptions.autoplay === 'yes',
             infinite: slickOptions.infinite === 'yes',
-            speed: slickOptions.speed ? slickOptions.speed : 1000,
-            autoplaySpeed: slickOptions.autoplaySpeed ? slickOptions.autoplaySpeed : 3000,
-            slidesToShow: 6,
+            speed: slickOptions.speed || 1000,
+            autoplaySpeed: slickOptions.autoplaySpeed || 3000,
+            slidesToShow: 4, // Mostrar solo 4 productos
             slidesToScroll: 1,
-            loop: true,
+            rows: 1, // Una sola fila
             adaptiveHeight: true,
+            prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
+            nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
+            appendArrows: appendArrowsClassName,
             responsive: [
                 {
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 4,
-                        slidesToScroll: 4,
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        rows: 1
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        rows: 1
                     }
                 },
                 {
@@ -197,12 +209,10 @@
                     settings: {
                         slidesToShow: 1,
                         slidesToScroll: 1,
+                        rows: 1
                     }
                 }
-            ],
-            prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
-            nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
-            appendArrows: appendArrowsClassName,
+            ]
         });
     });
 
@@ -641,8 +651,46 @@
             );
         }
     };
-    /* WOW active */
-    new WOW().init();
+    /* WOW active - Initialize with configuration to prevent conflicts */
+    if (typeof WOW !== 'undefined') {
+        try {
+            // First, remove any existing wow classes that might be causing visibility issues
+            $('.wow').removeClass('wow animated').removeAttr('style');
+            
+            // Initialize WOW with custom configuration
+            var wow = new WOW({
+                boxClass: 'wow-animate',      // Use different class to avoid conflicts
+                animateClass: 'animated',     // default
+                offset: 0,                    // default
+                mobile: true,                 // default
+                live: true,                   // default
+                callback: function(box) {
+                    // Callback after animation - ensure element is visible
+                    $(box).css('visibility', 'visible');
+                },
+                scrollContainer: null         // optional scroll container selector, otherwise use window
+            });
+            
+            // Don't initialize WOW automatically to prevent hiding elements
+            // Instead, manually handle animations without hiding elements
+            console.log('WOW.js disabled for homepage compatibility');
+        } catch (e) {
+            console.warn('WOW.js initialization failed:', e);
+        }
+    } else {
+        // If WOW is not available, ensure all elements are visible
+        $('.wow').removeClass('wow animated').removeAttr('style').css('visibility', 'visible');
+    }
+    
+    // Force all elements to be visible on page load
+    $(document).ready(function() {
+        $('.wow').each(function() {
+            $(this).css({
+                'visibility': 'visible',
+                'animation-name': 'none'
+            }).removeClass('wow animated');
+        });
+    });
 
     //Load functions
     $(document).ready(function () {

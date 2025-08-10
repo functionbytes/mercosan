@@ -14,13 +14,13 @@
                         </tr>
                     </tbody>
                 </table>
-                <h1 class="bb-text-center bb-m-0 bb-mt-md">Order is waiting for you to complete!</h1>
+                <h1 class="bb-text-center bb-m-0 bb-mt-md">Don't let these items slip away!</h1>
             </td>
         </tr>
         <tr>
             <td class="bb-content">
-                <p>Dear Admin,</p>
-                <div>We noticed you were intending to buy some products in our store, would you like to continue?</div>
+                <p>Hi {{ customer_name }},</p>
+                <div>You left some amazing items in your cart! We've saved them for you, but they won't last forever. Complete your purchase now to secure these great products.</div>
             </td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
                                     <tr>
                                         <td align="center" valign="top" class="lh-1">
                                             <a href="{{ site_url }}/checkout/{{ order_token }}/recover" class="bb-btn bb-bg-blue bb-border-blue">
-                                                <span class="btn-span">Complete order</span>
+                                                <span class="btn-span">Complete Your Purchase</span>
                                             </a>
                                         </td>
                                     </tr>
@@ -42,18 +42,35 @@
                             </table>
                         </td>
                     </tr>
+
                     </tbody>
                 </table>
             </td>
         </tr>
         <tr>
             <td class="bb-content bb-pt-0">
-                <h4>Here's what you ordered:</h4>
-                {{ product_list }}
+                <h4>Your reserved items:</h4>
+                {{ order_recover }}
 
                 {% if order_note %}
-                <div>Note: {{ order_note }}</div>
+                <div style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-left: 4px solid #007bff; border-radius: 4px;">
+                    <strong>Your note:</strong> {{ order_note }}
+                </div>
                 {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="bb-content">
+                <div style="margin-top: 30px; padding: 20px; background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px;">
+                    <h4 style="color: #856404; margin-top: 0;">⏰ Limited Time Offer</h4>
+                    <p style="color: #856404; margin-bottom: 0;">Complete your purchase in the next 24 hours and get <strong>free shipping</strong> on your order!</p>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="bb-content">
+                <p style="margin-top: 30px;">Need help? Feel free to reach out to our customer support team.</p>
+                <p style="margin-bottom: 0;">Happy shopping!</p>
             </td>
         </tr>
         </tbody>

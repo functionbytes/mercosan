@@ -44,12 +44,15 @@ class PublicController extends BaseController
 
             $newsletter->save();
 
+            // Almacenar el email en la sesión para futuras verificaciones
+            $request->session()->put('user_email', $newsletter->email);
+
             SubscribeNewsletterEvent::dispatch($newsletter);
         });
 
         return $this
             ->httpResponse()
-            ->setMessage(__('Subscribe to newsletter successfully!'));
+            ->setMessage(trans('plugins/newsletter::newsletter.popup.subscribe_success'));
     }
 
     public function getUnsubscribe(int|string $id, Request $request)
@@ -84,8 +87,30 @@ class PublicController extends BaseController
             ->setMessage(__('Your email does not exist in the system or you have unsubscribed already!'));
     }
 
-    public function ajaxLoadPopup()
+    public function ajaxLoadPopup(Request $request)
     {
+        // Verificar si el usuario ya está suscrito por IP o email en sesión
+        $userEmail = $request->session()->get('user_email');
+        $userIp = $request->ip();
+        
+        // Si hay un email en sesión, verificar si ya está suscrito
+        if ($userEmail) {
+            $existingSubscription = Newsletter::query()
+                ->where('email', $userEmail)
+                ->where('status', NewsletterStatusEnum::SUBSCRIBED)
+                ->exists();
+                
+            if ($existingSubscription) {
+                return $this
+                    ->httpResponse()
+                    ->setData([
+                        'html' => '',
+                        'show_popup' => false,
+                        'message' => trans('plugins/newsletter::newsletter.popup.already_subscribed')
+                    ]);
+            }
+        }
+
         $newsletterForm = NewsletterForm::create()
             ->remove(['wrapper_before', 'wrapper_after', 'email'])
             ->addBefore(
@@ -93,9 +118,9 @@ class PublicController extends BaseController
                 'email',
                 EmailField::class,
                 EmailFieldOption::make()
-                    ->label(__('Email Address'))
+                    ->label(trans('plugins/newsletter::newsletter.popup.email_label'))
                     ->maxLength(-1)
-                    ->placeholder(__('Enter Your Email'))
+                    ->placeholder(trans('plugins/newsletter::newsletter.popup.email_placeholder'))
                     ->required()
             )
             ->addAfter(
@@ -103,7 +128,7 @@ class PublicController extends BaseController
                 'dont_show_again',
                 CheckboxField::class,
                 CheckboxFieldOption::make()
-                    ->label(__("Don't show this popup again"))
+                    ->label(trans('plugins/newsletter::newsletter.popup.dont_show_again'))
                     ->value(false)
             );
 
@@ -111,6 +136,27 @@ class PublicController extends BaseController
             ->httpResponse()
             ->setData([
                 'html' => view('plugins/newsletter::partials.popup', compact('newsletterForm'))->render(),
+                'show_popup' => true
             ]);
+    }
+
+    public function checkSubscriptionStatus(Request $request)
+    {
+        $email = $request->input('email');
+        
+        if (!$email) {
+            return $this
+                ->httpResponse()
+                ->setData(['subscribed' => false]);
+        }
+
+        $isSubscribed = Newsletter::query()
+            ->where('email', $email)
+            ->where('status', NewsletterStatusEnum::SUBSCRIBED)
+            ->exists();
+
+        return $this
+            ->httpResponse()
+            ->setData(['subscribed' => $isSubscribed]);
     }
 }

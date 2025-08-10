@@ -1,19 +1,5 @@
 <div class="row">
-    <div class="col-auto">
-        @if (class_exists($history->user_type) && $history->user)
-            <img
-                src="{{ $history->user->avatar_url }}"
-                class="avatar"
-                alt="{{ $history->user_name }}"
-            />
-        @else
-            <img
-                src="{{ setting('admin_favicon') ? RvMedia::getImageUrl(setting('admin_favicon')) : asset(RvMedia::getDefaultImage()) }}"
-                class="avatar"
-                alt="{{ trans('plugins/audit-log::history.system') }}"
-            />
-        @endif
-    </div>
+
     <div class="col">
         <div class="text-truncate">
             <strong>

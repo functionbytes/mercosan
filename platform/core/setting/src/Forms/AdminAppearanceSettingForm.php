@@ -69,7 +69,7 @@ class AdminAppearanceSettingForm extends SettingForm
             ])
             ->add('admin_primary_color', ColorField::class, [
                 'label' => trans('core/setting::setting.admin_appearance.form.primary_color'),
-                'value' => setting('admin_primary_color', '#206bc4'),
+                'value' => setting('admin_primary_color', '#fe0000'),
             ])
             ->add('admin_secondary_color', ColorField::class, [
                 'label' => trans('core/setting::setting.admin_appearance.form.secondary_color'),
@@ -81,11 +81,11 @@ class AdminAppearanceSettingForm extends SettingForm
             ])
             ->add('admin_text_color', ColorField::class, [
                 'label' => trans('core/setting::setting.admin_appearance.form.text_color'),
-                'value' => setting('admin_text_color', '#182433'),
+                'value' => setting('admin_text_color', '#000'),
             ])
             ->add('admin_link_color', ColorField::class, [
                 'label' => trans('core/setting::setting.admin_appearance.form.link_color'),
-                'value' => setting('admin_link_color', '#206bc4'),
+                'value' => setting('admin_link_color', '#fe0000'),
             ])
             ->add('admin_link_hover_color', ColorField::class, [
                 'label' => trans('core/setting::setting.admin_appearance.form.link_hover_color'),

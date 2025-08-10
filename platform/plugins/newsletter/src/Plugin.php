@@ -13,10 +13,9 @@ class Plugin extends PluginOperationAbstract
         Schema::dropIfExists('newsletters');
 
         Setting::delete([
-            'newsletter_mailchimp_api_key',
-            'newsletter_mailchimp_list_id',
-            'newsletter_sendgrid_api_key',
-            'newsletter_sendgrid_list_id',
+            'newsletter_mailjet_api_key',
+            'newsletter_mailjet_api_secret',
+            'newsletter_mailjet_list_id',
             'enable_newsletter_contacts_list_api',
         ]);
     }

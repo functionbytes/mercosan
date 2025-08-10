@@ -40,6 +40,10 @@ Route::group(['namespace' => 'Botble\Newsletter\Http\Controllers'], function ():
             Route::get('ajax/newsletter/popup', 'PublicController@ajaxLoadPopup')
                 ->middleware(RequiresJsonRequestMiddleware::class)
                 ->name('public.ajax.newsletter-popup');
+
+            Route::post('ajax/newsletter/check-status', 'PublicController@checkSubscriptionStatus')
+                ->middleware(RequiresJsonRequestMiddleware::class)
+                ->name('public.ajax.newsletter-check-status');
         });
     }
 });

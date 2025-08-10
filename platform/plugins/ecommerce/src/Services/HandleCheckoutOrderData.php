@@ -97,7 +97,10 @@ class HandleCheckoutOrderData
                     $paymentMethod,
                 );
 
-                $shipping = $this->shippingFeeService->execute($shippingData);
+                // Pass shipping method and option for proper selection handling
+                $selectedMethod = $request->input('shipping_method', Arr::get($sessionCheckoutData, 'shipping_method'));
+                $selectedOption = $request->input('shipping_option', Arr::get($sessionCheckoutData, 'shipping_option'));
+                $shipping = $this->shippingFeeService->execute($shippingData, $selectedMethod, $selectedOption);
 
                 foreach ($shipping as $key => &$shipItem) {
                     if (get_shipping_setting('free_ship', $key)) {

@@ -48,7 +48,6 @@ class CheckoutForm extends FormFront
 
                     try {
                         $mobileDetect = new MobileDetect();
-
                         $isMobile = $mobileDetect->isMobile();
                     } catch (Throwable) {
                         $isMobile = false;
@@ -87,7 +86,7 @@ class CheckoutForm extends FormFront
                         })
                         ->addWrapper(
                             'left_column_wrapper',
-                            $isMobile ? '<div class="form-checkout col-lg-7">' : '<div class="form-checkout col-lg-7 col-md-6">',
+                            $isMobile ? '<div class="form-checkout col-lg-12">' : '<div class="form-checkout col-lg-7 col-md-6">',
                             '</div>',
                             function (CheckoutForm $form) use ($isMobile, $discountFormHtml, $cartItemHtml, $token, $model): void {
                                 $form
@@ -309,7 +308,7 @@ class CheckoutForm extends FormFront
                                             $form
                                                 ->addWrapper(
                                                     'footer_actions_left_wrapper',
-                                                    '<div class="order-2 order-md-1 col-md-6 text-center text-md-start mb-4 mb-md-0">',
+                                                    '<div class="order-2 order-md-1 col-md-12 text-center text-md-start mb-4 mb-md-0">',
                                                     '</div>',
                                                     function (CheckoutForm $form) use ($model): void {
                                                         $form
@@ -327,7 +326,7 @@ class CheckoutForm extends FormFront
                                                 )
                                                 ->addWrapper(
                                                     'footer_actions_right_wrapper',
-                                                    '<div class="order-1 order-md-2 col-md-6">',
+                                                    '<div class="order-1 order-md-2 col-md-12">',
                                                     '</div>',
                                                     function (CheckoutForm $form): void {
                                                         $form->add(

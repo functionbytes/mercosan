@@ -1,11 +1,10 @@
 @php
     $layout = MetaBox::getMetaData($product, 'layout', true);
-    $layout = ($layout && in_array($layout, array_keys(get_product_single_layouts()))) ? $layout : 'product-right-sidebar';
+    $layout = ($layout && in_array($layout, array_keys(get_product_single_layouts()))) ? $layout : 'product-full-width';
     Theme::layout($layout);
 
     Theme::asset()->usePath()->add('lightGallery-css', 'plugins/lightGallery/css/lightgallery.min.css');
-    Theme::asset()->container('footer')->usePath()
-        ->add('lightGallery-js', 'plugins/lightGallery/js/lightgallery.min.js', ['jquery']);
+    Theme::asset()->container('footer')->usePath()->add('lightGallery-js', 'plugins/lightGallery/js/lightgallery.min.js', ['jquery']);
 @endphp
 
 <div class="product-detail accordion-detail">
@@ -21,19 +20,7 @@
                         </figure>
                     @endforeach
                 </div>
-                <div class="slider-nav-thumbnails pl-15 pr-15">
-                    @foreach ($productImages as $img)
-                        <div><img src="{{ RvMedia::getImageUrl($img, 'thumb') }}" alt="{{ $product->name }}"></div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="single-social-share clearfix mt-50 mb-15">
-                <p class="mb-15 mt-30 font-sm"> <i class="fa fa-share-alt mr-5"></i> <span class="d-inline-block">{{ __('Share this') }}</span></p>
-                <div class="mobile-social-icon wow fadeIn  mb-sm-5 mb-md-0 animated">
-                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a class="twitter" href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ strip_tags(strip_tags(SeoHelper::getDescription())) }}" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(url()->current()) }}&summary={{ rawurldecode(strip_tags(SeoHelper::getDescription())) }}" target="_blank"><i class="fab fa-linkedin"></i></a>
-                </div>
+
             </div>
             <a class="mail-to-friend font-sm color-grey" href="mailto:someone@example.com?subject={{ __('Buy') }} {{ $product->name }}&body={{ __('Buy this one: :link', ['link' => $product->url]) }}"><i class="far fa-envelope"></i> {{ __('Email to a Friend') }}</a>
         </div>
@@ -115,9 +102,6 @@
 
                             @if (EcommerceHelper::isWishlistEnabled())
                                 <a aria-label="{{ __('Add To Wishlist') }}" class="action-btn hover-up js-add-to-wishlist-button" data-url="{{ route('public.wishlist.add', $product->id) }}" href="#"><i class="far fa-heart"></i></a>
-                            @endif
-                            @if (EcommerceHelper::isCompareEnabled())
-                                <a aria-label="{{ __('Add To Compare') }}" href="#" class="action-btn hover-up js-add-to-compare-button" data-url="{{ route('public.compare.add', $product->id) }}"><i class="far fa-exchange-alt"></i></a>
                             @endif
                         </div>
                     </div>

@@ -1137,7 +1137,7 @@ small {
     .page-item {
         &.disabled {
             .page-link {
-                background: #f7f8f9;
+                background: #fbfbfb;
                 cursor: not-allowed;
                 color: var(--color-primary) !important;
             }
@@ -1819,7 +1819,7 @@ input.qty-input[type=number] {
     .table--cart {
         thead {
             .main-heading {
-                background: #f4f5f9;
+                background: #f7f7f7;
             }
         }
 
@@ -1836,7 +1836,7 @@ input.qty-input[type=number] {
         }
 
         .table-responsive {
-            background: #f4f5f9;
+            background: #f7f7f7;
 
             .table--cart {
                 tr:first-child {

@@ -21,7 +21,7 @@
                         </div>
                         <div class="shopping-cart-title">
                             <h4><a href="{{ $product->original_product->url }}">{{ $product->name }}  @if ($product->isOutOfStock()) <span class="stock-status-label">({!! $product->stock_status_html !!})</span> @endif</a></h4>
-                            <h3><span class="d-inline-block">{{ $cartItem->qty }}</span> <span class="d-inline-block"> x </span> <span class="d-inline-block">{{ format_price($cartItem->price) }}</span> @if ($product->front_sale_price != $product->price)
+                            <h3><span class="d-inline-block  qty">{{ $cartItem->qty }}</span> <span class="d-inline-block x"> x </span> <span class="d-inline-block price">{{ format_price($cartItem->price) }}</span> @if ($product->front_sale_price != $product->price)
                                     <small><del>{{ format_price($product->price) }}</del></small>@endif</h3>
                             <p class="mb-0"><small>{{ $cartItem->options['attributes'] ?? '' }}</small></p>
 

@@ -77,7 +77,7 @@
                         <div class="divider center_icon mt-50 mb-50"><i class="fa fa-gem"></i></div>
                         <div class="row mb-50">
                             <div class="col-lg-6 col-md-12">
-                                <div class="mb-30 mt-50">
+                                <div class="border p-md-4 p-30 border-radius-10 cart-totals">
                                     <div class="heading_s1 mb-3">
                                         <h4>{{ __('Apply Coupon') }}</h4>
                                     </div>
@@ -85,11 +85,11 @@
                                         <div class="left">
                                             <div class="coupon form-coupon-wrapper">
                                                 <div class="form-row row justify-content-center">
-                                                    <div class="form-group col-lg-6">
+                                                    <div class="form-group col-lg-12">
                                                         <input class="font-medium coupon-code" type="text" name="coupon_code" value="{{ old('coupon_code') }}" placeholder="{{ __('Enter coupon code') }}">
                                                     </div>
-                                                    <div class="form-group col-lg-6">
-                                                        <button class="btn btn-rounded btn-sm btn-apply-coupon-code" type="button" data-url="{{ route('public.coupon.apply') }}"><i class="far fa-bookmark mr-5"></i>{{ __('Apply') }}</button>
+                                                    <div class="form-group col-lg-12">
+                                                        <button class="btn btn-rounded btn-sm btn-apply-coupon-code w-100" type="button" data-url="{{ route('public.coupon.apply') }}"><i class="far fa-bookmark mr-5"></i>{{ __('Apply') }}</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,17 +130,24 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button type="submit" name="checkout" class="btn btn-rounded"> <i class="fa fa-share-square mr-10"></i> {{ __('Proceed To Checkout') }}</button>
+                                    <button type="submit" name="checkout" class="btn w-100"> <i class="fa fa-share-square mr-10"></i> {{ __('Proceed To Checkout') }}</button>
+                                    <div class="mt-10">
+                                        <a  class="btn btn-primary w-100" href="{{ route('public.products') }}"><i class="fa fa-arrow-left me-2"></i>{{ __('Continue Shopping') }}</a>
+                                    </div>
                                 </div>
 
-                                <div class="mt-30">
-                                    <a href="{{ route('public.products') }}"><i class="fa fa-arrow-left me-2"></i>{{ __('Continue Shopping') }}</a>
-                                </div>
                             </div>
                         </div>
                     @endif
                 @else
-                    <p class="text-center">{{ __('Your cart is empty!') }}</p>
+                        <div class="cart-container">
+                            <div class="checkout-empty-container text-center py-5">
+                                <i class="fa-solid fa-circle-user"></i>
+                                <h2>{{ __('Your cart is empty!') }}</h2>
+                                <p class="">{{ __('Add products to start your purchase.') }}</p>
+                            </div>
+
+                        </div>
                 @endif
             </div>
         </div>

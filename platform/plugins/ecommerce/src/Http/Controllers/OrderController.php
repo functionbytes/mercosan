@@ -931,10 +931,21 @@ class OrderController extends BaseController
             $order->dont_show_order_info_in_product_list = true;
             OrderHelper::setEmailVariables($order);
 
-            $mailer->sendUsingTemplate('order_recover', $email);
+            // Get the configured email template from abandoned cart settings
+            $emailTemplate = get_ecommerce_setting('abandoned_cart_email_template', 'order_recover');
+
+            $mailer->sendUsingTemplate($emailTemplate, $email);
+
+            // Generate appropriate success message based on template used
+            $templateName = $emailTemplate === 'abandoned_cart' ?
+                trans('plugins/ecommerce::setting.abandoned_cart.template_modern') :
+                trans('plugins/ecommerce::setting.abandoned_cart.template_classic');
+
+            $successMessage = trans('plugins/ecommerce::order.sent_email_incomplete_order_success') .
+                ' (' . $templateName . ')';
 
             return $this
-                ->httpResponse()->setMessage(trans('plugins/ecommerce::order.sent_email_incomplete_order_success'));
+                ->httpResponse()->setMessage($successMessage);
         } catch (Exception $exception) {
             return $this
                 ->httpResponse()

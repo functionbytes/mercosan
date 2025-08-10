@@ -22,6 +22,7 @@ use Botble\Base\Supports\Helper;
 use Botble\Ecommerce\Facades\EcommerceHelper;
 use Botble\Ecommerce\Http\Requests\Settings\CheckoutSettingRequest;
 use Botble\Language\Forms\Fields\LanguageSwitcherField;
+use Botble\Location\Models\State;
 use Botble\Setting\Forms\SettingForm;
 
 class CheckoutSettingForm extends SettingForm
@@ -147,7 +148,7 @@ class CheckoutSettingForm extends SettingForm
                         'customRadio',
                         RadioFieldOption::make()
                             ->label(trans('plugins/ecommerce::setting.checkout.form.load_countries_states_cities_from_location_plugin'))
-                            ->selected($loadLocationFromPlugin = (bool) get_ecommerce_setting('load_countries_states_cities_from_location_plugin', 0))
+                            ->selected($loadLocationFromPlugin = (bool) get_ecommerce_setting('load_countries_states_cities_from_location_plugin', 1))
                             ->choices([
                                 0 => trans('core/base::base.no'),
                                 1 => trans('core/base::base.yes'),
@@ -179,8 +180,8 @@ class CheckoutSettingForm extends SettingForm
                     ])
                     ->add('open_location_settings', HtmlField::class, [
                         'html' => sprintf(
-                            '<div class="form-group location-settings" style="display: %s;" data-bb-value="0">',
-                            ! $loadLocationFromPlugin ? 'block' : 'none',
+                            '<div class="form-group location-settings" style="display: %s;" data-bb-value="1">',
+                            $loadLocationFromPlugin ? 'block' : 'none',
                         ),
                     ])
                     ->add(
@@ -212,10 +213,58 @@ class CheckoutSettingForm extends SettingForm
                         SelectFieldOption::make()
                             ->label(trans('plugins/ecommerce::setting.checkout.form.default_country_at_checkout_page'))
                             ->choices(['' => trans('plugins/ecommerce::setting.checkout.form.default_country_at_checkout_page_placeholder')] + $countries)
-                            ->selected(get_ecommerce_setting('default_country_at_checkout_page'))
+                            ->selected(get_ecommerce_setting('default_country_at_checkout_page', 'CO'))
                             ->helperText(trans('plugins/ecommerce::setting.checkout.form.default_country_at_checkout_page_help'))
                             ->searchable()
                     )
+                    ->add(
+                        'filter_cities_by_state',
+                        OnOffCheckboxField::class,
+                        OnOffFieldOption::make()
+                            ->label(trans('plugins/ecommerce::setting.checkout.form.filter_cities_by_state'))
+                            ->value($filterCitiesByState = get_ecommerce_setting('filter_cities_by_state', false))
+                            ->helperText(trans('plugins/ecommerce::setting.checkout.form.filter_cities_by_state_helper'))
+                            ->attributes([
+                                'data-bb-toggle' => 'collapse',
+                                'data-bb-target' => '.city-filter-settings',
+                            ])
+                    )
+                    ->add('open_city_filter_settings', HtmlField::class, [
+                        'html' => sprintf('<div class="city-filter-settings" style="display: %s;" data-bb-value="1">', $filterCitiesByState ? 'block' : 'none'),
+                    ])
+                    ->add(
+                        'default_state_for_city_filter',
+                        SelectField::class,
+                        SelectFieldOption::make()
+                            ->label(trans('plugins/ecommerce::setting.checkout.form.default_state_for_city_filter'))
+                            ->choices(['' => trans('plugins/ecommerce::setting.checkout.form.default_state_for_city_filter_placeholder')] + (is_plugin_active('location') ? State::query()->pluck('name', 'id')->all() : []))
+                            ->selected(get_ecommerce_setting('default_state_for_city_filter', '28'))
+                            ->helperText(trans('plugins/ecommerce::setting.checkout.form.default_state_for_city_filter_help'))
+                            ->searchable()
+                            ->attributes([
+                                'data-bb-toggle' => 'collapse',
+                                'data-bb-target' => '.selected-cities-settings'
+                            ])
+                    )
+                    ->add('open_selected_cities_settings', HtmlField::class, [
+                        'html' => '<div class="selected-cities-settings" style="display: block;">',
+                    ])
+                    ->add(
+                        'selected_cities_for_checkout[]',
+                        MultiCheckListField::class,
+                        MultiChecklistFieldOption::make()
+                            ->label(trans('plugins/ecommerce::setting.checkout.form.selected_cities_for_checkout'))
+                            ->choices($this->getCitiesForSelectedState())
+                            ->selected(old('selected_cities_for_checkout', json_decode(get_ecommerce_setting('selected_cities_for_checkout', '[]'), true) ?: []))
+                            ->helperText(trans('plugins/ecommerce::setting.checkout.form.selected_cities_for_checkout_helper'))
+                            ->attributes(['class' => 'cities-checkboxes'])
+                    )
+                    ->add('close_selected_cities_settings', HtmlField::class, [
+                        'html' => '</div>',
+                    ])
+                    ->add('close_city_filter_settings', HtmlField::class, [
+                        'html' => '</div>',
+                    ])
                     ->add('close_location_settings', HtmlField::class, [
                         'html' => '</div>',
                     ])
@@ -257,10 +306,38 @@ class CheckoutSettingForm extends SettingForm
                         SelectFieldOption::make()
                             ->label(trans('plugins/ecommerce::setting.checkout.form.default_country_at_checkout_page'))
                             ->choices(['' => trans('plugins/ecommerce::setting.checkout.form.default_country_at_checkout_page_placeholder')] + $countries)
-                            ->selected(get_ecommerce_setting('default_country_at_checkout_page'))
+                            ->selected(get_ecommerce_setting('default_country_at_checkout_page', 'CO'))
                             ->helperText(trans('plugins/ecommerce::setting.checkout.form.default_country_at_checkout_page_help'))
                             ->searchable()
                     )
+                    ->add(
+                        'filter_cities_by_state',
+                        OnOffCheckboxField::class,
+                        OnOffFieldOption::make()
+                            ->label(trans('plugins/ecommerce::setting.checkout.form.filter_cities_by_state'))
+                            ->value($filterCitiesByState = get_ecommerce_setting('filter_cities_by_state', false))
+                            ->helperText(trans('plugins/ecommerce::setting.checkout.form.filter_cities_by_state_helper'))
+                            ->attributes([
+                                'data-bb-toggle' => 'collapse',
+                                'data-bb-target' => '.city-filter-settings',
+                            ])
+                    )
+                    ->add('open_city_filter_settings', HtmlField::class, [
+                        'html' => sprintf('<div class="city-filter-settings" style="display: %s;" data-bb-value="1">', $filterCitiesByState ? 'block' : 'none'),
+                    ])
+                    ->add(
+                        'default_state_for_city_filter',
+                        SelectField::class,
+                        SelectFieldOption::make()
+                            ->label(trans('plugins/ecommerce::setting.checkout.form.default_state_for_city_filter'))
+                            ->choices(['' => trans('plugins/ecommerce::setting.checkout.form.default_state_for_city_filter_placeholder')] + (is_plugin_active('location') ? State::query()->pluck('name', 'id')->all() : []))
+                            ->selected(get_ecommerce_setting('default_state_for_city_filter', '28'))
+                            ->helperText(trans('plugins/ecommerce::setting.checkout.form.default_state_for_city_filter_help'))
+                            ->searchable()
+                    )
+                    ->add('close_city_filter_settings', HtmlField::class, [
+                        'html' => '</div>',
+                    ])
                     ->add('close_fieldset_location_settings', HtmlField::class, [
                         'html' => '</fieldset>',
                     ]);
@@ -309,5 +386,31 @@ class CheckoutSettingForm extends SettingForm
             ->when(is_plugin_active('language'), function (FormAbstract $form): void {
                 $form->add('languageSwitcher', LanguageSwitcherField::class);
             });
+    }
+
+    protected function getCitiesForSelectedState(): array
+    {
+        if (!is_plugin_active('location')) {
+            return [];
+        }
+
+        $selectedStateId = get_ecommerce_setting('default_state_for_city_filter');
+        
+        if (!$selectedStateId) {
+            // If no state is selected, use Santander (28) as default
+            $selectedStateId = 28;
+        }
+
+        try {
+            return \Botble\Location\Models\City::query()
+                ->where('state_id', $selectedStateId)
+                ->wherePublished()
+                ->orderBy('name')
+                ->pluck('name', 'id')
+                ->all();
+        } catch (\Exception $e) {
+            // If there's any error, return empty array
+            return [];
+        }
     }
 }

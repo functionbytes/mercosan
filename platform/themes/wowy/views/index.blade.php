@@ -1,5 +1,6 @@
 @php Theme::layout('homepage'); @endphp
 
+
 <div class="container">
     <div style="margin: 40px 0;">
         <h4 style="color: #f00; margin-bottom: 15px;">You need to setup your homepage first!</h4>

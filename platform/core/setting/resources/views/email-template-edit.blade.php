@@ -110,7 +110,7 @@
                     @foreach (EmailHandler::getIconVariables() as $key => $value)
                         <x-core::table.body.row>
                             <x-core::table.body.cell>
-                                <div style="background-color: #206bc4; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center">
+                                <div style="background-color: #fe0000; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center">
                                     <img
                                         src="{{ $value }}"
                                         width="32"

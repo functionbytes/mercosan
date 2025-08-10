@@ -15,6 +15,10 @@ use Botble\Ecommerce\Models\Discount;
 use Botble\Ecommerce\Models\Product;
 use Botble\Ecommerce\Services\HandleApplyCouponService;
 use Botble\Ecommerce\Services\HandleApplyPromotionsService;
+use Botble\Ecommerce\Services\HandleCheckoutOrderData;
+use Botble\Ecommerce\Services\HandleTaxService;
+use Botble\Ecommerce\Services\DynamicShippingValidationService;
+use Botble\Ecommerce\Services\FreeShippingAutoHandler;
 use Botble\SeoHelper\Facades\SeoHelper;
 use Botble\Theme\Facades\Theme;
 use Exception;
@@ -181,6 +185,7 @@ class PublicCartController extends BaseController
 
         $cartItems = OrderHelper::handleAddCart($product, $request);
 
+
         $cartItem = Arr::first(array_filter($cartItems, fn ($item) => $item['id'] == $product->id));
 
         $response->setMessage(__(
@@ -188,9 +193,24 @@ class PublicCartController extends BaseController
             ['product' => $originalProduct->name ?: $product->name]
         ));
 
+
+        $token = OrderHelper::getOrderSessionToken();
+
+        if (!session('tracked_start_checkout')) {
+            session(['tracked_start_checkout' => $token]);
+        }
+
+        $checkout = route('public.checkout.information', session('tracked_start_checkout'));
+
+        $modalContent = view(
+            EcommerceHelper::viewPath('modal'),
+            compact('checkout', 'cartItem')
+        )->render();
+
         $responseData = [
             'status' => true,
             'content' => $cartItems,
+            'content_modal' => $modalContent,
         ];
 
         app(GoogleTagManager::class)->addToCart(
@@ -205,7 +225,7 @@ class PublicCartController extends BaseController
             $cartItem['subtotal'],
         );
 
-        $token = OrderHelper::getOrderSessionToken();
+
         $nextUrl = route('public.checkout.information', $token);
 
         if (EcommerceHelper::getQuickBuyButtonTarget() == 'cart') {
@@ -286,9 +306,17 @@ class PublicCartController extends BaseController
                 ->setMessage(__('One or all products are not enough quantity so cannot update!'));
         }
 
+        $responseData = $this->getDataForResponse();
+        
+        // If we're in checkout context, also update shipping information
+        if ($request->has('checkout_context') || str_contains($request->header('referer', ''), 'checkout')) {
+            $checkoutData = $this->getCheckoutShippingData($request);
+            $responseData = array_merge($responseData, $checkoutData);
+        }
+        
         return $this
             ->httpResponse()
-            ->setData($this->getDataForResponse())
+            ->setData($responseData)
             ->setMessage(__('Update cart successfully!'));
     }
 
@@ -363,6 +391,7 @@ class PublicCartController extends BaseController
             )->render();
         }
 
+
         return apply_filters('ecommerce_cart_data_for_response', [
             'count' => Cart::instance('cart')->count(),
             'total_price' => format_price(Cart::instance('cart')->rawSubTotal()),
@@ -392,5 +421,144 @@ class PublicCartController extends BaseController
         }
 
         return (float) $couponDiscountAmount;
+    }
+    
+    /**
+     * Get checkout shipping data for AJAX updates from checkout page
+     */
+    protected function getCheckoutShippingData($request): array
+    {
+        $token = OrderHelper::getOrderSessionToken();
+        $sessionCheckoutData = OrderHelper::getOrderSessionData($token);
+        
+        if (empty($sessionCheckoutData)) {
+            return [];
+        }
+        
+        try {
+            $products = Cart::instance('cart')->products();
+            
+            $handleCheckoutOrderData = app(HandleCheckoutOrderData::class);
+            $checkoutOrderData = $handleCheckoutOrderData->execute(
+                $request,
+                $products,
+                $token,
+                $sessionCheckoutData
+            );
+
+            app(HandleTaxService::class)->execute($products, $sessionCheckoutData);
+            
+            // Prepare shipping data including currently selected method
+            // Priority: request data > session data
+            $currentShippingMethod = $request->input('current_shipping_method') ?: data_get($sessionCheckoutData, 'shipping_method');
+            $currentShippingOption = $request->input('current_shipping_option') ?: data_get($sessionCheckoutData, 'shipping_option');
+            
+            $shippingData = [
+                'order_total' => $checkoutOrderData->orderAmount,
+                'city' => data_get($sessionCheckoutData, 'city'),
+                'state' => data_get($sessionCheckoutData, 'state'),
+                'country' => data_get($sessionCheckoutData, 'country') ?: 'CO',
+                'weight' => $products->sum('weight'),
+                // Preserve currently selected shipping method from request or session
+                'shipping_option' => $currentShippingOption,
+                'shipping_method' => $currentShippingMethod,
+            ];
+            
+            $dynamicShippingValidation = app(DynamicShippingValidationService::class);
+            $freeShippingHandler = app(FreeShippingAutoHandler::class);
+            
+            // FIRST: Check for free shipping (highest priority)
+            $shouldAutoApplyFreeShipping = $freeShippingHandler->shouldAutoApplyFreeShipping($shippingData);
+            $skipShippingSelection = $shouldAutoApplyFreeShipping && $freeShippingHandler->shouldSkipShippingSelection($shippingData);
+            
+            \Log::info('PublicCartController: Free shipping check in checkout context', [
+                'order_total' => $shippingData['order_total'],
+                'shouldAutoApplyFreeShipping' => $shouldAutoApplyFreeShipping,
+                'skipShippingSelection' => $skipShippingSelection,
+                'currently_selected' => [
+                    'shipping_option' => $shippingData['shipping_option'],
+                    'shipping_method' => $shippingData['shipping_method']
+                ]
+            ]);
+            
+            if ($shouldAutoApplyFreeShipping) {
+                // Create and use auto free shipping method (highest priority)
+                $autoFreeShipping = $freeShippingHandler->createAutoFreeShippingMethod($shippingData);
+                \Log::info('PublicCartController: Auto free shipping result', [
+                    'autoFreeShipping' => $autoFreeShipping,
+                    'isEmpty' => empty($autoFreeShipping)
+                ]);
+                
+                if (!empty($autoFreeShipping)) {
+                    $validatedShipping = $autoFreeShipping;
+                } else {
+                    // Empty array means a price-based rule was found - use normal validation
+                    \Log::info('PublicCartController: Price-based rule found, using normal validation');
+                    $validatedShipping = $dynamicShippingValidation->validateShippingMethods($shippingData);
+                }
+            } else {
+                // Check normal shipping validation when free shipping doesn't apply
+                $validatedShipping = $dynamicShippingValidation->validateShippingMethods($shippingData);
+            }
+            
+            // When using normal validation (empty autoFreeShipping), set proper defaults
+            $useNormalDefaults = $shouldAutoApplyFreeShipping && empty($autoFreeShipping);
+            
+            $finalShippingData = $validatedShipping ?: $checkoutOrderData->shipping;
+            
+            \Log::info('PublicCartController: Final shipping data before view', [
+                'validated_shipping_count' => $validatedShipping ? count($validatedShipping) : 0,
+                'checkout_shipping_count' => $checkoutOrderData->shipping ? count($checkoutOrderData->shipping) : 0,
+                'final_shipping_count' => $finalShippingData ? count($finalShippingData) : 0,
+                'final_shipping_methods' => $finalShippingData ? array_keys($finalShippingData) : [],
+                'final_shipping_detail' => $finalShippingData
+            ]);
+            
+            $shippingViewData = [
+                'shipping' => $finalShippingData,
+                'defaultShippingOption' => $useNormalDefaults ? '7' : ($shouldAutoApplyFreeShipping ? 'free_shipping_auto' : $checkoutOrderData->defaultShippingOption),
+                'defaultShippingMethod' => $useNormalDefaults ? 'default' : ($shouldAutoApplyFreeShipping ? 'default' : $checkoutOrderData->defaultShippingMethod),
+                'orderTotal' => $checkoutOrderData->orderAmount,
+                'skipShippingSelection' => $useNormalDefaults ? false : $skipShippingSelection,
+                // Pass selected method info to preserve selection
+                'selectedShippingOption' => $currentShippingOption,
+                'selectedShippingMethod' => $currentShippingMethod,
+            ];
+            
+            \Log::info('PublicCartController: View data prepared', [
+                'view_data_keys' => array_keys($shippingViewData),
+                'shipping_in_view_data' => $shippingViewData['shipping'] ? array_keys($shippingViewData['shipping']) : []
+            ]);
+            
+            $shippingMethodsHtml = view('plugins/ecommerce::orders.partials.shipping-methods', $shippingViewData)->render();
+            
+            \Log::info('PublicCartController: HTML generated', [
+                'html_length' => strlen($shippingMethodsHtml),
+                'contains_pickup' => strpos($shippingMethodsHtml, 'pickup') !== false,
+                'contains_paid_delivery' => strpos($shippingMethodsHtml, 'paid_delivery') !== false
+            ]);
+            
+            $amountHtml = view('plugins/ecommerce::orders.partials.amount', [
+                'products' => $products,
+                'rawTotal' => $checkoutOrderData->rawTotal,
+                'orderAmount' => $checkoutOrderData->orderAmount,
+                'shipping' => $checkoutOrderData->shipping,
+                'sessionCheckoutData' => $sessionCheckoutData,
+                'shippingAmount' => $checkoutOrderData->shippingAmount,
+                'promotionDiscountAmount' => $checkoutOrderData->promotionDiscountAmount,
+                'couponDiscountAmount' => $checkoutOrderData->couponDiscountAmount,
+                'paymentFee' => $checkoutOrderData->paymentFee,
+            ])->render();
+            
+            return [
+                'shipping_methods' => $shippingMethodsHtml,
+                'amount' => $amountHtml,
+                'checkout_updated' => true,
+            ];
+            
+        } catch (Exception $e) {
+            \Log::error('Error updating checkout shipping data: ' . $e->getMessage());
+            return [];
+        }
     }
 }

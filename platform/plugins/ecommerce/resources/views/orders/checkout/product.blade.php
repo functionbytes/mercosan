@@ -13,14 +13,14 @@
 
         {!! apply_filters('ecommerce_cart_before_item_content', null, $cartItem) !!}
 
-        <p class="mb-0">
+        <p class="mb-0 cart-item-title">
             {{ $product->original_product->name }}
             @if ($product->isOutOfStock())
                 <span class="stock-status-label">({!! BaseHelper::clean($product->stock_status_html) !!})</span>
             @endif
         </p>
         @if($product->variation_attributes)
-            <p class="mb-0">
+            <p class="mb-0 ">
                 <small>{{ $product->variation_attributes }}</small>
             </p>
         @endif
@@ -59,7 +59,7 @@
 
         {!! apply_filters('ecommerce_cart_after_item_content', null, $cartItem) !!}
     </div>
-    <div class="col-auto text-end">
+    <div class="col-auto text-end cart-item-price">
         <p>{{ format_price($cartItem->price) }}</p>
     </div>
 </div>

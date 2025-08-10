@@ -23,7 +23,7 @@
         @endif
 
         @if ($buttonText && $slider->link)
-            <a class="animated btn btn-default btn-rounded" href="{{ url($slider->link) }}">{!! $buttonText !!} <i class="fa fa-arrow-right"></i> </a>
+            <a class="animated btn btn-default " href="{{ url($slider->link) }}">{!! $buttonText !!} <i class="fa fa-arrow-right"></i> </a>
         @endif
     </div>
 @endif

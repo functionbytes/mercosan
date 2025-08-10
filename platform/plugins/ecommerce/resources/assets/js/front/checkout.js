@@ -134,11 +134,25 @@ class MainCheckout {
         }
 
         const calculateShippingFee = (methods) => {
+            console.log('calculateShippingFee called with methods:', methods)
             const formData = new FormData($checkoutForm.get(0))
 
             for (let key in methods) {
-                formData.set(key, methods[key])
+                if (key === 'address' && typeof methods[key] === 'object') {
+                    // Serialize address object properly
+                    for (let addressKey in methods[key]) {
+                        formData.set(`address[${addressKey}]`, methods[key][addressKey])
+                        console.log('Setting formData:', `address[${addressKey}]`, '=', methods[key][addressKey])
+                    }
+                } else {
+                    formData.set(key, methods[key])
+                    console.log('Setting formData:', key, '=', methods[key])
+                }
             }
+            
+            // Log current form values for debugging
+            console.log('Current city value:', $('select[name="address[city]"]').val() || $('input[name="address[city]"]').val())
+            console.log('Current state value:', $('select[name="address[state]"]').val() || $('input[name="address[state]"]').val())
 
             $.ajax({
                 url: $checkoutForm.data('update-url'),
@@ -147,13 +161,59 @@ class MainCheckout {
                 contentType: false,
                 data: formData,
                 beforeSend: () => {
+                    console.log('Sending AJAX request to:', $checkoutForm.data('update-url'))
                     disablePaymentMethodsForm()
                     $('.shipping-info-loading').show()
                 },
                 success: ({ data }) => {
+                    console.log('AJAX success response:', data)
+                    console.log('Shipping methods HTML length:', data.shipping_methods ? data.shipping_methods.length : 'undefined')
+                    
+                    // Remember currently selected payment method before updating
+                    const selectedPaymentMethod = $('input[name=payment_method]:checked').val()
+                    const selectedShippingMethod = $('input[name=shipping_method]:checked').val()
+                    console.log('Currently selected payment method:', selectedPaymentMethod)
+                    console.log('Currently selected shipping method:', selectedShippingMethod)
+                    
                     $('.cart-item-wrapper').html(data.amount)
-                    $('[data-bb-toggle="checkout-payment-methods-area"]').html(data.payment_methods)
-                    $('[data-bb-toggle="checkout-shipping-methods-area"]').html(data.shipping_methods)
+                    
+                    // Update payment methods area
+                    const $paymentArea = $('[data-bb-toggle="checkout-payment-methods-area"]')
+                    if (data.payment_methods && data.payment_methods.trim()) {
+                        $paymentArea.html(data.payment_methods)
+                        
+                        // Restore previously selected payment method if it still exists
+                        if (selectedPaymentMethod) {
+                            const $previousSelection = $paymentArea.find(`input[name=payment_method][value="${selectedPaymentMethod}"]`)
+                            if ($previousSelection.length) {
+                                $previousSelection.prop('checked', true)
+                                console.log('Restored payment method selection:', selectedPaymentMethod)
+                            }
+                        }
+                    } else {
+                        console.warn('No payment methods returned from server')
+                    }
+                    
+                    // Update shipping methods and clear any animation styles
+                    const $shippingArea = $('[data-bb-toggle="checkout-shipping-methods-area"]')
+                    console.log('Before update - shipping area HTML:', $shippingArea.html().substring(0, 200) + '...')
+                    $shippingArea.html(data.shipping_methods)
+                    console.log('After update - shipping area HTML:', $shippingArea.html().substring(0, 200) + '...')
+                    
+                    // Count shipping options after update
+                    const shippingOptions = $shippingArea.find('input[name="shipping_method"]')
+                    console.log('Shipping options found after update:', shippingOptions.length)
+                    shippingOptions.each((index, element) => {
+                        const $option = $(element)
+                        console.log(`Option ${index + 1}:`, $option.val(), '-', $option.closest('label').text().trim())
+                    })
+                    
+                    // Remove any WOW.js animation styles that might interfere
+                    $shippingArea.find('*').removeAttr('style').removeClass('wow animated')
+                    $shippingArea.removeAttr('style').removeClass('wow animated')
+                },
+                error: (xhr, status, error) => {
+                    console.error('AJAX error:', error, xhr.responseText)
                 },
                 complete: () => {
                     enablePaymentMethodsForm()
@@ -191,6 +251,9 @@ class MainCheckout {
                     payment_method: '',
                     address: {
                         address_id: $('#address_id').val(),
+                        city: $('select[name="address[city]"], input[name="address[city]"]').val(),
+                        state: $('select[name="address[state]"], input[name="address[state]"]').val(),
+                        country: $('select[name="address[country]"], input[name="address[country]"]').val()
                     },
                 }
 
@@ -198,6 +261,12 @@ class MainCheckout {
                 if (paymentMethod.length) {
                     data.payment_method = paymentMethod.val()
                 }
+                
+                console.log('Shipping method selection changed:', {
+                    method: $this.val(),
+                    option: $this.data('option'),
+                    fullData: data
+                })
             }
 
             calculateShippingFee(data)
@@ -257,8 +326,24 @@ class MainCheckout {
                     contentType: false,
                     processData: false,
                     success: ({ error }) => {
-                        if (!error && (/country|state|city|address/.test($(event.target).prop('name')))) {
-                            calculateShippingFee()
+                        if (!error && (/country|state|city|address|address\[country\]|address\[state\]|address\[city\]|address\[zip_code\]/.test($(event.target).prop('name')))) {
+                            // Get current payment method and shipping method
+                            const currentPaymentMethod = $(document).find('input[name=payment_method]:checked').val()
+                            const currentShippingMethod = $(document).find('input[name=shipping_method]:checked').val()
+                            const currentShippingOption = $(document).find('input[name=shipping_method]:checked').data('option')
+                            
+                            const data = {}
+                            if (currentPaymentMethod) {
+                                data.payment_method = currentPaymentMethod
+                            }
+                            if (currentShippingMethod) {
+                                data.shipping_method = currentShippingMethod
+                            }
+                            if (currentShippingOption) {
+                                data.shipping_option = currentShippingOption
+                            }
+                            
+                            calculateShippingFee(data)
                         }
                     },
                     error: (response) => {
@@ -268,10 +353,19 @@ class MainCheckout {
             }
         }
 
-        $(document).on('change', '#address_country, #address_state, #address_city, #address_zip_code', (event) => {
+        $(document).on('change', '#address_country, #address_state, #address_city, #address_zip_code, select[name="address[country]"], select[name="address[state]"], select[name="address[city]"], input[name="address[city]"], input[name="address[zip_code]"]', (event) => {
             const _self = $(event.currentTarget)
             const $form = _self.closest('form')
 
+            console.log('=== ADDRESS CHANGE EVENT TRIGGERED ===')
+            console.log('Element that triggered change:', _self[0])
+            console.log('Element ID:', _self.attr('id'))
+            console.log('Element name:', _self.attr('name'))
+            console.log('New value:', _self.val())
+            console.log('Form found:', $form.length > 0)
+
+            // Update taxes
+            console.log('Making tax update AJAX call...')
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -280,12 +374,54 @@ class MainCheckout {
                 contentType: false,
                 processData: false,
                 success: ({ data }) => {
+                    console.log('Tax update successful')
                     $('.cart-item-wrapper').html(data.amount)
                 },
                 error: (response) => {
+                    console.error('Tax update error:', response)
                     MainCheckout.handleError(response, $form)
                 },
             })
+
+            // Calculate shipping fee when address changes
+            const fieldName = _self.prop('name')
+            console.log('Field changed:', fieldName, 'Value:', _self.val())
+            
+            if (/address_city|address_state|address_country|address_zip_code|address\[city\]|address\[state\]|address\[country\]|address\[zip_code\]/.test(fieldName)) {
+                console.log('Address field detected, recalculating shipping...')
+                setTimeout(() => {
+                    // Get current payment method and shipping method
+                    const currentPaymentMethod = $(document).find('input[name=payment_method]:checked').val()
+                    const currentShippingMethod = $(document).find('input[name=shipping_method]:checked').val()
+                    const currentShippingOption = $(document).find('input[name=shipping_method]:checked').data('option')
+                    
+                    const data = {
+                        // Always include address data to ensure city change is processed
+                        address: {
+                            city: $('select[name="address[city]"], input[name="address[city]"]').val(),
+                            state: $('select[name="address[state]"], input[name="address[state]"]').val(),
+                            country: $('select[name="address[country]"], input[name="address[country]"]').val()
+                        }
+                    }
+                    
+                    if (currentPaymentMethod) {
+                        data.payment_method = currentPaymentMethod
+                    }
+                    if (currentShippingMethod) {
+                        data.shipping_method = currentShippingMethod
+                    }
+                    if (currentShippingOption) {
+                        data.shipping_option = currentShippingOption
+                    } else {
+                        // Don't send a default shipping_option when city changes
+                        // Let the backend calculate available methods first
+                        console.log('No current shipping method selected, will recalculate available methods')
+                    }
+                    
+                    console.log('Calling calculateShippingFee with data:', data)
+                    calculateShippingFee(data)
+                }, 500) // Small delay to ensure tax calculation completes first
+            }
         })
 
         $(document).on('change', `${customerShippingAddressForm} .form-control`, (event) => {
@@ -351,21 +487,91 @@ class MainCheckout {
                 const qtyKey = $currentTarget.prop('name')
                 const qtyValue = $currentTarget.val()
                 const rowId = $parent.data('row-id')
+                
+                // Get currently selected shipping method to preserve it
+                const currentShippingMethod = $(document).find('input[name=shipping_method]:checked').val()
+                const currentShippingOption = $(document).find('input[name=shipping_method]:checked').data('option')
+
+                // Add checkout_context to indicate this is from checkout page
+                const requestData = {
+                    _token: $('meta[name="csrf-token"]').prop('content'),
+                    [qtyKey]: qtyValue,
+                    [`items[${rowId}][rowId]`]: rowId,
+                    checkout_context: true, // Flag to indicate this is from checkout
+                }
+                
+                // Include current shipping method selection if available
+                if (currentShippingMethod) {
+                    requestData.current_shipping_method = currentShippingMethod
+                }
+                if (currentShippingOption) {
+                    requestData.current_shipping_option = currentShippingOption
+                }
 
                 $.ajax({
                     type: 'POST',
                     url: $parent.data('url'),
-                    data: {
-                        _token: $('meta[name="csrf-token"]').prop('content'),
-                        [qtyKey]: qtyValue,
-                        [`items[${rowId}][rowId]`]: rowId,
-                    },
+                    data: requestData,
                     success: ({ error, message, data }) => {
                         if (error) {
                             MainCheckout.showError(message)
+                            return
                         }
 
-                        calculateShippingFee()
+                        // If cart update includes checkout data (shipping_methods, amount), use it
+                        if (data.checkout_updated && data.shipping_methods && data.amount) {
+                            console.log('Cart update included checkout data, updating shipping methods')
+                            console.log('Shipping methods HTML preview:', data.shipping_methods.substring(0, 500) + '...')
+                            
+                            $('.cart-item-wrapper').html(data.amount)
+                            
+                            const $shippingArea = $('[data-bb-toggle="checkout-shipping-methods-area"]')
+                            
+                            // Count current shipping methods before update
+                            const currentMethodsCount = $shippingArea.find('input[name=shipping_method]').length
+                            console.log('Current shipping methods count before update:', currentMethodsCount)
+                            
+                            $shippingArea.html(data.shipping_methods)
+                            
+                            // Count shipping methods after update
+                            const newMethodsCount = $shippingArea.find('input[name=shipping_method]').length
+                            console.log('New shipping methods count after update:', newMethodsCount)
+                            
+                            // Log all available methods
+                            $shippingArea.find('input[name=shipping_method]').each((index, element) => {
+                                const $method = $(element)
+                                console.log(`Method ${index + 1}:`, {
+                                    value: $method.val(),
+                                    option: $method.data('option'),
+                                    checked: $method.is(':checked'),
+                                    label: $method.next('label').find('.d-inline-block').first().text().trim()
+                                })
+                            })
+                            
+                            // Remove any WOW.js animation styles that might interfere
+                            $shippingArea.find('*').removeAttr('style').removeClass('wow animated')
+                            $shippingArea.removeAttr('style').removeClass('wow animated')
+                            
+                            // Try to restore the selected shipping method if it still exists
+                            if (currentShippingMethod && currentShippingOption) {
+                                const $newShippingOption = $shippingArea.find(`input[name=shipping_method][value="${currentShippingMethod}"][data-option="${currentShippingOption}"]`)
+                                if ($newShippingOption.length) {
+                                    $newShippingOption.prop('checked', true)
+                                    $('input[name=shipping_option]').val(currentShippingOption)
+                                    console.log('Preserved shipping method selection:', currentShippingMethod, currentShippingOption)
+                                } else {
+                                    console.log('Previously selected shipping method is no longer available')
+                                    console.log('Looking for:', currentShippingMethod, currentShippingOption)
+                                    console.log('Available options:', $shippingArea.find('input[name=shipping_method]').map((i, el) => 
+                                        $(el).val() + ':' + $(el).data('option')).get().join(', '))
+                                }
+                            }
+                        } else {
+                            // Fallback to separate shipping fee calculation
+                            calculateShippingFee()
+                        }
+                        
+                        MainCheckout.showSuccess(message || 'Cart updated successfully!')
                     },
                     error: (error) => {
                         MainCheckout.handleError(error)

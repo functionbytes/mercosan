@@ -60,6 +60,7 @@
                 ${message}
             </div>`;
 
+
             $('#alert-container').append(html).ready(() => {
                 window.setTimeout(() => {
                     $(`#alert-container #${alertId}`).remove();
@@ -251,6 +252,9 @@
             });
         });
 
+        window.trackedStartCheckout = '{{ session("tracked_start_checkout") }}';
+        window.siteUrl = '{{ url("/") }}';
+
         $(document).on('change', '.switch-currency', function () {
             $(this).closest('form').submit();
         });
@@ -398,6 +402,7 @@
                 },
                 dataType: 'json',
                 success: res => {
+
                     _self.prop('disabled', false).removeClass('button-loading').addClass('active');
 
                     if (res.error) {
@@ -410,7 +415,7 @@
                         return false;
                     }
 
-                    window.showAlert('alert-success', res.message);
+                    showProductAddedModal(res.data.content_modal);
 
                     if (res.data.next_url !== undefined) {
                         window.location.href = res.data.next_url;
@@ -433,6 +438,84 @@
                 }
             });
         });
+
+// Función para buscar el producto en el contenido del carrito
+        function findProductInCart(cartContent, productId) {
+            if (!cartContent || typeof cartContent !== 'object') {
+                return null;
+            }
+
+            // Iterar sobre todas las entradas del carrito
+            for (const [rowId, item] of Object.entries(cartContent)) {
+                if (item && item.id && item.id.toString() === productId.toString()) {
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        qty: item.qty,
+                        price: item.price,
+                        priceTax: item.priceTax || item.price,
+                        rowId: item.rowId,
+                        // Formatear precio
+                        display_price: formatPrice(item.priceTax || item.price),
+                        display_sale_price: formatPrice(item.priceTax || item.price),
+                        // Información adicional si está disponible
+                        image: item.options?.image || '',
+                        sku: item.options?.sku || '',
+                        // Datos calculados
+                        subtotal: (item.qty * (item.priceTax || item.price)),
+                        display_subtotal: formatPrice(item.qty * (item.priceTax || item.price))
+                    };
+                }
+            }
+
+            return null;
+        }
+
+// Función para formatear precio (puedes ajustar según tu formato)
+        function formatPrice(price) {
+            if (!price || price === 0) {
+                return '$ 0';
+            }
+
+            // Convertir a número si es string
+            const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+
+            // Formatear con separadores de miles
+            return '$ ' + numPrice.toLocaleString('es-CO', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+
+// Función para extraer información del producto desde el contexto del botón (fallback)
+        function getProductInfoFromButton(button) {
+            const productCard = button.closest('.product-card, .product-item, .product, [data-product]');
+
+            return {
+                id: button.data('id'),
+                name: productCard.find('.product-title, .product-name, h3, h4').first().text().trim() || 'Producto',
+                image: productCard.find('.product-image, .product-img img, img').first().attr('src') || '',
+                sku: productCard.find('.product-sku, .sku, [data-sku]').text().trim() || button.data('sku') || '',
+                price: productCard.find('.product-price .price, .current-price').first().text().trim() || '',
+                display_price: productCard.find('.product-price .price, .current-price').first().text().trim() || '',
+                display_sale_price: productCard.find('.product-price .price, .current-price').first().text().trim() || '',
+                qty: 1,
+                productUrl: productCard.find('a').first().attr('href') || '#',
+                categoryUrl: button.data('category-url') || window.location.pathname
+            };
+        }
+
+        function showProductAddedModal(modalHtml) {
+            $('body').append(modalHtml);
+            $('#shopping-modal').modal('show');
+            $('#shopping-modal').on('hidden.bs.modal', function () {
+                $(this).remove();
+            });
+            $(document).on('click', '#shopping-modal .close', function () {
+                $('#shopping-modal').modal('hide');
+            });
+        }
+
 
         $(document).on('click', '.add-to-cart-form button[type=submit]', function (event) {
             event.preventDefault();
@@ -469,7 +552,9 @@
                         return false;
                     }
 
-                    window.showAlert('alert-success', res.message);
+
+
+                    showProductAddedModal(res.data.content_modal);
 
                     if (res.data.next_url !== undefined) {
                         window.location.href = res.data.next_url;

@@ -1,14 +1,24 @@
-<tr class="shipping-rule-item-{{ $item->id }}">
+<tr class="shipping-rule-item-{{ $item->id }} city-rate-item">
     <th scope="row">{{ $item->id }}</th>
     @if($item->state_name)
-        <td>{{ $item->state_name }}</td>
+        <td>
+            <span class="fw-semibold">{{ $item->state_name }}</span>
+            @if($item->country_name && $item->country_name !== $item->shippingRule->shipping->country_name)
+                <br><small class="text-muted">{{ $item->country_name }}</small>
+            @endif
+        </td>
     @else
-        <td>&mdash;</td>
+        <td><span class="text-muted">&mdash;</span></td>
     @endif
     @if($item->city_name)
-        <td>{{ $item->city_name }}</td>
+        <td>
+            <span class="city-name">{{ $item->city_name }}</span>
+            @if($item->state_name)
+                <br><small class="state-name">{{ $item->state_name }}</small>
+            @endif
+        </td>
     @else
-        <td>&mdash;</td>
+        <td><span class="text-muted">&mdash;</span></td>
     @endif
     @if($item->zip_code)
         <td>{{ $item->zip_code }}</td>
@@ -16,10 +26,14 @@
         <td>&mdash;</td>
     @endif
     <td>
-        {{ ($item->adjustment_price < 0 ? '-' : '') . format_price($item->adjustment_price) }}
-        {!! Html::tag('small', '(' . format_price(max($item->adjustment_price + $item->shippingRule->price, 0)) . ')', [
-            'class' => 'text-info ms-1',
-        ]) !!}
+        <div class="price-info">
+            <span class="adjustment-price {{ $item->adjustment_price < 0 ? 'negative' : ($item->adjustment_price > 0 ? 'positive' : 'neutral') }}">
+                {{ $item->adjustment_price != 0 ? ($item->adjustment_price < 0 ? '' : '+') . format_price($item->adjustment_price) : '&mdash;' }}
+            </span>
+            <br><small class="final-price">
+                {{ trans('plugins/ecommerce::shipping.final_price') }}: {{ format_price(max($item->adjustment_price + $item->shippingRule->price, 0)) }}
+            </small>
+        </div>
     </td>
     <td>
         @if ($item->is_enabled)

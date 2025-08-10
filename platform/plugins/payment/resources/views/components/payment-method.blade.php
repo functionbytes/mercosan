@@ -11,7 +11,7 @@
     $id = sprintf('payment-%s', $name);
 @endphp
 
-<li class="list-group-item payment-method-item">
+<li class="list-group-item payment-method-item @if (($isSelected ?? '') == $name) border-danger border-top @endif">
     <input
         class="magic-radio js_payment_method"
         id="{{ $id }}"

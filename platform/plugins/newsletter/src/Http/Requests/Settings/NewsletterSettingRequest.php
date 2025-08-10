@@ -11,10 +11,14 @@ class NewsletterSettingRequest extends Request
     {
         return [
             'enable_newsletter_contacts_list_api' => [new OnOffRule()],
-            'newsletter_mailchimp_api_key' => ['nullable', 'string', 'min:32', 'max:40'],
-            'newsletter_mailchimp_list_id' => ['nullable', 'string', 'size:10'],
-            'newsletter_sendgrid_api_key' => ['nullable', 'string', 'min:32', 'max:255'],
-            'newsletter_sendgrid_list_id' => ['nullable', 'string', 'min:10', 'max:255'],
+            'newsletter_mailjet_api_key' => ['nullable', 'string', 'min:32', 'max:40'],
+            'newsletter_mailjet_api_secret' => ['nullable', 'string', 'min:32', 'max:40'],
+            'newsletter_mailjet_list_id' => ['nullable', 'string', 'size:8'],
+            'newsletter_popup_enable' => ['nullable', 'boolean'],
+            'newsletter_popup_title' => ['nullable', 'string', 'max:120'],
+            'newsletter_popup_subtitle' => ['nullable', 'string', 'max:150'],
+            'newsletter_popup_description' => ['nullable', 'string', 'max:300'],
+            'newsletter_popup_delay' => ['nullable', 'integer', 'min:0', 'max:60'],
         ];
     }
 }

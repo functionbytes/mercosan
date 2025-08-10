@@ -7,7 +7,7 @@
 ])
 
 <div class="row mb-5 d-block d-md-flex">
-    <div class="col-12 col-md-3">
+    <div class="col-12 col-md-12">
         @if ($title)
             <h2>{{ $title }}</h2>
         @endif
@@ -19,7 +19,7 @@
         {!! BaseHelper::clean($extraDescription) !!}
     </div>
 
-    <div class="col-12 col-md-9">
+    <div class="col-12 col-md-12">
         @if ($card)
             <x-core::card {{ $attributes }}>
                 <x-core::card.body>

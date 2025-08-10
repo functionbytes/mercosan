@@ -55,14 +55,14 @@
 
         .btn-primary {
             color: #fff !important;
-            background-color: #0d6efd !important;
-            border-color: #0d6efd !important;
+            background-color: #fe0000 !important;
+            border-color: #fe0000 !important;
         }
 
         .btn-secondary {
             color: #fff !important;
-            background-color: #6c757d !important;
-            border-color: #6c757d !important;
+            background-color: #000!important;
+            border-color: #000!important;
         }
 
         .btn {
