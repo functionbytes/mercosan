@@ -117,6 +117,12 @@ AdminHelper::registerRoutes(function (): void {
                 'uses' => 'OrderController@downloadProof',
                 'permission' => 'orders.edit',
             ])->wherePrimaryKey('order');
+
+            Route::get('production-pdf/{order}', [
+                'as' => 'production-pdf',
+                'uses' => 'OrderController@getProductionOrderPdf',
+                'permission' => 'orders.edit',
+            ])->wherePrimaryKey('order');
         });
 
         Route::group(['prefix' => 'incomplete-orders', 'as' => 'orders.'], function (): void {

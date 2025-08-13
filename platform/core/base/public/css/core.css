@@ -19399,7 +19399,7 @@ a.avatar {
 
 .badge {
     align-items: center;
-    background: var(--bb-bg-surface-secondary);
+    background: #000000;
     border: var(--bb-border-width) var(--bb-border-style) transparent;
     font-weight: var(--bb-font-weight-bold);
     justify-content: center;
@@ -26126,7 +26126,7 @@ a:hover:has(.icon) {
 
 .bg-success {
     --bb-bg-opacity: 1;
-    background-color: rgba(var(--bb-success-rgb),var(--bb-bg-opacity))!important
+    background-color: #000;
 }
 
 .bg-success-lt {
@@ -26764,7 +26764,7 @@ a:hover:has(.icon) {
 }
 
 .text-success-fg {
-    color: var(--bb-success-fg)!important
+    color: var(--bb-success-fg)!important;
 }
 
 .text-info {

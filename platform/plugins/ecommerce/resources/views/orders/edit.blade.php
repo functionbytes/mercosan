@@ -24,6 +24,15 @@
                                 ])
 
                                 <div class="btn-list justify-content-end my-3">
+                                    <x-core::button
+                                        tag="a"
+                                        :href="route('orders.production-pdf', $order->id) . '?type=print'"
+                                        target="_blank"
+                                        icon="ti ti-file-type-pdf"
+                                        color="success"
+                                    >
+                                        Orden de Producción PDF
+                                    </x-core::button>
                                     @if ($order->isInvoiceAvailable())
                                         <x-core::button
                                             tag="a"

@@ -106,7 +106,7 @@
                     if (res.data.sale_price !== res.data.price) {
                         $('.product-price ins span.old-price').text(res.data.display_price).show();
                         $('.product-price span.save-price .percentage-off').text(res.data.sale_percentage);
-                        $('.product-price span.save-price').show();
+                        $('.product-price span.save-price').show();add-to-cart-form
                     } else {
                         $('.product-price ins span.old-price').hide();
                         $('.product-price span.save-price').hide();
@@ -507,6 +507,7 @@
 
         function showProductAddedModal(modalHtml) {
             $('body').append(modalHtml);
+            $('#quick-view-modal').modal('hide');
             $('#shopping-modal').modal('show');
             $('#shopping-modal').on('hidden.bs.modal', function () {
                 $(this).remove();
@@ -551,7 +552,6 @@
 
                         return false;
                     }
-
 
 
                     showProductAddedModal(res.data.content_modal);

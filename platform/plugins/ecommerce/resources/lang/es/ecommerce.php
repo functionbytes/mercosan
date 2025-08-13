@@ -40,6 +40,11 @@ return [
         'shipping_method' => 'Método de Envío',
         'notes' => 'Notas',
     ],
+    
+    // Store configuration
+    'company' => 'Empresa',
+    'notification_email' => 'Correo de Notificaciones',
+    'notification_email_help' => 'Email donde se enviarán las notificaciones de nuevos pedidos (deja vacío para usar el email del administrador)',
     'customer' => [
         'name' => 'Cliente',
         'name_plural' => 'Clientes',
@@ -120,4 +125,5 @@ return [
     'site_url' => 'URL del sitio',
     'site_email' => 'Correo del sitio',
     'site_phone' => 'Teléfono del sitio',
+    'order_edit_link' => 'Enlace para editar pedido',
 ];

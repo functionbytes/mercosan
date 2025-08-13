@@ -20,6 +20,7 @@ use Botble\Ecommerce\Facades\EcommerceHelper;
 use Botble\Ecommerce\Facades\FlashSale as FlashSaleFacade;
 use Botble\Ecommerce\Facades\InvoiceHelper;
 use Botble\Ecommerce\Facades\OrderHelper;
+use Botble\Ecommerce\Facades\ProductionHelper;
 use Botble\Ecommerce\Facades\OrderReturnHelper;
 use Botble\Ecommerce\Facades\ProductCategoryHelper;
 use Botble\Ecommerce\Forms\Fronts\Auth\ForgotPasswordForm;
@@ -363,6 +364,7 @@ class EcommerceServiceProvider extends ServiceProvider
         $loader->alias('ProductCategoryHelper', ProductCategoryHelper::class);
         $loader->alias('CurrencyHelper', CurrencyFacade::class);
         $loader->alias('InvoiceHelper', InvoiceHelper::class);
+        $loader->alias('ProductionHelper', ProductionHelper::class);
     }
 
     public function boot(): void
@@ -691,6 +693,28 @@ class EcommerceServiceProvider extends ServiceProvider
             }
 
             EmailHandler::addTemplateSettings(ECOMMERCE_MODULE_SCREEN_NAME, $emailConfig);
+            
+            // Add sample data for email template variables
+            add_action('email_variable_value', function () {
+                add_filter('email_variable_value', function ($value, $variable, $module) {
+                    if ($module === ECOMMERCE_MODULE_SCREEN_NAME) {
+                        return match ($variable) {
+                            'order_edit_link' => route('orders.edit', 1),
+                            'order_id' => '#EC-001',
+                            'customer_name' => 'John Doe',
+                            'customer_phone' => '+1-234-567-8900',
+                            'customer_address' => '123 Main Street, New York, NY 10001',
+                            'shipping_method' => 'Express Delivery',
+                            'payment_method' => 'Credit Card',
+                            'product_list' => '<p>Sample Product List</p>',
+                            'order_note' => 'Please deliver between 9 AM and 5 PM',
+                            'order_amount' => '$199.99',
+                            default => $value,
+                        };
+                    }
+                    return $value;
+                }, 10, 3);
+            });
         });
 
         DashboardMenu::beforeRetrieving(function (): void {

@@ -1,5 +1,4 @@
 /public/hot
-/public/storage
 /storage/*.key
 .DS_Store
 Thumbs.db
@@ -22,7 +21,6 @@ __MACOSX
 /.phpintel
 /.php_cs.cache
 
-public/vendor/core
 
 _ide_helper.php
 yarn.lock
@@ -31,19 +29,9 @@ bun.lockb
 
 public/mix-manifest.json
 
-public/themes
-public/docs
 resources/docs
 
 .phpunit.result.cache
-/storage/.license
-/storage/fonts
-/storage/framework/*.txt
-/storage/installing
-/storage/installed
-
-/lang/*
-!/lang/en
 
 /log
 

@@ -15,6 +15,7 @@ class GeneralSettingRequest extends Request
             'store_company' => ['nullable', 'string', 'max:120'],
             'store_phone' => 'nullable|' . BaseHelper::getPhoneValidationRule(),
             'store_email' => ['nullable', new EmailRule()],
+            'store_notification_email' => ['nullable', new EmailRule()],
             'store_address' => ['nullable', 'string', 'max:255'],
             'store_country' => ['nullable', 'string', 'max:120'],
             'store_state' => ['nullable', 'string', 'max:120'],

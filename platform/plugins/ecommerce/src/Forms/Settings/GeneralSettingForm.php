@@ -54,6 +54,15 @@ class GeneralSettingForm extends SettingForm
                     ->value(get_ecommerce_setting('store_email'))
                     ->colspan(3)
             )
+            ->add(
+                'store_notification_email',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(trans('plugins/ecommerce::ecommerce.notification_email'))
+                    ->helperText(trans('plugins/ecommerce::ecommerce.notification_email_help'))
+                    ->value(get_ecommerce_setting('store_notification_email'))
+                    ->colspan(3)
+            )
             ->addLocationFields(
                 countryAttributes: [
                     'name' => 'store_country',

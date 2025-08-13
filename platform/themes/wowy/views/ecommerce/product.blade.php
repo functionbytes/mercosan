@@ -218,7 +218,7 @@
     @endif
 
     @php
-        $relatedProducts = get_related_products($product, 6);
+        $relatedProducts = get_related_products($product, 4);
     @endphp
 
     @if (count($relatedProducts) > 0)

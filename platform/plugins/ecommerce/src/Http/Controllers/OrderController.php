@@ -22,6 +22,7 @@ use Botble\Ecommerce\Facades\Discount;
 use Botble\Ecommerce\Facades\EcommerceHelper;
 use Botble\Ecommerce\Facades\InvoiceHelper;
 use Botble\Ecommerce\Facades\OrderHelper;
+use Botble\Ecommerce\Facades\ProductionHelper;
 use Botble\Ecommerce\Http\Requests\AddressRequest;
 use Botble\Ecommerce\Http\Requests\ApplyCouponRequest;
 use Botble\Ecommerce\Http\Requests\CreateOrderRequest;
@@ -1332,5 +1333,14 @@ class OrderController extends BaseController
         abort_unless($storage->exists($order->proof_file), 404);
 
         return $storage->download($order->proof_file);
+    }
+
+    public function getProductionOrderPdf(Order $order, Request $request)
+    {
+        if ($request->input('type') == 'print') {
+            return ProductionHelper::streamProductionOrder($order);
+        }
+
+        return ProductionHelper::downloadProductionOrder($order);
     }
 }

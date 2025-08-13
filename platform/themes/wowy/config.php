@@ -49,6 +49,7 @@ return [
                 $theme->asset()->usePath()->add('bootstrap-css', 'plugins/bootstrap/css/bootstrap.min.css');
             }
 
+            $theme->asset()->usePath()->add('fontawesome', 'plugins/fontawesome/css/all.css');
             $theme->asset()->usePath()->add('fontawesome-css', 'css/vendors/fontawesome-all.min.css');
             $theme->asset()->usePath()->add('wowy-font-css', 'css/vendors/wowy-font.css');
 

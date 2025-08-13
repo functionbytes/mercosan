@@ -10,6 +10,8 @@ return [
     'city' => 'City',
     'address' => 'Address',
     'company' => 'Company',
+    'notification_email' => 'Notification Email',
+    'notification_email_help' => 'Email address where new order notifications will be sent (leave empty to use admin email)',
     'tax_id' => 'Tax ID',
     'store_address' => 'Store address',
     'store_phone' => 'Store phone',
@@ -30,6 +32,7 @@ return [
     'site_url' => 'Site URL',
     'site_email' => 'Site email',
     'site_phone' => 'Site phone',
+    'order_edit_link' => 'Order edit link',
     'select_state' => 'Select state...',
     'select_city' => 'Select city...',
     'theme_options' => [

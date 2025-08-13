@@ -43,18 +43,7 @@ $((function() {
                         return n()
                     }
                 ));
-            var o = function(e) {
-                $(".newsletter-error-message").html(e).show()
-            }
-                , r = function(e) {
-                var t = "";
-                $.each(e, (function(e, n) {
-                        "" !== t && (t += "<br />"),
-                            t += n
-                    }
-                )),
-                    o(t)
-            };
+
             $(document).on("submit", "form.bb-newsletter-popup-form", (function(t) {
                     t.preventDefault();
                     var n = $(t.currentTarget)
@@ -75,9 +64,6 @@ $((function() {
                                 var r = t.error
                                     , s = t.message;
                                 r ? o(s) : (n.find('input[name="email"]').val(""),
-                                    function(e) {
-                                        $(".newsletter-success-message").html(e).show()
-                                    }(s),
                                     document.dispatchEvent(new CustomEvent("newsletter.subscribed")),
                                         setTimeout((function() {
                                                 e.modal("hide")

@@ -25,6 +25,7 @@ return [
 
     'admin_new_order_title' => 'Notice about new order',
     'admin_new_order_description' => 'Send to administrators when an order placed',
+    'admin_new_order_subject' => 'New order :order_id has been placed',
 
     'order_confirmation_title' => 'Order confirmation',
     'order_confirmation_description' => 'Send to customer when they order was confirmed by admins',

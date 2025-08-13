@@ -88,6 +88,24 @@ return [
                 'product_list' => 'plugins/ecommerce::ecommerce.product_list',
             ],
         ],
+        'admin_new_order' => [
+            'title' => 'plugins/ecommerce::email.admin_new_order_title',
+            'description' => 'plugins/ecommerce::email.admin_new_order_description',
+            'subject' => 'plugins/ecommerce::email.admin_new_order_subject',
+            'can_off' => true,
+            'enabled' => true,
+            'variables' => [
+                'customer_name' => 'plugins/ecommerce::ecommerce.customer_name',
+                'customer_phone' => 'plugins/ecommerce::ecommerce.customer_phone',
+                'customer_address' => 'plugins/ecommerce::ecommerce.customer_address',
+                'shipping_method' => 'plugins/ecommerce::ecommerce.shipping_method',
+                'payment_method' => 'plugins/ecommerce::ecommerce.payment_method',
+                'product_list' => 'plugins/ecommerce::ecommerce.product_list',
+                'order_note' => 'plugins/ecommerce::ecommerce.order_note',
+                'order_id' => 'plugins/ecommerce::ecommerce.order_id',
+                'order_edit_link' => 'plugins/ecommerce::ecommerce.order_edit_link',
+            ],
+        ],
         ...(! setting('ecommerce_disable_physical_product') ? [
             'customer_delivery_order' => [
                 'title' => 'plugins/ecommerce::email.delivery_confirmation_title',
@@ -115,23 +133,6 @@ return [
                 ],
             ],
         ] : []),
-        'admin_new_order' => [
-            'title' => 'plugins/ecommerce::email.admin_new_order_title',
-            'description' => 'plugins/ecommerce::email.admin_new_order_description',
-            'subject' => 'plugins/ecommerce::email.admin_new_order_subject',
-            'can_off' => true,
-            'enabled' => false,
-            'variables' => [
-                'customer_name' => 'plugins/ecommerce::ecommerce.customer_name',
-                'customer_phone' => 'plugins/ecommerce::ecommerce.customer_phone',
-                'customer_address' => 'plugins/ecommerce::ecommerce.customer_address',
-                'shipping_method' => 'plugins/ecommerce::ecommerce.shipping_method',
-                'payment_method' => 'plugins/ecommerce::ecommerce.payment_method',
-                'product_list' => 'plugins/ecommerce::ecommerce.product_list',
-                'order_note' => 'plugins/ecommerce::ecommerce.order_note',
-                'order_id' => 'plugins/ecommerce::ecommerce.order_id',
-            ],
-        ],
         'order_confirm' => [
             'title' => 'plugins/ecommerce::email.order_confirmation_title',
             'description' => 'plugins/ecommerce::email.order_confirmation_description',

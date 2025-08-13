@@ -82,7 +82,7 @@
                                         <h4>{{ __('Apply Coupon') }}</h4>
                                     </div>
                                     <div class="total-amount">
-                                        <div class="left">
+                                        <div class="">
                                             <div class="coupon form-coupon-wrapper">
                                                 <div class="form-row row justify-content-center">
                                                     <div class="form-group col-lg-12">
@@ -142,7 +142,7 @@
                 @else
                         <div class="cart-container">
                             <div class="checkout-empty-container text-center py-5">
-                                <i class="fa-solid fa-circle-user"></i>
+                                <i class="fa-solid fa-cart-xmark"></i>
                                 <h2>{{ __('Your cart is empty!') }}</h2>
                                 <p class="">{{ __('Add products to start your purchase.') }}</p>
                             </div>

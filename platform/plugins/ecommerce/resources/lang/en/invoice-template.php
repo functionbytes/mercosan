@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'name' => 'Invoice Template',
-    'setting' => 'Invoice Template Settings',
-    'setting_description' => 'Settings for Invoice template',
+    'name' => 'Purchase Receipt Template',
+    'setting' => 'Purchase Receipt Template Settings',
+    'setting_description' => 'Settings for Purchase Receipt template',
     'setting_content' => 'Content',
     'preview' => 'Preview',
-    'preview_heading' => 'Preview Invoice template',
+    'preview_heading' => 'Preview Purchase Receipt template',
     'template' => 'Template',
-    'order_invoice_label' => 'Order Invoice',
+    'order_invoice_label' => 'Order Purchase Receipt',
     'variables' => [
-        'invoice_data' => 'Invoice information from database, ex: invoice.code, invoice.amount, ...',
+        'invoice_data' => 'Purchase receipt information from database, ex: invoice.code, invoice.amount, ...',
         'site_logo' => 'The site logo with full URL',
-        'company_logo' => 'The company logo of invoice with full URL',
+        'company_logo' => 'The company logo of purchase receipt with full URL',
         'site_title' => 'The site title',
         'company_name' => 'The company name',
         'company_phone' => 'The company phone',
@@ -28,8 +28,8 @@ return [
         'payment_description' => 'The payment description',
     ],
     'reset_success' => 'Reset back to default successfully',
-    'confirm_reset' => 'Confirm reset invoice template?',
-    'confirm_message' => 'Do you really want to reset this invoice template to default?',
+    'confirm_reset' => 'Confirm reset purchase receipt template?',
+    'confirm_message' => 'Do you really want to reset this purchase receipt template to default?',
     'reset_to_default' => 'Reset to default',
     'continue' => 'Continue',
 ];
