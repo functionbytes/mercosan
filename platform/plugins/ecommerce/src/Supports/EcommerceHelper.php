@@ -274,6 +274,7 @@ class EcommerceHelper
 
         return State::query()
             ->wherePublished()
+            ->where('id', 28) // Only Santander state
             ->when($this->isUsingInMultipleCountries(), function ($query) use ($countryId) {
                 return $query->whereHas('country', function ($query) use ($countryId) {
                     return $query
@@ -295,6 +296,9 @@ class EcommerceHelper
             return [];
         }
 
+        // Only specific cities: Bucaramanga, Floridablanca, Girón, Piedecuesta
+        $allowedCityIds = [858, 878, 881, 904];
+
         // If city filtering by state is enabled, use the configured state and selected cities
         if ($this->isFilterCitiesByStateEnabled()) {
             $defaultStateId = $this->getDefaultStateForCityFilter();
@@ -307,9 +311,10 @@ class EcommerceHelper
             $selectedCities = json_decode($selectedCitiesJson, true) ?: [];
             
             if (!empty($selectedCities)) {
-                // Use only the selected cities
+                // Use only the selected cities that are also in our allowed list
+                $filteredCities = array_intersect($selectedCities, $allowedCityIds);
                 return City::query()
-                    ->whereIn('id', $selectedCities)
+                    ->whereIn('id', $filteredCities)
                     ->wherePublished()
                     ->orderBy('name')
                     ->select('name', 'id')
@@ -317,9 +322,10 @@ class EcommerceHelper
                     ->mapWithKeys(fn (City $item) => [$item->getKey() => $item->name])
                     ->all();
             } else {
-                // If no specific cities selected, use all cities from the configured state
+                // Use only allowed cities from Santander state
                 return City::query()
-                    ->where('state_id', $stateId)
+                    ->whereIn('id', $allowedCityIds)
+                    ->where('state_id', 28)
                     ->wherePublished()
                     ->orderBy('name')
                     ->select('name', 'id')
@@ -329,22 +335,11 @@ class EcommerceHelper
             }
         }
 
-        // Default behavior: use provided state or country
-        if (!$stateId && !$countryId) {
-            return [];
-        }
-
-        $query = City::query()->wherePublished();
-
-        if ($stateId) {
-            $query->where('state_id', $stateId);
-        } elseif ($countryId) {
-            $query->whereHas('state.country', function ($query) use ($countryId) {
-                return $query->where('id', $countryId)->orWhere('code', $countryId);
-            });
-        }
-
-        return $query->orderBy('order')
+        // Default behavior: use only allowed cities
+        return City::query()
+            ->whereIn('id', $allowedCityIds)
+            ->wherePublished()
+            ->orderBy('order')
             ->oldest('name')
             ->select('name', 'id')
             ->get()
@@ -689,7 +684,7 @@ class EcommerceHelper
     public function getCustomerAddressValidationRules(?string $prefix = ''): array
     {
         $rules = [
-            $prefix . 'name' => ['required', 'min:3', 'max:120'],
+            $prefix . 'name' => ['required', 'min:3', 'max:120', 'regex:/^[a-zA-ZáéíóúñÑ\s]+\s+[a-zA-ZáéíóúñÑ\s]+$/u'],
             $prefix . 'email' => ['email', 'nullable', 'max:60', 'min:6'],
             $prefix . 'state' => ['required', 'max:120'],
             $prefix . 'city' => ['required', 'max:120'],

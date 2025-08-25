@@ -238,6 +238,7 @@
     "Delivery Notes:": "Delivery Notes:",
     "Delivery confirmed successfully": "Delivery confirmed successfully",
     "Description": "Description",
+    "Description Popular Categories": "Browse our most popular product categories",
     "Device ID is required!": "Device ID is required!",
     "Discount": "Discount",
     "Discount :amount": "Discount :amount",
@@ -287,6 +288,7 @@
     "Enter Public, Secret into the box in right hand": "Enter Public, Secret into the box in right hand",
     "Enter Store ID and Store Password (API/Secret key) into the box in right hand": "Enter Store ID and Store Password (API/Secret key) into the box in right hand",
     "Enter Your Email": "Enter Your Email",
+    "Enter Your Name": "Enter Your Name",
     "Enter coupon code": "Enter coupon code",
     "Enter coupon code...": "Enter coupon code...",
     "Enter the order ID": "Enter the order ID",
@@ -476,6 +478,7 @@
     "No products in the cart.": "No products in the cart.",
     "No results found": "No results found",
     "No results found!": "No results found!",
+    "No disponible": "Not available",
     "No reviews yet!": "No reviews yet!",
     "No reviews!": "No reviews!",
     "No shipping methods were found with your provided shipping information!": "No shipping methods were found with your provided shipping information!",
@@ -807,6 +810,7 @@
     "Time to read (minute)": "Time to read (minute)",
     "Times downloaded": "Times downloaded",
     "Title": "Title",
+    "Title Popular Categories": "Popular Categories",
     "Title :number": "Title :number",
     "To show chat box on that website, please go to :link and add :domain to whitelist domains!": "To show chat box on that website, please go to :link and add :domain to whitelist domains!",
     "Top": "Top",
@@ -959,5 +963,8 @@
     "tags": "tags",
     "when shipping fee less than or equal :amount": "when shipping fee less than or equal :amount",
     "| (pipe)": "| (pipe)",
-    "✅ Purchased :time": "✅ Purchased :time"
+    "✅ Purchased :time": "✅ Purchased :time",
+    "We are working to restock it as soon as possible.": "We are working to restock it as soon as possible.",
+    "If you would like more information about this product or its restock, please contact us by email.": "If you would like more information about this product or its restock, please contact us by email.",
+    "or to our WhatsApp": "or to our WhatsApp"
 }

@@ -1,8 +1,8 @@
 <section class="popular-categories  section-padding-60" id="featured-product-categories">
     <div class="container wow fadeIn animated">
         <div class="section-content">
-            <h3 class="section-title ">{{ $title }}</h3>
-            <p class="section-description">dasdad</p>
+            <h3 class="section-title ">{{ __('Title Popular Categories') }}</h3>
+            <p class="section-description">{{ __('Description Popular Categories') }}</p>
         </div>
 
         <div class="carousel-6-columns-cover position-relative">

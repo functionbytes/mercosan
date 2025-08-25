@@ -52,7 +52,8 @@
 .newsletter-popup .modal-dialog .modal-content .modal-title {
     margin-bottom: 0;
     line-height: 1.5;
-    font-size: 22px;
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 .newsletter-popup .modal-dialog .modal-content .modal-text {
     font-size: 13px;
@@ -70,9 +71,18 @@
     content: " *";
     color: red;
 }
-.newsletter-popup .modal-dialog .modal-content form input[type=email] {
+.newsletter-popup .modal-dialog .modal-content form input[type=email],
+.newsletter-popup .modal-dialog .modal-content form input[type=text] {
     height: 50px;
     padding: 0 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-popup .modal-dialog .modal-content form input[type=email]:focus,
+.newsletter-popup .modal-dialog .modal-content form input[type=text]:focus {
+    border-color: #df2509;
 }
 .newsletter-popup .modal-dialog .modal-content form input:focus {
     box-shadow: none;
@@ -151,3 +161,36 @@
         transform: rotate(360deg);
     }
 }
+
+/* Estilos mejorados para el formulario con campos nombre y email */
+.newsletter-form-fields {
+    width: 100%;
+}
+
+.newsletter-form-fields .form-group {
+    margin-bottom: 15px;
+}
+
+.newsletter-form-fields .form-control {
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form-fields .form-control::placeholder {
+    color: #999;
+    font-size: 14px;
+}
+
+.newsletter-popup .modal-dialog .modal-content form .btn-primary {
+    background-color: #df2509;
+    border-color: #df2509;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.newsletter-popup .modal-dialog .modal-content form .btn-primary:hover {
+    background-color: #c91f08;
+    border-color: #c91f08;
+}
+

@@ -553,7 +553,7 @@
                         return false;
                     }
 
-
+                    console.log('alert-danger');
                     showProductAddedModal(res.data.content_modal);
 
                     if (res.data.next_url !== undefined) {

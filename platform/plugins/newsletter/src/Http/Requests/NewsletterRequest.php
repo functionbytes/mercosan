@@ -15,6 +15,7 @@ class NewsletterRequest extends Request
     public function rules(): array
     {
         return [
+            'name' => ['nullable', 'string', 'max:120'],
             'email' => [
                 'required',
                 'email',

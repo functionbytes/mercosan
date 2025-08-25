@@ -4,6 +4,7 @@ return [
     'name' => 'Newsletter',
     'newsletter_form' => 'Formulario de Newsletter',
     'description' => 'Ver y eliminar suscriptores del newsletter',
+
     'settings' => [
         'email' => [
             'templates' => [
@@ -26,16 +27,22 @@ return [
                 ],
             ],
         ],
+
         'title' => 'Newsletter',
         'panel_description' => 'Ver y actualizar configuraciones del newsletter',
-        'description' => 'Configuraciones para newsletter (envío automático de email del newsletter a SendGrid, mailjet... cuando alguien se registra al newsletter en el sitio web).',
+        'description' => 'Configuraciones para newsletter (envío automático de email del newsletter a SendGrid, Mailjet... cuando alguien se registra al newsletter en el sitio web).',
+
+        // Proveedores
         'mailjet_api_key' => 'Clave API de Mailjet',
         'mailjet_list_id' => 'ID de Lista de Mailjet',
         'mailjet_list' => 'Lista de Mailjet',
-        'sendgrid_api_key' => 'Clave API de Sendgrid',
-        'sendgrid_list_id' => 'ID de Lista de Sendgrid',
-        'sendgrid_list' => 'Lista de Sendgrid',
+        'sendgrid_api_key' => 'Clave API de SendGrid',
+        'sendgrid_list_id' => 'ID de Lista de SendGrid',
+        'sendgrid_list' => 'Lista de SendGrid',
+
         'enable_newsletter_contacts_list_api' => '¿Habilitar API de lista de contactos del newsletter?',
+
+        // Popup
         'enable_popup' => 'Habilitar popup del newsletter',
         'popup_title' => 'Título del popup',
         'popup_subtitle' => 'Subtítulo del popup',
@@ -48,20 +55,32 @@ return [
             'all' => 'Todas las páginas',
         ],
     ],
+
     'statuses' => [
         'subscribed' => 'Suscrito',
         'unsubscribed' => 'Desuscrito',
     ],
+
     'popup' => [
-        'title' => '¡Suscríbete a nuestro Newsletter!',
-        'subtitle' => 'Recibe las últimas noticias y ofertas especiales',
-        'description' => 'Mantente informado con nuestras últimas actualizaciones, promociones exclusivas y contenido de valor directamente en tu bandeja de entrada.',
+        // Copy motivador + cupón 10%
+        'title' => 'Mantente informado y aprovecha más',
+        'subtitle' => 'Recibe novedades, promociones.',
+        'description' => 'Suscríbete ahora y recibe en tu correo nuestras últimas actualizaciones, promociones exclusivas y contenido de valor pensado para ti. 🎁 Además, obtén un cupón de bienvenida del 10% en tu primera compra.',
+
+        // Campos visuales
         'email_placeholder' => 'Ingresa tu email',
         'email_label' => 'Dirección de Email',
-        'subscribe_button' => 'Suscribirse',
+        'subscribe_button' => 'Suscribirme', // compatible con vistas actuales
+
+        // Opcionales (útiles en el partial del popup)
+        'popup_button_text' => 'Quiero mi 10%',
+        'popup_coupon_note' => 'Cupón válido solo para tu primera compra.',
+        'popup_privacy_note' => 'Al suscribirte, aceptas nuestra política de privacidad.',
+
+        // Mensajes
         'dont_show_again' => 'No mostrar este popup nuevamente',
         'already_subscribed' => 'Ya estás suscrito a nuestro newsletter.',
         'subscribe_success' => '¡Te has suscrito al newsletter exitosamente!',
-        'subscribe_error' => 'Error al suscribirse. Por favor intenta nuevamente.',
+        'subscribe_error' => 'Error al suscribirse. Por favor, intenta nuevamente.',
     ],
 ];

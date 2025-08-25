@@ -22,8 +22,7 @@
                 </div>
 
             </div>
-            <a class="mail-to-friend font-sm color-grey" href="mailto:someone@example.com?subject={{ __('Buy') }} {{ $product->name }}&body={{ __('Buy this one: :link', ['link' => $product->url]) }}"><i class="far fa-envelope"></i> {{ __('Email to a Friend') }}</a>
-        </div>
+           </div>
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="detail-info">
                 <h2 class="title-detail">{{ $product->name }}</h2>
@@ -55,13 +54,16 @@
                     </div>
                 </div>
                 <div class="bt-1 border-color-1 mt-15 mb-15"></div>
-                <div class="short-desc mb-30">
+                <div class="short-desc ">
                     {!! apply_filters('ecommerce_before_product_description', null, $product) !!}
                     {!! BaseHelper::clean($product->description) !!}
                     {!! apply_filters('ecommerce_after_product_description', null, $product) !!}
                 </div>
 
-                <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                <div class="bt-1 border-color-1 mt-15 mb-15"></div>
+                <div class="hr-section"></div>
+
+
                 <form class="add-to-cart-form" method="POST" action="{{ route('public.cart.add-to-cart') }}">
                     @csrf
 
@@ -83,30 +85,59 @@
 
                     {!! apply_filters(ECOMMERCE_PRODUCT_DETAIL_EXTRA_HTML, null, $product) !!}
                     <input type="hidden" name="id" class="hidden-product-id" value="{{ ($product->is_variation || !$product->defaultVariation->product_id) ? $product->id : $product->defaultVariation->product_id }}"/>
-                    <div class="detail-extralink">
-                        @if (EcommerceHelper::isCartEnabled())
-                            <div class="detail-qty border radius">
-                                <a href="#" class="qty-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                <input type="number" min="1" value="1" name="qty" class="qty-val qty-input" />
-                                <a href="#" class="qty-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+
+                    <div class="row mt-10 mb-10"></div>
+
+
+
+
+
+                    @if (EcommerceHelper::isCartEnabled())
+
+                            @if ($product->isOutOfStock())
+                                <div class="detail-extralink out-of-stock-message">
+                                    <h3>{{ __('Out Of Stock') }}</h3>
+
+                                    <div class="out-of-stock-container">
+
+                                        <p> {{ __('We are working to restock it as soon as possible.') }}</p>
+                                        <p> {{ __('If you would like more information about this product or its restock, please contact us by email.') }}
+                                            <a href="mailto:{{ theme_option('contact_email') }}">{{ theme_option('contact_email') }}</a>
+                                            {{ __('or to our WhatsApp') }}
+                                            <a href="https://wa.me/{{ theme_option('phone') }}" target="_blank" rel="noopener">{{ theme_option('phone') }}</a>.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            @else
+
+                            <div class="detail-extralink">
+                                @if (EcommerceHelper::isCartEnabled() && !$product->isOutOfStock())
+                                    <div class="detail-qty border radius">
+                                        <a href="#" class="qty-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                        <input type="number" min="1" value="1" name="qty" class="qty-val qty-input" />
+                                        <a href="#" class="qty-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                                    </div>
+                                @endif
+
+                                <div class="product-extra-link2 @if (EcommerceHelper::isQuickBuyButtonEnabled()) has-buy-now-button @endif">
+
+                                    <button type="submit" class="button button-add-to-cart" type="submit">{{ __('Add to cart') }}</button>
+                                    @if (EcommerceHelper::isQuickBuyButtonEnabled())
+                                        <button class="button button-buy-now ms-2" type="submit" name="checkout">{{ __('Buy Now') }}</button>
+                                    @endif
+
+                                    @if (EcommerceHelper::isWishlistEnabled())
+                                        <a aria-label="{{ __('Add To Wishlist') }}" class="action-btn hover-up js-add-to-wishlist-button" data-url="{{ route('public.wishlist.add', $product->id) }}" href="#"><i class="far fa-heart"></i></a>
+                                    @endif
+                                </div>
                             </div>
                         @endif
+                    @endif
 
-                        <div class="product-extra-link2 @if (EcommerceHelper::isQuickBuyButtonEnabled()) has-buy-now-button @endif">
-                            @if (EcommerceHelper::isCartEnabled())
-                                <button type="submit" class="button button-add-to-cart @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" @if ($product->isOutOfStock()) disabled @endif>{{ __('Add to cart') }}</button>
-                                @if (EcommerceHelper::isQuickBuyButtonEnabled())
-                                    <button class="button button-buy-now ms-2 @if ($product->isOutOfStock()) btn-disabled @endif" type="submit" name="checkout" @if ($product->isOutOfStock()) disabled @endif>{{ __('Buy Now') }}</button>
-                                @endif
-                            @endif
 
-                            @if (EcommerceHelper::isWishlistEnabled())
-                                <a aria-label="{{ __('Add To Wishlist') }}" class="action-btn hover-up js-add-to-wishlist-button" data-url="{{ route('public.wishlist.add', $product->id) }}" href="#"><i class="far fa-heart"></i></a>
-                            @endif
-                        </div>
-                    </div>
                 </form>
-                <ul class="product-meta font-xs color-grey mt-50">
+                <ul class="product-meta font-xs color-grey mt-30">
 
                     <li class="mb-5 @if (! $product->sku) d-none @endif"><span class="d-inline-block me-1" id="product-sku">{{ __('SKU') }}</span>: <span>{{ $product->sku }}</span></li>
 

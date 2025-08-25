@@ -3730,7 +3730,8 @@ textarea.form-control-lg {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    vertical-align: middle
+    vertical-align: middle;
+    width: 100%;
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -19676,12 +19677,12 @@ a.badge {
     --bb-btn-color: var(--bb-info-fg);
     --bb-btn-bg: var(--bb-info);
     --bb-btn-hover-color: var(--bb-info-fg);
-    --bb-btn-hover-bg: var(--bb-info-darken);
+    --bb-btn-hover-bg: #000000;
     --bb-btn-active-color: var(--bb-info-fg);
-    --bb-btn-active-bg: var(--bb-info-darken);
+    --bb-btn-active-bg: #000000;
     --bb-btn-disabled-bg: var(--bb-info);
     --bb-btn-disabled-color: var(--bb-info-fg);
-    --bb-btn-box-shadow: var(--bb-box-shadow-input)
+    --bb-btn-box-shadow: var(--bb-box-shadow-input);
 }
 
 .btn-outline-info {
@@ -29155,4 +29156,65 @@ a.dropdown-toggle.dropdown-header-name:after {
 
 .btn i {
     margin: 0 calc(var(--bb-btn-padding-x)/2) 0 calc(var(--bb-btn-padding-x)/-4)
+}
+
+
+.toastify {
+    padding: 0.75rem 2rem 0.75rem 0.75rem;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 2px -1px rgb(255 0 0 / 1%), 0 10px 36px -4px rgba(255, 0, 0, 0.3);
+    background: #fb0000 !important;
+    position: fixed;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 999999;
+    width: 25rem;
+    max-width: calc(100% - 30px);
+}
+
+
+.table-actions .btn  {
+    width: auto;
+}
+
+button.btn  {
+    width: auto;
+}
+
+.card-footer  .btn  {
+    width: 100%;
+}
+
+
+.card-body  .nav-link {
+    color: #000;
+}
+
+
+.dd-item>.item-details .btn  {
+    width: auto;
+}
+
+.js-base-form button {
+    width: 100%;
+}
+
+.btn-icon {
+    width: auto !important;
+}
+
+
+.page-body button {
+    width: 100% ;
+}
+
+
+.table-search-input  button {
+    width: auto;
 }

@@ -2,6 +2,11 @@
     $cssClass = Arr::get($selectAttributes, 'class') . ' form-select';
 
     $cssClass = trim(str_replace('form-control', '', $cssClass));
+    
+    // Agregar clase para Select2 automáticamente en todos los selects
+    if (!str_contains($cssClass, 'select-search-full') && !str_contains($cssClass, 'select-full')) {
+        $cssClass .= ' select-search-full';
+    }
 
     Arr::set($selectAttributes, 'class', $cssClass);
     $choices = $list ?? $choices;

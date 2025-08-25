@@ -1,4 +1,6 @@
-<section class="section-padding-60">
+@empty($posts)
+
+    <section class="section-padding-60">
     <div class="container">
         <div class="col-12">
             @if ($title)
@@ -38,3 +40,4 @@
         </div>
     </div>
 </section>
+@endisset

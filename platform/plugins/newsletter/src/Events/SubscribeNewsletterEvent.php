@@ -13,7 +13,7 @@ class SubscribeNewsletterEvent
     use InteractsWithSockets;
     use SerializesModels;
 
-    public function __construct(public Newsletter $newsletter)
+    public function __construct(public Newsletter $newsletter, public bool $sendEmailNotification = true)
     {
     }
 }

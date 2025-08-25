@@ -5,6 +5,23 @@ $((function() {
             var t = new Date;
             t.setTime(t.getTime() + e),
                 document.cookie = "newsletter_popup=1; expires=".concat(t.toUTCString(), "; path=/")
+        }
+        // Define missing functions for error handling
+        , o = function(message) {
+            $(".newsletter-error-message").html(message).show();
+        }
+        , r = function(errors) {
+            var errorMessage = "";
+            $.each(errors, function(field, messages) {
+                if (Array.isArray(messages)) {
+                    $.each(messages, function(index, message) {
+                        errorMessage += message + "<br>";
+                    });
+                } else {
+                    errorMessage += messages + "<br>";
+                }
+            });
+            o(errorMessage);
         };
         if (e.length > 0) {
             -1 === document.cookie.indexOf("newsletter_popup=1") && fetch(e.data("url"), {
@@ -61,24 +78,38 @@ $((function() {
                                 return s.prop("disabled", !0).addClass("btn-loading")
                             },
                             success: function(t) {
-                                var r = t.error
-                                    , s = t.message;
-                                r ? o(s) : (n.find('input[name="email"]').val(""),
-                                    document.dispatchEvent(new CustomEvent("newsletter.subscribed")),
-                                        setTimeout((function() {
-                                                e.modal("hide")
-                                        }
-                                    ), 500))
+                                var isError = t.error
+                                    , message = t.message;
+                                if (isError) {
+                                    o(message);
+                                } else {
+                                    $(".newsletter-success-message").html(message).show();
+                                    n.find('input[name="name"]').val("");
+                                    n.find('input[name="email"]').val("");
+                                    document.dispatchEvent(new CustomEvent("newsletter.subscribed"));
+                                    setTimeout(function() {
+                                        e.modal("hide");
+                                    }, 1500); // Give user time to see success message
+                                }
                             },
-                            error: function(e) {
-                                var t;
-                                void 0 !== (t = e).errors && t.errors.length ? r(t.errors) : void 0 !== t.responseJSON ? void 0 !== t.responseJSON.errors ? 422 === t.status && r(t.responseJSON.errors) : void 0 !== t.responseJSON.message ? o(t.responseJSON.message) : $.each(t.responseJSON, (function(e, t) {
-                                        $.each(t, (function(e, t) {
-                                                o(t)
-                                            }
-                                        ))
+                            error: function(response) {
+                                if (response.responseJSON) {
+                                    if (response.responseJSON.errors) {
+                                        r(response.responseJSON.errors);
+                                    } else if (response.responseJSON.message) {
+                                        o(response.responseJSON.message);
+                                    } else {
+                                        $.each(response.responseJSON, function(field, messages) {
+                                            $.each(messages, function(index, message) {
+                                                o(message);
+                                            });
+                                        });
                                     }
-                                )) : o(t.statusText)
+                                } else if (response.errors && response.errors.length) {
+                                    r(response.errors);
+                                } else {
+                                    o(response.statusText || 'An error occurred');
+                                }
                             },
                             complete: function() {
                                 "undefined" != typeof refreshRecaptcha && refreshRecaptcha(),

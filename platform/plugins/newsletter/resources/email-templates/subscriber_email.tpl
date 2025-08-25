@@ -19,15 +19,15 @@
                                        </tbody>
                                     </table>
 
-                                    <h1 class="bb-text-center bb-m-0">Subscribe Successfully</h1>
+                                    <h1 class="bb-text-center bb-m-0">¡Suscripción Exitosa!</h1>
 
-                                    <p class="bb-text-center bb-mt-sm bb-mb-0 bb-text-muted">Thank you for subscribing our newsletter!</p>
+                                    <p class="bb-text-center bb-mt-sm bb-mb-0 bb-text-muted">¡Gracias por suscribirte a nuestro boletín! Te mantendremos informado sobre nuestras ofertas y novedades.</p>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="bb-content bb-text-muted bb-text-center">
-                                    To unsubscribe newsletter, click {{ newsletter_unsubscribe_link }}
+                                    Para cancelar la suscripción al boletín, haz clic {{ newsletter_unsubscribe_link }}
                                 </td>
                             </tr>
                         </tbody>

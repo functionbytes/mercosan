@@ -89,10 +89,11 @@
                     name="address[name]"
                     autocomplete="family-name"
                     type="text"
+                    placeholder="{{ __('e.g. Juan Carlos Pérez López') }}"
                     value="{{ old('address.name', Arr::get($sessionCheckoutData, 'name')) ?: (auth('customer')->check() ? auth('customer')->user()->name : null) }}"
                     required
                 >
-                <label for="address_name">{{ __('Full Name') }}</label>
+                <label for="address_name">{{ __('Full Name (first and last name)') }}</label>
             </div>
             {!! Form::error('address.name', $errors) !!}
         </div>

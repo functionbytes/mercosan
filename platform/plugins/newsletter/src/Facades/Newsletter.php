@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static \Illuminate\Contracts\Container\Container getContainer()
  * @method static \Botble\Newsletter\NewsletterManager setContainer(\Illuminate\Contracts\Container\Container $container)
  * @method static \Botble\Newsletter\NewsletterManager forgetDrivers()
+ * @method static \Botble\Newsletter\Models\Newsletter subscribeUser(string $email, string|null $name = null, bool $sendEvent = true)
  *
  * @see \Botble\Newsletter\NewsletterManager
  */

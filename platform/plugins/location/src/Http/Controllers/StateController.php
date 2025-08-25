@@ -82,6 +82,8 @@ class StateController extends BaseController
 
         $data = State::query()
             ->where('name', 'LIKE', '%' . $keyword . '%')
+            ->wherePublished()
+            ->where('id', 28) // Only Santander state
             ->select(['id', 'name'])
             ->take(10)
             ->oldest('order')
@@ -100,6 +102,7 @@ class StateController extends BaseController
         $data = State::query()
             ->select(['id', 'name'])
             ->wherePublished()
+            ->where('id', 28) // Only Santander state
             ->orderBy('order')
             ->orderBy('name');
 

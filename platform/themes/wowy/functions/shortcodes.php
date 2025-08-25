@@ -43,6 +43,7 @@ app()->booted(function (): void {
 
                 return Theme::partial('shortcodes.featured-product-categories', [
                     'title' => $shortcode->title,
+                    'description' => $shortcode->description,
                     'categories' => $categories,
                     'shortcode' => $shortcode,
                 ]);

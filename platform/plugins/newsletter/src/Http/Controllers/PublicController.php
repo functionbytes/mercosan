@@ -5,8 +5,10 @@ namespace Botble\Newsletter\Http\Controllers;
 use Botble\Base\Facades\BaseHelper;
 use Botble\Base\Forms\FieldOptions\CheckboxFieldOption;
 use Botble\Base\Forms\FieldOptions\EmailFieldOption;
+use Botble\Base\Forms\FieldOptions\TextFieldOption;
 use Botble\Base\Forms\Fields\CheckboxField;
 use Botble\Base\Forms\Fields\EmailField;
+use Botble\Base\Forms\Fields\TextField;
 use Botble\Base\Http\Controllers\BaseController;
 use Botble\Newsletter\Enums\NewsletterStatusEnum;
 use Botble\Newsletter\Events\SubscribeNewsletterEvent;
@@ -14,6 +16,7 @@ use Botble\Newsletter\Events\UnsubscribeNewsletterEvent;
 use Botble\Newsletter\Forms\Fronts\NewsletterForm;
 use Botble\Newsletter\Http\Requests\NewsletterRequest;
 use Botble\Newsletter\Models\Newsletter;
+use Botble\Newsletter\Facades\Newsletter as NewsletterFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
@@ -32,22 +35,32 @@ class PublicController extends BaseController
              */
             $request = $form->getRequest();
 
-            /**
-             * @var Newsletter $newsletter
-             */
-            $newsletter = $form->getModel()->newQuery()->firstOrNew([
-                'email' => $request->input('email'),
-            ], [
-                ...$form->getRequestData(),
-                'status' => NewsletterStatusEnum::SUBSCRIBED,
-            ]);
+            $email = $request->input('email');
+            $name = $request->input('name', '');
 
-            $newsletter->save();
+            // Check if email already exists and is subscribed
+            $existingSubscription = Newsletter::query()
+                ->where('email', strtolower(trim($email)))
+                ->where('status', NewsletterStatusEnum::SUBSCRIBED)
+                ->first();
 
-            // Almacenar el email en la sesión para futuras verificaciones
+            if ($existingSubscription) {
+                throw new \Illuminate\Validation\ValidationException(
+                    \Illuminate\Support\Facades\Validator::make([], []),
+                    [
+                        'email' => [__('El email ya ha sido registrado.')]
+                    ]
+                );
+            }
+
+            // Use centralized method with sendEvent=true to send confirmation emails
+            $newsletter = NewsletterFacade::subscribeUser($email, $name, true);
+
+            // Store email in session for future verifications
             $request->session()->put('user_email', $newsletter->email);
 
-            SubscribeNewsletterEvent::dispatch($newsletter);
+            // Update form model for consistency
+            $form->setModel($newsletter);
         });
 
         return $this
@@ -112,7 +125,16 @@ class PublicController extends BaseController
         }
 
         $newsletterForm = NewsletterForm::create()
-            ->remove(['wrapper_before', 'wrapper_after', 'email'])
+            ->remove(['wrapper_before', 'wrapper_after', 'name', 'email'])
+            ->addBefore(
+                'submit',
+                'name',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label(__('Name'))
+                    ->placeholder(__('Enter Your Name'))
+                    ->cssClass('form-control mb-3')
+            )
             ->addBefore(
                 'submit',
                 'email',
@@ -121,6 +143,7 @@ class PublicController extends BaseController
                     ->label(trans('plugins/newsletter::newsletter.popup.email_label'))
                     ->maxLength(-1)
                     ->placeholder(trans('plugins/newsletter::newsletter.popup.email_placeholder'))
+                    ->cssClass('form-control mb-3')
                     ->required()
             )
             ->addAfter(
@@ -144,11 +167,14 @@ class PublicController extends BaseController
     {
         $email = $request->input('email');
         
-        if (!$email) {
+        if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $this
                 ->httpResponse()
                 ->setData(['subscribed' => false]);
         }
+
+        // Clean email for consistent checking
+        $email = strtolower(trim($email));
 
         $isSubscribed = Newsletter::query()
             ->where('email', $email)

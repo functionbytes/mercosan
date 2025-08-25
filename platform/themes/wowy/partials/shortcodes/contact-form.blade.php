@@ -4,6 +4,7 @@
             <div class="col-xl-8 col-lg-10 m-auto">
                 <div class="contact-from-area  padding-20-row-col wow tmFadeInUp animated" style="visibility: visible;">
                     <h3 class="mb-10 text-center">{{ __('Drop Us a Line') }}</h3>
+
                     <p class="text-muted mb-30 text-center font-sm">{{ __('Contact Us For Any Questions') }}</p>
                     {!! Form::open(['route' => 'public.send.contact', 'class' => 'contact-form-style text-center contact-form', 'method' => 'POST']) !!}
                         {!! apply_filters('pre_contact_form', null) !!}

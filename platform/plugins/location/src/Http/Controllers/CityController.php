@@ -81,8 +81,12 @@ class CityController extends BaseController
                 ->setData([]);
         }
 
+        $allowedCityIds = [858, 878, 881, 904]; // Bucaramanga, Floridablanca, Girón, Piedecuesta
+        
         $data = City::query()
             ->where('name', 'LIKE', '%' . $keyword . '%')
+            ->wherePublished()
+            ->whereIn('id', $allowedCityIds)
             ->select(['id', 'name'])
             ->take(10)
             ->oldest('order')
@@ -98,9 +102,13 @@ class CityController extends BaseController
 
     public function ajaxGetCities(Request $request)
     {
+        // Only specific cities: Bucaramanga, Floridablanca, Girón, Piedecuesta
+        $allowedCityIds = [858, 878, 881, 904];
+        
         $data = City::query()
             ->select(['id', 'name'])
             ->wherePublished()
+            ->whereIn('id', $allowedCityIds)
             ->orderBy('order')
             ->orderBy('name');
 

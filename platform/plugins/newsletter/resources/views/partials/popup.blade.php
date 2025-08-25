@@ -5,7 +5,7 @@
     $image = theme_option('newsletter_popup_image');
 @endphp
 
-<link rel="stylesheet" href="{{ asset('vendor/core/plugins/newsletter/css/newsletter.css') }}?v=1.2.8">
+<link rel="stylesheet" href="{{ asset('vendor/core/plugins/newsletter/css/newsletter.css') }}?v=1.3.0">
 
 <div @class(['modal-dialog', 'modal-lg' => $image])>
     <div @class(['modal-content border-0', 'd-flex flex-md-col flex-lg-row' => $image])>
@@ -20,15 +20,15 @@
         <div class="newsletter-popup-content">
             <div class="modal-header flex-column align-items-start border-0 p-0">
                 @if ($subtitle)
-                    <span class="modal-subtitle">{!! BaseHelper::clean($subtitle) !!}</span>
+                    <span class="modal-subtitle">{{ trans('plugins/newsletter::newsletter.popup.subtitle') }}</span>
                 @endif
 
                 @if ($title)
-                    <h5 class="modal-title" id="newsletterPopupModalLabel">{!! BaseHelper::clean($title) !!}</h5>
+                    <h5 class="modal-title" id="newsletterPopupModalLabel">{{ trans('plugins/newsletter::newsletter.popup.title') }}</h5>
                 @endif
 
                 @if ($description)
-                    <p class="modal-text text-muted">{!! BaseHelper::clean($description) !!}</p>
+                    <p class="modal-text text-muted">{{ trans('plugins/newsletter::newsletter.popup.description') }}</p>
                 @endif
             </div>
             <div class="modal-body p-0">

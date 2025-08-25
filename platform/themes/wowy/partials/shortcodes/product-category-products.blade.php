@@ -2,7 +2,7 @@
     <div class="container">
         <div class="heading-tab d-flex">
             <div class="heading-tab-left wow fadeIn animated">
-                <h3 class="section-title mb-35">{{ $category->name }}</h3>
+                <h3 class="section-title">{{ $category->name }}</h3>
             </div>
             <div class="heading-tab-right wow fadeIn animated">
                 @if ($category->activeChildren->isNotEmpty())

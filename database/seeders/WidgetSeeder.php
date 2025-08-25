@@ -19,8 +19,8 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 1,
                 'data' => [
                     'id' => 'NewsletterWidget',
-                    'name' => 'Sign up to Newsletter',
-                    'subtitle' => '...and receive $25 coupon for first shopping.',
+                    'name' => 'Suscríbete al boletín informativo',
+                    'subtitle' => '...y recibe un cupón de 10% para tu primera compra.',
                 ],
             ],
             [
@@ -29,7 +29,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 0,
                 'data' => [
                     'id' => 'SiteInfoWidget',
-                    'name' => 'Site information',
+                    'name' => 'Información del sitio',
                 ],
             ],
             [
@@ -48,7 +48,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 2,
                 'data' => [
                     'id' => 'CustomMenuWidget',
-                    'name' => 'Information',
+                    'name' => 'Información',
                     'menu_id' => 'information',
                 ],
             ],
@@ -58,8 +58,8 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 3,
                 'data' => [
                     'id' => 'PaymentMethodsWidget',
-                    'name' => 'Payments',
-                    'description' => 'Secured Payment Gateways',
+                    'name' => 'Pagos',
+                    'description' => 'Pasarelas de pago seguras',
                     'image' => 'general/payment-methods.png',
                 ],
             ],
@@ -70,7 +70,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 0,
                 'data' => [
                     'id' => 'BlogSearchWidget',
-                    'name' => 'Search',
+                    'name' => 'Busqueda',
                 ],
             ],
             [
@@ -79,7 +79,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 1,
                 'data' => [
                     'id' => 'BlogCategoriesWidget',
-                    'name' => 'Categories',
+                    'name' => 'Categorias',
                 ],
             ],
             [
@@ -88,7 +88,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 2,
                 'data' => [
                     'id' => 'RecentPostsWidget',
-                    'name' => 'Recent Posts',
+                    'name' => 'Entradas recientes',
                 ],
             ],
             [
@@ -97,7 +97,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 4,
                 'data' => [
                     'id' => 'TagsWidget',
-                    'name' => 'Popular Tags',
+                    'name' => 'Etiquetas populares',
                 ],
             ],
 
@@ -107,7 +107,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 1,
                 'data' => [
                     'id' => 'ProductCategoriesWidget',
-                    'name' => 'Categories',
+                    'name' => 'Categorias',
                 ],
             ],
             [
@@ -116,7 +116,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 2,
                 'data' => [
                     'id' => 'FeaturedProductsWidget',
-                    'name' => 'Featured Products',
+                    'name' => 'Productos destacados',
                 ],
             ],
             [
@@ -125,7 +125,7 @@ class WidgetSeeder extends BaseSeeder
                 'position' => 3,
                 'data' => [
                     'id' => 'FeaturedBrandsWidget',
-                    'name' => 'Manufacturers',
+                    'name' => 'Fabricantes',
                 ],
             ],
         ];

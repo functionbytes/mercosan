@@ -157,6 +157,7 @@ class CheckoutRequest extends Request
         return apply_filters(PROCESS_CHECKOUT_MESSAGES_REQUEST_ECOMMERCE, [
             'agree_terms_and_policy.required' => __('You must agree to the terms and conditions and privacy policy.'),
             'agree_terms_and_policy.accepted' => __('You must agree to the terms and conditions and privacy policy.'),
+            'address.name.regex' => __('Please enter your complete name (first and last name).'),
         ]);
     }
 

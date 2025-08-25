@@ -1,5 +1,5 @@
 /public/hot
-/storage/*.key
+
 .DS_Store
 Thumbs.db
 /bower_components
@@ -14,8 +14,7 @@ npm-debug.log
 sftp-config.json
 .phpstorm.meta.php
 _ide_helper_models.php
-/storage/app/backup
-/storage/cache_keys.json
+
 
 __MACOSX
 /.phpintel

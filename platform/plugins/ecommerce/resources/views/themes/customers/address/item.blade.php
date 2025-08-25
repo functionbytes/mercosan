@@ -1,19 +1,46 @@
-<div class="col mt-3">
-    <div class="card mb-3 p-3">
-        <p>
-            {{ $address->name }}
+
+
+
+<div class="col-sp-12 col-xs-12 col-sm-12 col-md-6 col-lg-6 address-box-item">
+    <div class="address-box">
+        <div class="address-header">
+            <div class="name">
+                {{ $address->name }}
+            </div>
             @if ($address->is_default)
-                <x-core::badge color="info">{{ __('Default') }}</x-core::badge>
+            <div class="alias">
+                {{ __('Default') }}
+            </div>
             @endif
-        </p>
-        <p><x-core::icon name="ti ti-book" class="me-1" /> {{ $address->full_address }}
-        </p>
-        <p><x-core::icon name="ti ti-phone" class="me-1" />{{ $address->phone }}</p>
-        <div class="w-100 mt-3 d-flex gap-2">
-            <a class="text-info d-inline-block" href="{{ route('customer.address.edit', $address->id) }}">{{ __('Edit') }}</a> |
-            <x-core::form :url="route('customer.address.destroy', $address->id)" method="get" onsubmit="return confirm('{{ __('Are you sure you want to delete this address?') }}')">
-                <a class="text-danger bb-remove-address-item" type="submit" onclick="$(this).closest('form').submit()">{{ __('Remove') }}</a>
+        </div>
+        <div class="address-body">
+            <div class="table-responsive address-table">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>{{ __('Address') }} :</td>
+                        <td>
+                            <p>{{ $address->full_address }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ __('Phone') }} :</td>
+                        <td>
+                            {{ $address->phone }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="button-group">
+            <a class="btn  w-100" href="{{ route('customer.address.edit', $address->id) }}" >
+                {{ __('Edit') }}
+            </a>
+            <x-core::form  :url="route('customer.address.destroy', $address->id)" method="get" onsubmit="return confirm('{{ __('Are you sure you want to delete this address?') }}')">
+                <a class="btn  w-100" type="submit" onclick="$(this).closest('form').submit()">{{ __('Remove') }}</a>
             </x-core::form>
         </div>
     </div>
 </div>
+

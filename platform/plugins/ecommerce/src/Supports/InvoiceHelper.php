@@ -128,7 +128,7 @@ class InvoiceHelper
     {
         $storageDisk = Storage::disk('local');
 
-        $invoiceFile = sprintf('ecommerce/invoices/invoice-%s.pdf', $invoice->code);
+        $invoiceFile = sprintf('ecommerce/invoices/comp-%s.pdf', $invoice->code);
 
         $invoicePath = $storageDisk->path($invoiceFile);
 

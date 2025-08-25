@@ -53,7 +53,8 @@ class AddressForm extends FormFront
                 EmailField::class,
                 EmailFieldOption::make()
                     ->addAttribute('id', 'address-email')
-                    ->colspan(1)
+                    ->colspan(2
+                    )
             )
             ->addLocationFields()
             ->add(

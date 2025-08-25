@@ -1,14 +1,7 @@
 <div class="col-lg-4 col-md-6">
     <div class="widget-about font-md mb-md-5 mb-lg-0">
-        @if (theme_option('logo'))
-            <div class="logo logo-width-1 wow fadeIn animated">
-                <a href="{{ BaseHelper::getHomepageUrl() }}">
-                    <img src="{{ RvMedia::getImageUrl(theme_option('logo')) }}" alt="{{ theme_option('site_title') }}">
-                </a>
-            </div>
-        @endif
         @if (theme_option('address') || theme_option('phone') || theme_option('working_hours'))
-            <h4 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">{{ __('Contact') }}</h4>
+            <h4 class="mb-10 fw-600 widget-title mb-30  wow fadeIn animated">{{ __('Contact') }}</h4>
             @if (theme_option('address'))
                 <p class="wow fadeIn animated">
                     <strong class="d-inline-block">{{ __('Address') }}:</strong> {{ theme_option('address') }}

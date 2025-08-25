@@ -932,7 +932,6 @@ class OrderController extends BaseController
             $order->dont_show_order_info_in_product_list = true;
             OrderHelper::setEmailVariables($order);
 
-            // Get the configured email template from abandoned cart settings
             $emailTemplate = get_ecommerce_setting('abandoned_cart_email_template', 'order_recover');
 
             $mailer->sendUsingTemplate($emailTemplate, $email);

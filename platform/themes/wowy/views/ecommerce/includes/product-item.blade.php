@@ -62,7 +62,13 @@
 
             @if (EcommerceHelper::isCartEnabled())
                 <div class="product-action-1 show" @if (!EcommerceHelper::isReviewEnabled()) style="bottom: 10px;" @endif>
-                    <a aria-label="{{ __('Add To Cart') }}" class="action-btn hover-up add-to-cart-button" data-id="{{ $product->id }}" data-url="{{ route('public.cart.add-to-cart') }}" href="#"><i class="far fa-shopping-bag"></i></a>
+                    @if ($product->isOutOfStock())
+                        <span class="action-btn hover-up out-of-stock-btn text-danger" title="{{ __('No disponible') }}">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    @else
+                        <a aria-label="{{ __('Add To Cart') }}" class="action-btn hover-up add-to-cart-button" data-id="{{ $product->id }}" data-url="{{ route('public.cart.add-to-cart') }}" href="#"><i class="far fa-shopping-bag"></i></a>
+                    @endif
                 </div>
             @endif
         </div>
