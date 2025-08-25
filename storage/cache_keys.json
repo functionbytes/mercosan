@@ -12,6 +12,8 @@
     ],
     "Botble\\Ecommerce\\Models\\ProductCategory": [
         "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_rendering_select98c26180347ab84c8f86307ed51212ad",
-        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_98c26180347ab84c8f86307ed51212ad"
+        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_98c26180347ab84c8f86307ed51212ad",
+        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_2fa283f27332ba8bf794ea6d450a3da9",
+        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_rendering_select2fa283f27332ba8bf794ea6d450a3da9"
     ]
 }
