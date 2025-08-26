@@ -108,12 +108,11 @@ class HookServiceProvider extends ServiceProvider
 
 
     /**
-     * Calculate tax based on Colombian tax rules
+     * Calculate tax - VAT/IVA functionality removed
      */
     private function calculateTax(float $amount): float
     {
-        // Colombian IVA is typically 19%
-        // Adjust this calculation based on your business needs
-        return $amount * 0.19;
+        // VAT/IVA functionality has been removed
+        return 0;
     }
 }

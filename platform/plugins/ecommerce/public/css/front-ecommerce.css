@@ -165,19 +165,53 @@ select.form-control {
     height: 45px;
 }
 
+.payment-checkout-btn-back  {
+    background-color: #000;
+    color: #ffffff;
+    padding: 15px 15px;
+    transition: all ease-in-out 300ms;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: auto;
+    font-weight: 700;
+}
+
+.payment-checkout-btn-back:hover{
+    filter: brightness(85%);
+    color: #ffffff;
+    background-color: var(--bs-primary);
+    padding: 15px 15px;
+    transition: all ease-in-out 300ms;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: auto;
+    font-weight: 700;
+}
+
 .payment-checkout-btn,
 .payment-checkout-btn-step {
     background-color: var(--bs-primary);
     color: #ffffff;
     padding: 15px 15px;
     transition: all ease-in-out 300ms;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: auto;
+    font-weight: 700;
 }
 .payment-checkout-btn:hover,
 .payment-checkout-btn-step:hover {
     filter: brightness(85%);
     color: #ffffff;
     background-color: var(--bs-primary);
+    padding: 15px 15px;
+    transition: all ease-in-out 300ms;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: auto;
+    font-weight: 700;
 }
+
 
 .label-success {
     color: #36c6d3;

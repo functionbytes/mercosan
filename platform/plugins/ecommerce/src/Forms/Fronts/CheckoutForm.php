@@ -307,24 +307,6 @@ class CheckoutForm extends FormFront
                                         function (CheckoutForm $form) use ($model): void {
                                             $form
                                                 ->addWrapper(
-                                                    'footer_actions_left_wrapper',
-                                                    '<div class="order-2 order-md-1 col-md-12 text-center text-md-start mb-4 mb-md-0">',
-                                                    '</div>',
-                                                    function (CheckoutForm $form) use ($model): void {
-                                                        $form
-                                                            ->add(
-                                                                'footer_actions_back_to_cart',
-                                                                HtmlField::class,
-                                                                HtmlFieldOption::make()->content(view('plugins/ecommerce::orders.partials.back-to-cart'))
-                                                            )
-                                                            ->add(
-                                                                'filters_ecommerce_checkout_form_after_back_to_cart_link',
-                                                                HtmlField::class,
-                                                                HtmlFieldOption::make()->content(apply_filters('ecommerce_checkout_form_after_back_to_cart_link', null, $model['products']))
-                                                            );
-                                                    }
-                                                )
-                                                ->addWrapper(
                                                     'footer_actions_right_wrapper',
                                                     '<div class="order-1 order-md-2 col-md-12">',
                                                     '</div>',
@@ -336,6 +318,25 @@ class CheckoutForm extends FormFront
                                                         );
                                                     }
                                                 )
+                                                ->addWrapper(
+                                                    'footer_actions_left_wrapper',
+                                                    '<div class="order-2 order-md-1 col-md-12 text-center  mb-4 mb-md-0">',
+                                                    '</div>',
+                                                    function (CheckoutForm $form) use ($model): void {
+                                                        $form
+                                                            ->add(
+                                                                'filters_ecommerce_checkout_form_after_back_to_cart_link',
+                                                                HtmlField::class,
+                                                                HtmlFieldOption::make()->content(apply_filters('ecommerce_checkout_form_after_back_to_cart_link', null, $model['products']))
+                                                            )
+                                                            ->add(
+                                                                'footer_actions_back_to_cart',
+                                                                HtmlField::class,
+                                                                HtmlFieldOption::make()->content(view('plugins/ecommerce::orders.partials.back-to-cart'))
+                                                            );
+                                                    }
+                                                )
+
                                                 ->setFormEndKey('filters_ecommerce_checkout_form_after');
                                         }
                                     );

@@ -33,7 +33,7 @@
                     <span style="display: block;">BIENVENIDA</span>
                   </div>
                   <p style="margin: 4px 0 12px; font-size: 14px; color: #555555;">
-                    Has obtenido un 10% de descuento en tu primera compra por compras superiores a 200.000 COP. Válido hasta <em>{{ coupon_expiry_date }}</em>.
+                    Has obtenido un 10% de descuento en tu primera compra. Válido hasta <em>{{ coupon_expiry_date }}</em>.
                   </p>
                   <p style="margin: 12px 0 0; font-size: 12px; color: #888888;">
                     El código se aplica automáticamente en la orden si alcanzas el monto mínimo. Válido solo para primera compra. Términos y condiciones aplican.

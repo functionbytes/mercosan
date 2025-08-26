@@ -215,13 +215,11 @@ class WompiPaymentService extends PaymentAbstract
     }
 
     /**
-     * Calculate tax based on Colombian tax rules
-     * This is a simple example - adjust according to your business needs
+     * Calculate tax - VAT/IVA functionality removed
      */
     private function calculateTax(float $amount): float
     {
-        // Colombian IVA is typically 19%
-        // Adjust this calculation based on your tax requirements
-        return $amount * 0.19;
+        // VAT/IVA functionality has been removed
+        return 0;
     }
 }

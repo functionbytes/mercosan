@@ -477,35 +477,27 @@ class WompiService
             };
 
             $convertedAmount = $originalAmount * $exchangeRate;
-            $convertedTax = ($this->data['tax'] ?? 0) * $exchangeRate;
+            $convertedTax = 0; // VAT/IVA functionality removed
         } else {
             $convertedAmount = $originalAmount;
-            $convertedTax = $this->data['tax'] ?? 0;
+            $convertedTax = 0; // VAT/IVA functionality removed
         }
 
         // Convertir a centavos
         $amountInCents = (int)($convertedAmount * 100);
-        $taxInCents = (int)($convertedTax * 100);
+        $taxInCents = 0; // VAT/IVA functionality removed
 
-        // Limitar para sandbox - MANTENER LA PROPORCIÓN DEL TAX
+        // Limitar para sandbox - VAT/IVA functionality removed
         if ($this->isSandbox) {
             $maxAmount = 50000000; // 500,000 COP máximo para sandbox
 
             if ($amountInCents > $maxAmount) {
-                // Calcular la proporción para mantener la relación tax/amount
-                $originalTaxRatio = $convertedTax / $convertedAmount;
-                $reducedAmountInPesos = $maxAmount / 100; // Convertir centavos a pesos
-                $reducedTax = $reducedAmountInPesos * $originalTaxRatio;
-
                 $amountInCents = $maxAmount;
-                $taxInCents = (int)($reducedTax * 100);
+                $taxInCents = 0; // VAT/IVA functionality removed
 
-                \Log::warning('Wompi: Amount and tax reduced proportionally for sandbox limits', [
+                \Log::warning('Wompi: Amount reduced for sandbox limits (VAT/IVA removed)', [
                     'original_amount_cents' => (int)($convertedAmount * 100),
-                    'original_tax_cents' => (int)($convertedTax * 100),
-                    'reduced_amount_cents' => $amountInCents,
-                    'reduced_tax_cents' => $taxInCents,
-                    'original_tax_ratio' => $originalTaxRatio
+                    'reduced_amount_cents' => $amountInCents
                 ]);
             }
         }
@@ -551,19 +543,7 @@ class WompiService
             'widget_url' => $this->getWidgetUrl()
         ];
 
-        // Solo agregar impuestos si son válidos (mayor a 0)
-        if ($taxInCents > 0) {
-            $widgetData['tax_in_cents'] = [
-                'vat' => $taxInCents,
-                'consumption' => 0
-            ];
-
-            \Log::info('Wompi: Including tax data', [
-                'original_tax' => $this->data['tax'] ?? 0,
-                'converted_tax' => $convertedTax,
-                'tax_in_cents' => $taxInCents
-            ]);
-        }
+        // VAT/IVA functionality removed - no tax data included
 
         // Validar y agregar dirección de envío solo si TODOS los campos requeridos están presentes
         $shippingData = $this->prepareShippingAddress();

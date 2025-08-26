@@ -191,11 +191,6 @@
                                 ${{ number_format($widgetData['amount_in_cents'] / 100, 0) }} COP
                             @endif
                         </div>
-                        @if(isset($widgetData['tax_in_cents']) && $widgetData['tax_in_cents']['vat'] > 0)
-                            <small class="text-muted">
-                                {{ __('Incluye IVA') }}: ${{ number_format($widgetData['tax_in_cents']['vat'] / 100, 0) }} COP
-                            </small>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -272,12 +267,6 @@
                             data-customer-data:phone-number="{{ $widgetData['customer_data']['phone_number'] }}"
                             data-customer-data:phone-number-prefix="{{ $widgetData['customer_data']['phone_number_prefix'] }}"
                         @endif
-                        @if(isset($widgetData['tax_in_cents']['vat']) && $widgetData['tax_in_cents']['vat'] > 0)
-                            data-tax-in-cents:vat="{{ $widgetData['tax_in_cents']['vat'] }}"
-                            @if(isset($widgetData['tax_in_cents']['consumption']) && $widgetData['tax_in_cents']['consumption'] > 0)
-                                data-tax-in-cents:consumption="{{ $widgetData['tax_in_cents']['consumption'] }}"
-                            @endif
-                        @endif
                         @if(isset($widgetData['shipping_address']) && isset($widgetData['shipping_address']['address_line_1']))
                             data-shipping-address:address-line-1="{{ $widgetData['shipping_address']['address_line_1'] }}"
                             data-shipping-address:city="{{ $widgetData['shipping_address']['city'] }}"
@@ -350,11 +339,6 @@
                         <strong>Teléfono:</strong> {{ $widgetData['customer_data']['phone_number_prefix'] }} {{ $widgetData['customer_data']['phone_number'] }}<br>
                     @else
                         <strong>Teléfono:</strong> No disponible<br>
-                    @endif
-                    @if(isset($widgetData['tax_in_cents']))
-                        <strong>IVA (centavos):</strong> {{ $widgetData['tax_in_cents']['vat'] ?? 'N/A' }}<br>
-                    @else
-                        <strong>IVA:</strong> No incluido<br>
                     @endif
                     <strong>URL Redirect:</strong> {{ $widgetData['redirect_url'] }}
                 </div>
@@ -611,13 +595,7 @@
             formData['customer-data:phone-number-prefix'] = widgetConfig.customer_data.phone_number_prefix;
         }
 
-        // Solo agregar impuestos si existen y son válidos
-        if (widgetConfig.tax_in_cents && widgetConfig.tax_in_cents.vat > 0) {
-            formData['tax-in-cents:vat'] = widgetConfig.tax_in_cents.vat;
-            if (widgetConfig.tax_in_cents.consumption > 0) {
-                formData['tax-in-cents:consumption'] = widgetConfig.tax_in_cents.consumption;
-            }
-        }
+        // VAT/IVA functionality removed
 
         // Solo agregar datos que existan
         for (const [key, value] of Object.entries(formData)) {
@@ -750,7 +728,7 @@
             formElements: document.querySelectorAll('#formWompi *').length,
             buttonsFound: document.querySelectorAll('button').length,
             wompiElements: document.querySelectorAll('[data-wompi-id], [class*="wompi"], button[data-wompi-id]').length,
-            taxIncluded: widgetConfig.tax_in_cents ? widgetConfig.tax_in_cents.vat : 'No tax',
+            taxIncluded: 'VAT/IVA removed',
             scriptExists: !!document.getElementById('wompi-widget-script'),
             onlineStatus: navigator.onLine
         });
