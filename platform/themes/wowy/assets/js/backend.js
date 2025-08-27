@@ -1558,6 +1558,190 @@
             })
         })
 
+        // Newsletter Inline Shortcode Validation
+        $(document).ready(function() {
+            // Validación en tiempo real
+            $(document).on('input blur', 'form.bb-newsletter-inline-form input[name="email"]', function() {
+                var emailInput = $(this);
+                var email = emailInput.val().trim();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Limpiar clases previas
+                emailInput.removeClass('is-valid is-invalid');
+
+                if (email && !emailRegex.test(email)) {
+                    emailInput.addClass('is-invalid');
+                    showFieldError(emailInput, 'Please enter a valid email address');
+                } else if (email && emailRegex.test(email)) {
+                    emailInput.addClass('is-valid');
+                    hideFieldError(emailInput);
+                } else {
+                    hideFieldError(emailInput);
+                }
+            });
+
+            // Validación del campo nombre
+            $(document).on('input blur', 'form.bb-newsletter-inline-form input[name="name"]', function() {
+                var nameInput = $(this);
+                var name = nameInput.val().trim();
+
+                nameInput.removeClass('is-valid is-invalid');
+
+                if (name && name.length < 2) {
+                    nameInput.addClass('is-invalid');
+                    showFieldError(nameInput, 'Name must be at least 2 characters');
+                } else if (name && name.length >= 2) {
+                    nameInput.addClass('is-valid');
+                    hideFieldError(nameInput);
+                } else {
+                    hideFieldError(nameInput);
+                }
+            });
+
+            function showFieldError(field, message) {
+                var errorDiv = field.siblings('.field-error');
+                if (errorDiv.length === 0) {
+                    errorDiv = $('<div class="field-error text-danger small mt-1"></div>');
+                    field.after(errorDiv);
+                }
+                errorDiv.text(message).show();
+            }
+
+            function hideFieldError(field) {
+                field.siblings('.field-error').hide();
+            }
+
+            function validateForm(form) {
+                var isValid = true;
+                var emailInput = form.find('input[name="email"]');
+                var nameInput = form.find('input[name="name"]');
+                var email = emailInput.val().trim();
+                var name = nameInput.val().trim();
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Validar email
+                if (!email) {
+                    emailInput.addClass('is-invalid');
+                    showFieldError(emailInput, 'Email is required');
+                    isValid = false;
+                } else if (!emailRegex.test(email)) {
+                    emailInput.addClass('is-invalid');
+                    showFieldError(emailInput, 'Please enter a valid email address');
+                    isValid = false;
+                } else {
+                    emailInput.removeClass('is-invalid').addClass('is-valid');
+                    hideFieldError(emailInput);
+                }
+
+                // Validar nombre (si existe el campo)
+                if (nameInput.length > 0) {
+                    if (!name) {
+                        nameInput.addClass('is-invalid');
+                        showFieldError(nameInput, 'Name is required');
+                        isValid = false;
+                    } else if (name.length < 2) {
+                        nameInput.addClass('is-invalid');
+                        showFieldError(nameInput, 'Name must be at least 2 characters');
+                        isValid = false;
+                    } else {
+                        nameInput.removeClass('is-invalid').addClass('is-valid');
+                        hideFieldError(nameInput);
+                    }
+                }
+
+                return isValid;
+            }
+
+            $(document).on('submit', 'form.bb-newsletter-inline-form', function(e) {
+                e.preventDefault();
+
+                var form = $(this);
+                var submitBtn = form.find('button[type="submit"]');
+                var originalText = submitBtn.text();
+                var successMsg = form.parent().find('.newsletter-success-message');
+                var errorMsg = form.parent().find('.newsletter-error-message');
+
+                // Validar formulario antes de enviar
+                if (!validateForm(form)) {
+                    return false;
+                }
+
+                // Reset messages
+                successMsg.html('').hide();
+                errorMsg.html('').hide();
+
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    url: form.prop('action'),
+                    data: new FormData(form[0]),
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        submitBtn.prop('disabled', true).addClass('btn-loading').text('Subscribing...');
+                    },
+                    success: function(response) {
+                        var isError = response.error;
+                        var message = response.message;
+
+                        if (isError) {
+                            errorMsg.html(message).show();
+                        } else {
+                            successMsg.html(message).show();
+                            form.find('input[name="name"]').val('');
+                            form.find('input[name="email"]').val('');
+                            document.dispatchEvent(new CustomEvent('newsletter.subscribed'));
+                        }
+                    },
+                    error: function(response) {
+                        var errorMessage = '';
+
+                        if (response.responseJSON) {
+                            if (response.responseJSON.errors) {
+                                $.each(response.responseJSON.errors, function(field, messages) {
+                                    if (Array.isArray(messages)) {
+                                        $.each(messages, function(index, message) {
+                                            errorMessage += message + '<br>';
+                                        });
+                                    } else {
+                                        errorMessage += messages + '<br>';
+                                    }
+                                });
+                            } else if (response.responseJSON.message) {
+                                errorMessage = response.responseJSON.message;
+                            } else {
+                                $.each(response.responseJSON, function(field, messages) {
+                                    $.each(messages, function(index, message) {
+                                        errorMessage += message + '<br>';
+                                    });
+                                });
+                            }
+                        } else if (response.errors && response.errors.length) {
+                            $.each(response.errors, function(field, messages) {
+                                if (Array.isArray(messages)) {
+                                    $.each(messages, function(index, message) {
+                                        errorMessage += message + '<br>';
+                                    });
+                                } else {
+                                    errorMessage += messages + '<br>';
+                                }
+                            });
+                        } else {
+                            errorMessage = response.statusText || 'An error occurred';
+                        }
+
+                        errorMsg.html(errorMessage).show();
+                    },
+                    complete: function() {
+                        if (typeof refreshRecaptcha !== 'undefined') {
+                            refreshRecaptcha();
+                        }
+                        submitBtn.prop('disabled', false).removeClass('btn-loading').text(originalText);
+                    }
+                });
+            });
+        });
+
     });
 
 })(jQuery);

@@ -322,6 +322,16 @@ app()->booted(function (): void {
         shortcode()->setAdminConfig('newsletter-form', function (array $attributes) {
             return Theme::partial('shortcodes.newsletter-form-admin-config', compact('attributes'));
         });
+
+        add_shortcode('newsletter-inline', __('Newsletter Inline'), __('Newsletter Inline Subscription'), function (Shortcode $shortcode) {
+            return Theme::partial('shortcodes.newsletter-inline', [
+                'shortcode' => $shortcode,
+            ]);
+        });
+
+        shortcode()->setAdminConfig('newsletter-inline', function (array $attributes) {
+            return Theme::partial('shortcodes.newsletter-inline-admin-config', compact('attributes'));
+        });
     }
 
     add_shortcode('our-offices', __('Our offices'), __('Our offices'), function () {
