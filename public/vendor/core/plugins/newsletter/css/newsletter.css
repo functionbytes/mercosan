@@ -187,6 +187,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    margin-top: 10px;
 }
 
 .newsletter-popup .modal-dialog .modal-content form .btn-primary:hover {

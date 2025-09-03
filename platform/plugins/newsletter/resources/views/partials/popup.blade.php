@@ -18,7 +18,7 @@
         <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" data-dismiss="modal" aria-label="Close"></button>
 
         <div class="newsletter-popup-content">
-            <div class="modal-header flex-column align-items-start border-0 p-0">
+            <div class=" modal-header flex-column align-items-start border-0 p-0">
                 @if ($subtitle)
                     <span class="modal-subtitle">{{ trans('plugins/newsletter::newsletter.popup.subtitle') }}</span>
                 @endif

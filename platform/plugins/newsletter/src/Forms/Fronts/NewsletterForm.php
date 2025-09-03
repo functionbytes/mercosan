@@ -12,6 +12,7 @@ use Botble\Base\Forms\Fields\TextField;
 use Botble\Newsletter\Http\Requests\NewsletterRequest;
 use Botble\Newsletter\Models\Newsletter;
 use Botble\Theme\FormFront;
+use Botble\Captcha\Facades\Captcha;
 
 class NewsletterForm extends FormFront
 {
@@ -38,7 +39,7 @@ class NewsletterForm extends FormFront
                     ->label(false)
                     ->cssClass('form-control mb-3')
                     ->wrapperAttributes(['class' => 'form-group'])
-                    ->placeholder(__('Enter Your Name'))
+                    ->placeholder(__('Enter your name'))
                     ->addAttribute('id', 'newsletter-name')
             )
             ->add(
@@ -50,7 +51,7 @@ class NewsletterForm extends FormFront
                     ->cssClass('form-control mb-3')
                     ->wrapperAttributes(['class' => 'form-group'])
                     ->maxLength(-1)
-                    ->placeholder(__('Enter Your Email'))
+                    ->placeholder(__('Enter your email'))
                     ->addAttribute('id', 'newsletter-email')
             )
             ->add(
@@ -58,7 +59,9 @@ class NewsletterForm extends FormFront
                 'submit',
                 ButtonFieldOption::make()
                     ->label(__('Subscribe'))
-                    ->cssClass('btn btn-primary w-100'),
+                    ->cssClass('btn btn-primary w-100')
+                    ->addAttribute('id', 'newsletter-submit-btn')
+                    ->addAttribute('disabled', Captcha::isEnabled()),
             )
             ->add('wrapper_after', HtmlField::class, HtmlFieldOption::make()->content('</div>'))
             ->add(

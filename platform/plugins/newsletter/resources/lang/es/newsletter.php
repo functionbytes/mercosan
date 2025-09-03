@@ -5,6 +5,7 @@ return [
     'newsletter_form' => 'Formulario de Newsletter',
     'description' => 'Ver y eliminar suscriptores del newsletter',
 
+
     'settings' => [
         'email' => [
             'templates' => [
@@ -83,4 +84,10 @@ return [
         'subscribe_success' => '¡Te has suscrito al newsletter exitosamente!',
         'subscribe_error' => 'Error al suscribirse. Por favor, intenta nuevamente.',
     ],
+
+    'Enter your name' => 'Ingresa tu nombre',
+    'Enter your email' => 'Ingresa tu correo electrónico',
+    'Subscribe' => 'Suscribirse',
+
+
 ];

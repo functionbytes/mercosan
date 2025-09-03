@@ -1,16 +1,42 @@
 $(() => {
+    console.log('Newsletter popup script loaded')
     const $newsletterPopup = $('#newsletter-popup')
+    
+    console.log('Newsletter popup element found:', $newsletterPopup.length > 0)
 
     const newsletterDelayTime = $newsletterPopup.data('delay') * 1000 || 5000
+    console.log('Popup delay:', newsletterDelayTime / 1000, 'seconds')
 
-    const dontShowAgain = (time) => {
-        const date = new Date()
-        date.setTime(date.getTime() + time)
-        document.cookie = `newsletter_popup=1; expires=${date.toUTCString()}; path=/`
+    const dontShowAgain = (milliseconds) => {
+        const expires = new Date()
+        const cookieTime = milliseconds || (60 * 60 * 1000) // 1 hora por defecto
+        expires.setTime(expires.getTime() + cookieTime)
+        document.cookie = `newsletter_popup=1; expires=${expires.toUTCString()}; path=/; SameSite=Lax`
+        console.log('Newsletter popup cookie set for:', cookieTime / 1000 / 60, 'minutes')
+    }
+
+    const getCookie = (name) => {
+        const nameEQ = name + "="
+        const ca = document.cookie.split(';')
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i]
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length)
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length)
+        }
+        return null
+    }
+
+    const deleteCookie = (name) => {
+        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        console.log('Cookie deleted:', name)
     }
 
     if ($newsletterPopup.length > 0) {
-        if (document.cookie.indexOf('newsletter_popup=1') === -1) {
+        const hasPopupCookie = getCookie("newsletter_popup")
+        console.log('Newsletter popup cookie status:', hasPopupCookie)
+        
+        if (!hasPopupCookie) {
+            console.log('Loading newsletter popup...')
             fetch($newsletterPopup.data('url'), {
                 method: 'GET',
                 headers: {
@@ -56,15 +82,23 @@ $(() => {
             })
             .on('hide.bs.modal', () => {
                 const checkbox = $newsletterPopup.find('form').find('input[name="dont_show_again"]')
+                const dontShowAgainChecked = checkbox.is(':checked')
+                console.log('Modal closing, dont show again:', dontShowAgainChecked)
 
-                if (checkbox.is(':checked')) {
-                    dontShowAgain(3 * 24 * 60 * 60 * 1000) // 1 day
+                if (dontShowAgainChecked) {
+                    // No mostrar más (30 días)
+                    dontShowAgain(30 * 24 * 60 * 60 * 1000) // 30 días
                 } else {
-                    dontShowAgain(60 * 60 * 1000) // 1 hour
+                    // Mostrar después de 1 hora
+                    dontShowAgain(60 * 60 * 1000) // 1 hora
                 }
             })
 
-        document.addEventListener('newsletter.subscribed', () => dontShowAgain())
+        document.addEventListener('newsletter.subscribed', () => {
+            console.log('User subscribed, setting cookie for 7 days')
+            // Cuando se suscriben, no mostrar por 7 días
+            dontShowAgain(7 * 24 * 60 * 60 * 1000) // 7 días
+        })
 
         let showError = function (message) {
             $('.newsletter-error-message').html(message).show()
@@ -154,4 +188,22 @@ $(() => {
             })
         })
     }
+
+    // Funciones globales para debugging
+    window.newsletterPopupDebug = {
+        getCookie,
+        deleteCookie,
+        clearPopupCookie() {
+            deleteCookie('newsletter_popup')
+            console.log('Newsletter popup cookie cleared. Refresh page to see popup again.')
+        },
+        showPopup() {
+            if ($newsletterPopup.length > 0) {
+                deleteCookie('newsletter_popup')
+                location.reload()
+            }
+        }
+    }
+
+    console.log('Newsletter popup debug functions available:', Object.keys(window.newsletterPopupDebug))
 })

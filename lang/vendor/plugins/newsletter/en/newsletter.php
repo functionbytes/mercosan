@@ -41,4 +41,7 @@ return [
         'subscribed' => 'Subscribed',
         'unsubscribed' => 'Unsubscribed',
     ],
+    'Enter your name' => 'Enter your name',
+    'Enter your email' => 'Enter your email',
+    'Subscribe' => 'Subscribe',
 ];

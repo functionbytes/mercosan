@@ -12083,7 +12083,7 @@ a:hover {
     margin: 20px 0;
     padding: 30px;
     border-radius: 10px;
-    background: #f8f9fa;
+    background: #fbfbfb;
     border: 1px solid #e9ecef;
 }
 
@@ -12104,27 +12104,42 @@ a:hover {
     color: white;
 }
 
-.newsletter-inline-container {
+.newsletter-inline-shortcode .newsletter-inline-container {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.newsletter-inline-image {
+.newsletter-inline-shortcode .newsletter-inline-image {
     flex-shrink: 0;
 }
 
-.newsletter-inline-image img {
+.newsletter-inline-shortcode .newsletter-inline-image img {
     max-width: 120px;
     height: auto;
     border-radius: 8px;
 }
 
-.newsletter-inline-content {
+.newsletter-inline-shortcode .newsletter-inline-content {
     flex: 1;
 }
 
-.newsletter-inline-subtitle {
+.newsletter-inline-shortcode .newsletter-inline-subtitle {
+    letter-spacing: 1px;
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 12px;
+    background: #fb0000;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    position: initial;
+    display: inline-block;
+}
+
+.newsletter-inline-shortcode .brand-style .newsletter-inline-subtitle {
     letter-spacing: 1px;
     font-size: 15px;
     color: #fff;
@@ -12137,38 +12152,21 @@ a:hover {
     margin-bottom: 10px;
 }
 
-.brand-style .newsletter-inline-subtitle {
-    letter-spacing: 1px;
-    font-size: 15px;
-    color: #fff;
-    letter-spacing: 1px;
-    font-size: 12px;
-    background: #fb0000;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-}
-
-.newsletter-inline-title {
-    margin-bottom: 0;
+.newsletter-inline-shortcode .newsletter-inline-title {
     line-height: 1.5;
     margin-bottom: 10px;
     font-size: 20px;
-    font-size: 13px;
 }
 
-.newsletter-inline-description {
-    color: var(--color-muted) !important;
-    font-size: 13px;
-    color: rgb(0 0 0);
+.newsletter-inline-shortcode .newsletter-inline-description {
+    color: #000;
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
-.brand-style .newsletter-inline-description {
+.newsletter-inline-shortcode .brand-style .newsletter-inline-description {
     color: rgba(255,255,255,0.9);
 }
 
@@ -12179,20 +12177,21 @@ a:hover {
 .newsletter-inline-shortcode .newsletter-inline-form .form-control {
     padding: 12px 16px;
     border-radius: 6px;
+    background: #fff;
     border: 1px solid #ddd;
-    font-size: 16px;
+    font-size: 13px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .newsletter-inline-shortcode .newsletter-inline-form .form-control:focus {
-    border-color: #80bdff;
+    border-color: #000000;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 25%);
 }
 
 .newsletter-inline-shortcode .newsletter-inline-form .form-control.is-valid {
-    border-color: #28a745;
-    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    border-color: #000000;
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 25%);
 }
 
 .newsletter-inline-shortcode .newsletter-inline-form .form-control.is-invalid {
@@ -12212,6 +12211,15 @@ a:hover {
     font-weight: 600;
     font-size: 16px;
 }
+
+
+
+.newsletter-inline-shortcode .newsletter-inline-form .btn.btn-disabled{
+    color: #fff;
+    background-color: #000000ad;
+    border-color: #000000ad;
+}
+
 
 .newsletter-inline-shortcode .newsletter-success-message,
 .newsletter-inline-shortcode .newsletter-error-message {

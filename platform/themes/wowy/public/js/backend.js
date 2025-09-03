@@ -213,6 +213,8 @@
             }
         };
 
+        // Comentado para evitar conflicto con jQuery Validate
+        /*
         $(document).on('click', '.newsletter-form button[type=submit]', function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -231,10 +233,6 @@
                 success: res => {
                     _self.removeClass('button-loading');
 
-                    if (typeof refreshRecaptcha !== 'undefined') {
-                        refreshRecaptcha();
-                    }
-
                     if (!res.error) {
                         _self.closest('form').find('input[type=email]').val('');
                         showSuccess(res.message);
@@ -243,14 +241,12 @@
                     }
                 },
                 error: res => {
-                    if (typeof refreshRecaptcha !== 'undefined') {
-                        refreshRecaptcha();
-                    }
                     _self.removeClass('button-loading');
                     handleError(res);
                 }
             });
         });
+        */
 
         window.trackedStartCheckout = '{{ session("tracked_start_checkout") }}';
         window.siteUrl = '{{ url("/") }}';
@@ -420,14 +416,26 @@
                     if (res.data.next_url !== undefined) {
                         window.location.href = res.data.next_url;
                     } else {
+                        console.log('Updating cart after adding product, siteUrl:', window.siteUrl);
+                        var ajaxCartUrl = (window.siteUrl && !window.siteUrl.includes('{{')) ? window.siteUrl + '/ajax/cart' : '/ajax/cart';
+                        console.log('Using cart URL:', ajaxCartUrl);
                         $.ajax({
-                            url: window.siteUrl + '/ajax/cart',
+                            url: ajaxCartUrl,
                             method: 'GET',
                             success: response => {
+                                console.log('Cart AJAX response:', response);
                                 if (!response.error) {
+                                    console.log('Updating cart dropdown and count:', response.data.count);
                                     $('.cart-dropdown-wrap').html(response.data.html);
-                                    $('.mini-cart-icon span').text(response.data.count);
+                                    $('.mini-cart-icon .pro-count').text(response.data.count);
+                                    console.log('Cart elements found:', $('.cart-dropdown-wrap').length, $('.mini-cart-icon .pro-count').length);
+                                } else {
+                                    console.error('Cart AJAX error:', response.message);
                                 }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Cart AJAX request failed:', xhr.responseText, status, error);
+                                console.error('Request URL was:', ajaxCartUrl);
                             }
                         });
                     }
@@ -560,12 +568,12 @@
                         window.location.href = res.data.next_url;
                     } else {
                         $.ajax({
-                            url: window.siteUrl + '/ajax/cart',
+                            url: (window.siteUrl && !window.siteUrl.includes('{{')) ? window.siteUrl + '/ajax/cart' : '/ajax/cart',
                             method: 'GET',
                             success: function (response) {
                                 if (!response.error) {
                                     $('.cart-dropdown-wrap').html(response.data.html);
-                                    $('.mini-cart-icon span').text(response.data.count);
+                                    $('.mini-cart-icon .pro-count').text(response.data.count);
                                 }
                             }
                         });
@@ -601,7 +609,7 @@
                         success: response => {
                             if (!response.error) {
                                 $('.cart-dropdown-wrap').html(response.data.html);
-                                $('.mini-cart-icon span').text(response.data.count);
+                                $('.mini-cart-icon .pro-count').text(response.data.count);
                                 window.showAlert('alert-success', res.message);
                             }
                         }
@@ -642,7 +650,7 @@
                         success: response => {
                             if (!response.error) {
                                 $('.cart-dropdown-wrap').html(response.data.html);
-                                $('.mini-cart-icon span').text(response.data.count);
+                                $('.mini-cart-icon .pro-count').text(response.data.count);
                             }
                         }
                     });
@@ -736,7 +744,7 @@
                         success: response => {
                             if (!response.error) {
                                 $('.cart-dropdown-wrap').html(response.data.html);
-                                $('.mini-cart-icon span').text(response.data.count);
+                                $('.mini-cart-icon .pro-count').text(response.data.count);
                             }
                         }
                     });
@@ -1558,6 +1566,258 @@
             })
         })
 
+    });
+
+    // reCAPTCHA callback functions for newsletter forms
+    window.recaptchaCallback = function() {
+        // Habilitar los botones de suscripción cuando se valide el reCAPTCHA
+        $('#newsletter-submit-btn, #newsletter-submit-popup-btn').prop('disabled', false).removeClass('btn-disabled').removeClass('disabled');
+        console.log('reCAPTCHA callback - button enabled');
+    };
+    
+    window.recaptchaExpiredCallback = function() {
+        // Deshabilitar los botones cuando expire el reCAPTCHA
+        $('#newsletter-submit-btn, #newsletter-submit-popup-btn').prop('disabled', true).addClass('btn-disabled');
+        console.log('reCAPTCHA expired - button disabled');
+    };
+
+    // Global callback for any reCAPTCHA validation
+    window.grecaptchaCallback = function() {
+        $('#newsletter-submit-btn, #newsletter-submit-popup-btn').prop('disabled', false).removeClass('btn-disabled').removeClass('disabled');
+        console.log('Global reCAPTCHA callback - button enabled');
+    };
+
+    // Handle captcha validation for newsletter forms
+    $(document).ready(function() {
+        // Remove duplicate captcha in newsletter forms
+        setTimeout(function() {
+            var captchas = $('.bb-newsletter-inline-form .g-recaptcha');
+            if (captchas.length > 1) {
+                // Keep only the first captcha
+                captchas.slice(1).remove();
+            }
+        }, 1000);
+
+        // Monitor for captcha completion in newsletter forms
+        function checkCaptchaStatus() {
+            // Check all possible captcha response fields
+            var captchaResponse = $('.bb-newsletter-inline-form .g-recaptcha-response').val() || 
+                                 $('.bb-newsletter-inline-form [name="g-recaptcha-response"]').val() || 
+                                 $('[name="g-recaptcha-response"]').val();
+            
+            var submitBtn = $('#newsletter-submit-btn');
+            
+            if (captchaResponse && captchaResponse.length > 0) {
+                submitBtn.prop('disabled', false).removeClass('btn-disabled').removeClass('disabled');
+                console.log('Captcha validated - button enabled');
+            } else {
+                submitBtn.prop('disabled', true).addClass('btn-disabled');
+                console.log('Captcha not validated - button disabled');
+            }
+        }
+
+        // Check immediately and then every 500ms
+        checkCaptchaStatus();
+        setInterval(checkCaptchaStatus, 500);
+
+        // Also check on click events in the captcha area
+        $(document).on('click', '.g-recaptcha', function() {
+            setTimeout(checkCaptchaStatus, 1000);
+        });
+
+        // Initialize jQuery Validate for newsletter form
+        if ($.fn.validate) {
+            // Add custom email validation method
+            $.validator.addMethod("strictEmail", function(value, element) {
+                if (this.optional(element)) {
+                    return true;
+                }
+                // More strict email validation
+                var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+                var isValidFormat = emailRegex.test(value);
+                
+                // Additional checks
+                var parts = value.split('@');
+                if (parts.length !== 2) return false;
+                
+                var localPart = parts[0];
+                var domainPart = parts[1];
+                
+                // Local part checks
+                if (localPart.length === 0 || localPart.length > 64) return false;
+                if (localPart.startsWith('.') || localPart.endsWith('.')) return false;
+                if (localPart.includes('..')) return false;
+                
+                // Domain part checks
+                if (domainPart.length === 0 || domainPart.length > 253) return false;
+                if (domainPart.startsWith('-') || domainPart.endsWith('-')) return false;
+                if (domainPart.startsWith('.') || domainPart.endsWith('.')) return false;
+                if (!domainPart.includes('.')) return false; // Must have at least one dot
+                
+                // Check domain parts
+                var domainParts = domainPart.split('.');
+                for (var i = 0; i < domainParts.length; i++) {
+                    var part = domainParts[i];
+                    if (part.length === 0 || part.length > 63) return false;
+                    if (part.startsWith('-') || part.endsWith('-')) return false;
+                    if (!/^[a-zA-Z0-9-]+$/.test(part)) return false;
+                }
+                
+                // Check TLD (last part should be at least 2 characters and only letters)
+                var tld = domainParts[domainParts.length - 1];
+                if (tld.length < 2 || !/^[a-zA-Z]+$/.test(tld)) return false;
+                
+                return isValidFormat;
+            }, "Por favor ingresa un email válido con dominio completo");
+
+            $('#botble-newsletter-forms-fronts-newsletter-form').validate({
+                rules: {
+                    name: {
+                        required: false,
+                        minlength: 2
+                    },
+                    email: {
+                        required: true,
+                        strictEmail: true
+                    }
+                },
+                messages: {
+                    name: {
+                        minlength: "El nombre debe tener al menos 2 caracteres"
+                    },
+                    email: {
+                        required: "Por favor ingresa tu email",
+                        strictEmail: "Por favor ingresa un email válido con dominio completo (ej: usuario@dominio.com)"
+                    }
+                },
+                errorElement: 'div',
+                errorClass: 'invalid-feedback',
+                errorPlacement: function(error, element) {
+                    error.addClass('d-block');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function(element) {
+                    $(element).addClass('is-invalid').removeClass('is-valid');
+                },
+                unhighlight: function(element) {
+                    $(element).removeClass('is-invalid').addClass('is-valid');
+                },
+                submitHandler: function(form) {
+                    // Check if captcha is validated before submitting
+                    var captchaResponse = $('.bb-newsletter-inline-form .g-recaptcha-response').val() || 
+                                         $('.bb-newsletter-inline-form [name="g-recaptcha-response"]').val() || 
+                                         $('[name="g-recaptcha-response"]').val();
+                    
+                    if (!captchaResponse || captchaResponse.length === 0) {
+                        alert('Por favor completa el captcha antes de continuar');
+                        return false;
+                    }
+                    
+                    // Submit the form via AJAX (existing functionality)
+                    var $form = $(form);
+                    var $submitBtn = $form.find('button[type="submit"]');
+                    var originalText = $submitBtn.text();
+                    var $successMsg = $form.find('.newsletter-success-message');
+                    var $errorMsg = $form.find('.newsletter-error-message');
+                    
+                    $successMsg.html('').hide();
+                    $errorMsg.html('').hide();
+                    $submitBtn.prop('disabled', true).addClass('btn-loading').text('Enviando...');
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: $form.attr('action'),
+                        data: $form.serialize(),
+                        success: function(response) {
+                            $submitBtn.prop('disabled', false).removeClass('btn-loading').text(originalText);
+                            
+                            // Clear any existing messages first
+                            $successMsg.html('').hide();
+                            $errorMsg.html('').hide();
+                            
+                            if (response.error) {
+                                $errorMsg.html(response.message).show();
+                            } else {
+                                $successMsg.html(response.message || 'Suscripción exitosa').show();
+                                $form[0].reset();
+                                
+                                // Reset captcha if available
+                                if (typeof grecaptcha !== 'undefined') {
+                                    grecaptcha.reset();
+                                }
+                                
+                                // Re-check captcha status after reset
+                                setTimeout(function() {
+                                    $('#newsletter-submit-btn').prop('disabled', true).addClass('btn-disabled');
+                                }, 100);
+                            }
+                        },
+                        error: function(xhr) {
+                            $submitBtn.prop('disabled', false).removeClass('btn-loading').text(originalText);
+                            var errorMessage = 'Error al procesar la solicitud';
+                            
+                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                var errors = xhr.responseJSON.errors;
+                                var errorMessages = [];
+                                $.each(errors, function(field, messages) {
+                                    $.each(messages, function(index, message) {
+                                        errorMessages.push(message);
+                                    });
+                                });
+                                errorMessage = errorMessages.join('<br>');
+                            } else if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            
+                            $errorMsg.html(errorMessage).show();
+                            
+                            // Reset captcha on error
+                            if (typeof grecaptcha !== 'undefined') {
+                                grecaptcha.reset();
+                            }
+                        }
+                    });
+                    
+                    return false; // Prevent default form submission
+                }
+            });
+
+            // Clear any duplicate error messages that might appear outside the form
+            function clearDuplicateMessages() {
+                // Remove any message divs that are outside the form but inside the newsletter container
+                $('.newsletter-inline-form').each(function() {
+                    var $container = $(this);
+                    // Remove duplicate message divs that are siblings of the form
+                    $container.find('> .newsletter-success-message, > .newsletter-error-message').not($container.find('form .newsletter-success-message, form .newsletter-error-message')).remove();
+                });
+            }
+
+            // Clear duplicates on page load
+            clearDuplicateMessages();
+
+            // Real-time email validation feedback
+            $('#newsletter-email').on('input blur', function() {
+                var emailField = $(this);
+                var emailValue = emailField.val().trim();
+                
+                if (emailValue.length > 0) {
+                    // Check if it's a valid email
+                    var validator = $('#botble-newsletter-forms-fronts-newsletter-form').validate();
+                    var isValid = validator.element(emailField);
+                    
+                    if (!isValid) {
+                        // Show visual feedback for invalid email
+                        emailField.addClass('is-invalid').removeClass('is-valid');
+                    } else {
+                        // Show visual feedback for valid email
+                        emailField.removeClass('is-invalid').addClass('is-valid');
+                    }
+                } else {
+                    // Remove validation classes when empty
+                    emailField.removeClass('is-invalid is-valid');
+                }
+            });
+        }
     });
 
 })(jQuery);

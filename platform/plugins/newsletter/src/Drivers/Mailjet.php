@@ -56,7 +56,7 @@ class Mailjet extends AbstractProvider implements Provider
             'Action' => 'addnoforce',
         ]);
 
-        return $response->json();
+        return $response->json() ?? [];
     }
 
     /**
@@ -70,6 +70,6 @@ class Mailjet extends AbstractProvider implements Provider
             'Action' => 'unsub',
         ]);
 
-        return $response->json();
+        return $response->json() ?? [];
     }
 }

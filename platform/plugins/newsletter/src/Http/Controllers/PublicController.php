@@ -3,12 +3,16 @@
 namespace Botble\Newsletter\Http\Controllers;
 
 use Botble\Base\Facades\BaseHelper;
+use Botble\Base\Forms\FieldOptions\ButtonFieldOption;
 use Botble\Base\Forms\FieldOptions\CheckboxFieldOption;
 use Botble\Base\Forms\FieldOptions\EmailFieldOption;
+use Botble\Base\Forms\FieldOptions\HtmlFieldOption;
 use Botble\Base\Forms\FieldOptions\TextFieldOption;
 use Botble\Base\Forms\Fields\CheckboxField;
 use Botble\Base\Forms\Fields\EmailField;
+use Botble\Base\Forms\Fields\HtmlField;
 use Botble\Base\Forms\Fields\TextField;
+use Botble\Captcha\Facades\Captcha;
 use Botble\Base\Http\Controllers\BaseController;
 use Botble\Newsletter\Enums\NewsletterStatusEnum;
 use Botble\Newsletter\Events\SubscribeNewsletterEvent;
@@ -38,9 +42,20 @@ class PublicController extends BaseController
             $email = $request->input('email');
             $name = $request->input('name', '');
 
+            // Clean and validate email format
+            $email = strtolower(trim($email));
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new \Illuminate\Validation\ValidationException(
+                    \Illuminate\Support\Facades\Validator::make([], []),
+                    [
+                        'email' => [__('El formato del email no es válido.')]
+                    ]
+                );
+            }
+
             // Check if email already exists and is subscribed
             $existingSubscription = Newsletter::query()
-                ->where('email', strtolower(trim($email)))
+                ->where('email', $email)
                 ->where('status', NewsletterStatusEnum::SUBSCRIBED)
                 ->first();
 
@@ -102,27 +117,7 @@ class PublicController extends BaseController
 
     public function ajaxLoadPopup(Request $request)
     {
-        // Verificar si el usuario ya está suscrito por IP o email en sesión
-        $userEmail = $request->session()->get('user_email');
-        $userIp = $request->ip();
-        
-        // Si hay un email en sesión, verificar si ya está suscrito
-        if ($userEmail) {
-            $existingSubscription = Newsletter::query()
-                ->where('email', $userEmail)
-                ->where('status', NewsletterStatusEnum::SUBSCRIBED)
-                ->exists();
-                
-            if ($existingSubscription) {
-                return $this
-                    ->httpResponse()
-                    ->setData([
-                        'html' => '',
-                        'show_popup' => false,
-                        'message' => trans('plugins/newsletter::newsletter.popup.already_subscribed')
-                    ]);
-            }
-        }
+        // TESTING: Temporalmente simplificado para debugging
 
         $newsletterForm = NewsletterForm::create()
             ->remove(['wrapper_before', 'wrapper_after', 'name', 'email'])
@@ -146,14 +141,51 @@ class PublicController extends BaseController
                     ->cssClass('form-control mb-3')
                     ->required()
             )
-            ->addAfter(
-                'submit',
-                'dont_show_again',
-                CheckboxField::class,
-                CheckboxFieldOption::make()
-                    ->label(trans('plugins/newsletter::newsletter.popup.dont_show_again'))
-                    ->value(false)
-            );
+            ->when(Captcha::isEnabled(), function ($form) {
+                $form->addBefore(
+                    'submit',
+                    'captcha',
+                    HtmlField::class,
+                    HtmlFieldOption::make()
+                        ->content(Captcha::display([
+                            'data-callback' => 'recaptchaCallback',
+                            'data-expired-callback' => 'recaptchaExpiredCallback'
+                        ]))
+                );
+            })
+            ->when(Captcha::isEnabled(), function ($form) {
+                $form->setFormOption('onsubmit', 'return false;'); // Prevent form submission if captcha not validated
+                $form->add(
+                    'newsletter-submit-popup-btn',
+                    'submit',
+                    ButtonFieldOption::make()
+                        ->label(__('Subscribe'))
+                        ->cssClass('btn btn-primary')
+                        ->addAttribute('id', 'newsletter-submit-popup-btn')
+                        ->addAttribute('disabled', true)
+                );
+                $form->remove('submit');
+                // Add checkbox after the new submit button when reCAPTCHA is enabled
+                $form->addAfter(
+                    'newsletter-submit-popup-btn',
+                    'dont_show_again',
+                    CheckboxField::class,
+                    CheckboxFieldOption::make()
+                        ->label(trans('plugins/newsletter::newsletter.popup.dont_show_again'))
+                        ->value(false)
+                );
+            })
+            ->when(!Captcha::isEnabled(), function ($form) {
+                // Add checkbox after the original submit button when reCAPTCHA is disabled
+                $form->addAfter(
+                    'submit',
+                    'dont_show_again',
+                    CheckboxField::class,
+                    CheckboxFieldOption::make()
+                        ->label(trans('plugins/newsletter::newsletter.popup.dont_show_again'))
+                        ->value(false)
+                );
+            });
 
         return $this
             ->httpResponse()

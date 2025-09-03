@@ -64,4 +64,7 @@ return [
         'subscribe_success' => 'Subscribe to newsletter successfully!',
         'subscribe_error' => 'Error subscribing. Please try again.',
     ],
+    'Enter your name' => 'Enter your name',
+    'Enter your email' => 'Enter your email',
+    'Subscribe' => 'Subscribe',
 ];

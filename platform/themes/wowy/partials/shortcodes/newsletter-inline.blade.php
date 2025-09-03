@@ -31,8 +31,6 @@
 
             <div class="newsletter-inline-form">
                 {!! $newsletterForm->setFormOption('class', 'bb-newsletter-inline-form')->renderForm() !!}
-                <div class="newsletter-success-message" style="display: none;"></div>
-                <div class="newsletter-error-message" style="display: none;"></div>
             </div>
         </div>
     </div>
