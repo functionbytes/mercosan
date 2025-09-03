@@ -14,7 +14,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <h1 class="bb-text-center bb-m-0 bb-mt-md">New Contact Message</h1>
+                    <h1 class="bb-text-center bb-m-0 bb-mt-md">Nuevo mensaje de contacto</h1>
                 </td>
             </tr>
             <tr>

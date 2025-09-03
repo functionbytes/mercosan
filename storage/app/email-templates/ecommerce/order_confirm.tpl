@@ -20,7 +20,7 @@
         <tr>
             <td class="bb-content ">
                 <p>Estimado {{ customer_name }},</p>
-                <div>Hemos confirmado su(s) pedido(s) y está(n) listo(s) para envío.</div>
+                <div>Hemos confirmado tu pedido, te avisaremos cuando este listo.</div>
             </td>
         </tr>
         <tr>
