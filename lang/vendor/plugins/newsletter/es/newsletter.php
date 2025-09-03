@@ -51,9 +51,9 @@ return [
         'unsubscribed' => 'Darme de baja',
     ],
     'popup' => [
-        'title' => '¡Suscríbete a nuestro Boletín!',
-        'subtitle' => 'Obtén las últimas noticias y ofertas especiales',
-        'description' => 'Mantente informado con nuestras últimas actualizaciones, promociones exclusivas y contenido valioso directamente en tu bandeja de entrada.',
+        'title' => 'Mantente informado y aprovecha más.',
+        'subtitle' => 'Recibe novedades, promociones.',
+        'description' => 'Suscríbete ahora y recibe en tu correo nuestras últimas actualizaciones, promociones exclusivas y contenido de valor pensado para ti. 🎁 Además, obtén un cupón de bienvenida del 10% en tu primera compra.',
         'email_placeholder' => 'Ingresa tu correo electrónico',
         'email_label' => 'Dirección de correo electrónico',
         'subscribe_button' => 'Suscribirse',

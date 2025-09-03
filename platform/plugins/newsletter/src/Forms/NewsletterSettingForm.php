@@ -35,15 +35,22 @@ class NewsletterSettingForm extends SettingForm
             ->setSectionTitle(trans('plugins/newsletter::newsletter.settings.title'))
             ->setSectionDescription(trans('plugins/newsletter::newsletter.settings.description'))
             ->setValidatorClass(NewsletterSettingRequest::class)
+            ->add('newsletter_email_notifications_enable', 'onOffCheckbox', [
+                'label' => trans('plugins/newsletter::newsletter.settings.enable_email_notifications'),
+                'value' => (bool) setting('newsletter_email_notifications_enable', false),
+                'help_block' => [
+                    'text' => trans('plugins/newsletter::newsletter.settings.enable_email_notifications_help'),
+                ],
+            ])
             ->add('newsletter_popup_enable', 'html', [
                 'html' => '<div class="form-group mb-3">
                     <label class="form-check">
-                        <input type="checkbox" 
-                               name="newsletter_popup_enable" 
-                               class="form-check-input mb-0" 
-                               data-bb-toggle="collapse" 
-                               data-bb-target=".newsletter-popup-settings" 
-                               value="1" 
+                        <input type="checkbox"
+                               name="newsletter_popup_enable"
+                               class="form-check-input mb-0"
+                               data-bb-toggle="collapse"
+                               data-bb-target=".newsletter-popup-settings"
+                               value="1"
                                ' . (setting('newsletter_popup_enable', true) ? 'checked=""' : '') . '>
                         <span class="form-check-label">
                             ' . trans('plugins/newsletter::newsletter.settings.enable_popup') . '

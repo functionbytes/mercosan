@@ -63,6 +63,18 @@ trait PaymentsTrait
             'payment_type' => $payment->payment_type ?? 'direct',
         ]);
 
+        // Dispatch OrderPaymentConfirmedEvent for invoice processing
+        if ($payment->order_id && class_exists('Botble\Ecommerce\Events\OrderPaymentConfirmedEvent')) {
+            $order = \Botble\Ecommerce\Models\Order::find($payment->order_id);
+            if ($order) {
+                event(new \Botble\Ecommerce\Events\OrderPaymentConfirmedEvent($order, null));
+                \Illuminate\Support\Facades\Log::info('Wompi: OrderPaymentConfirmedEvent dispatched', [
+                    'order_id' => $order->id,
+                    'charge_id' => $chargeId
+                ]);
+            }
+        }
+
         return $this->processPayment($payment);
     }
 

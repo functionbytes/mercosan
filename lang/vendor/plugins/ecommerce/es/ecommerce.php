@@ -155,4 +155,16 @@ return [
     'order_will_be_shown' => 'Se mostrará su código de pedido',
     'weight_unit' => 'Unidad de peso',
     'height_unit' => 'Unidad de longitud / altura',
+    
+    // Checkout request messages
+    'You must agree to the terms and conditions and privacy policy.' => 'Debe aceptar los términos y condiciones y la política de privacidad.',
+    'Please enter your complete name (first and last name).' => 'Por favor, ingrese su nombre completo (nombre y apellido).',
+    'Name' => 'Nombre',
+    'Phone' => 'Teléfono',
+    'Email' => 'Correo electrónico',
+    'State' => 'Estado o Provincia',
+    'City' => 'Ciudad',
+    'Country' => 'País',
+    'Address' => 'Dirección',
+    'Zipcode' => 'Código postal',
 ];

@@ -101,11 +101,13 @@ $(() => {
         })
 
         let showError = function (message) {
-            $('.newsletter-error-message').html(message).show()
+            // Show error using browser alert or toast notification
+            alert('Error: ' + message)
         }
 
         let showSuccess = function (message) {
-            $('.newsletter-success-message').html(message).show()
+            // Show success using browser alert or toast notification
+            alert('Éxito: ' + message)
         }
 
         let handleError = function (data) {
@@ -149,9 +151,6 @@ $(() => {
             const $form = $(e.currentTarget)
             const $button = $form.find('button[type=submit]')
 
-            $('.newsletter-success-message').html('').hide()
-            $('.newsletter-error-message').html('').hide()
-
             $.ajax({
                 type: 'POST',
                 cache: false,
@@ -175,7 +174,7 @@ $(() => {
 
                     setTimeout(() => {
                         $newsletterPopup.modal('hide')
-                    }, 5000)
+                    }, 2000)
                 },
                 error: (error) => handleError(error),
                 complete: () => {

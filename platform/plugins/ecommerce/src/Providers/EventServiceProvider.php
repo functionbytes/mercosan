@@ -38,6 +38,7 @@ use Botble\Ecommerce\Listeners\SendShippingStatusChangedNotification;
 use Botble\Ecommerce\Listeners\SendWebhookWhenOrderPlaced;
 use Botble\Ecommerce\Listeners\UpdateInvoiceAndShippingWhenOrderCancelled;
 use Botble\Ecommerce\Listeners\UpdateInvoiceWhenOrderCompleted;
+use Botble\Ecommerce\Listeners\UpdateInvoiceWhenPaymentConfirmed;
 use Botble\Ecommerce\Listeners\UpdateProductStockStatus;
 use Botble\Ecommerce\Listeners\UpdateProductVariationInfo;
 use Botble\Ecommerce\Listeners\UpdateProductView;
@@ -103,6 +104,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         OrderPaymentConfirmedEvent::class => [
             OrderPaymentConfirmedNotification::class,
+            UpdateInvoiceWhenPaymentConfirmed::class,
         ],
         OrderCancelledEvent::class => [
             OrderCancelledNotification::class,

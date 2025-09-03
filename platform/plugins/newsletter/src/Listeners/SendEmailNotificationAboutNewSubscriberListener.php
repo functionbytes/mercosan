@@ -16,7 +16,7 @@ class SendEmailNotificationAboutNewSubscriberListener implements ShouldQueue
         if (!$event->sendEmailNotification) {
             return;
         }
-        
+
         $unsubscribeUrl = URL::signedRoute('public.newsletter.unsubscribe', ['user' => $event->newsletter->id]);
 
         // Log para debugging
@@ -40,12 +40,16 @@ class SendEmailNotificationAboutNewSubscriberListener implements ShouldQueue
             \Log::error('Error enviando newsletter email: ' . $e->getMessage());
         }
 
-        // Enviar email al admin
-        try {
-            $mailer->sendUsingTemplate('admin_email');
-            \Log::info('Newsletter admin email enviado');
-        } catch (\Exception $e) {
-            \Log::error('Error enviando newsletter admin email: ' . $e->getMessage());
+
+        $sendEmailNotifications = (bool) setting('newsletter_email_notifications_enable', false);
+
+        if (!$sendEmailNotifications) {
+            try {
+                $mailer->sendUsingTemplate('admin_email');
+                \Log::info('Newsletter admin email enviado');
+            } catch (\Exception $e) {
+                \Log::error('Error enviando newsletter admin email: ' . $e->getMessage());
+            }
         }
     }
 }

@@ -197,13 +197,13 @@ class NewsletterManager extends Manager implements Factory
     /**
      * Subscribe user to newsletter with validation and deduplication
      * Compatible with existing architecture
-     * 
+     *
      * @param string $email The email address to subscribe
      * @param string|null $name Optional name of the subscriber
-     * @param bool $sendEvent Whether to dispatch SubscribeNewsletterEvent (default: true)
+     * @param bool $sendEvent Whether to dispatch SubscribeNewsletterEvent (default: false)
      * @return Newsletter The newsletter model instance
      */
-    public function subscribeUser(string $email, ?string $name = null, bool $sendEvent = true): Newsletter
+    public function subscribeUser(string $email, ?string $name = null): Newsletter
     {
         // Clean and validate email
         $email = strtolower(trim($email));
@@ -234,7 +234,7 @@ class NewsletterManager extends Manager implements Factory
 
         // Always dispatch event for Mailjet sync when there's a subscription change
         if ($newsletter->wasRecentlyCreated || $newsletter->wasChanged()) {
-            SubscribeNewsletterEvent::dispatch($newsletter, $sendEvent);
+            SubscribeNewsletterEvent::dispatch($newsletter);
         }
 
         return $newsletter;

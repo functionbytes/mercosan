@@ -43,6 +43,10 @@ return [
 
         'enable_newsletter_contacts_list_api' => '¿Habilitar API de lista de contactos del newsletter?',
 
+        // Email Notifications
+        'enable_email_notifications' => 'Habilitar notificaciones por email',
+        'enable_email_notifications_help' => 'Cuando esté habilitado, se enviarán emails de confirmación a los usuarios y notificaciones a los administradores cuando alguien se suscriba al newsletter.',
+
         // Popup
         'enable_popup' => 'Habilitar popup del newsletter',
         'popup_title' => 'Título del popup',

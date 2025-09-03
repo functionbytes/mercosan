@@ -105,7 +105,10 @@ class InvoiceHelper
             ]);
         }
 
-        do_action(INVOICE_PAYMENT_CREATED, $invoice);
+        // Only send invoice payment created email if payment is completed
+        if ($invoice->status == InvoiceStatusEnum::COMPLETED && $invoice->paid_at) {
+            do_action(INVOICE_PAYMENT_CREATED, $invoice);
+        }
 
         return $invoice;
     }

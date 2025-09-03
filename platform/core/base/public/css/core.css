@@ -19657,6 +19657,24 @@ a.badge {
     --bb-btn-box-shadow: var(--bb-box-shadow-input)
 }
 
+
+.btn-success:hover,
+.btn-success:focus  {
+    --bb-btn-border-color: var(--bb-success);
+    --bb-btn-hover-border-color: var(--bb-success);
+    --bb-btn-active-border-color: var(--bb-success);
+    --bb-btn-color: var(--bb-success);
+    --bb-btn-bg: var(--bb-success);
+    --bb-btn-hover-color: var(--bb-success);
+    --bb-btn-hover-bg: var(--bb-success-darken);
+    --bb-btn-active-color: var(--bb-success);
+    --bb-btn-active-bg: var(--bb-success-darken);
+    --bb-btn-disabled-bg: var(--bb-success);
+    --bb-btn-disabled-color: var(--bb-success);
+    --bb-btn-box-shadow: var(--bb-box-shadow-input)
+}
+
+
 .btn-outline-success {
     --bb-btn-color: var(--bb-success);
     --bb-btn-bg: transparent;
@@ -29216,5 +29234,9 @@ button.btn  {
 
 
 .table-search-input  button {
+    width: auto;
+}
+
+.steps button {
     width: auto;
 }

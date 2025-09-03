@@ -10,6 +10,7 @@ class NewsletterSettingRequest extends Request
     public function rules(): array
     {
         return [
+            'newsletter_email_notifications_enable' => [new OnOffRule()],
             'enable_newsletter_contacts_list_api' => [new OnOffRule()],
             'newsletter_mailjet_api_key' => ['nullable', 'string', 'min:32', 'max:40'],
             'newsletter_mailjet_api_secret' => ['nullable', 'string', 'min:32', 'max:40'],

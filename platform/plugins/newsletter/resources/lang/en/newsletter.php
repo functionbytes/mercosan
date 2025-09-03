@@ -36,6 +36,8 @@ return [
         'sendgrid_list_id' => 'Sendgrid List ID',
         'sendgrid_list' => 'Sendgrid List',
         'enable_newsletter_contacts_list_api' => 'Enable newsletter contacts list API?',
+        'enable_email_notifications' => 'Enable email notifications',
+        'enable_email_notifications_help' => 'When enabled, confirmation emails will be sent to users and admin notifications will be sent when someone subscribes to the newsletter.',
         'enable_popup' => 'Enable newsletter popup',
         'popup_title' => 'Popup title',
         'popup_subtitle' => 'Popup subtitle',

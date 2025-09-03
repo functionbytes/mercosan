@@ -308,6 +308,7 @@ class OrderHelper
                 return false;
             }
 
+            // customer_new_order should always be sent (confirms order was received)
             $mailer = EmailHandler::setModule(ECOMMERCE_MODULE_SCREEN_NAME);
             if ($mailer->templateEnabled('customer_new_order')) {
                 $mailer = $this->setEmailVariables($order, $mailer);

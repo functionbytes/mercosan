@@ -33,8 +33,6 @@
             </div>
             <div class="modal-body p-0">
                 {!! $newsletterForm->setFormOption('class', 'bb-newsletter-popup-form')->renderForm() !!}
-                <div class="newsletter-success-message" style="display: none;"></div>
-                <div class="newsletter-error-message" style="display: none;"></div>
             </div>
         </div>
     </div>

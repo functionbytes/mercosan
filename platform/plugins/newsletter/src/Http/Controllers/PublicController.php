@@ -68,8 +68,8 @@ class PublicController extends BaseController
                 );
             }
 
-            // Use centralized method with sendEvent=true to send confirmation emails
-            $newsletter = NewsletterFacade::subscribeUser($email, $name, true);
+            // Check if email notifications are enabled in settings
+            $newsletter = NewsletterFacade::subscribeUser($email, $name);
 
             // Store email in session for future verifications
             $request->session()->put('user_email', $newsletter->email);
@@ -198,7 +198,7 @@ class PublicController extends BaseController
     public function checkSubscriptionStatus(Request $request)
     {
         $email = $request->input('email');
-        
+
         if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $this
                 ->httpResponse()

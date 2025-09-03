@@ -18,7 +18,7 @@
     }
     .card {
         background-color: #ffffff;
-        border: 1px solid #dee2e6; /* Borde sutil */
+        border: 1px solid #f1f1f1; /* Borde sutil */
         border-radius: 0.375rem; /* Bordes redondeados */
         margin: 20px 0;
     }
@@ -45,7 +45,7 @@
     }
     .product-row {
         padding: 1rem 0;
-        border-bottom: 1px solid #dee2e6;
+        border-bottom: 1px solid #f1f1f1;
     }
     .product-row:last-child {
         border-bottom: none;
@@ -70,87 +70,103 @@
                 <tr>
                     <td>
                         <table class="card" border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr style="background-color: #fff;border: 1px solid #8888881a;box-shadow: 0 0 10px #8888881a; border-radius: 10px; margin-bottom: 10px;">
-                                <td class="card-body" align="center" style="padding: 1rem;">
-                                    @if (!$order->dont_show_order_info_in_product_list)
-                                        <h1 style="font-size: 1.5rem; font-weight: 600; margin: 0 0 1rem;">¡Gracias por tu pedido!</h1>
-                                        <p style="font-size: 1rem; color: #343a40; margin: 0 0 1.5rem;">Aquí tienes un resumen de tu compra. Puedes ver los detalles completos en el siguiente botón:</p>
-                                        <p style="margin: 0 0 1.5rem;">
-                                            <a href="{{ route('public.orders.tracking', ['order_id' => $order->code, 'email' => $order->user->email ?: $order->address->email]) }}" class="btn">
-                                                Ver mi Pedido
-                                            </a>
-                                        </p>
-                                        <hr style="border: none; border-top: 1px solid #dee2e6; margin: 2rem 0;">
-                                    @endif
 
-                                    @foreach($products ?? $order->products as $orderProduct)
-                                        <table class="product-row" width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style="padding:8px 32px 0;">
+                                    @foreach(($products ?? $order->products) as $orderProduct)
+                                        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" >
                                             <tr>
-                                                <td width="74" style="padding-right: 10px;">
-                                                    <img src="{{ RvMedia::getImageUrl($orderProduct->product_image, 'thumb') }}" width="64" height="64" alt="{{ $orderProduct->product_name }}" style="border-radius: 0.25rem;">
+                                                <td width="76" valign="top" style="padding:16px 12px 16px 0;">
+                                                    <img src="{{ RvMedia::getImageUrl($orderProduct->product_image, 'thumb') }}"
+                                                         width="64" height="64" alt="{{ $orderProduct->product_name }}"
+                                                         style="border-radius:6px; width:64px; height:64px; object-fit:cover;">
                                                 </td>
-                                                <td style="vertical-align: top; text-align: left;">
-                                                    <p style="font-weight:500;text-transform: uppercase;margin: 0rem;">{{ $orderProduct->product_name }}</p>
+                                                <td valign="top" style="padding:16px 0; font:400 14px/1.4 Arial,Helvetica,sans-serif; color:#212529;">
+                                                    <div style="font-weight:600; text-transform:uppercase; margin-bottom:2px;">
+                                                        {{ $orderProduct->product_name }}
+                                                    </div>
+
                                                     @if ($attributes = Arr::get($orderProduct->options, 'attributes'))
-                                                        <p class="text-muted" style="font-size: 14px;margin: 0px;">{{ $attributes }}</p>
+                                                        <div class="muted" style="color:#6c757d; font-size:13px; margin:0;">
+                                                            {{ $attributes }}
+                                                        </div>
                                                     @endif
+
                                                     @if ($orderProduct->product_options_implode)
-                                                        <p class="text-muted" style="font-size: 14px;margin: 0px;">{{ $orderProduct->product_options_implode }}</p>
+                                                        <div class="muted" style="color:#6c757d; font-size:13px; margin:0;">
+                                                            {{ $orderProduct->product_options_implode }}
+                                                        </div>
                                                     @endif
-                                                    <p style="font-size: 14px;margin: 0px;">{{ trans('plugins/ecommerce::products.form.quantity') }}: {{ $orderProduct->qty }}</p>
+
+                                                    <div style="font-size:13px; margin-top:6px;">
+                                                        {{ trans('plugins/ecommerce::products.form.quantity') }}:
+                                                        <strong>{{ $orderProduct->qty }}</strong>
+                                                    </div>
                                                 </td>
-                                                <td style="text-align: right;font-weight: 600;vertical-align: center;font-size: 17px;">
+                                                <td align="right" valign="middle" style="padding:16px 0 16px 12px; font:700 16px/1 Arial,Helvetica,sans-serif; color:#111;">
                                                     {{ format_price($orderProduct->price) }}
                                                 </td>
                                             </tr>
                                         </table>
                                     @endforeach
-
-                                    <!-- Totales -->
-                                    @if (!$order->dont_show_order_info_in_product_list)
-                                        <hr style="border: none; border-top: 1px solid #dee2e6; margin: 2rem 0 1rem;">
-                                        <table width="100%" border="0" cellpadding="0" cellspacing="0" style="text-align: left;">
-                                            @if ($order->sub_total != $order->amount)
-                                                <tr class="totals-row">
-                                                    <td>{{ trans('plugins/ecommerce::products.form.sub_total') }}</td>
-                                                    <td align="right">{{ format_price($order->sub_total) }}</td>
-                                                </tr>
-                                            @endif
-                                            @if ((float)$order->shipping_amount)
-                                                <tr class="totals-row">
-                                                    <td>{{ trans('plugins/ecommerce::products.form.shipping_fee') }}</td>
-                                                    <td align="right">{{ format_price($order->shipping_amount) }}</td>
-                                                </tr>
-                                            @endif
-                                            @if ((float)$order->tax_amount)
-                                                <tr class="totals-row">
-                                                    <td>{{ trans('plugins/ecommerce::products.form.tax') }}</td>
-                                                    <td align="right">{{ format_price($order->tax_amount) }}</td>
-                                                </tr>
-                                            @endif
-                                            @if ((float)$order->discount_amount)
-                                                <tr class="totals-row">
-                                                    <td>{{ trans('plugins/ecommerce::products.form.discount') }}</td>
-                                                    <td align="right" style="color: #198754;">-{{ format_price($order->discount_amount) }}</td>
-                                                </tr>
-                                            @endif
-                                            @if ((float)$order->payment_fee)
-                                                <tr class="totals-row">
-                                                    <td>{{ trans('plugins/payment::payment.payment_fee') }}</td>
-                                                    <td align="right">{{ format_price($order->payment_fee) }}</td>
-                                                </tr>
-                                            @endif
-                                            <tr class="totals-row">
-                                                <td colspan="2"><hr style="border: none; border-top: 1px solid #dee2e6; margin: 0.5rem 0;"></td>
-                                            </tr>
-                                            <tr class="totals-row">
-                                                <td class="font-weight-bold" style="font-size: 1.25rem;">{{ trans('plugins/ecommerce::products.form.total') }}</td>
-                                                <td align="right" class="font-weight-bold" style="font-size: 1.25rem;">{{ format_price($order->amount) }}</td>
-                                            </tr>
-                                        </table>
-                                    @endif
                                 </td>
                             </tr>
+
+                            <!-- Totales -->
+                            @if (!$order->dont_show_order_info_in_product_list)
+                                <tr>
+                                    <td style="padding:8px 32px 0;">
+                                        <table role="presentation" width="100%" >
+
+                                            @if ($order->sub_total != $order->amount)
+                                                <tr><td colspan="2" style="height:6px; line-height:6px; font-size:0;">&nbsp;</td></tr>
+                                                <tr>
+                                                    <td style="font:400 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ trans('plugins/ecommerce::products.form.sub_total') }}</td>
+                                                    <td align="right" style="font:600 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ format_price($order->sub_total) }}</td>
+                                                </tr>
+                                            @endif
+
+                                            @if ((float)$order->shipping_amount)
+                                                <tr>
+                                                    <td style="font:400 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ trans('plugins/ecommerce::products.form.shipping_fee') }}</td>
+                                                    <td align="right" style="font:600 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ format_price($order->shipping_amount) }}</td>
+                                                </tr>
+                                            @endif
+
+                                            @if ((float)$order->tax_amount)
+                                                <tr>
+                                                    <td style="font:400 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ trans('plugins/ecommerce::products.form.tax') }}</td>
+                                                    <td align="right" style="font:600 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ format_price($order->tax_amount) }}</td>
+                                                </tr>
+                                            @endif
+
+                                            @if ((float)$order->discount_amount)
+                                                <tr>
+                                                    <td style="font:400 14px/1.8 Arial,Helvetica,sans-serif; color:#198754;">{{ trans('plugins/ecommerce::products.form.discount') }}</td>
+                                                    <td align="right" style="font:700 14px/1.8 Arial,Helvetica,sans-serif; color:#198754;">-{{ format_price($order->discount_amount) }}</td>
+                                                </tr>
+                                            @endif
+
+                                            @if ((float)$order->payment_fee)
+                                                <tr>
+                                                    <td style="font:400 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ trans('plugins/payment::payment.payment_fee') }}</td>
+                                                    <td align="right" style="font:600 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ format_price($order->payment_fee) }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" class="hr" style="padding:8px 0;">
+                                                        <div style="border-top:1px solid #f1f1f1; line-height:0; height:0;">&nbsp;</div>
+                                                    </td>
+                                                </tr>
+                                            @endif
+
+                                            <tr>
+                                                <td style="font:700 18px/1.6 Arial,Helvetica,sans-serif; color:#111;">{{ trans('plugins/ecommerce::products.form.total') }}</td>
+                                                <td align="right" style="font:700 18px/1.6 Arial,Helvetica,sans-serif; color:#111;">{{ format_price($order->amount) }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            @endif
                         </table>
                     </td>
                 </tr>

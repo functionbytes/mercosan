@@ -10,7 +10,7 @@
             <tbody>
               <tr>
                 <td valign="middle" align="center">
-                  <img src="{{ 'confetti' | icon_url }}" width="40" height="40" alt="Confeti de bienvenida" style="display: block;">
+                  <img src="{{ 'alert-triangle' | icon_url }}" width="40" height="40" alt="Confeti de bienvenida" style="display: block;">
                 </td>
               </tr>
             </tbody>
