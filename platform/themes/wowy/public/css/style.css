@@ -12230,9 +12230,9 @@ a:hover {
 }
 
 .newsletter-inline-shortcode .newsletter-success-message {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    background: #fb000045;
+    color: #ff0000;
+    border: 1px solid #fb000047;
 }
 
 .newsletter-inline-shortcode .newsletter-error-message {
