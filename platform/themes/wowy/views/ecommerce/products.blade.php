@@ -38,12 +38,12 @@
                 </div>
             </div>
         @elseif($layout === 'product-left-sidebar')
-            <div class="col-xl-3 primary-sidebar mt-4">
+            <div class="col-xl-3 col-lg-12 col-md-12">
                 <div class="widget-area">
                     @include(Theme::getThemeNamespace('views.ecommerce.includes.filters'))
                 </div>
             </div>
-            <div class="col-lg-9">
+            <div class="col-xl-9 col-lg-12 col-md-12">
                 <div class="mt-4">
                     <div class="products-listing position-relative bb-product-items-wrapper">
                         @include(Theme::getThemeNamespace() . '::views.ecommerce.includes.product-items', compact('products'))
@@ -51,14 +51,14 @@
                 </div>
             </div>
         @elseif($layout === 'product-right-sidebar')
-            <div class="col-lg-9">
+            <div class="col-xl-9 col-lg-12 col-md-12">
                 <div class="mt-4">
                     <div class="products-listing position-relative bb-product-items-wrapper">
                         @include(Theme::getThemeNamespace() . '::views.ecommerce.includes.product-items', compact('products'))
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 primary-sidebar mt-4">
+            <div class="col-xl-3 col-lg-12 col-md-12">
                 <div class="widget-area">
                     @include(Theme::getThemeNamespace('views.ecommerce.includes.filters'))
                 </div>
