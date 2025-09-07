@@ -224,7 +224,7 @@
                         </div>
                     </div>
                 @endif
-                <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block main-menu-light-white hover-boder hover-boder-white">
+                <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block main-menu-light hover-boder hover-boder">
                     <nav>
                         {!!
                             Menu::renderMenuLocation('main-menu', [
@@ -236,7 +236,7 @@
 
                 @if ($hotline = theme_option('hotline'))
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fa fa-phone-alt"></i><span>{{ __('Hotline') }}</span> <a href="tel:{{ $hotline }}" class="text-white">{{ $hotline }}</a></p>
+                        <p><i class="fa fa-phone-alt"></i><span>{{ __('Hotline') }}</span> <a href="tel:{{ $hotline }}" class="text">{{ $hotline }}</a></p>
                     </div>
                 @endif
 
@@ -246,14 +246,14 @@
                             @if (EcommerceHelper::isWishlistEnabled())
                                 <div class="header-action-icon-2">
                                     <a href="{{ route('public.wishlist') }}" class="wishlist-count">
-                                        <img alt="wowy" src="{{ Theme::asset()->url('images/icons/icon-heart-white.svg') }}">
+                                        <img alt="wowy" src="{{ Theme::asset()->url('images/icons/icon-heart.svg') }}">
                                         <span class="pro-count white">@if (auth('customer')->check())<span>{{ auth('customer')->user()->wishlist()->count() }}</span> @else <span>{{ Cart::instance('wishlist')->count() }}</span>@endif</span>
                                     </a>
                                 </div>
                             @endif
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{{ route('public.cart') }}">
-                                    <img alt="cart" src="{{ Theme::asset()->url('images/icons/icon-cart-white.svg') }}">
+                                    <img alt="cart" src="{{ Theme::asset()->url('images/icons/icon-cart.svg') }}">
                                     <span class="pro-count white">{{ Cart::instance('cart')->count() }}</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -262,11 +262,11 @@
                             </div>
                             <div class="header-action-icon-2">
                                 <a href="{{ route('customer.login') }}">
-                                    <img alt="wowy" src="{{ Theme::asset()->url('images/icons/icon-user-white.svg') }}">
+                                    <img alt="wowy" src="{{ Theme::asset()->url('images/icons/icon-user.svg') }}">
                                 </a>
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
-                                <div class="burger-icon burger-icon-white">
+                                <div class="burger-icon burger-icon">
                                     <span class="burger-icon-top"></span>
                                     <span class="burger-icon-mid"></span>
                                     <span class="burger-icon-bottom"></span>
@@ -296,16 +296,16 @@
         </div>
         @if (is_plugin_active('ecommerce'))
             <div class="mobile-header-content-area">
-                <div class="mobile-search search-style-3 mobile-header-border">
+                <div class="mobile-search search-style-3 mobile-header-border d-none">
                     <form action="{{ route('public.products') }}" class="form--quick-search" data-ajax-url="{{ route('public.ajax.search-products') }}" method="get">
                         <input type="text" name="q" class="input-search-product" placeholder="{{ __('Search...') }}">
                         <button type="submit" title="search"> <i class="far fa-search"></i> </button>
                         <div class="panel--search-result"></div>
                     </form>
                 </div>
-                <div class="mobile-menu-wrap mobile-header-border">
-                    <div class="main-categories-wrap mobile-header-border">
-                        <a class="categories-button-active-2" href="#">
+                <div class="mobile-menu-wrap mobile-header-border ">
+                    <div class="main-categories-wrap mobile-header-border ">
+                        <a class="categories-button-active-2 d-none" href="#">
                             <span class="far fa-bars"></span> {{ __('Browse Categories') }} <i class="down far fa-chevron-down"></i>
                         </a>
                         <div class="categories-dropdown-wrap categories-dropdown-active-small">
@@ -365,9 +365,9 @@
                         !!}
                     </nav>
                 </div>
-                <div class="mobile-header-info-wrap mobile-header-border">
+                <div class="mobile-header-info-wrap mobile-header-border d-none">
                     @if (is_plugin_active('language'))
-                        <div class="single-mobile-header-info">
+                        <div class="single-mobile-header-info ">
                             <a class="mobile-language-active" href="#">{{ __('Language') }} <span><i class="far fa-angle-down"></i></span></a>
                             <div class="lang-curr-dropdown lang-dropdown-active">
                                 <ul>

@@ -12,8 +12,7 @@
             @for ($i = 1; $i <= 5; $i++)
                 @if ($shortcode->{'title' . $i})
 
-
-                    <div class="col-lg-4 col-md-6 mb-md-3 mb-lg-0">
+                    <div class="col-lg-4 col-md-12 mb-md-3 mb-lg-0">
                         <div class="banner-left-icon d-flex align-items-center wow fadeIn animated h-100 {{ $headerStyle == 'header-style-2' ? 'style-2' : '' }}">
                             <div class="banner-icon">
                                 <img src="{{ RvMedia::getImageUrl($shortcode->{'icon' . $i}, null, false, RvMedia::getDefaultImage()) }}" alt="icon">

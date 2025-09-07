@@ -16,7 +16,7 @@
                     <p class="float-md-left font-sm text-muted mb-0">{!! Theme::getSiteCopyright() !!}</p>
                 </div>
                 <div class="col-lg-6">
-                    <p class="text-lg-end text-start font-sm text-muted mb-0">
+                    <p class="text-lg-end text-center font-sm text-muted mb-0">
                         {{ __('All rights reserved.') }}
                     </p>
                 </div>
@@ -58,7 +58,7 @@
             "sec": "{{ __('sec') }}",
             "No reviews!": "{{ __('No reviews!') }}"
         };
-        
+
         window.trackedStartCheckout = '{{ session("tracked_start_checkout") }}';
         window.siteUrl = '{{ url("/") }}';
     </script>

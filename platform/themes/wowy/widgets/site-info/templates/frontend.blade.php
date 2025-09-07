@@ -24,7 +24,7 @@
             @endif
         @endif
             @if (($socialLinks = theme_option('social_links')) && $socialLinks = json_decode($socialLinks, true))
-            <h4 class="mb-10 mt-20 fw-600 text-grey-4 wow fadeIn animated">{{ __('Follow Us') }}</h4>
+            <h4 class="mb-10 mt-20 fw-600 wow fadeIn animated">{{ __('Follow Us') }}</h4>
             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
                 @foreach($socialLinks as $socialLink)
                     @if (count($socialLink) == 4 && isset($socialLink[0]['value']) && isset($socialLink[1]['value']) && isset($socialLink[2]['value']) && isset($socialLink[3]['value']))

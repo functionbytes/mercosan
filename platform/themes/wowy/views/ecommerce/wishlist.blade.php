@@ -51,7 +51,15 @@
                     </div>
                     {!! $products->withQueryString()->links(Theme::getThemeNamespace() . '::partials.custom-pagination') !!}
                 @else
-                    <p>{{ __('No item in wishlist!') }}</p>
+                    <div class="cart-container">
+                        <div class="checkout-empty-container text-center py-5">
+                            <i class="fa-solid fa-heart"></i>
+                            <h2>{{ __('No item in wishlist!') }}</h2>
+                            <p class="">{{ __('Add products to start your purchase.') }}</p>
+                        </div>
+
+                    </div>
+
                 @endif
             </div>
         </div>

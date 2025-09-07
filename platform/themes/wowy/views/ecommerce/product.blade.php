@@ -124,7 +124,7 @@
 
                                     <button type="submit" class="button button-add-to-cart" type="submit">{{ __('Add to cart') }}</button>
                                     @if (EcommerceHelper::isQuickBuyButtonEnabled())
-                                        <button class="button button-buy-now ms-2" type="submit" name="checkout">{{ __('Buy Now') }}</button>
+                                        <button class="button button-buy-now " type="submit" name="checkout">{{ __('Buy Now') }}</button>
                                     @endif
 
                                     @if (EcommerceHelper::isWishlistEnabled())
