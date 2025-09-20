@@ -219,7 +219,7 @@ class ThemeOptionSeeder extends BaseSeeder
                 ],
                 [
                     'key' => 'message',
-                    'value' => '<b class="text-success"> Trendy 25</b> silver jewelry, save up 35% off today',
+                    'value' => '<b class="text-success"> Trendy 25</b> joyería de plata, ahorra hasta un 35% hoy',
                 ],
                 [
                     'key' => 'link',
@@ -227,7 +227,7 @@ class ThemeOptionSeeder extends BaseSeeder
                 ],
                 [
                     'key' => 'link_text',
-                    'value' => 'Shop now',
+                    'value' => 'Comprar ahora',
                 ],
             ],
             [
@@ -237,7 +237,7 @@ class ThemeOptionSeeder extends BaseSeeder
                 ],
                 [
                     'key' => 'message',
-                    'value' => '<b class="text-danger">Supper Value Deals</b> - Save more with coupons',
+                    'value' => '<b class="text-danger">Súper Ofertas de Valor</b> - Ahorra más con cupones',
                 ],
                 [
                     'key' => 'link',
@@ -255,7 +255,7 @@ class ThemeOptionSeeder extends BaseSeeder
                 ],
                 [
                     'key' => 'message',
-                    'value' => 'Get great devices up to 50% off',
+                    'value' => 'Consigue excelentes dispositivos con hasta un 50% de descuento',
                 ],
                 [
                     'key' => 'link',
@@ -263,7 +263,7 @@ class ThemeOptionSeeder extends BaseSeeder
                 ],
                 [
                     'key' => 'link_text',
-                    'value' => 'View details',
+                    'value' => 'Ver detalles',
                 ],
             ],
         ];

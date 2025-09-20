@@ -53,7 +53,7 @@
     <div class="header-top header-top-ptb-1 d-none d-lg-block">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-xl-3 col-lg-4">
+                <div class="col-xl-2 col-lg-2">
                     <div class="header-info">
                         <ul>
                             @if ($hotline = theme_option('hotline'))
@@ -67,8 +67,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-5 col-lg-4">
-                    <div class="text-center">
+                <div class="col-xl-8 col-lg-8 text-center">
                         @if (theme_option('header_messages') && $headerMessages = json_decode(theme_option('header_messages'), true))
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
@@ -93,13 +92,12 @@
                                 </ul>
                             </div>
                         @endif
-                    </div>
                 </div>
 
                 @php $currencies = is_plugin_active('ecommerce') ? get_all_currencies() : []; @endphp
 
                 @if (is_plugin_active('ecommerce') || is_plugin_active('language'))
-                    <div class="col-xl-4 col-lg-4">
+                    <div class="col-xl-2 col-lg-2">
                         <div class="header-info header-info-right">
                             <ul>
                                 @if (is_plugin_active('language'))

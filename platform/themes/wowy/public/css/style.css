@@ -5350,7 +5350,13 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 
 #news-flash {
     margin-bottom: -8px;
-    min-width: 400px
+    min-width: 700px;
+    text-align: center;
+    display: flex;
+}
+
+#news-flash ul{
+    width: 100%;
 }
 
 .header-info i {

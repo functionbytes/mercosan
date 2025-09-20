@@ -47,28 +47,28 @@ class SimpleSliderSeeder extends BaseSeeder
 
         $sliderItems = [
             [
-                'title' => 'Super Value Deals',
+                'title' => 'Ofertas Súper Valor',
                 'link' => '/products',
-                'description' => 'Save more with coupons & up to 70% off',
-                'button_text' => 'Shop now',
-                'subtitle' => 'Trade-In Offer',
-                'highlight_text' => 'On All Products',
+                'description' => 'Ahorra más con cupones y hasta un 70% de descuento',
+                'button_text' => 'Comprar ahora',
+                'subtitle' => 'Oferta de intercambio',
+                'highlight_text' => 'En todos los productos',
             ],
             [
-                'title' => 'Tech Trending',
+                'title' => 'Tendencias Tech',
                 'link' => '/products',
-                'description' => 'Save more with coupons & up to 20% off',
-                'button_text' => 'Discover now',
-                'subtitle' => 'Tech Promotions',
-                'highlight_text' => 'Great Collection',
+                'description' => 'Ahorra más con cupones y hasta un 20% de descuento',
+                'button_text' => 'Descubrir ahora',
+                'subtitle' => 'Promociones tecnológicas',
+                'highlight_text' => 'Gran colección',
             ],
             [
-                'title' => 'Big Deals From',
+                'title' => 'Grandes ofertas de',
                 'link' => '/products',
-                'description' => 'Headphone, Gaming Laptop, PC and more...',
-                'button_text' => 'Shop now',
-                'subtitle' => 'Upcoming Offer',
-                'highlight_text' => 'Manufacturer',
+                'description' => 'Auriculares, portátiles gaming, PC y más...',
+                'button_text' => 'Comprar ahora',
+                'subtitle' => 'Próxima oferta',
+                'highlight_text' => 'Fabricante',
             ],
         ];
 
