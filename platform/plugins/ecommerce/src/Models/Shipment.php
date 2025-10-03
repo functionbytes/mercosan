@@ -33,6 +33,9 @@ class Shipment extends BaseModel
         'estimate_date_shipped',
         'date_shipped',
         'customer_delivered_confirmed_at',
+        'delivery_token',
+        'delivered_at',
+        'delivered_by',
     ];
 
     protected $casts = [
@@ -42,10 +45,17 @@ class Shipment extends BaseModel
         'estimate_date_shipped' => 'datetime',
         'date_shipped' => 'datetime',
         'customer_delivered_confirmed_at' => 'datetime',
+        'delivered_at' => 'datetime',
     ];
 
     protected static function booted(): void
     {
+        static::creating(function (Shipment $shipment): void {
+            if (! $shipment->delivery_token) {
+                $shipment->delivery_token = \Illuminate\Support\Str::random(64);
+            }
+        });
+
         static::deleted(function (Shipment $shipment): void {
             $shipment->histories()->delete();
         });

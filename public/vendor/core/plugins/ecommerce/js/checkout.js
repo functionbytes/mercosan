@@ -32125,8 +32125,8 @@ var MainCheckout = /*#__PURE__*/function () {
           $('input[name=shipping_option]').val($this.data('option'));
           $('.mobile-total').text('...');
           var _data = {
-            shipping_method: $this.val(),
-            shipping_option: $this.data('option'),
+            shipping_method: $this.data('option'),
+            shipping_option: $this.val(),
             payment_method: '',
             address: {
               address_id: $('#address_id').val(),

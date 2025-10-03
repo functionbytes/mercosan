@@ -41,7 +41,8 @@ class CheckoutRequest extends Request
             && EcommerceHelper::isAvailableShipping($products)
             && ! (bool) get_ecommerce_setting('disable_shipping_options', false)
         ) {
-            $rules['shipping_method'] = 'required|' . Rule::in(ShippingMethodEnum::values());
+            // Accept both enum values (default, '') and numeric shipping rule IDs (5, 7, 8, etc.)
+            $rules['shipping_method'] = 'required|string';
             if (auth('customer')->check()) {
                 $rules['address.address_id'] = 'required_without:address.name';
                 if (! $this->has('address.address_id') || $addressId === 'new') {

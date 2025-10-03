@@ -3,6 +3,7 @@
 use Botble\Base\Facades\AdminHelper;
 use Botble\Base\Http\Middleware\RequiresJsonRequestMiddleware;
 use Botble\Ecommerce\Facades\EcommerceHelper;
+use Botble\Ecommerce\Http\Controllers\ConfirmDeliveryController;
 use Botble\Ecommerce\Http\Controllers\ExportProductCategoryController;
 use Botble\Ecommerce\Http\Controllers\Fronts\PublicUpdateCheckoutController;
 use Botble\Ecommerce\Http\Controllers\Fronts\PublicUpdateTaxCheckoutController;
@@ -227,6 +228,12 @@ Theme::registerRoutes(function (): void {
                 'as' => 'public.orders.tracking',
                 'uses' => 'PublicProductController@getOrderTracking',
             ])->wherePrimaryKey();
+
+            Route::get('delivery/confirm/{token}', [ConfirmDeliveryController::class, 'show'])
+                ->name('public.orders.delivery.confirmation');
+
+            Route::post('delivery/confirm/{token}', [ConfirmDeliveryController::class, 'confirm'])
+                ->name('public.orders.delivery.confirm');
 
             Route::get('ajax/quick-view/{id?}', [QuickViewController::class, 'show'])
                 ->middleware(RequiresJsonRequestMiddleware::class)

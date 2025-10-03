@@ -384,6 +384,12 @@
                 </div>
             {% endif %}
 
+            {% if shipping_method_name %}
+                <div>
+                    {{ 'plugins/ecommerce::order.shipping_method'|trans }}: <strong>{{ shipping_method_name }}</strong>
+                </div>
+            {% endif %}
+
             {% if payment_description %}
                 <div>
                     {{ 'plugins/ecommerce::order.payment_info'|trans }}: <strong>{{ payment_description | raw }}</strong>

@@ -30,25 +30,8 @@ class PrintShippingLabelController extends BaseController
 
         $writer = new Writer($renderer);
 
-        $url = $shipment->tracking_link;
-
-        if (! $url) {
-            $params = [
-                'order_id' => get_order_code($shipment->order_id),
-            ];
-
-            $customer = $shipment->order->user;
-
-            $orderAddress  = $shipment->order->address;
-
-            if (EcommerceHelper::isLoginUsingPhone()) {
-                $params['phone'] = $orderAddress->phone ?: $customer->phone;
-            } else {
-                $params['email'] = $orderAddress->email ?: $customer->email;
-            }
-
-            $url = route('public.orders.tracking', $params);
-        }
+        // Usar el token de validación de entrega para el QR
+        $url = route('public.orders.delivery.confirmation', $shipment->delivery_token);
 
         $qrCode = $writer->writeString($url);
 
@@ -99,6 +82,8 @@ class PrintShippingLabelController extends BaseController
                     'tracking_link' => $shipment->tracking_link,
                     'note' => Str::limit((string) $shipment->note, 90),
                     'qr_code' => base64_encode($qrCode),
+                    'delivery_date' => $order->delivery_date ? BaseHelper::formatDate($order->delivery_date) : null,
+                    'delivery_time' => $order->delivery_time ? $order->delivery_time : null,
                     'order' => [
                         'amount' => format_price($order->amount),
                         'tax_amount' => format_price($order->tax_amount),

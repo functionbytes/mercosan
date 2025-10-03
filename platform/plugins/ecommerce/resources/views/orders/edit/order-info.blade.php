@@ -122,6 +122,17 @@
                     {!! BaseHelper::clean($order->payment->status->toHtml()) !!}
                 </x-core::table.body.cell>
             </x-core::table.body.row>
+
+            @if ($order->shipping_method_name)
+                <x-core::table.body.row>
+                    <x-core::table.body.cell>
+                        {{ trans('plugins/ecommerce::order.shipping_method') }}
+                    </x-core::table.body.cell>
+                    <x-core::table.body.cell>
+                        {{ $order->shipping_method_name }}
+                    </x-core::table.body.cell>
+                </x-core::table.body.row>
+            @endif
         @endif
 
         @if($isInAdmin)

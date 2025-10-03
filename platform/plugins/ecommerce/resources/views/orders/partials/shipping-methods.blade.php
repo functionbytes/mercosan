@@ -19,7 +19,7 @@
                             [
                                 'shippingItem' => $shippingItem,
                                 'attributes' => [
-                                    'id' => "shipping-method-$shippingKey-$shippingOption",
+                                    'id' => "shipping-method-$shippingOption-$shippingKey",
                                     'name' => 'shipping_method',
                                     'class' => 'magic-radio shipping_method_input',
                                     'checked' => (old('shipping_method', $selectedShippingMethod ?? $defaultShippingMethod ?? '') == $shippingKey && old('shipping_option', $selectedShippingOption ?? $defaultShippingOption ?? '') == $shippingOption),

@@ -6,249 +6,271 @@
     <title>Orden de Producción - {{ $order->code }}</title>
 
     <style>
-        body {
-            font-size: 15px;
-            font-family: 'DejaVu Sans', Arial, sans-serif !important;
-            position: relative;
+        @page {
+            size: 80mm auto;
+            margin: 0;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        table tr td {
+        * {
+            margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
-        table tr td:last-child {
-            text-align: right;
+        body {
+            font-family: 'DejaVu Sans', 'Arial', sans-serif;
+            font-size: 9pt;
+            width: 80mm;
+            padding: 5mm;
+            margin: 0 auto;
+            line-height: 1.3;
         }
 
-        .bold, strong, b, .total, .stamp {
-            font-weight: 700;
+        .header {
+            text-align: center;
+            margin-bottom: 5mm;
+            border-bottom: 1px dashed #000;
+            padding-bottom: 3mm;
         }
 
-        .right {
-            text-align: right;
+        .logo {
+            max-width: 40mm;
+            height: auto;
+            margin-bottom: 2mm;
         }
 
-        .large {
-            font-size: 1.75em;
+        .title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin: 2mm 0;
         }
 
-        .total {
-            color: #fb7578;
+        .section {
+            margin-bottom: 4mm;
+            padding-bottom: 3mm;
+            border-bottom: 1px dashed #ccc;
         }
 
-        .large.total img {
-            width: 14px;
+        .section:last-child {
+            border-bottom: none;
         }
 
-        .logo-container {
-            margin: 20px 0 50px;
-        }
-
-        .invoice-info-container {
-            font-size: .875em;
-        }
-
-        .invoice-info-container td {
-            padding: 4px 0;
-        }
-
-        .line-items-container {
-            font-size: .875em;
-            margin: 70px 0;
-        }
-
-        .line-items-container th {
-            border-bottom: 2px solid #ddd;
-            color: #999;
-            font-size: .75em;
-            padding: 10px 0 15px;
-            text-align: left;
+        .section-title {
+            font-size: 8pt;
+            font-weight: bold;
             text-transform: uppercase;
+            margin-bottom: 2mm;
+            letter-spacing: 0.3pt;
         }
 
-        .line-items-container th:last-child {
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1mm;
+            font-size: 8pt;
+        }
+
+        .info-label {
+            font-weight: bold;
+        }
+
+        .product-item {
+            margin-bottom: 3mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-name {
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 1mm;
+        }
+
+        .product-qty {
+            font-size: 10pt;
+            font-weight: bold;
             text-align: right;
+            margin-top: 1mm;
         }
 
-        .line-items-container td {
-            padding: 10px 0;
+        .product-options {
+            font-size: 8pt;
+            color: #333;
+            margin-left: 2mm;
+            margin-top: 1mm;
         }
 
-        .line-items-container tbody tr:first-child td {
-            padding-top: 25px;
+        .product-option {
+            margin-bottom: 0.5mm;
         }
 
-        .line-items-container.has-bottom-border tbody tr:last-child td {
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 25px;
+        .footer {
+            text-align: center;
+            margin-top: 5mm;
+            padding-top: 3mm;
+            border-top: 1px dashed #000;
+            font-size: 7pt;
         }
 
-        .line-items-container th.heading-quantity {
-            width: 50px;
+        strong, b {
+            font-weight: bold;
         }
 
-        .line-items-container th.heading-price {
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
             text-align: right;
-            width: 100px;
-        }
-
-        .line-items-container th.heading-subtotal {
-            width: 100px;
-        }
-
-        .invoice-customer-container {
-            padding: 10px;
-            background: #fff5f5;
-            --bs-border-opacity: 1;
-            border-color: #fb0000;
-            margin-bottom: 20px;
-        }
-
-        .invoice-private-container {
-            padding: 10px;
-            background: #efefef;
-            --bs-border-opacity: 1;
-            border-color:  #000;
-        }
-
-        .payment-info {
-            font-size: .875em;
-            line-height: 1.5;
-            width: 38%
-        }
-
-        small {
-            font-size: 80%;
-        }
-
-        .stamp {
-            border: 2px solid #555;
-            color: #555;
-            display: inline-block;
-            font-size: 18px;
-            line-height: 1;
-            opacity: .5;
-            padding: .3rem .75rem;
-            position: fixed;
-            text-transform: uppercase;
-            top: 40%;
-            left: 40%;
-            transform: rotate(-14deg);
-        }
-
-        .is-failed {
-            border-color: #d23;
-            color: #d23;
-        }
-
-        .is-completed {
-            border-color: #0a9928;
-            color: #0a9928;
         }
     </style>
 </head>
 <body>
 
-<table class="invoice-info-container">
-    <tr>
-        <td>
-            <div class="logo-container">
-                @if($logo && $logoFullPath)
-                    <img src="{{ $logoFullPath }}" style="width:100%; max-width:150px; margin-bottom: 15px;" alt="Logo">
-                @endif
-            </div>
-        </td>
-        <td>
-            <p>
-                <strong>{{ $order->created_at->format('F d, Y') }}</strong>
-            </p>
-            <p>
-                <strong style="display: inline-block">Orden: </strong>
-                <span style="display: inline-block">{{ $order->code }}</span>
-            </p>
-        </td>
-    </tr>
-</table>
+<!-- HEADER -->
+<div class="header">
+    @if($logo && $logoFullPath)
+        <img src="{{ $logoFullPath }}" class="logo" alt="Logo">
+    @endif
+    <div class="title">ORDEN DE PRODUCCIÓN</div>
+    <div style="font-size: 10pt; font-weight: bold;">{{ $order->code }}</div>
+    <div style="font-size: 8pt; margin-top: 2mm;">{{ $order->created_at->format('d/m/Y H:i') }}</div>
+</div>
 
-<table class="invoice-info-container">
-    <tr>
-        <td>
-            <p><strong>DATOS DE PRODUCCIÓN</strong></p>
-            <p>Orden: {{ $order->code }}</p>
-            <p>Fecha: {{ $order->created_at->format('d/m/Y') }}</p>
-            <p>Estado: {{ $order->status->label() }}</p>
-        </td>
-        <td>
-            <p><strong>{{ $order->user->name ?: ($order->shippingAddress->name ?? 'Cliente') }}</strong></p>
-            @if($order->user->email ?: $order->shippingAddress->email)
-                <p>{{ $order->user->email ?: $order->shippingAddress->email }}</p>
+<!-- INFORMACIÓN DE LA ORDEN -->
+<div class="section">
+    <div class="section-title">Información del Pedido</div>
+    <div class="info-row">
+        <span class="info-label">Orden:</span>
+        <span>{{ $order->code }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Estado:</span>
+        <span>{{ $order->status->label() }}</span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Cliente:</span>
+        <span>{{ $order->user->name ?: ($order->shippingAddress->name ?? 'N/A') }}</span>
+    </div>
+
+
+    <div class="info-row">
+        <span class="info-label">Fecha entrega:</span>
+        <span>@if($order->delivery_date)
+                {{ $order->delivery_date->format('d/m/Y') }}
+            @else
+                N/A
             @endif
-            @if($order->user->phone ?: $order->shippingAddress->phone)
-                <p>{{ $order->user->phone ?: $order->shippingAddress->phone }}</p>
+        </span>
+    </div>
+
+    <div class="info-row">
+        <span class="info-label">Hora entrega:</span>
+        <span>
+            @if($order->delivery_time)
+                {{ $order->delivery_time }}
+            @else
+                N/A
             @endif
-        </td>
-    </tr>
-</table>
-
-
-<table class="line-items-container">
-    <thead>
-    <tr>
-        <th class="heading-description">Producto</th>
-        <th class="heading-description">Características/Opciones</th>
-        <th class="heading-quantity">Cantidad</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($order->products as $orderProduct)
-        <tr>
-            <td>{{ $orderProduct->product_name }}</td>
-            <td>
-                @if($orderProduct->options && isset($orderProduct->options['attributes']) && $orderProduct->options['attributes'])
-                    <div><small>Atributos: {{ $orderProduct->options['attributes'] }}</small></div>
+        </span>
+    </div>
+    <div class="info-row">
+        <span class="info-label">Dirección:</span>
+        <span>@if($order->shippingAddress)
+                @if($order->shippingAddress->address)
+                    {{ $order->shippingAddress->address }}
                 @endif
-                @if($orderProduct->options && isset($orderProduct->options['options']) && is_array($orderProduct->options['options']))
-                    @foreach($orderProduct->options['options'] as $option)
-                        <div><small>{{ $option['name'] ?? '' }}: {{ $option['value'] ?? '' }}</small></div>
-                    @endforeach
+                @if($order->shippingAddress->city || $order->shippingAddress->state)
+
+                    {{ $order->shippingAddress->city }}
+                    @if($order->shippingAddress->city && $order->shippingAddress->state), @endif
+                    {{ $order->shippingAddress->state }}
+
                 @endif
-                @if($orderProduct->product_options && is_array($orderProduct->product_options))
-                    @foreach($orderProduct->product_options as $option)
-                        <div><small>{{ $option['name'] ?? '' }}: {{ $option['value'] ?? '' }}</small></div>
-                    @endforeach
+                @if($order->shippingAddress->zip_code)
+                    {{ $order->shippingAddress->zip_code }}ajustar
                 @endif
-            </td>
-            <td class="bold">{{ $orderProduct->qty }}</td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+            @endif</span>
+    </div>
 
 
-@if($order->description)
-    <table class="invoice-customer-container">
-        <tr style="text-align: left">
-            <td style="text-align: left">
-                <p><strong>Observaciones del Cliente:</strong> {{ $order->description }}</p>
-            </td>
-        </tr>
+</div>
+
+<!-- PRODUCTOS -->
+<div class="section">
+    <div class="section-title">Productos Solicitados ({{ $order->products->count() }})</div>
+    <table style="width: 100%; border-collapse: collapse; font-size: 8pt;">
+        @foreach($order->products as $index => $orderProduct)
+            @php
+                $hasOptions = false;
+                $allOptions = [];
+
+                // Recopilar atributos
+                if (!empty($orderProduct->options['attributes'])) {
+                    $allOptions[] = ['label' => 'Atributos', 'value' => $orderProduct->options['attributes']];
+                    $hasOptions = true;
+                }
+
+                // Recopilar options
+                if (!empty($orderProduct->options['options']) && is_array($orderProduct->options['options'])) {
+                    foreach ($orderProduct->options['options'] as $option) {
+                        if (!empty($option['name']) && !empty($option['value'])) {
+                            $allOptions[] = ['label' => $option['name'], 'value' => $option['value']];
+                            $hasOptions = true;
+                        }
+                    }
+                }
+
+                // Recopilar product_options
+                if (!empty($orderProduct->product_options) && is_array($orderProduct->product_options)) {
+                    foreach ($orderProduct->product_options as $option) {
+                        if (!empty($option['name']) && !empty($option['value'])) {
+                            $allOptions[] = ['label' => $option['name'], 'value' => $option['value']];
+                            $hasOptions = true;
+                        }
+                    }
+                }
+            @endphp
+            <tr >
+                <td style="padding: 2mm 0; vertical-align: top; width: 75%;">
+                    <div style="font-weight: bold; font-size: 9pt; margin-bottom: 1mm;">
+                        {{ $index + 1 }}. {{ $orderProduct->product_name }}
+                    </div>
+                    @if($hasOptions)
+                        <div style="font-size: 7pt; color: #555; line-height: 1.3;">
+                            @foreach($allOptions as $option)
+                                <div>• {{ $option['label'] }}: {{ $option['value'] }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+                </td>
+                <td style="padding: 2mm 0; vertical-align: top; text-align: right; width: 25%;">
+                    <div style="font-size: 11pt; font-weight: bold;">
+                        {{ $orderProduct->qty }}
+                    </div>
+                </td>
+            </tr>
+        @endforeach
     </table>
-@endif
+</div>
 
+<!-- OBSERVACIONES DEL AGENTE -->
 @if($order->private_notes)
-    <table class="invoice-private-container">
-        <tr style="text-align: left">
-            <td style="text-align: left;">
-                <p><strong>🔒 NOTAS INTERNAS DE PRODUCCIÓN:</strong> {{ $order->private_notes }}</p>
-            </td>
-        </tr>
-    </table>
+    <div class="">
+        <div class="section-title">Observaciones</div>
+        <div>
+                {{ $order->private_notes }}
+        </div>
+    </div>
 @endif
+<!-- FOOTER -->
+<div class="footer">
+    <div>Documento generado: {{ now()->format('d/m/Y H:i') }}</div>
+</div>
 
 
 </body>

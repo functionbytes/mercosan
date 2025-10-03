@@ -55,8 +55,9 @@ class HandleShippingFeeService
             'shipping_method' => $method,
             'shipping_option_from_data' => $option
         ]);
-        
-        $shippingMethods = $businessRulesService->getAvailableShippingMethods($dataWithSelection, $option);
+
+        // Pass the selected method (not option) to mark it as selected
+        $shippingMethods = $businessRulesService->getAvailableShippingMethods($dataWithSelection, $method);
         
         // Convert the business rules format to the expected format
         $result = [];
@@ -82,16 +83,24 @@ class HandleShippingFeeService
             uasort($defaultMethods, function($a, $b) {
                 return ($a['priority'] ?? 999) <=> ($b['priority'] ?? 999);
             });
-            
-            $result[ShippingMethodEnum::DEFAULT] = $defaultMethods;
+
+                // Structure: ['5' => ['default' => [...]], '7' => ['default' => [...]], '8' => ['default' => [...]]]
+            // Where 5, 7, 8 are the shipping rule IDs from database
+            foreach ($defaultMethods as $methodId => $methodData) {
+                $result[$methodId] = [ShippingMethodEnum::DEFAULT => $methodData];
+            }
         }
 
         // Apply filters for any additional customizations
         $result = apply_filters('handle_shipping_fee', $result, $data, $option);
-        
+
+        // ALWAYS return all methods, never filter
+        // The selected method is marked with 'is_selected' flag in business rules service
+
         \Log::info('HandleShippingFeeService: Final result with business rules applied', [
-            'methods_count' => isset($result[ShippingMethodEnum::DEFAULT]) ? count($result[ShippingMethodEnum::DEFAULT]) : 0,
-            'methods' => isset($result[ShippingMethodEnum::DEFAULT]) ? array_keys($result[ShippingMethodEnum::DEFAULT]) : [],
+            'methods_count' => count($result),
+            'methods' => array_keys($result),
+            'selected_method' => $method,
             'business_rules_applied' => true
         ]);
 

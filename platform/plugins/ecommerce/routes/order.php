@@ -28,6 +28,12 @@ AdminHelper::registerRoutes(function (): void {
                 'permission' => 'orders.edit',
             ]);
 
+            Route::post('confirm-production', [
+                'as' => 'confirm-production',
+                'uses' => 'OrderController@postConfirmProduction',
+                'permission' => 'orders.edit',
+            ]);
+
             Route::post('send-order-confirmation-email/{order}', [
                 'as' => 'send-order-confirmation-email',
                 'uses' => 'OrderController@postResendOrderConfirmationEmail',

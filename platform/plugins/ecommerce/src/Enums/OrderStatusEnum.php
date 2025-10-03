@@ -9,6 +9,7 @@ use Illuminate\Support\HtmlString;
 /**
  * @method static OrderStatusEnum PENDING()
  * @method static OrderStatusEnum PROCESSING()
+ * @method static OrderStatusEnum IN_PRODUCTION()
  * @method static OrderStatusEnum COMPLETED()
  * @method static OrderStatusEnum CANCELED()
  * @method static OrderStatusEnum PARTIAL_RETURNED()
@@ -19,6 +20,8 @@ class OrderStatusEnum extends Enum
     public const PENDING = 'pending';
 
     public const PROCESSING = 'processing';
+
+    public const IN_PRODUCTION = 'in_production';
 
     public const COMPLETED = 'completed';
 
@@ -35,6 +38,7 @@ class OrderStatusEnum extends Enum
         $color = match ($this->value) {
             self::PENDING => 'warning',
             self::PROCESSING => 'info',
+            self::IN_PRODUCTION => 'primary',
             self::COMPLETED => 'success',
             self::CANCELED, self::RETURNED, self::PARTIAL_RETURNED => 'danger',
             default => 'primary',
@@ -48,6 +52,7 @@ class OrderStatusEnum extends Enum
         return match ($this->value) {
             self::PENDING => 'ti ti-clock',
             self::PROCESSING => 'ti ti-refresh',
+            self::IN_PRODUCTION => 'ti ti-tool',
             self::COMPLETED => 'ti ti-circle-check',
             self::CANCELED => 'ti ti-circle-x',
             self::PARTIAL_RETURNED, self::RETURNED => 'ti ti-reload',

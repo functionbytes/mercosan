@@ -1,4 +1,5 @@
-@empty($posts)
+@empty($posts
+)
 
     <section class="section-padding-60">
     <div class="container">

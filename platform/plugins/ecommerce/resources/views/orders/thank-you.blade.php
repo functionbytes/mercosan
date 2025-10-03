@@ -69,7 +69,7 @@
 
                         @if (
                             $order->sub_total != $order->amount
-                            || $order->shipping_method->getValue()
+                            || !empty($order->shipping_method)
                             || (EcommerceHelper::isTaxEnabled() && (float) $order->tax_amount)
                             || (float) $order->discount_amount
                         )
@@ -83,14 +83,14 @@
                             ])
                         @endif
 
-                        @if ($order->shipping_method->getValue())
+                        @if (!empty($order->shipping_method))
                             @include('plugins/ecommerce::orders.thank-you.total-row', [
                                 'label' =>
                                     __('Shipping fee') .
                                     ($order->is_free_shipping
                                         ? ' <small>(' . __('Using coupon code') . ': <strong>' . $order->coupon_code . '</strong>)</small>'
                                         : ''),
-                                'value' => $order->shipping_method_name . ((float) $order->shipping_amount ? ' - ' . format_price($order->shipping_amount) : ' - ' . __('Free')),
+                                'value' => ((float) $order->shipping_amount ? format_price($order->shipping_amount) : __('Free')),
 
                             ])
                         @endif
@@ -188,14 +188,6 @@
                             @endif
                         @endif
 
-                        @if (!empty($isShowShipping))
-                            <p>
-                                <span class="d-inline-block-title">{{ __('Shipping method') }}:</span>
-                                <span class="order-customer-info-meta">{{ $order->shipping_method_name }} -
-                        {{ format_price($order->shipping_amount) }}</span>
-                            </p>
-                        @endif
-
                         @if (is_plugin_active('payment') && $order->payment->id)
                             <p>
                                 <span class="d-inline-block-title">{{ __('Payment method') }}:</span>
@@ -214,6 +206,13 @@
                                     ($bankInfo = OrderHelper::getOrderBankInfo($orders)))
                                 {!! $bankInfo !!}
                             @endif
+                        @endif
+
+                        @if (!empty($order->shipping_method))
+                            <p>
+                                <span class="d-inline-block-title">{{ __('Shipping method') }}:</span>
+                                <span class="order-customer-info-meta">{{ $order->shipping_method_name }}</span>
+                            </p>
                         @endif
 
                         {!! apply_filters('ecommerce_thank_you_customer_info', null, $order) !!}

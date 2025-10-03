@@ -9118,7 +9118,7 @@ body.show-admin-bar .mobile-header-wrapper-style,body.show-admin-bar .sticky-bar
 
 .rating_wrap .rating:before {
     color: #d2d2d2;
-    content: "ï€…ï€…ï€…ï€…ï€…";
+    content: "";
     float: left;
     font-size: 12px;
     font-weight: 900;

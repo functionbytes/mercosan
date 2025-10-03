@@ -24,15 +24,6 @@
                                 ])
 
                                 <div class="btn-list justify-content-end my-3">
-                                    <x-core::button
-                                        tag="a"
-                                        :href="route('orders.production-pdf', $order->id) . '?type=print'"
-                                        target="_blank"
-                                        icon="ti ti-file-type-pdf"
-                                        color="success"
-                                    >
-                                        Orden de Producción PDF
-                                    </x-core::button>
                                     @if ($order->isInvoiceAvailable())
                                         <x-core::button
                                             tag="a"
@@ -139,7 +130,7 @@
                                         @if (
                                             $order->payment->status == Botble\Payment\Enums\PaymentStatusEnum::COMPLETED
                                             && (
-                                                $order->payment->amount - $order->payment->refunded_amount > 0
+                                                  $order->payment->amount - $order->payment->refunded_amount > 0
                                                 || $order->products->sum('qty') - $order->products->sum('restock_quantity') > 0
                                             )
                                         )
@@ -152,45 +143,51 @@
                             </div>
                         @endif
 
-                        @if (EcommerceHelper::countDigitalProducts($order->products) != $order->products->count() && ! EcommerceHelper::isDisabledPhysicalProduct())
-                            <div class="p-3 d-flex justify-content-between align-items-center">
-                                @if ($order->status == Botble\Ecommerce\Enums\OrderStatusEnum::CANCELED && !$order->shipment->id)
-                                    <div class="text-uppercase">
+                        @if (
+                            $order->status != Botble\Ecommerce\Enums\OrderStatusEnum::CANCELED
+                            && $order->status != Botble\Ecommerce\Enums\OrderStatusEnum::PENDING
+                            && is_plugin_active('payment')
+                            && $order->payment->id
+                            && $order->payment->status == Botble\Payment\Enums\PaymentStatusEnum::COMPLETED
+                        )
+                            <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
+                                <div class="text-uppercase">
+                                    @if ($order->status == Botble\Ecommerce\Enums\OrderStatusEnum::IN_PRODUCTION)
                                         <x-core::icon name="ti ti-check" class="text-success" />
-                                        <span>{{ trans('plugins/ecommerce::order.all_products_are_not_delivered') }}</span>
-                                    </div>
-                                @else
-                                    @if (! EcommerceHelper::isDisabledPhysicalProduct() && $order->shipment->id)
-                                        <div class="text-uppercase">
-                                            <x-core::icon name="ti ti-check" class="text-success" />
-                                            <span>{{ trans('plugins/ecommerce::order.delivery') }}</span>
-                                        </div>
+                                        {{ trans('plugins/ecommerce::order.production_order_was_confirmed') }}
                                     @else
-                                        <div class="text-uppercase">
-                                            <x-core::icon name="ti ti-truck" />
-                                            <span>{{ trans('plugins/ecommerce::order.delivery') }}</span>
-                                        </div>
-
-                                        <x-core::button
-                                            type="button"
-                                            class="btn-trigger-shipment"
-                                            color="info"
-                                            :data-target="route('orders.get-shipment-form', $order->id)"
-                                        >
-                                            {{ trans('plugins/ecommerce::order.delivery') }}
-                                        </x-core::button>
+                                        <x-core::icon name="ti ti-file-type-pdf" />
+                                        {{ trans('plugins/ecommerce::order.confirm_production_order') }}
                                     @endif
+                                </div>
+                                @if ($order->status != Botble\Ecommerce\Enums\OrderStatusEnum::IN_PRODUCTION)
+                                    <form action="{{ route('orders.confirm-production') }}">
+                                        <input name="order_id" type="hidden" value="{{ $order->id }}">
+                                        <x-core::button type="button" color="success" class="btn-confirm-production">
+                                            {{ trans('plugins/ecommerce::order.confirm_production') }}
+                                        </x-core::button>
+                                    </form>
+                                @else
+                                    <x-core::button
+                                        tag="a"
+                                        :href="route('orders.production-pdf', $order->id) . '?type=print'"
+                                        target="_blank"
+                                        icon="ti ti-file-type-pdf"
+                                        color="success"
+                                    >
+                                        {{ trans('plugins/ecommerce::order.view_production_pdf') }}
+                                    </x-core::button>
                                 @endif
                             </div>
+                        @endif
 
-                            @if(! EcommerceHelper::isDisabledPhysicalProduct())
-                                @if (! $order->shipment->id)
-                                    <div class="p-3 shipment-create-wrap" style="display: none;"></div>
-                                @else
-                                    @include('plugins/ecommerce::orders.shipment-detail', [
-                                        'shipment' => $order->shipment,
-                                    ])
-                                @endif
+                        @if(! EcommerceHelper::isDisabledPhysicalProduct())
+                            @if (! $order->shipment->id)
+                                <div class="p-3 shipment-create-wrap" style="display: none;"></div>
+                            @else
+                                @include('plugins/ecommerce::orders.shipment-detail', [
+                                    'shipment' => $order->shipment,
+                                ])
                             @endif
                         @endif
                     </div>

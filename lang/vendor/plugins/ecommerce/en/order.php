@@ -27,6 +27,7 @@ return [
     'customer_label' => 'Customer',
     'tax_amount' => 'Tax Amount',
     'shipping_amount' => 'Shipping amount',
+    'shipping_method' => 'Shipping method',
     'payment_method' => 'Payment method',
     'payment_status_label' => 'Payment status',
     'manage_orders' => 'Manage orders',

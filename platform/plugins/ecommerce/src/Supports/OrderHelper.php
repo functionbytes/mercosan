@@ -415,7 +415,12 @@ class OrderHelper
     {
         $name = null;
 
-        if ($method == ShippingMethodEnum::DEFAULT) {
+        // If method is a numeric ID, it's a shipping rule ID from the new system
+        if (is_numeric($method)) {
+            $rule = ShippingRule::query()->find($method);
+            $name = $rule?->name;
+        } elseif ($method == ShippingMethodEnum::DEFAULT) {
+            // Legacy: if method is 'default', look in option for the rule ID
             if ($option) {
                 $rule = ShippingRule::query()->find($option);
                 $name = $rule?->name;

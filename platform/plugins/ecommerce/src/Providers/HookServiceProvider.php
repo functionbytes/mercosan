@@ -808,7 +808,7 @@ class HookServiceProvider extends ServiceProvider
                 return [
                     'amount' => $this->convertOrderAmount((float) $orders->sum('amount')),
                     'shipping_amount' => $this->convertOrderAmount((float) $orders->sum('shipping_amount')),
-                    'shipping_method' => $firstOrder->shipping_method->label(),
+                    'shipping_method' => $firstOrder->shipping_method_name,
                     'tax_amount' => $this->convertOrderAmount((float) $orders->sum('tax_amount')),
                     'discount_amount' => $this->convertOrderAmount((float) $orders->sum('discount_amount')),
                     'currency' => strtoupper(get_application_currency()->title),

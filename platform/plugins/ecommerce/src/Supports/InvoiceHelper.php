@@ -318,6 +318,11 @@ class InvoiceHelper
             $data['payment_status_label'] = $invoice->payment->status->label();
         }
 
+        // Add shipping method name
+        if ($order && $order->shipping_method_name) {
+            $data['shipping_method_name'] = $order->shipping_method_name;
+        }
+
         return apply_filters('ecommerce_invoice_variables', $data, $invoice);
     }
 

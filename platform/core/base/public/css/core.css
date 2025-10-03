@@ -29240,3 +29240,9 @@ button.btn  {
 .steps button {
     width: auto;
 }
+
+
+
+.list-group-flush .btn {
+    width: auto;
+}

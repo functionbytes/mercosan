@@ -346,6 +346,28 @@ class OrderController extends BaseController
             ->setMessage(trans('plugins/ecommerce::order.confirm_order_success'));
     }
 
+    public function postConfirmProduction(Request $request)
+    {
+        /**
+         * @var Order $order
+         */
+        $order = Order::query()->findOrFail($request->input('order_id'));
+
+        $order->status = OrderStatusEnum::IN_PRODUCTION;
+        $order->save();
+
+        OrderHistory::query()->create([
+            'action' => 'confirm_production',
+            'description' => trans('plugins/ecommerce::order.production_order_confirmed'),
+            'order_id' => $order->id,
+            'user_id' => Auth::id(),
+        ]);
+
+        return $this
+            ->httpResponse()
+            ->setMessage(trans('plugins/ecommerce::order.confirm_production_success'));
+    }
+
     public function postResendOrderConfirmationEmail(Order $order)
     {
         $result = OrderHelper::sendOrderConfirmationEmail($order);

@@ -194,7 +194,7 @@ return [
         'print_shipping_label' => 'Imprimir etiqueta de envío',
         'sender' => 'Remitente',
         'order_date' => 'Fecha de orden',
-        'scan_qr_code' => 'Escanee el código QR para rastrear su envío',
+        'scan_qr_code' => 'Escanee el código QR para confirmar la entrega del pedido',
     ],
     'currency' => 'Divisa',
     'base_on_weight' => 'Basado en el peso del producto  (gramos)',

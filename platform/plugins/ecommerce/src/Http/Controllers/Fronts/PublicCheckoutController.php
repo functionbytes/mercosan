@@ -709,7 +709,10 @@ class PublicCheckoutController extends BaseController
                 $request->input('shipping_option')
             );
 
-            $shippingMethod = Arr::first($shippingMethodData);
+            // Get the specific method that was selected (not just the first one)
+            // $shippingMethodInput is the rule ID like "5", "7", "8"
+            $shippingMethod = Arr::get($shippingMethodData, $shippingMethodInput);
+
             if (! $shippingMethod) {
                 throw ValidationException::withMessages([
                     'shipping_method' => trans(
@@ -719,7 +722,10 @@ class PublicCheckoutController extends BaseController
                 ]);
             }
 
-            $shippingAmount = Arr::get($shippingMethod, 'price', 0);
+            // $shippingMethod is ['default' => [...]], so we need to get the actual method data
+            $actualMethod = Arr::first($shippingMethod);
+
+            $shippingAmount = Arr::get($actualMethod, 'price', 0);
 
             if (get_shipping_setting('free_ship', $shippingMethodInput)) {
                 $shippingAmount = 0;
@@ -773,7 +779,20 @@ class PublicCheckoutController extends BaseController
          */
         $order = Order::query()->where(compact('token'))->first();
 
+        \Log::info('PublicCheckoutController: Before createOrderFromData', [
+            'shipping_amount_in_request' => $request->input('shipping_amount'),
+            'shipping_method' => $request->input('shipping_method'),
+            'order_id' => $order?->id,
+            'current_order_shipping_amount' => $order?->shipping_amount
+        ]);
+
         $order = $this->createOrderFromData($request->input(), $order);
+
+        \Log::info('PublicCheckoutController: After createOrderFromData', [
+            'order_id' => $order->id,
+            'order_shipping_amount' => $order->shipping_amount,
+            'order_amount' => $order->amount
+        ]);
 
         OrderHistory::query()->create([
             'action' => OrderHistoryActionEnum::CREATE_ORDER_FROM_PAYMENT_PAGE,
@@ -793,9 +812,9 @@ class PublicCheckoutController extends BaseController
                 'type' => $order->shipping_method,
                 'status' => ShippingStatusEnum::PENDING,
                 'price' => $order->shipping_amount,
-                'rate_id' => $shippingData ? Arr::get($shippingMethod, 'id', '') : '',
-                'shipment_id' => $shippingData ? Arr::get($shippingMethod, 'shipment_id', '') : '',
-                'shipping_company_name' => $shippingData ? Arr::get($shippingMethod, 'company_name', '') : '',
+                'rate_id' => $shippingData ? Arr::get($actualMethod, 'id', '') : '',
+                'shipment_id' => $shippingData ? Arr::get($actualMethod, 'shipment_id', '') : '',
+                'shipping_company_name' => $shippingData ? Arr::get($actualMethod, 'company_name', '') : '',
             ]);
         }
 

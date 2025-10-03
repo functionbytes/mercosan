@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Select2 Implementation</title>
+    <!-- Select2 CSS -->
+    <link href="/public/vendor/core/core/base/libraries/select2/css/select2.min.css" rel="stylesheet" />
+    <!-- Custom Select2 CSS -->
+    <link href="/public/vendor/core/core/base/css/libraries/select2.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Test de Implementación Select2</h1>
+        <p>Este formulario simula el comportamiento de los selects de direcciones.</p>
+        
+        <form>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="country" class="form-label">País</label>
+                    <select class="form-select select-search-full" name="country" id="country">
+                        <option value="">Seleccionar país</option>
+                        <option value="AR">Argentina</option>
+                        <option value="BR">Brasil</option>
+                        <option value="CL">Chile</option>
+                        <option value="CO">Colombia</option>
+                        <option value="MX">México</option>
+                        <option value="PE">Perú</option>
+                        <option value="UY">Uruguay</option>
+                        <option value="VE">Venezuela</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="state" class="form-label">Estado/Provincia</label>
+                    <select class="form-select select-search-full" name="state" id="state">
+                        <option value="">Seleccionar estado</option>
+                        <option value="CABA">Ciudad de Buenos Aires</option>
+                        <option value="BA">Buenos Aires</option>
+                        <option value="CB">Córdoba</option>
+                        <option value="SF">Santa Fe</option>
+                        <option value="MZ">Mendoza</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="city" class="form-label">Ciudad</label>
+                    <select class="form-select select-search-full" name="city" id="city">
+                        <option value="">Seleccionar ciudad</option>
+                        <option value="CABA">Ciudad de Buenos Aires</option>
+                        <option value="La Plata">La Plata</option>
+                        <option value="Mar del Plata">Mar del Plata</option>
+                        <option value="Bahía Blanca">Bahía Blanca</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="category" class="form-label">Categoría de ejemplo</label>
+                    <select class="form-select select-search-full" name="category" id="category">
+                        <option value="">Seleccionar categoría</option>
+                        <option value="electronics">Electrónicos</option>
+                        <option value="clothing">Ropa</option>
+                        <option value="books">Libros</option>
+                        <option value="home">Hogar</option>
+                        <option value="sports">Deportes</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- jQuery -->
+    <script src="/public/vendor/core/core/base/libraries/jquery.min.js"></script>
+    <!-- Select2 JS -->
+    <script src="/public/vendor/core/core/base/libraries/select2/js/select2.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para inicializar Select2 -->
+    <script>
+        $(document).ready(function() {
+            // Inicializar Select2 en todos los selects con clase select-search-full
+            $('.select-search-full').each(function(index, element) {
+                $(element).select2({
+                    width: '100%',
+                    placeholder: $(element).data('placeholder') || $(element).find('option:first').text(),
+                    allowClear: $(element).data('allow-clear') || false
+                });
+            });
+            
+            console.log('Select2 inicializado en elementos:', $('.select-search-full').length);
+        });
+    </script>
+</body>
+</html>

@@ -48,12 +48,16 @@ class Order extends BaseModel
         'completed_at',
         'proof_file',
         'private_notes',
+        'delivery_date',
+        'delivery_time',
     ];
 
     protected $casts = [
         'status' => OrderStatusEnum::class,
-        'shipping_method' => ShippingMethodEnum::class,
+        // Removed ShippingMethodEnum cast to allow both enum values ('default') and rule IDs ('5', '7', '8')
+        // 'shipping_method' => ShippingMethodEnum::class,
         'completed_at' => 'datetime',
+        'delivery_date' => 'date',
     ];
 
     protected static function booted(): void
