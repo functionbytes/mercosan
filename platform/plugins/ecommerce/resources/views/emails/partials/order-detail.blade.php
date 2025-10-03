@@ -131,6 +131,12 @@
                                                     <td style="font:400 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ trans('plugins/ecommerce::products.form.shipping_fee') }}</td>
                                                     <td align="right" style="font:600 14px/1.8 Arial,Helvetica,sans-serif; color:#212529;">{{ format_price($order->shipping_amount) }}</td>
                                                 </tr>
+                                                @if ($order->shipping_method_name)
+                                                    <tr>
+                                                        <td style="font:400 13px/1.8 Arial,Helvetica,sans-serif; color:#6c757d; padding-left:12px;">{{ trans('plugins/ecommerce::order.shipping_method') }}</td>
+                                                        <td align="right" style="font:400 13px/1.8 Arial,Helvetica,sans-serif; color:#6c757d;">{{ $order->shipping_method_name }}</td>
+                                                    </tr>
+                                                @endif
                                             @endif
 
                                             @if ((float)$order->tax_amount)
