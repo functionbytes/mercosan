@@ -319,6 +319,44 @@ class HandleApplyCouponService
             $rawTotal = Cart::instance('cart')->rawTotalByItems($cartItems);
         }
 
+        $discount->loadMissing(['excludedProducts', 'excludedProductCategories']);
+
+        $excludedProductIds = $discount->excludedProducts->pluck('id')->all();
+        $excludedCategoryIds = $discount->excludedProductCategories->pluck('id')->all();
+
+        if ($excludedProductIds || $excludedCategoryIds) {
+            $products->loadMissing([
+                'categories',
+                'variationInfo',
+                'variationInfo.configurableProduct',
+                'variationInfo.configurableProduct.categories',
+            ]);
+
+            $cartItems = $cartItems->filter(function ($cartItem) use ($products, $excludedProductIds, $excludedCategoryIds) {
+                $product = $products->first(fn ($p) => $p->id == $cartItem->id || $p->original_product->id == $cartItem->id);
+
+                if (! $product) {
+                    return true;
+                }
+
+                if (in_array($product->original_product->id, $excludedProductIds)) {
+                    return false;
+                }
+
+                if ($excludedCategoryIds) {
+                    $productCategoryIds = $product->original_product->categories->pluck('id')->all();
+                    if (! empty(array_intersect($productCategoryIds, $excludedCategoryIds))) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
+            $rawTotal = Cart::instance('cart')->rawTotalByItems($cartItems);
+            $countCart = $cartItems->count();
+        }
+
         switch ($discount->type_option) {
             case DiscountTypeOptionEnum::AMOUNT:
                 switch ($discount->target) {

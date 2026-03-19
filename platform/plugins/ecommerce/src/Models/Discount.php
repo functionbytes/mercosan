@@ -50,6 +50,8 @@ class Discount extends BaseModel
             $discount->customers()->detach();
             $discount->products()->detach();
             $discount->usedByCustomers()->detach();
+            $discount->excludedProducts()->detach();
+            $discount->excludedProductCategories()->detach();
         });
     }
 
@@ -86,6 +88,21 @@ class Discount extends BaseModel
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'ec_discount_products', 'discount_id', 'product_id');
+    }
+
+    public function excludedProducts(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'ec_discount_excluded_products', 'discount_id', 'product_id');
+    }
+
+    public function excludedProductCategories(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            ProductCategory::class,
+            'ec_discount_excluded_product_categories',
+            'discount_id',
+            'product_category_id'
+        );
     }
 
     public function productVariants(): BelongsToMany

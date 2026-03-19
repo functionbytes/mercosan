@@ -681,6 +681,147 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="border-top mt-3">
+                        <h4 class="mt-3 mb-2">Exclusiones</h4>
+
+                        <div class="mb-3 position-relative">
+                            <label class="form-check">
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    v-model="enable_exclusions"
+                                    value="1"
+                                />
+                                <span class="form-check-label">Habilitar exclusiones</span>
+                                <span class="form-check-description">Permite excluir productos y/o categorías de este descuento.</span>
+                            </label>
+                        </div>
+
+                        <div v-show="enable_exclusions">
+
+                        <div class="mb-3">
+                            <label class="form-label">Excluir productos</label>
+                            <div class="position-relative box-search-advance excluded-product">
+                                <input
+                                    type="text"
+                                    class="form-control textbox-advancesearch"
+                                    @click="loadExcludedProductsForSearch(1, true)"
+                                    @keyup="handleSearchExcludedProduct($event.target.value)"
+                                    placeholder="Buscar producto a excluir..."
+                                />
+                                <div
+                                    class="card position-absolute w-100 z-1"
+                                    :class="{ active: excluded_products_search_results.data && excluded_products_search_results.data.length, hidden: hidden_excluded_product_search_panel }"
+                                    :style="[loading_excluded ? { minHeight: '10rem' } : {}]"
+                                >
+                                    <div v-if="loading_excluded" class="loading-spinner"></div>
+                                    <div
+                                        v-else
+                                        class="list-group list-group-flush overflow-auto"
+                                        style="max-height: 25rem"
+                                    >
+                                        <a
+                                            class="list-group-item list-group-item-action"
+                                            v-for="product in excluded_products_search_results.data"
+                                            @click="handleSelectExcludedProduct(product)"
+                                            href="javascript:void(0)"
+                                        >
+                                            <div class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <span
+                                                        class="avatar"
+                                                        :style="{ backgroundImage: 'url(' + product.image_url + ')' }"
+                                                    ></span>
+                                                </div>
+                                                <div class="col text-truncate">
+                                                    <div class="text-body d-block">{{ product.name }}</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="p-3" v-if="excluded_products_search_results.data && excluded_products_search_results.data.length === 0">
+                                            <p class="text-muted text-center mb-0">No se encontraron productos.</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="card-footer"
+                                        v-if="excluded_products_search_results.next_page_url || excluded_products_search_results.prev_page_url"
+                                    >
+                                        <discount-search-box-pagination
+                                            :resource="excluded_products_search_results"
+                                            @on-prev="loadExcludedProductsForSearch(excluded_products_search_results.prev_page_url ? excluded_products_search_results.current_page - 1 : excluded_products_search_results.current_page, true)"
+                                            @on-next="loadExcludedProductsForSearch(excluded_products_search_results.next_page_url ? excluded_products_search_results.current_page + 1 : excluded_products_search_results.current_page, true)"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            v-if="selected_excluded_products.length"
+                            class="list-group list-group-flush list-group-hoverable mb-3"
+                        >
+                            <input type="hidden" :value="selected_excluded_product_ids.join(',')" name="excluded_products" />
+                            <h5 class="mb-2">Productos excluidos</h5>
+                            <div class="list-group-item" v-for="product in selected_excluded_products">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span
+                                            class="avatar"
+                                            :style="{ backgroundImage: 'url(' + product.image_url + ')' }"
+                                        ></span>
+                                    </div>
+                                    <div class="col text-truncate">
+                                        <a :href="product.product_link" class="text-body d-block" target="_blank">{{ product.name }}</a>
+                                    </div>
+                                    <div class="col-auto">
+                                        <discount-list-item-remove-icon-button
+                                            @click="handleRemoveExcludedProduct($event, product)"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Excluir categorías</label>
+                            <select
+                                class="form-select"
+                                @click="product_categories.length === 0 && getListProductCategories()"
+                                @change="handleSelectExcludedCategory(product_categories.find(c => c.id == $event.target.value))"
+                            >
+                                <option value="">-- Seleccionar categoría a excluir --</option>
+                                <option
+                                    v-for="category in product_categories"
+                                    :value="category.id"
+                                    v-html="category.name"
+                                    :disabled="selected_excluded_category_ids.includes(category.id)"
+                                ></option>
+                            </select>
+                        </div>
+
+                        <div
+                            v-if="selected_excluded_categories.length"
+                            class="list-group list-group-flush list-group-hoverable mb-3"
+                        >
+                            <input type="hidden" :value="selected_excluded_category_ids.join(',')" name="excluded_product_categories" />
+                            <h5 class="mb-2">Categorías excluidas</h5>
+                            <div class="list-group-item" v-for="category in selected_excluded_categories">
+                                <div class="row align-items-center">
+                                    <div class="col text-truncate">
+                                        <span class="text-body d-block" v-html="category.name"></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <discount-list-item-remove-icon-button
+                                            @click="handleRemoveExcludedCategory($event, category)"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div><!-- end v-show enable_exclusions -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -919,6 +1060,17 @@ export default {
             hidden_customer_search_panel: true,
             loading: false,
             discountUnit: '$',
+            excluded_products_search_results: {
+                data: [],
+            },
+            selected_excluded_products: [],
+            selected_excluded_product_ids: [],
+            excluded_product_keyword: null,
+            hidden_excluded_product_search_panel: true,
+            loading_excluded: false,
+            selected_excluded_categories: [],
+            selected_excluded_category_ids: [],
+            enable_exclusions: false,
         }
     },
     props: {
@@ -945,6 +1097,7 @@ export default {
             if (!container.is(e.target) && container.has(e.target).length === 0) {
                 context.hidden_product_search_panel = true
                 context.hidden_customer_search_panel = true
+                context.hidden_excluded_product_search_panel = true
             }
         })
 
@@ -1007,6 +1160,23 @@ export default {
                 this.selected_variants.push(variant)
                 this.selected_variant_ids.push(variant.id)
             })
+
+            if (this.discount.excluded_products && this.discount.excluded_products.length) {
+                this.enable_exclusions = true
+                this.discount.excluded_products.forEach((product) => {
+                    this.handleSelectExcludedProduct(product)
+                })
+            }
+
+            if (this.discount.excluded_product_categories && this.discount.excluded_product_categories.length) {
+                this.enable_exclusions = true
+                if (!this.product_categories.length) {
+                    await this.getListProductCategories()
+                }
+                this.discount.excluded_product_categories.forEach((category) => {
+                    this.handleSelectExcludedCategory(category)
+                })
+            }
 
             if (this.type_option === 'shipping') {
                 this.handleChangeTypeOption()
@@ -1255,6 +1425,64 @@ export default {
 
             this.selected_variants = _.reject(this.selected_variants, (item) => {
                 return item.product_id === variant.product_id
+            })
+        },
+        loadExcludedProductsForSearch: function (page = 1, force = false) {
+            let context = this
+            context.hidden_excluded_product_search_panel = false
+            if (!context.excluded_products_search_results.data || force) {
+                context.loading_excluded = true
+            }
+            axios
+                .get(route('products.get-list-products-for-select'), {
+                    params: {
+                        keyword: context.excluded_product_keyword,
+                        include_variation: 0,
+                        page: page,
+                    },
+                })
+                .then((res) => {
+                    context.excluded_products_search_results = res.data.data
+                    context.loading_excluded = false
+                })
+                .catch(() => {
+                    context.loading_excluded = false
+                })
+        },
+        handleSearchExcludedProduct: _.debounce(function (value) {
+            this.excluded_product_keyword = value
+            this.loadExcludedProductsForSearch(1, true)
+        }, 500),
+        handleSelectExcludedProduct: function (item) {
+            if (!_.includes(this.selected_excluded_product_ids, item.id)) {
+                item.product_link = route('products.edit', item.id)
+                this.selected_excluded_products.push(item)
+                this.selected_excluded_product_ids.push(item.id)
+            }
+            this.hidden_excluded_product_search_panel = true
+        },
+        handleRemoveExcludedProduct: function ($event, currentItem) {
+            $event.preventDefault()
+            this.selected_excluded_product_ids = _.reject(this.selected_excluded_product_ids, (item) => {
+                return item === currentItem.id
+            })
+            this.selected_excluded_products = _.reject(this.selected_excluded_products, (item) => {
+                return item.id === currentItem.id
+            })
+        },
+        handleSelectExcludedCategory: function (category) {
+            if (!_.includes(this.selected_excluded_category_ids, category.id)) {
+                this.selected_excluded_categories.push(category)
+                this.selected_excluded_category_ids.push(category.id)
+            }
+        },
+        handleRemoveExcludedCategory: function ($event, currentCategory) {
+            $event.preventDefault()
+            this.selected_excluded_category_ids = _.reject(this.selected_excluded_category_ids, (item) => {
+                return item === currentCategory.id
+            })
+            this.selected_excluded_categories = _.reject(this.selected_excluded_categories, (item) => {
+                return item.id === currentCategory.id
             })
         },
     },

@@ -127,6 +127,30 @@ class DiscountController extends BaseController
 
                 $discount->customers()->attach(array_unique($customers));
             }
+
+            if ($excludedProducts = $request->input('excluded_products')) {
+                if (is_string($excludedProducts) && Str::contains($excludedProducts, ',')) {
+                    $excludedProducts = explode(',', $excludedProducts);
+                }
+
+                if (! is_array($excludedProducts)) {
+                    $excludedProducts = [$excludedProducts];
+                }
+
+                $discount->excludedProducts()->attach(array_unique(array_filter($excludedProducts)));
+            }
+
+            if ($excludedCategories = $request->input('excluded_product_categories')) {
+                if (is_string($excludedCategories) && Str::contains($excludedCategories, ',')) {
+                    $excludedCategories = explode(',', $excludedCategories);
+                }
+
+                if (! is_array($excludedCategories)) {
+                    $excludedCategories = [$excludedCategories];
+                }
+
+                $discount->excludedProductCategories()->attach(array_unique(array_filter($excludedCategories)));
+            }
         }
 
         event(new CreatedContentEvent(DISCOUNT_MODULE_SCREEN_NAME, $request, $discount));
@@ -145,6 +169,8 @@ class DiscountController extends BaseController
             'productCategories',
             'products' => fn (BelongsToMany $query) => $query->where('is_variation', false),
             'productVariants.variationInfo.variationItems.attribute',
+            'excludedProducts',
+            'excludedProductCategories',
         ]);
 
         foreach ($discount->productVariants as $productVariant) {
@@ -158,6 +184,10 @@ class DiscountController extends BaseController
         }
 
         $discount->products->each(function ($product): void {
+            $product->image_url = RvMedia::getImageUrl($product->image, 'thumb', false, RvMedia::getDefaultImage());
+        });
+
+        $discount->excludedProducts->each(function ($product): void {
             $product->image_url = RvMedia::getImageUrl($product->image, 'thumb', false, RvMedia::getDefaultImage());
         });
 
@@ -253,6 +283,34 @@ class DiscountController extends BaseController
             $discount->customers()->sync(array_unique($customers));
         } else {
             $discount->customers()->detach();
+        }
+
+        if ($excludedProducts = $request->input('excluded_products')) {
+            if (is_string($excludedProducts) && Str::contains($excludedProducts, ',')) {
+                $excludedProducts = explode(',', $excludedProducts);
+            }
+
+            if (! is_array($excludedProducts)) {
+                $excludedProducts = [$excludedProducts];
+            }
+
+            $discount->excludedProducts()->sync(array_unique(array_filter($excludedProducts)));
+        } else {
+            $discount->excludedProducts()->detach();
+        }
+
+        if ($excludedCategories = $request->input('excluded_product_categories')) {
+            if (is_string($excludedCategories) && Str::contains($excludedCategories, ',')) {
+                $excludedCategories = explode(',', $excludedCategories);
+            }
+
+            if (! is_array($excludedCategories)) {
+                $excludedCategories = [$excludedCategories];
+            }
+
+            $discount->excludedProductCategories()->sync(array_unique(array_filter($excludedCategories)));
+        } else {
+            $discount->excludedProductCategories()->detach();
         }
 
         event(new UpdatedContentEvent(DISCOUNT_MODULE_SCREEN_NAME, $request, $discount));

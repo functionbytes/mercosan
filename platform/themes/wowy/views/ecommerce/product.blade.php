@@ -24,7 +24,7 @@
             </div>
            </div>
         <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="detail-info">
+            <div class="detail-info mt-20">
                 <h2 class="title-detail">{{ $product->name }}</h2>
                 <div class="product-detail-rating">
                     @if ($product->brand->id)
@@ -49,7 +49,7 @@
                         <ins><span class="text-brand">{{ format_price($product->front_sale_price_with_taxes) }}</span></ins>
                         @if ($product->front_sale_price !== $product->price)
                             <ins><span class="old-price font-md ml-15">{{ format_price($product->price_with_taxes) }}</span></ins>
-                            <span class="save-price font-md color3 ml-15"><span class="percentage-off d-inline-block">{{ get_sale_percentage($product->price, $product->front_sale_price) }}</span> <span class="d-inline-block">{{ __('Off') }}</span></span>
+                            <span class="save-price font-md color3 ml-15"><span class="percentage-off d-inline-block">{{ get_sale_percentage($product->price, $product->front_sale_price) }}</span></span>
                         @endif
                     </div>
                 </div>

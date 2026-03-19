@@ -53,6 +53,43 @@ class HandleApplyPromotionsService
         }
 
         foreach ($availablePromotions as $promotion) {
+            $promotion->loadMissing(['excludedProducts', 'excludedProductCategories']);
+
+            $excludedProductIds = $promotion->excludedProducts->pluck('id')->all();
+            $excludedCategoryIds = $promotion->excludedProductCategories->pluck('id')->all();
+
+            $filteredCartItems = $cartItems;
+
+            if ($excludedProductIds || $excludedCategoryIds) {
+                $productsForExclusion = get_products([
+                    'condition' => [
+                        ['ec_products.id', 'IN', $cartItems->pluck('id')->all()],
+                    ],
+                    'with' => ['categories', 'variationInfo', 'variationInfo.configurableProduct', 'variationInfo.configurableProduct.categories'],
+                ]);
+
+                $filteredCartItems = $cartItems->filter(function ($cartItem) use ($productsForExclusion, $excludedProductIds, $excludedCategoryIds) {
+                    $product = $productsForExclusion->find($cartItem->id);
+
+                    if (! $product) {
+                        return true;
+                    }
+
+                    if (in_array($product->original_product->id, $excludedProductIds)) {
+                        return false;
+                    }
+
+                    if ($excludedCategoryIds) {
+                        $productCategoryIds = $product->original_product->categories->pluck('id')->all();
+                        if (! empty(array_intersect($productCategoryIds, $excludedCategoryIds))) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+            }
+
             switch ($promotion->type_option) {
                 case DiscountTypeOptionEnum::AMOUNT:
                     switch ($promotion->target) {
@@ -68,7 +105,7 @@ class HandleApplyPromotionsService
                             break;
                         case DiscountTargetEnum::SPECIFIC_PRODUCT:
                         case DiscountTargetEnum::PRODUCT_VARIANT:
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 if (
                                     $item->qty >= $promotion->product_quantity &&
                                     in_array($item->id, $promotion->products()->pluck('product_id')->all())
@@ -86,7 +123,7 @@ class HandleApplyPromotionsService
                                 'with' => [],
                             ]);
 
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 $product = $products->find($item->id);
 
                                 if (! $product) {
@@ -113,7 +150,7 @@ class HandleApplyPromotionsService
                                 'with' => [],
                             ]);
 
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 $product = $products->find($item->id);
 
                                 if (! $product) {
@@ -141,7 +178,7 @@ class HandleApplyPromotionsService
                                 'with' => [],
                             ]);
 
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 $product = $products->find($item->id);
 
                                 if (! $product) {
@@ -180,7 +217,7 @@ class HandleApplyPromotionsService
                             break;
                         case DiscountTargetEnum::SPECIFIC_PRODUCT:
                         case DiscountTargetEnum::PRODUCT_VARIANT:
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 if (
                                     $item->qty >= $promotion->product_quantity &&
                                     in_array($item->id, $promotion->products()->pluck('product_id')->all())
@@ -198,7 +235,7 @@ class HandleApplyPromotionsService
                                 'with' => [],
                             ]);
 
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 $product = $products->find($item->id);
 
                                 if (! $product) {
@@ -225,7 +262,7 @@ class HandleApplyPromotionsService
                                 'with' => [],
                             ]);
 
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 $product = $products->find($item->id);
 
                                 if (! $product) {
@@ -253,7 +290,7 @@ class HandleApplyPromotionsService
                                 'with' => [],
                             ]);
 
-                            foreach ($cartItems as $item) {
+                            foreach ($filteredCartItems as $item) {
                                 $product = $products->find($item->id);
 
                                 if (! $product) {
@@ -281,7 +318,7 @@ class HandleApplyPromotionsService
                     break;
                 case DiscountTypeOptionEnum::SAME_PRICE:
                     if ($promotion->product_quantity > 1 && $countCart >= $promotion->product_quantity) {
-                        foreach ($cartItems as $item) {
+                        foreach ($filteredCartItems as $item) {
                             if ($item->qty < $promotion->product_quantity) {
                                 continue;
                             }
