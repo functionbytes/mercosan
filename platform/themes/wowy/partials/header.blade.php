@@ -226,9 +226,9 @@
             </div>
         </div>
     </div>
-    <div class="header-bottom header-bottom-bg-color sticky-bar gray-bg sticky-blue-bg">
+    <div class="header-bottom gray-bg sticky-bar">
         <div class="container">
-            <div class="header-wrap header-space-between position-relative main-nav">
+            <div class="header-wrap header-space-between position-relative main-nav ">
                 <div class="logo logo-width-1 d-block d-lg-none">
                     @if ($logo = theme_option('logo_light') ?: theme_option('logo'))
                         <a href="{{ BaseHelper::getHomepageUrl() }}"><img src="{{ RvMedia::getImageUrl($logo) }}" alt="{{ theme_option('site_title') }}"></a>
