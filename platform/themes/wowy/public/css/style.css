@@ -583,7 +583,6 @@ button.submit,button[type=submit] {
     border: none;
     border-radius: 4px;
     color: #fff;
-    font-size: 15px;
     font-weight: 500;
     padding: 12px 30px
 }
@@ -764,8 +763,8 @@ textarea:focus {
 }
 
 .custom_select .select2-container--default .select2-selection--single {
-    background-color: #f7f7f7;
-    border: 2px solid #f7f7f7;
+    background-color: #f8f9fa;
+    border: 2px solid #f8f9fa;
     border-radius: 50px!important;
     color: #000;
     font-size: 13px;
@@ -869,8 +868,8 @@ textarea:focus {
 }
 
 .form-group input {
-    background: #f7f7f7;
-    border: 2px solid #f7f7f7;
+    background: #f8f9fa;
+    border: 2px solid #f8f9fa;
     box-shadow: none;
     color: #000;
     font-size: 13px;
@@ -881,7 +880,7 @@ textarea:focus {
 
 .form-group input:focus {
     background: transparent;
-    border-color: #f7f7f7
+    border-color: #f8f9fa
 }
 
 label {
@@ -1031,7 +1030,7 @@ label {
 }
 
 .comments-area .comment {
-    color: #777;
+    color: #000;
     font-size: 15px;
     margin-bottom: 10px
 }
@@ -1074,8 +1073,8 @@ label {
 }
 
 .comment-form textarea {
-    background: #f7f7f7;
-    border: 2px solid #f7f7f7;
+    background: #f8f9fa;
+    border: 2px solid #f8f9fa;
     border-radius: 20px;
     color: #000;
     font-size: 13px;
@@ -1087,14 +1086,14 @@ label {
 
 .comment-form textarea:focus {
     background: transparent;
-    border-color: #f7f7f7;
+    border-color: #f8f9fa;
     box-shadow: none;
     outline: none!important
 }
 
 .comment-form input {
-    background: #f7f7f7;
-    border: 2px solid #f7f7f7;
+    background: #f8f9fa;
+    border: 2px solid #f8f9fa;
     border-radius: 4px;
     box-shadow: none;
     color: #000;
@@ -1125,12 +1124,12 @@ label {
 }
 
 .form-control::-moz-placeholder {
-    color: #777;
+    color: #000;
     font-weight: 300
 }
 
 .form-control::placeholder {
-    color: #777;
+    color: #000;
     font-weight: 300
 }
 
@@ -1778,7 +1777,7 @@ label {
 }
 
 .preloader {
-    background-color: #f7f7f7;
+    background-color: #f8f9fa;
     bottom: 0;
     height: 100%;
     left: 0;
@@ -1864,7 +1863,7 @@ label {
 }
 
 .breadcrumb-item.active {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .page-header .breadcrumb a {
@@ -1874,7 +1873,7 @@ label {
 
 .page-header .breadcrumb a:hover,
 .page-header .breadcrumb a:focus {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 
@@ -3204,7 +3203,7 @@ table .product-thumbnail img {
     background: #fbfbfb;
     border: 1px solid #fbfbfb;
     border-radius: 26px;
-    color: #777;
+    color: #000;
     cursor: pointer;
     display: flex;
     padding: 11px 16px;
@@ -3216,7 +3215,7 @@ table .product-thumbnail img {
 }
 
 .shop-product-filter .sort-by-product-area .sort-by-product-wrap .sort-by i {
-    color: #ababab;
+    color: #000;
     font-size: 14px;
     margin-right: 10px;
     position: relative;
@@ -3432,11 +3431,11 @@ table .product-thumbnail img {
 .detail-info .product-price ins {
     font-size: 20px;
     font-weight: 600;
-    text-decoration: none
+    text-decoration: none;
 }
 
 .detail-info .product-price ins span.old-price {
-    color: #888;
+    color: #000 !important;
     font-size: 16px;
     font-weight: 500;
     margin-left: 10px;
@@ -4772,7 +4771,7 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 }
 
 .sticky-bar.stick.sticky-blue-bg {
-    background-color: var(--color-brand)
+    background-color: #fff
 }
 
 .header-height-1 {
@@ -5592,8 +5591,8 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
     top: -3px
 }
 
-.main-menu>nav>ul>li>a:hover {
-    color: #fff;
+.main-menu > nav > ul > li > a:hover {
+    color: #000;
 }
 
 .main-menu>nav>ul>li>a:hover i {
@@ -5604,7 +5603,7 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 
 
 .main-menu>nav>ul>li>a.active {
-    color: var(--color-brand)
+    color: #fff;
 }
 
 .main-menu>nav>ul>li ul.sub-menu {
@@ -5665,7 +5664,7 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 }
 
 .main-menu>nav>ul>li>a:hover {
-    color: #fff
+    color: #000
 }
 
 .main-menu>nav>ul>li:hover {
@@ -6376,7 +6375,7 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
     background: rgb(255 255 255);
     border: 1px solid rgb(255 255 255);
     border-radius: 4px;
-    color: #df2509;
+    color: #fe0000;
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
@@ -8023,6 +8022,8 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 
 @media only screen and (max-width: 768px) {
 
+
+
     .popular-categories .section-content .section-title {
         font-size: 21px !important;
     }
@@ -8299,6 +8300,8 @@ header.header-area .sticky-bar:not(.stick) .main-categories-wrap>a.cant-close>i 
 }
 
 @media only screen and (min-width: 992px)and (max-width:1199px) {
+
+
     .logo.logo-hm3 a img {
         width:120px
     }
@@ -9490,7 +9493,7 @@ body.show-admin-bar .mobile-header-wrapper-style,body.show-admin-bar .sticky-bar
 }
 
 small {
-    font-size: 80%
+    font-size: 90%
 }
 
 .text-left {
@@ -10516,7 +10519,7 @@ input.qty-input[type=number] {
 }
 
 .section--shopping-cart .table--cart thead .main-heading {
-    background: #f7f7f7
+    background: #f8f9fa
 }
 
 .section--shopping-cart .table--cart>tbody {
@@ -10529,7 +10532,7 @@ input.qty-input[type=number] {
     }
 
     .section--shopping-cart .table-responsive {
-        background: #f7f7f7
+        background: #f8f9fa
     }
 
     .section--shopping-cart .table-responsive .table--cart tr:first-child td {
@@ -10679,9 +10682,9 @@ a:hover {
     border: none;
     border-radius: 4px;
     color: #fff;
-    font-size: 12px;
     font-weight: 500;
-    padding: 12px 30px
+    padding: 12px 30px;
+    text-transform: uppercase;
 }
 .slick-initialized .slick-slide {
     display: block;
@@ -10934,7 +10937,7 @@ a:hover {
 
 .cart-container .checkout-empty-container i {
     font-size: 150px;
-    color: #fb0000 !important;
+    color: #fe0000 !important;
     margin-bottom: 20px;
 }
 
@@ -10969,7 +10972,7 @@ a:hover {
 }
 
 .customer-page .dashboard-content .btn-add-addresses {
-    background-color: #fb0000!important;
+    background-color: #fe0000!important;
     color: #fff!important;
     width: auto;
 }
@@ -11005,7 +11008,7 @@ a:hover {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #fb0000;
+    background-color: #fe0000;
     padding: 2px 8px;
     border-radius: 4px;
     color: #fff;
@@ -11030,8 +11033,8 @@ a:hover {
 }
 
 .customer-page .dashboard-content .dashboard-address .address-box>div .form-check .form-check-input:checked {
-    background-color: #fb0000;
-    border-color: #fb0000
+    background-color: #fe0000;
+    border-color: #fe0000
 }
 
 .customer-page .dashboard-content .dashboard-address .address-box>div .form-check .form-check-input:checked[type=radio] {
@@ -11079,7 +11082,7 @@ a:hover {
 }
 
 .customer-page .dashboard-content .dashboard-address .address-box>div .address-table table tr td h4 span {
-    background-color: #fb0000;
+    background-color: #fe0000;
     padding: 4px 8px;
     border-radius: 4px;
     color: #fff;
@@ -11114,7 +11117,7 @@ a:hover {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #fb0000;
+    background-color: #fe0000;
     padding: 2px 8px;
     border-radius: 4px;
     color: #fff;
@@ -11185,7 +11188,7 @@ a:hover {
     align-items: center;
     border-color: transparent;
     padding: .77em 1.4em;
-    background-color: #F7F7F7;
+    background-color: #f8f9fa;
     color: #000;
     font-weight: 600;
     border-color: transparent !important;
@@ -11202,7 +11205,7 @@ a:hover {
 
 .customer-page .dashboard-content .dashboard-address .address-box .button-group .btn:hover,
 .customer-page .dashboard-content .dashboard-address .address-box .button-group .btn:focus {
-    background-color: #fb0000;
+    background-color: #fe0000;
     color: #fff
 }
 
@@ -11325,7 +11328,7 @@ a:hover {
 .bb-product-filter-title {
     border-bottom: 1px solid #0000000f;
     font-size: 16px;
-    background: #df2509;
+    background: #fe0000;
     color: #fff;
     font-weight: 500;
     padding: 15px 20px;
@@ -12060,7 +12063,7 @@ a:hover {
 
 .out-of-stock-message h3 {
     font-size: 20px;
-    color: #df2509 !important;
+    color: #fe0000 !important;
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -12090,7 +12093,9 @@ a:hover {
 
 
 .detail-info .product-price-cover .product-price span {
+    font-weight: 700;
     font-size: 24px;
+    color: var(--color-brand);
 }
 
 .shopping-summery .product-des {
@@ -12215,7 +12220,7 @@ a:hover {
     color: #fff;
     letter-spacing: 1px;
     font-size: 12px;
-    background: #fb0000;
+    background: #fe0000;
     text-transform: uppercase;
     font-weight: 600;
     padding: 5px 10px;
@@ -12230,7 +12235,7 @@ a:hover {
     color: #fff;
     letter-spacing: 1px;
     font-size: 12px;
-    background: #fb0000;
+    background: #fe0000;
     text-transform: uppercase;
     font-weight: 600;
     padding: 5px 10px;
@@ -12315,9 +12320,9 @@ a:hover {
 }
 
 .newsletter-inline-shortcode .newsletter-success-message {
-    background: #fb000045;
+    background: #fe000045;
     color: #ff0000;
-    border: 1px solid #fb000047;
+    border: 1px solid #fe000047;
 }
 
 .newsletter-inline-shortcode .newsletter-error-message {
@@ -12353,6 +12358,10 @@ a:hover {
 
 @media (max-width: 1199px) {
 
+
+    .shop-product-filter {
+        display: grid;
+    }
 
     .main-menu>nav>ul>li>a:hover {
         color: #000;
@@ -12409,11 +12418,11 @@ a:hover {
     }
 
     .mobile-social-icon  {
-        margin-top: 10px;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      : 10px
-    }.hero-slider-1.style-2
+        margin-top: 10px;                                                                             
+    }
 
      .modal {
-         padding:  0px 10px;
+         padding: 0px 10px;
      }
 
     .newsletter-popup .modal-dialog {

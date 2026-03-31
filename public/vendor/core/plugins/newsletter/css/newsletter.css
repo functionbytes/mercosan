@@ -4,7 +4,7 @@
     overflow: auto;
 }
 .newsletter-popup .modal-dialog .newsletter-popup-bg {
-    background-color: #f7f7f7;
+    background-color: #f8f9fa;
     padding: 0;
 }
 .newsletter-popup .modal-dialog .newsletter-popup-bg img {
@@ -43,7 +43,7 @@
     color: #fff;
     letter-spacing: 1px;
     font-size: 12px;
-    background: #fb0000;
+    background: #fe0000;
     text-transform: uppercase;
     font-weight: 600;
     padding: 5px 10px;
@@ -82,7 +82,7 @@
 
 .newsletter-popup .modal-dialog .modal-content form input[type=email]:focus,
 .newsletter-popup .modal-dialog .modal-content form input[type=text]:focus {
-    border-color: #df2509;
+    border-color: #fe0000;
 }
 .newsletter-popup .modal-dialog .modal-content form input:focus {
     box-shadow: none;
@@ -143,13 +143,13 @@
 }
 .newsletter-popup .modal-dialog .modal-content .newsletter-message.newsletter-success-message {
     background-color: #fa857436;
-    border-color: #df2509;
-    color: #df2509;
+    border-color: #fe0000;
+    color: #fe0000;
 }
 .newsletter-popup .modal-dialog .modal-content .newsletter-message.newsletter-error-message {
     background-color: #fa857436;
-    border-color: #df2509;
-    color: #df2509;
+    border-color: #fe0000;
+    color: #fe0000;
 
 
 }
@@ -182,8 +182,8 @@
 }
 
 .newsletter-popup .modal-dialog .modal-content form .btn-primary {
-    background-color: #df2509;
-    border-color: #df2509;
+    background-color: #fe0000;
+    border-color: #fe0000;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
