@@ -114,8 +114,8 @@
         }
 
         .stamp {
-            border: 2px solid #555;
-            color: #555;
+            border: 2px solid #fe0000;
+            color: #fe0000;
             display: inline-block;
             font-size: 18px;
             line-height: 1;
@@ -129,13 +129,13 @@
         }
 
         .is-failed {
-            border-color: #d23;
-            color: #d23;
+            border-color: #fe0000;
+            color: #fe0000;
         }
 
         .is-completed {
-            border-color: #0a9928;
-            color: #0a9928;
+            border-color: #fe0000;
+            color: #fe0000;
         }
 
         body[dir=rtl] {

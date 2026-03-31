@@ -57,7 +57,7 @@ class CheckoutForm extends FormFront
                         ->when(! $isMobile, function (CheckoutForm $form) use ($model, $discountFormHtml, $cartItemHtml): void {
                             $form->addWrapper(
                                 'right_column_wrapper',
-                                '<div class="col-lg-5 col-md-6 order-2 checkout-order-info">',
+                                '<div class="col-lg-5 col-md-12 col-sm-12 order-2 checkout-order-info">',
                                 '</div>',
                                 function (CheckoutForm $form) use ($discountFormHtml, $cartItemHtml, $model): void {
                                     $form
@@ -86,7 +86,7 @@ class CheckoutForm extends FormFront
                         })
                         ->addWrapper(
                             'left_column_wrapper',
-                            $isMobile ? '<div class="form-checkout col-lg-12">' : '<div class="form-checkout col-lg-7 col-md-6">',
+                            $isMobile ? '<div class="form-checkout col-lg-12">' : '<div class="form-checkout col-lg-7 col-md-12 col-sm-12 ">',
                             '</div>',
                             function (CheckoutForm $form) use ($isMobile, $discountFormHtml, $cartItemHtml, $token, $model): void {
                                 $form

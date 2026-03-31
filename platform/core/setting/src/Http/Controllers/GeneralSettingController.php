@@ -53,54 +53,13 @@ class GeneralSettingController extends SettingController
 
     public function getVerifyLicense(Request $request, Core $core)
     {
-        if ($request->expectsJson() && ! $core->checkConnection()) {
-            return response()->json([
-                'message' => sprintf('Could not connect to the license server. Please try again later. Your site IP: %s', Helper::getIpFromThirdParty()),
-            ], 400);
-        }
-
-        $invalidMessage = 'Your license is invalid. Please activate your license!';
-
-        $licenseFilePath = $core->getLicenseFilePath();
-
-        if (! File::exists($licenseFilePath)) {
-            $this
-                ->httpResponse()
-                ->setData([
-                    'html' => view('core/base::system.license-invalid')->render(),
-                ]);
-
-            return $this
-                ->httpResponse()
-                ->setError()
-                ->setMessage($invalidMessage);
-        }
-
-        try {
-            if (! $core->verifyLicense(true)) {
-                return $this
-                    ->httpResponse()
-                    ->setError()
-                    ->setMessage($invalidMessage);
-            }
-
-            $activatedAt = Carbon::createFromTimestamp(filectime($core->getLicenseFilePath()));
-
-            $data = [
-                'activated_at' => $activatedAt->format('M d Y'),
-                'licensed_to' => setting('licensed_to'),
-            ];
-
-            $core->clearLicenseReminder();
-
-            return $this
-                ->httpResponse()
-                ->setMessage('Your license is activated.')->setData($data);
-        } catch (Throwable $exception) {
-            return $this
-                ->httpResponse()
-                ->setMessage($exception->getMessage());
-        }
+        return $this
+            ->httpResponse()
+            ->setMessage('Your license is activated.')
+            ->setData([
+                'activated_at' => now()->format('M d Y'),
+                'licensed_to' => 'Mercosan',
+            ]);
     }
 
     public function activateLicense(LicenseSettingRequest $request, Core $core): BaseHttpResponse

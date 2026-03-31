@@ -34,7 +34,7 @@
             width: 100%;
         }
         .payment-header {
-            background: #fb0000;
+            background: #fe0000;
             color: white;
             padding: 2rem;
             text-align: center;
@@ -77,21 +77,21 @@
             margin-top: 10px;
         }
         .back-button:hover, .fallback-button:hover {
-            background: #fb0000;
+            background: #fe0000;
             transform: translateY(-1px);
         }
         .fallback-button {
-            background: #fb0000;
+            background: #fe0000;
         }
         .fallback-button:hover {
-            background: #fb0000;
+            background: #fe0000;
         }
         .payment-instructions {
-            background: #fb000045;
-            border: 1px solid #fb000045;
+            background: #fe000045;
+            border: 1px solid #fe000045;
             border-radius: 4px;
             padding: 1rem;
-            color: #fb0000;
+            color: #fe0000;
         }
         .security-info {
             display: flex;
@@ -120,7 +120,7 @@
             width: 20px;
             height: 20px;
             border: 3px solid #f3f3f3;
-            border-top: 3px solid #fb0000;
+            border-top: 3px solid #fe0000;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -131,7 +131,7 @@
         .error-message {
             display: none;
             background: #f8d7da;
-            color: #fb0000;
+            color: #fe0000;
             padding: 1.5rem;
             border-radius: 10px;
             margin: 1rem 0;
@@ -139,23 +139,23 @@
         }
         .text-success {
             --bs-text-opacity: 1;
-            color: #fb0000;
+            color: #fe0000;
         }
 
         .widget-status {
             text-align: center;
             margin: 1rem 0;
             font-size: 0.9rem;
-            color: #fb0000;
+            color: #fe0000;
             display: none !important;
         }
         .waybox-button {
-            background-color: #fb0000 !important;
+            background-color: #fe0000 !important;
             width: 100% !important;
         }
 
         .security-info i{
-            color: #fb0000 !important;
+            color: #fe0000 !important;
         }
     </style>
 </head>

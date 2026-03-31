@@ -26,7 +26,7 @@
 
 .CodeMirror-gutters {
   border-right: 1px solid #ddd;
-  background-color: #f7f7f7;
+  background-color: #f8f9fa;
   white-space: nowrap;
 }
 .CodeMirror-linenumbers {}
@@ -61,7 +61,7 @@
   z-index: 1;
 }
 .cm-fat-cursor .CodeMirror-line::selection,
-.cm-fat-cursor .CodeMirror-line > span::selection, 
+.cm-fat-cursor .CodeMirror-line > span::selection,
 .cm-fat-cursor .CodeMirror-line > span > span::selection { background: transparent; }
 .cm-fat-cursor .CodeMirror-line::-moz-selection,
 .cm-fat-cursor .CodeMirror-line > span::-moz-selection,

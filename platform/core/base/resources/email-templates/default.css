@@ -257,20 +257,20 @@ code {
 
 .bb-table-pre .bb-table-pre-line-highlight-red td {
     background: #fbebeb;
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-table-pre .bb-table-pre-line-highlight-red td pre {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-table-pre .bb-table-pre-line-highlight-green td {
     background: #eaf7ec;
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-table-pre .bb-table-pre-line-highlight-green td pre {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-table-pre tr:first-child td {
@@ -670,7 +670,7 @@ strong {
 }
 
 .bb-day-month {
-    background: #fb0000;
+    background: #fe0000;
     border-radius: 4px 4px 0 0;
     color: #ffffff;
     font-weight: 400;
@@ -1300,7 +1300,7 @@ a.bb-bg-pink:hover {
 }
 
 .bb-bg-red {
-    background-color: #fb0000;
+    background-color: #fe0000;
     color: #ffffff;
 }
 
@@ -1321,20 +1321,20 @@ a.bb-bg-red:hover {
 }
 
 .bb-bg-red-lt {
-    color: #fb0000 !important;
+    color: #fe0000 !important;
     background: #f7d7d7 !important;
 }
 
 .bb-text-red {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-border-red {
-    border-color: #fb0000;
+    border-color: #fe0000;
 }
 
 .bb-bg-orange {
-    background-color: #fb0000;
+    background-color: #fe0000;
     color: #ffffff;
 }
 
@@ -1355,16 +1355,16 @@ a.bb-bg-orange:hover {
 }
 
 .bb-bg-orange-lt {
-    color: #fb0000 !important;
+    color: #fe0000 !important;
     background: #fde1cd !important;
 }
 
 .bb-text-orange {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-border-orange {
-    border-color: #fb0000;
+    border-color: #fe0000;
 }
 
 .bb-bg-yellow {
@@ -1436,7 +1436,7 @@ a.bb-bg-lime:hover {
 }
 
 .bb-bg-green {
-    background-color: #fb0000;
+    background-color: #fe0000;
     color: #ffffff;
 }
 
@@ -1457,16 +1457,16 @@ a.bb-bg-green:hover {
 }
 
 .bb-bg-green-lt {
-    color: #fb0000 !important;
+    color: #fe0000 !important;
     background: #d5f0da !important;
 }
 
 .bb-text-green {
-    color: #fb0000;
+    color: #fe0000;
 }
 
 .bb-border-green {
-    border-color: #fb0000;
+    border-color: #fe0000;
 }
 
 .bb-bg-teal {
@@ -1577,7 +1577,7 @@ a.bb-bg-gray:hover {
 }
 
 a.bb-bg-white:hover {
-    background-color: #f7f7f7 !important;
+    background-color: #f8f9fa !important;
 }
 
 .bb-bg-white-lightest {

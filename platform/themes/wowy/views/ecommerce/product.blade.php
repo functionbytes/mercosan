@@ -128,7 +128,7 @@
                                     @endif
 
                                     @if (EcommerceHelper::isWishlistEnabled())
-                                        <a aria-label="{{ __('Add To Wishlist') }}" class="action-btn hover-up js-add-to-wishlist-button" data-url="{{ route('public.wishlist.add', $product->id) }}" href="#"><i class="far fa-heart"></i></a>
+                                        <a aria-label="{{ __('Add To Wishlist') }}" class="action-btn hover-up js-add-to-wishlist-button" data-url="{{ route('public.wishlist.add', $product->id) }}" href="#"><i class="fa fa-heart"></i></a>
                                     @endif
                                 </div>
                             </div>

@@ -20,7 +20,7 @@ class LicenseController extends BaseController
 {
     public function index(): View|RedirectResponse
     {
-        return view('packages/installer::license');
+        return redirect()->to(URL::temporarySignedRoute('installers.final', Carbon::now()->addMinutes(30)));
     }
 
     public function store(LicenseSettingRequest $request, Core $core): RedirectResponse

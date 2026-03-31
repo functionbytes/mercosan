@@ -59,19 +59,6 @@
             </x-core::alert>
         @endif
 
-        @if (! $activated)
-            <x-core::alert
-                type="warning"
-                title="You haven't activated your license yet!"
-                :important="true"
-            >
-                <p class="mt-3 mb-0">
-                    We are required to activate your license before doing upgrade.
-                    Please go to <a href="{{ route('settings.general') }}" class="fw-bold text-white">settings</a> page
-                    to activate your license.
-                </p>
-            </x-core::alert>
-        @endif
 
         @if($isOutdated && $latestUpdate)
             <x-core::card class="mb-3">

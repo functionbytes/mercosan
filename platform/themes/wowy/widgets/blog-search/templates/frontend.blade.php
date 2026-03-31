@@ -5,7 +5,7 @@
     <div class="search-form">
         <form action="{{ route('public.search') }}" method="GET">
             <input type="text" name="q" value="{{ BaseHelper::stringify(request()->query('q')) }}" placeholder="{{ __('Search...') }}">
-            <button type="submit" title="search"> <i class="far fa-search"></i> </button>
+            <button type="submit" title="search"> <i class="fa fa-search"></i> </button>
         </form>
     </div>
 </div>

@@ -89,7 +89,7 @@
                                                         <input class="font-medium coupon-code" type="text" name="coupon_code" value="{{ old('coupon_code') }}" placeholder="{{ __('Enter coupon code') }}">
                                                     </div>
                                                     <div class="form-group col-lg-12">
-                                                        <button class="btn btn-rounded btn-sm btn-apply-coupon-code w-100" type="button" data-url="{{ route('public.coupon.apply') }}"><i class="far fa-bookmark mr-5"></i>{{ __('Apply') }}</button>
+                                                        <button class="btn btn-apply-coupon-code w-100" type="button" data-url="{{ route('public.coupon.apply') }}"><i class="fa fa-bookmark mr-5"></i>{{ __('Apply') }}</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +130,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button type="submit" name="checkout" class="btn w-100"> <i class="fa fa-share-square mr-10"></i> {{ __('Proceed To Checkout') }}</button>
+                                    <button type="submit" name="checkout" class="btn w-100"> <i class="fa fa-share-square mr-5"></i> {{ __('Proceed To Checkout') }}</button>
                                     <div class="mt-10">
                                         <a  class="btn btn-primary w-100" href="{{ route('public.products') }}"><i class="fa fa-arrow-left me-2"></i>{{ __('Continue Shopping') }}</a>
                                     </div>

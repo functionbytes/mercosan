@@ -10,7 +10,7 @@
             <small>{{ trans('plugins/ecommerce::reports.count.revenue') }}</small>
         </div>
         <div class="icon">
-            <i class="far fa-money-bill-alt"></i>
+            <i class="fa fa-money-bill-alt"></i>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="alert alert-success mb-1">
+<div class="alert alert-danger mb-1">
     <div class="d-flex align-items-center gap-2 justify-content-between flex-wrap">
         <div>
             {!! BaseHelper::clean(__('Coupon code: :code', ['code' => '<strong>' . session('applied_coupon_code') . '</strong>'])) !!}

@@ -38,7 +38,7 @@
                             @endif
                         </div>
                         <div class="shopping-cart-delete">
-                            <a href="#" data-url="{{ route('public.cart.remove', $cartItem->rowId) }}" class="remove-cart-item"><i class="far fa-times"></i></a>
+                            <a href="#" data-url="{{ route('public.cart.remove', $cartItem->rowId) }}" class="remove-cart-item"><i class="fa fa-times"></i></a>
                         </div>
                     </li>
                 @endif

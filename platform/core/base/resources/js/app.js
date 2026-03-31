@@ -12,29 +12,3 @@ $.ajaxSetup({
     },
 })
 
-$(() => {
-    setTimeout(() => {
-        if (typeof siteAuthorizedUrl === 'undefined' || typeof isAuthenticated === 'undefined' || !isAuthenticated) {
-            return
-        }
-
-        const $reminder = $('[data-bb-toggle="authorized-reminder"]')
-
-        if ($reminder.length) {
-            return
-        }
-
-        $httpClient
-            .makeWithoutErrorHandler()
-            .get(siteAuthorizedUrl, { verified: true })
-            .then(() => null)
-            .catch((error) => {
-                if (!error.response || error.response.status !== 200) {
-                    return
-                }
-
-                $(error.response.data.data.html).prependTo('body')
-                $(document).find('.alert-license').slideDown()
-            })
-    }, 1000)
-})

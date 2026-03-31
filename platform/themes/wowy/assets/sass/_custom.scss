@@ -378,7 +378,7 @@ body.show-admin-bar {
 
 .rating_wrap {
     .rating {
-        font-family: "Font Awesome 5 Pro" !important;
+        font-family: "Font Awesome 6 Pro" !important;
         vertical-align: top;
         overflow: hidden;
         position: relative;
@@ -407,7 +407,7 @@ body.show-admin-bar {
 
     .product_rate {
         overflow: hidden;
-        font-family: "Font Awesome 5 Pro" !important;
+        font-family: "Font Awesome 6 Pro" !important;
         top: 0;
         left: 0;
         position: absolute;
@@ -1819,7 +1819,7 @@ input.qty-input[type=number] {
     .table--cart {
         thead {
             .main-heading {
-                background: #f7f7f7;
+                background: #f8f9fa;
             }
         }
 
@@ -1836,7 +1836,7 @@ input.qty-input[type=number] {
         }
 
         .table-responsive {
-            background: #f7f7f7;
+            background: #f8f9fa;
 
             .table--cart {
                 tr:first-child {

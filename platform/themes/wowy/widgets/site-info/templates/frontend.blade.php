@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-12 col-sm-12">
     <div class="widget-about font-md mb-md-5 mb-lg-0">
         @if (theme_option('address') || theme_option('phone') || theme_option('working_hours'))
             <h4 class="mb-10 fw-600 widget-title mb-30  wow fadeIn animated">{{ __('Contact') }}</h4>

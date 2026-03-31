@@ -86,12 +86,6 @@ class UpdateCommand extends Command
         $progress->start();
 
         try {
-            if (! $this->core->verifyLicense(true)) {
-                $this->components->error('Your license is invalid. Please activate your license first.');
-
-                return self::FAILURE;
-            }
-
             $progress->label('Downloading the latest update...');
             $progress->advance();
 

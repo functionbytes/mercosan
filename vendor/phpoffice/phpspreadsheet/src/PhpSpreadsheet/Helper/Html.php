@@ -240,7 +240,7 @@ class Html
         'gray93' => 'ededed',
         'gray94' => 'f0f0f0',
         'gray95' => 'f2f2f2',
-        'gray97' => 'f7f7f7',
+        'gray97' => 'f8f9fa',
         'gray98' => 'fafafa',
         'gray99' => 'fcfcfc',
         'green' => '00ff00',

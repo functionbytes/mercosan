@@ -26,9 +26,52 @@
             --color-grey-1: {{ theme_option('color_grey_1', '#111111') }};
             --color-grey-2: {{ theme_option('color_grey_2', '#242424') }};
             --color-grey-4: {{ theme_option('color_grey_4', '#90908e') }};
-            --color-grey-9: {{ theme_option('color_grey_9', '#f7f7f7') }};
+            --color-grey-9: {{ theme_option('color_grey_9', '#f8f9fa') }};
             --color-muted: {{ theme_option('color_muted', '#8e8e90') }};
             --color-body: {{ theme_option('color_body', '#4f5d77') }};
+        }
+    </style>
+    <style>
+        .mobile-search-bar {
+            background: #fff;
+            padding: 8px 15px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            z-index: 99;
+        }
+        .mobile-search-bar__inner {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+        .mobile-search-bar__inner input {
+            flex: 1;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            background: transparent;
+            outline: none;
+        }
+        .mobile-search-bar__inner button {
+            border: none;
+            background: transparent;
+            padding: 8px 14px;
+            color: #666;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .mobile-search-bar .panel--search-result {
+            position: absolute;
+            left: 15px;
+            right: 15px;
+            top: 100%;
+            z-index: 999;
+            background: #fff;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
     </style>
 
@@ -61,7 +104,7 @@
                             @endif
 
                             @if (is_plugin_active('ecommerce') && EcommerceHelper::isOrderTrackingEnabled())
-                                <li><i class="far fa-anchor mr-5"></i><a href="{{ route('public.orders.tracking') }}">{{ __('Track Your Order') }}</a></li>
+                                <li><i class="fa fa-anchor mr-5"></i><a href="{{ route('public.orders.tracking') }}">{{ __('Track Your Order') }}</a></li>
                             @endif
                         </ul>
                     </div>
@@ -149,7 +192,7 @@
                                 </select>
                             </div>
                             <input type="text" name="q" class="input-search-product"  placeholder="{{ __('Search for items…') }}" autocomplete="off">
-                            <button type="submit" title="search"> <i class="far fa-search"></i> </button>
+                            <button type="submit" title="search"> <i class="fa fa-search"></i> </button>
                             <div class="panel--search-result"></div>
                         </form>
                     </div>
@@ -276,6 +319,19 @@
             </div>
         </div>
     </div>
+    @if (is_plugin_active('ecommerce'))
+    <div class="mobile-search-bar d-lg-none">
+        <div class="container">
+            <form action="{{ route('public.products') }}" class="form--quick-search" data-ajax-url="{{ route('public.ajax.search-products') }}" method="get">
+                <div class="mobile-search-bar__inner">
+                    <input type="text" name="q" class="input-search-product" placeholder="{{ __('Buscar artículos…') }}" autocomplete="off">
+                    <button type="submit" title="search"><i class="fa fa-search"></i></button>
+                </div>
+                <div class="panel--search-result"></div>
+            </form>
+        </div>
+    </div>
+    @endif
 </header>
 <div class="mobile-header-active mobile-header-wrapper-style">
     <div class="mobile-header-wrapper-inner">
@@ -294,17 +350,17 @@
         </div>
         @if (is_plugin_active('ecommerce'))
             <div class="mobile-header-content-area">
-                <div class="mobile-search search-style-3 mobile-header-border d-none">
+                <div class="mobile-search search-style-3 mobile-header-border">
                     <form action="{{ route('public.products') }}" class="form--quick-search" data-ajax-url="{{ route('public.ajax.search-products') }}" method="get">
                         <input type="text" name="q" class="input-search-product" placeholder="{{ __('Search...') }}">
-                        <button type="submit" title="search"> <i class="far fa-search"></i> </button>
+                        <button type="submit" title="search"> <i class="fa fa-search"></i> </button>
                         <div class="panel--search-result"></div>
                     </form>
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border ">
-                    <div class="main-categories-wrap mobile-header-border ">
-                        <a class="categories-button-active-2 d-none" href="#">
-                            <span class="far fa-bars"></span> {{ __('Browse Categories') }} <i class="down far fa-chevron-down"></i>
+                    <div class="main-categories-wrap mobile-header-border d-none">
+                        <a class="categories-button-active-2" href="#">
+                            <span class="fa fa-bars"></span> {{ __('Browse Categories') }} <i class="down far fa-chevron-down"></i>
                         </a>
                         <div class="categories-dropdown-wrap categories-dropdown-active-small">
                             <ul>
@@ -366,7 +422,7 @@
                 <div class="mobile-header-info-wrap mobile-header-border d-none">
                     @if (is_plugin_active('language'))
                         <div class="single-mobile-header-info ">
-                            <a class="mobile-language-active" href="#">{{ __('Language') }} <span><i class="far fa-angle-down"></i></span></a>
+                            <a class="mobile-language-active" href="#">{{ __('Language') }} <span><i class="fa fa-angle-down"></i></span></a>
                             <div class="lang-curr-dropdown lang-dropdown-active">
                                 <ul>
                                     @php
@@ -383,7 +439,7 @@
 
                     @if (count($currencies) > 1)
                         <div class="single-mobile-header-info">
-                            <a class="mobile-language-active" href="#">{{ __('Currency') }} <span><i class="far fa-angle-down"></i></span></a>
+                            <a class="mobile-language-active" href="#">{{ __('Currency') }} <span><i class="fa fa-angle-down"></i></span></a>
                             <div class="lang-curr-dropdown lang-dropdown-active">
                                 <ul>
                                     @foreach ($currencies as $currency)

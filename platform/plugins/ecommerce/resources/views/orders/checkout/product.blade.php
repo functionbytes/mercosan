@@ -7,6 +7,12 @@
                 alt="{{ $product->original_product->name }}"
             >
             <span class="checkout-quantity">{{ $cartItem->qty }}</span>
+            <a
+                href="{{ route('public.cart.remove', $cartItem->rowId) }}"
+                class="checkout-remove-btn"
+                data-bb-toggle="remove-from-checkout"
+                title="{{ __('Remove') }}"
+            >&times;</a>
         </div>
     </div>
     <div class="col">
@@ -30,6 +36,7 @@
                 class="ec-checkout-quantity"
                 data-url="{{ route('public.cart.update') }}"
                 data-row-id="{{ $cartItem->rowId }}"
+                data-remove-url="{{ route('public.cart.remove', $cartItem->rowId) }}"
             >
                 <button type="button" class="ec-checkout-quantity-control ec-checkout-quantity-minus" data-bb-toggle="decrease-qty">
                     <x-core::icon name="ti ti-minus" />

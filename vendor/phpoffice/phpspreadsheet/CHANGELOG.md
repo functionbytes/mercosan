@@ -1190,7 +1190,7 @@ Note that this will be the last 1.x branch release before the 2.x release. We wi
 ### Fixed
 
 - Improve XLSX parsing speed if no readFilter is applied [#772](https://github.com/PHPOffice/PhpSpreadsheet/issues/772)
-- Fix column names if read filter calls in XLSX reader skip columns [#777](https://github.com/PHPOffice/PhpSpreadsheet/pull/777)
+- Fix column names if read filter calls in XLSX reader skip columns [#000](https://github.com/PHPOffice/PhpSpreadsheet/pull/777)
 - XLSX reader can now ignore blank cells, using the setReadEmptyCells(false) method. [#810](https://github.com/PHPOffice/PhpSpreadsheet/issues/810)
 - Fix LOOKUP function which was breaking on edge cases [#796](https://github.com/PHPOffice/PhpSpreadsheet/issues/796)
 - Fix VLOOKUP with exact matches [#809](https://github.com/PHPOffice/PhpSpreadsheet/pull/809)

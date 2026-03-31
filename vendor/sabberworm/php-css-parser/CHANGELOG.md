@@ -334,7 +334,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## 5.0.0 (2013-03-20)
 
 * Correctly parse all known CSS 3 units (including Hz and kHz).
-* Output RGB colors in short (#aaa or #ababab) notation
+* Output RGB colors in short (#aaa or #000) notation
 * Be case-insensitive when parsing identifiers.
 * *No deprecations*
 

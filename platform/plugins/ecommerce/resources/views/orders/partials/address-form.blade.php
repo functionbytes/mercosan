@@ -1,6 +1,6 @@
 <div class="customer-address-payment-form">
     <input type="hidden" name="update-tax-url" id="update-checkout-tax-url" value="{{ route('public.ajax.checkout.update-tax') }}">
-    <div class="mb-3 form-group">
+    <div class="mb-3 form-group customer-auth">
         @if (auth('customer')->check())
             <p>{{ __('Account') }}: <strong>{{ auth('customer')->user()->name }}</strong> - {!! Html::email(auth('customer')->user()->email) !!} (<a href="{{ route('customer.logout') }}">{{ __('Logout') }})</a></p>
         @else
@@ -89,11 +89,10 @@
                     name="address[name]"
                     autocomplete="family-name"
                     type="text"
-                    placeholder="{{ __('e.g. Juan Carlos Pérez López') }}"
                     value="{{ old('address.name', Arr::get($sessionCheckoutData, 'name')) ?: (auth('customer')->check() ? auth('customer')->user()->name : null) }}"
                     required
                 >
-                <label for="address_name">{{ __('Full Name (first and last name)') }}</label>
+                <label for="address_name">{{ __('Full Name') }}</label>
             </div>
             {!! Form::error('address.name', $errors) !!}
         </div>

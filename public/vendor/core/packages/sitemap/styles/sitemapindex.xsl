@@ -63,7 +63,7 @@ a
 }
 a:visited
 {
-	color: #777;
+	color: #000;
 }
 a:hover
 {

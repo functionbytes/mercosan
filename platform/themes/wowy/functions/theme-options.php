@@ -558,7 +558,7 @@ app()->booted(function (): void {
             'label' => __('Grey 9'),
             'attributes' => [
                 'name' => 'color_grey_9',
-                'value' => '#f7f7f7',
+                'value' => '#f8f9fa',
             ],
         ])
         ->setField([

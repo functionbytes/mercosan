@@ -69,7 +69,7 @@
                                 <a href="{{ $relatedItem->url }}">{{ $relatedItem->name }}</a></h3>
                             <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
                                 <div>
-                                    <span class="post-on has-dot"> <i class="far fa-clock"></i> {{ $relatedItem->created_at->translatedFormat('M d, Y') }}</span>
+                                    <span class="post-on has-dot"> <i class="fa fa-clock"></i> {{ $relatedItem->created_at->translatedFormat('M d, Y') }}</span>
                                 </div>
                                 <a href="{{ $relatedItem->url }}" class="text-brand">{{ __('Read more') }} <i class="fa fa-arrow-right fw-300 text-brand ml-5"></i></a>
                             </div>

@@ -46,36 +46,7 @@ class SystemController extends BaseSystemController
 
     public function getCheckUpdate(Core $core)
     {
-        $response = $this->httpResponse();
-
-        if (! config('core.base.general.enable_system_updater') || BaseHelper::hasDemoModeEnabled()) {
-            return $response;
-        }
-
-        $response
-            ->setData(['has_new_version' => false]);
-
-        try {
-            $updateData = $core->checkUpdate();
-        } catch (Throwable $exception) {
-            return $this
-                ->httpResponse()
-                ->setMessage($exception->getMessage());
-        }
-
-        if ($updateData) {
-            $response
-                ->setData(['has_new_version' => true])
-                ->setMessage(
-                    sprintf(
-                        'A new version (%s / released on %s) is available to update',
-                        $updateData->version,
-                        BaseHelper::formatDate($updateData->releasedDate)
-                    )
-                );
-        }
-
-        return $response;
+        return $this->httpResponse()->setData(['has_new_version' => false]);
     }
 
     public function getUpdater(Core $core)

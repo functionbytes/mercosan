@@ -12,7 +12,7 @@
                 <span><i class="fa fa-th"></i>{{ __('Show:') }}</span>
             </div>
             <div class="sort-by-dropdown-wrap">
-                <span> {{ Arr::get($shows, $showing, (int)theme_option('number_of_products_per_page', 12)) }} <i class="far fa-angle-down"></i></span>
+                <span> {{ Arr::get($shows, $showing, (int)theme_option('number_of_products_per_page', 12)) }} <i class="fa fa-angle-down"></i></span>
             </div>
         </div>
         <div class="sort-by-dropdown products_ajaxsortby" data-name="num">
@@ -33,7 +33,7 @@
                 <span><i class="fa fa-sort-amount-down"></i>{{ __('Sort by:') }}</span>
             </div>
             <div class="sort-by-dropdown-wrap">
-                <span><span>{!! Arr::get($sorts, $sortBy) !!}</span> <i class="far fa-angle-down"></i></span>
+                <span><span>{!! Arr::get($sorts, $sortBy) !!}</span> <i class="fa fa-angle-down"></i></span>
             </div>
         </div>
         <div class="sort-by-dropdown products_ajaxsortby" data-name="sort-by">

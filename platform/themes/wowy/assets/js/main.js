@@ -159,8 +159,8 @@
         loop: true,
         dots: true,
         arrows: true,
-        prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
-        nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
+        prevArrow: '<span class="slider-btn slider-prev"><i class="fa fa-chevron-left"></i></span>',
+        nextArrow: '<span class="slider-btn slider-next"><i class="fa fa-chevron-right"></i></span>',
         appendArrows: '.hero-slider-1-arrow'
     });
 
@@ -184,8 +184,8 @@
             slidesToScroll: 1,
             rows: 1, // Una sola fila
             adaptiveHeight: true,
-            prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
-            nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
+            prevArrow: '<span class="slider-btn slider-prev"><i class="fa fa-chevron-left"></i></span>',
+            nextArrow: '<span class="slider-btn slider-next"><i class="fa fa-chevron-right"></i></span>',
             appendArrows: appendArrowsClassName,
             responsive: [
                 {
@@ -249,8 +249,8 @@
                     }
                 }
             ],
-            prevArrow: '<span class="slider-btn slider-prev"><i class="far fa-chevron-left"></i></span>',
-            nextArrow: '<span class="slider-btn slider-next"><i class="far fa-chevron-right"></i></span>',
+            prevArrow: '<span class="slider-btn slider-prev"><i class="fa fa-chevron-left"></i></span>',
+            nextArrow: '<span class="slider-btn slider-next"><i class="fa fa-chevron-right"></i></span>',
             appendArrows: appendArrowsClassName,
         });
     });
@@ -504,7 +504,7 @@
         $offCanvasNavSubMenu = $offCanvasNav.find('.dropdown');
 
     /*Add Toggle Button With Off Canvas Sub Menu*/
-    $offCanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="far fa-chevron-down"></i></span>');
+    $offCanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="fa fa-chevron-down"></i></span>');
 
     /*Close Off Canvas Sub Menu*/
     $offCanvasNavSubMenu.slideUp();
@@ -656,7 +656,7 @@
         try {
             // First, remove any existing wow classes that might be causing visibility issues
             $('.wow').removeClass('wow animated').removeAttr('style');
-            
+
             // Initialize WOW with custom configuration
             var wow = new WOW({
                 boxClass: 'wow-animate',      // Use different class to avoid conflicts
@@ -670,7 +670,7 @@
                 },
                 scrollContainer: null         // optional scroll container selector, otherwise use window
             });
-            
+
             // Don't initialize WOW automatically to prevent hiding elements
             // Instead, manually handle animations without hiding elements
             console.log('WOW.js disabled for homepage compatibility');
@@ -681,7 +681,7 @@
         // If WOW is not available, ensure all elements are visible
         $('.wow').removeClass('wow animated').removeAttr('style').css('visibility', 'visible');
     }
-    
+
     // Force all elements to be visible on page load
     $(document).ready(function() {
         $('.wow').each(function() {

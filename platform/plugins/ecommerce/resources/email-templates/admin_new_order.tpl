@@ -96,7 +96,7 @@
             </tr>
             <tr>
                 <td class="bb-content bb-text-center bb-border-top bb-pt-md">
-                    <a href="{{ order_edit_link }}" class="bb-btn bb-btn-blue" style="background-color: #fb0000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
+                    <a href="{{ order_edit_link }}" class="bb-btn bb-btn-blue" style="background-color: #fe0000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;">
                         View & Edit Order
                     </a>
                     <p class="bb-text-muted bb-mt-sm" style="font-size: 12px; color: #666;">

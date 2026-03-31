@@ -48,17 +48,7 @@ class CustomerTable extends TableAbstract
     {
         $data = $this->table
             ->eloquent($this->query())
-            ->editColumn('avatar', function (Customer $item) {
-                if ($this->isExportingToCSV() || $this->isExportingToExcel()) {
-                    return $item->avatar_url;
-                }
-
-                return Html::tag(
-                    'img',
-                    '',
-                    ['src' => $item->avatar_url, 'alt' => BaseHelper::clean($item->name), 'width' => 50]
-                );
-            });
+;
 
         return $this->toJson($data);
     }
@@ -73,7 +63,6 @@ class CustomerTable extends TableAbstract
                 'name',
                 'email',
                 'phone',
-                'avatar',
                 'created_at',
                 'status',
                 'confirmed_at',
@@ -86,8 +75,6 @@ class CustomerTable extends TableAbstract
     {
         $columns = [
             IdColumn::make(),
-            Column::make('avatar')
-                ->title(trans('plugins/ecommerce::customer.avatar')),
             NameColumn::make()->route('customers.edit'),
         ];
 

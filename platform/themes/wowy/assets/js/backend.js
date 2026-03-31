@@ -1600,19 +1600,36 @@
 
         // Monitor for captcha completion in newsletter forms
         function checkCaptchaStatus() {
-            // Check all possible captcha response fields
-            var captchaResponse = $('.bb-newsletter-inline-form .g-recaptcha-response').val() || 
-                                 $('.bb-newsletter-inline-form [name="g-recaptcha-response"]').val() || 
-                                 $('[name="g-recaptcha-response"]').val();
-            
             var submitBtn = $('#newsletter-submit-btn');
-            
-            if (captchaResponse && captchaResponse.length > 0) {
-                submitBtn.prop('disabled', false).removeClass('btn-disabled').removeClass('disabled');
-                console.log('Captcha validated - button enabled');
+
+            // Check if reCAPTCHA exists on the page
+            var hasCaptcha = $('.bb-newsletter-inline-form .g-recaptcha').length > 0;
+
+            if (hasCaptcha) {
+                // If captcha exists, check if it's completed
+                var captchaResponse = $('.bb-newsletter-inline-form .g-recaptcha-response').val() ||
+                                     $('.bb-newsletter-inline-form [name="g-recaptcha-response"]').val() ||
+                                     $('[name="g-recaptcha-response"]').val();
+
+                if (captchaResponse && captchaResponse.length > 0) {
+                    submitBtn.prop('disabled', false).removeClass('btn-disabled').removeClass('disabled');
+                    console.log('Captcha validated - button enabled');
+                } else {
+                    submitBtn.prop('disabled', true).addClass('btn-disabled');
+                    console.log('Captcha not validated - button disabled');
+                }
             } else {
-                submitBtn.prop('disabled', true).addClass('btn-disabled');
-                console.log('Captcha not validated - button disabled');
+                // No captcha present, check if email is valid
+                var emailInput = $('#newsletter-email');
+                var emailValue = emailInput.val();
+
+                if (emailValue && emailValue.length > 0 && emailValue.includes('@') && emailValue.includes('.')) {
+                    submitBtn.prop('disabled', false).removeClass('btn-disabled').removeClass('disabled');
+                    console.log('No captcha required - email valid - button enabled');
+                } else {
+                    submitBtn.prop('disabled', true).addClass('btn-disabled');
+                    console.log('No captcha - email invalid - button disabled');
+                }
             }
         }
 
@@ -1703,14 +1720,19 @@
                     $(element).removeClass('is-invalid').addClass('is-valid');
                 },
                 submitHandler: function(form) {
-                    // Check if captcha is validated before submitting
-                    var captchaResponse = $('.bb-newsletter-inline-form .g-recaptcha-response').val() || 
-                                         $('.bb-newsletter-inline-form [name="g-recaptcha-response"]').val() || 
-                                         $('[name="g-recaptcha-response"]').val();
-                    
-                    if (!captchaResponse || captchaResponse.length === 0) {
-                        alert('Por favor completa el captcha antes de continuar');
-                        return false;
+                    // Check if captcha exists on the page
+                    var hasCaptcha = $('.bb-newsletter-inline-form .g-recaptcha').length > 0;
+
+                    if (hasCaptcha) {
+                        // Only check captcha if it exists
+                        var captchaResponse = $('.bb-newsletter-inline-form .g-recaptcha-response').val() ||
+                                             $('.bb-newsletter-inline-form [name="g-recaptcha-response"]').val() ||
+                                             $('[name="g-recaptcha-response"]').val();
+
+                        if (!captchaResponse || captchaResponse.length === 0) {
+                            alert('Por favor completa el captcha antes de continuar');
+                            return false;
+                        }
                     }
                     
                     // Submit the form via AJAX (existing functionality)

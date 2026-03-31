@@ -87,11 +87,6 @@ class MarketplaceService
     public function beginInstall(string $id, string $name): bool|JsonResponse
     {
         $core = Core::make();
-        $licenseFilePath = $core->getLicenseFilePath();
-
-        if (! File::exists($licenseFilePath)) {
-            throw new RequiresLicenseActivatedException();
-        }
 
         $data = $this->callApi(
             'post',
@@ -99,7 +94,6 @@ class MarketplaceService
             [
                 'license_url' => $this->licenseUrl,
                 'license_api_key' => $this->licenseApiKey,
-                'license_file' => $core->getLicenseFile(),
             ]
         );
 

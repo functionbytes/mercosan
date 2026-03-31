@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <article class="first-post mb-30 wow fadeIn animated hover-up">
                             <div class="img-hover-slide position-relative overflow-hidden">
-                                <span class="top-right-icon bg-dark"><i class="far fa-bookmark"></i></span>
+                                <span class="top-right-icon bg-dark"><i class="fa fa-bookmark"></i></span>
                                 <div class="post-thumb img-hover-scale">
                                     <a href="{{ $post->url }}">
                                         <img src="{{ RvMedia::getImageUrl($post->image, null, false, RvMedia::getDefaultImage()) }}" alt="{{ $post->name }}">
@@ -70,7 +70,7 @@
                                 <p class="post-exerpt mb-30">{{ $post->description }}</p>
                                 <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
                                     <div>
-                                        <span class="post-on has-dot"> <i class="far fa-clock"></i> {{ $post->created_at->translatedFormat('M d, Y') }}</span>
+                                        <span class="post-on has-dot"> <i class="fa fa-clock"></i> {{ $post->created_at->translatedFormat('M d, Y') }}</span>
                                     </div>
                                     <a href="{{ $post->url }}" class="text-brand">{{ __('Read more') }} <i class="fa fa-arrow-right fw-300 text-brand ml-5"></i></a>
                                 </div>

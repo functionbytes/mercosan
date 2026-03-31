@@ -95,12 +95,6 @@ class CustomerForm extends FormAbstract
                     ->colspan(2)
             )
             ->add('status', SelectField::class, StatusFieldOption::make()->choices(CustomerStatusEnum::labels()))
-            ->add(
-                'avatar',
-                MediaImageField::class,
-                MediaImageFieldOption::make()
-                    ->label(trans('plugins/ecommerce::customer.avatar'))
-            )
             ->setBreakFieldPoint('status')
             ->when($this->getModel()->getKey(), function (): void {
                 /**

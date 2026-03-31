@@ -2,7 +2,7 @@
     @if (theme_option('preloader_version', 'v1') == 'v1' && theme_option('preloader_image'))
         <style>
             .preloader {
-                background-color: #f7f7f7;
+                background-color: #f8f9fa;
                 bottom: 0;
                 height: 100%;
                 left: 0;

@@ -27,7 +27,7 @@
                                     </h4>
                                     <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
                                         <div>
-                                            <span class="post-on"> <i class="far fa-clock"></i> {{ $post->created_at->translatedFormat('d M Y') }}</span>
+                                            <span class="post-on"> <i class="fa fa-clock"></i> {{ $post->created_at->translatedFormat('d M Y') }}</span>
                                             <span class="hit-count has-dot">{{ number_format($post->views) }} {{ __('Views')}}</span>
                                         </div>
                                         <a href="{{ $post->url }}">{{ __('Read more') }} <i class="fa fa-arrow-right font-xxs ml-5"></i></a>

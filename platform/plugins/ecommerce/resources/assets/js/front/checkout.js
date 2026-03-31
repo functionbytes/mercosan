@@ -454,13 +454,29 @@ class MainCheckout {
             $addressId.trigger('change')
         }
 
+        const removeFromCheckout = (url) => {
+            $.ajax({
+                url,
+                method: 'GET',
+                success: () => window.location.reload(),
+            })
+        }
+
         $(document)
+            .on('click', '[data-bb-toggle="remove-from-checkout"]', (e) => {
+                e.preventDefault()
+                removeFromCheckout($(e.currentTarget).prop('href'))
+            })
             .on('click', '[data-bb-toggle="decrease-qty"]', (e) => {
                 const $input = $(e.currentTarget).parent().find('input')
 
                 let count = parseInt($input.val()) - 1
 
                 if (count < 1) {
+                    const removeUrl = $(e.currentTarget).parent().data('remove-url')
+                    if (removeUrl) {
+                        removeFromCheckout(removeUrl)
+                    }
                     return
                 }
 

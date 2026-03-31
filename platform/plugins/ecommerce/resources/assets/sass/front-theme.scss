@@ -241,6 +241,33 @@ select.form-control {
     line-height: 22px;
 }
 
+.checkout-remove-btn {
+    position: absolute;
+    left: -7px;
+    top: -7px;
+    width: 25px;
+    height: 25px;
+    background: #dc3545;
+    color: #ffffff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    text-align: center;
+    line-height: 23px;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: background 0.15s;
+
+    &:hover {
+        background: #bb2d3b;
+        color: #ffffff;
+        text-decoration: none;
+    }
+}
+
 .cart-item {
     margin-top: 10px;
     margin-bottom: 10px;
