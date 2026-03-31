@@ -12334,16 +12334,7 @@ a:hover {
 }
 
 
-@media (max-width: 976px) {
-
-    .sticky-bar {
-        background-color: #fff !important;
-    }
-}
-
 @media (max-width: 768px) {
-
-
 
     .shop-product-filter .sort-by-product-area .sort-by-product-wrap .sort-by span {
         font-size: 12px;
@@ -12400,16 +12391,13 @@ a:hover {
     margin: auto;
     pointer-events: none;
 }
-.sticky-bar {
-    background-color: var(--color-brand);
-}
 
 
 @media (max-width: 1199px) {
 
-
     .shop-product-filter .total-product p {
         font-size: 12px;
+        /* margin-right: 10px; */
     }
 
 
@@ -12445,6 +12433,9 @@ a:hover {
         margin-top: 20px;
     }
 
+
+    .header-bottom-bg-color {
+    }
 
 
     .header-action-2 .header-action-icon-2>a {

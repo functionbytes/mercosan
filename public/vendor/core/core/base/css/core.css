@@ -25679,7 +25679,7 @@ a.mention.hover,a.mention:hover {
 }
 
 .bg-azure {
-    background-color:  color-mix(in srgb, #000000 calc(var(--bb-bg-opacity, 1) * 100%), transparent) !important;
+    background-color: color-mix(in srgb,var(--bb-azure) calc(var(--bb-bg-opacity, 1)*100%),transparent)!important
 }
 
 .bg-azure-lt {
@@ -25802,7 +25802,7 @@ a.mention.hover,a.mention:hover {
 }
 
 .bg-pink {
-    background-color:  color-mix(in srgb, #fe0000 calc(var(--bb-bg-opacity, 1) * 100%), transparent) !important;
+    background-color: color-mix(in srgb,var(--bb-pink) calc(var(--bb-bg-opacity, 1)*100%),transparent)!important
 }
 
 .bg-pink-lt {
@@ -25925,7 +25925,7 @@ a.mention.hover,a.mention:hover {
 }
 
 .bg-yellow {
-    background-color:  color-mix(in srgb, #fe0000 calc(var(--bb-bg-opacity, 1) * 100%), transparent) !important;
+    background-color: color-mix(in srgb,var(--bb-yellow) calc(var(--bb-bg-opacity, 1)*100%),transparent)!important
 }
 
 .bg-yellow-lt {
@@ -25966,7 +25966,7 @@ a.mention.hover,a.mention:hover {
 }
 
 .bg-lime {
-    background-color:  color-mix(in srgb, #000000 calc(var(--bb-bg-opacity, 1) * 100%), transparent) !important;
+    background-color: color-mix(in srgb,var(--bb-lime) calc(var(--bb-bg-opacity, 1)*100%),transparent)!important
 }
 
 .bg-lime-lt {
