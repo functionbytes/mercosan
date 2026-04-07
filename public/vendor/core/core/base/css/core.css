@@ -27421,11 +27421,11 @@ a.mention.hover,a.mention:hover {
 }
 
 .permissions-tree .form-check .form-check-input.check-danger:checked {
-    background-color: #dc3545
+    background-color: #fb0000
 }
 
 .permissions-tree .form-check .form-check-input.check-danger:focus {
-    border-color: #dc3545
+    border-color: #fb0000
 }
 
 .permissions-tree .form-check .form-check-input.check-success:checked {

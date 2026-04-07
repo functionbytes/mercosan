@@ -321,6 +321,55 @@ class OrderController extends BaseController
         return DeleteResourceAction::make($order);
     }
 
+    public function postAddProduct(Order $order, Request $request)
+    {
+        $request->validate([
+            'product_id' => ['required', 'integer', 'exists:ec_products,id'],
+            'qty' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $product = Product::query()->findOrFail($request->integer('product_id'));
+        $qty = $request->integer('qty', 1);
+
+        $existing = OrderProduct::query()
+            ->where('order_id', $order->getKey())
+            ->where('product_id', $product->getKey())
+            ->first();
+
+        if ($existing) {
+            $existing->update(['qty' => $existing->qty + $qty]);
+        } else {
+            OrderProduct::query()->create([
+                'order_id' => $order->getKey(),
+                'product_id' => $product->getKey(),
+                'product_name' => $product->name,
+                'product_image' => $product->image,
+                'qty' => $qty,
+                'weight' => $product->weight ?? 0,
+                'price' => $product->price,
+                'tax_amount' => 0,
+                'product_type' => $product->product_type,
+            ]);
+        }
+
+        $order->load('products');
+        $subTotal = $order->products->sum(fn ($p) => $p->price * $p->qty);
+        $order->update([
+            'sub_total' => $subTotal,
+            'amount' => $subTotal + $order->shipping_amount + $order->tax_amount - $order->discount_amount - $order->promotion_amount,
+        ]);
+
+        OrderHistory::query()->create([
+            'action' => 'add_product',
+            'description' => "Producto \"{$product->name}\" (x{$qty}) agregado manualmente",
+            'order_id' => $order->getKey(),
+            'user_id' => Auth::id(),
+        ]);
+
+        return $this->httpResponse()
+            ->setMessage('Producto agregado exitosamente');
+    }
+
     public function getGenerateInvoice(Order $order, Request $request)
     {
         abort_unless($order->isInvoiceAvailable(), 404);
@@ -869,6 +918,124 @@ class OrderController extends BaseController
                 'customerOrderNumbers'
             )
         );
+    }
+
+    public function getManageItems(Order $order): mixed
+    {
+        $this->pageTitle('Editar productos de la orden #' . $order->code);
+
+        Assets::usingVueJS();
+
+        $order->load(['products', 'address', 'user']);
+
+        $productIds = $order->products->pluck('product_id')->all();
+
+        $products = Product::query()
+            ->whereIn('id', $productIds)
+            ->get();
+
+        $cartItems = collect();
+        foreach ($order->products as $orderProduct) {
+            $product = $products->firstWhere('id', $orderProduct->product_id);
+            if (! $product) {
+                continue;
+            }
+
+            $options = ['options' => $orderProduct->product_options];
+            $cartItem = CartItem::fromAttributes($product->id, $orderProduct->product_name, 0, $options);
+            $cartItem->setQuantity($orderProduct->qty ?? 1);
+            $cartItems[] = $cartItem;
+        }
+
+        $products = CartItemResource::collection($cartItems);
+
+        $customer = null;
+        $customerAddresses = [];
+        $customerOrderNumbers = 0;
+
+        if ($order->user_id) {
+            /** @var Customer $customer */
+            $customer = Customer::query()->findOrFail($order->user_id);
+            $customer->avatar = (string) $customer->avatar_url;
+            $customerOrderNumbers = $customer->completedOrders()->count();
+            $customerAddresses = CustomerAddressResource::collection($customer->addresses);
+        }
+
+        $customerAddress = new CustomerAddressResource($order->address);
+
+        Assets::addStylesDirectly(['vendor/core/plugins/ecommerce/css/ecommerce.css'])
+            ->addScriptsDirectly([
+                'vendor/core/plugins/ecommerce/libraries/jquery.textarea_autosize.js',
+                'vendor/core/plugins/ecommerce/js/order-create.js',
+            ])
+            ->addScripts(['input-mask']);
+
+        return view(
+            'plugins/ecommerce::orders.manage',
+            compact(
+                'order',
+                'products',
+                'productIds',
+                'customer',
+                'customerAddresses',
+                'customerAddress',
+                'customerOrderNumbers'
+            )
+        );
+    }
+
+    public function postUpdateItems(Order $order, Request $request): mixed
+    {
+        $data = $this->getDataBeforeCreateOrder($request);
+
+        if (Arr::get($data, 'error')) {
+            return $this
+                ->httpResponse()
+                ->setError()
+                ->setMessage(implode('; ', Arr::get($data, 'message', [])));
+        }
+
+        $order->products()->delete();
+
+        foreach (Arr::get($data, 'products') as $productItem) {
+            $productItem = $productItem->toArray($request);
+            $quantity = Arr::get($productItem, 'quantity', 1);
+
+            OrderProduct::query()->create([
+                'order_id' => $order->id,
+                'product_id' => Arr::get($productItem, 'id'),
+                'product_name' => Arr::get($productItem, 'name'),
+                'product_image' => Arr::get($productItem, 'image'),
+                'qty' => $quantity,
+                'weight' => Arr::get($productItem, 'weight'),
+                'price' => Arr::get($productItem, 'original_price'),
+                'tax_amount' => Arr::get($productItem, 'tax_price'),
+                'product_options' => Arr::get($productItem, 'cart_options.options'),
+                'options' => Arr::get($productItem, 'cart_options', []),
+                'product_type' => Arr::get($productItem, 'product_type'),
+            ]);
+        }
+
+        $order->update([
+            'sub_total' => Arr::get($data, 'sub_amount') ?: 0,
+            'amount' => Arr::get($data, 'total_amount'),
+            'tax_amount' => Arr::get($data, 'tax_amount') ?: 0,
+            'shipping_amount' => Arr::get($data, 'shipping_amount') ?: 0,
+            'discount_amount' => Arr::get($data, 'discount_amount') ?: 0,
+            'promotion_amount' => Arr::get($data, 'promotion_amount') ?: 0,
+        ]);
+
+        OrderHistory::query()->create([
+            'action' => OrderHistoryActionEnum::CREATE_ORDER_FROM_ADMIN_PAGE,
+            'description' => 'Productos de la orden actualizados desde el panel de administración.',
+            'order_id' => $order->getKey(),
+            'user_id' => Auth::id(),
+        ]);
+
+        return $this
+            ->httpResponse()
+            ->setNextUrl(route('orders.edit', $order->getKey()))
+            ->withUpdatedSuccessMessage();
     }
 
     public function getIncompleteList(OrderIncompleteTable $dataTable)

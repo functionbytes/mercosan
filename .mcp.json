@@ -7,13 +7,6 @@
                 "boost:mcp"
             ]
         },
-        "context7": {
-            "command": "npx",
-            "args": [
-                "--yes",
-                "@upstash/context7-mcp"
-            ]
-        },
         "chrome-devtools": {
             "command": "npx",
             "args": [

@@ -570,6 +570,14 @@
                             >
                                 {{ trans('plugins/ecommerce::order.reorder') }}
                             </x-core::button>
+
+                            <x-core::button
+                                tag="a"
+                                :href="route('orders.manage', $order->id)"
+                            >
+                                Editar productos
+                            </x-core::button>
+
                             @if ($order->canBeCanceledByAdmin())
                                 <x-core::button
                                     type="button"

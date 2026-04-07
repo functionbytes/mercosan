@@ -40,7 +40,7 @@ class ContactExport extends TableExportHandler
             if ($value == ContactStatusEnum::READ) {
                 $status->setARGB('1d9977');
             } else {
-                $status->setARGB('dc3545');
+                $status->setARGB('fb0000');
             }
 
             $event->sheet

@@ -59,7 +59,7 @@ for (const assetType of types) {
 }
 
 if (! buildPaths.length) {
-    buildPaths = ['*/*']
+    buildPaths = ['plugins/*', 'packages/*']
 }
 
 buildPaths.forEach(buildPath => glob.sync(`./platform/${buildPath}/webpack.mix.js`).forEach(item => require(__dirname + '/' + item)))

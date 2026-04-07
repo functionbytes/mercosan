@@ -16,16 +16,18 @@
         "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_d5e5d25432b515e046c4324c24b6cb81",
         "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_33260e6a0e775e3f41e47a5709246569",
         "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_rendering_select50a18a10811e69cfce3c9d70ae6f3796",
-        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_50a18a10811e69cfce3c9d70ae6f3796"
+        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_50a18a10811e69cfce3c9d70ae6f3796",
+        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_rendering_select3d1025aec71fc2adb133828561008583",
+        "e2df835384821fa5036252a0581ba12b@ecommerce_categories_for_widgets_3d1025aec71fc2adb133828561008583"
     ],
     "Botble\\ACL\\Models\\UserMeta": [
         "65b83ad065dbeb5292d94ab9580d9273@user-meta-1"
     ],
-    "Botble\\Base\\Models\\AdminNotification": [
-        "91ca94b722506f03892a158294e61ceb@admin-notifications-count"
-    ],
     "Botble\\Contact\\Models\\Contact": [
         "0c175e4a57799ccc0d2967044852a2f8@unread-contacts",
         "0c175e4a57799ccc0d2967044852a2f8@unread-contacts-count"
+    ],
+    "Botble\\Base\\Models\\AdminNotification": [
+        "91ca94b722506f03892a158294e61ceb@admin-notifications-count"
     ]
 }

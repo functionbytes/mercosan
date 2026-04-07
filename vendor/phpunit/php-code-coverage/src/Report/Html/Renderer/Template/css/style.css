@@ -7,7 +7,7 @@
  --phpunit-warning: {{warning}};
  --phpunit-warning-bar: #ffc107;
  --phpunit-danger: {{danger}};
- --phpunit-danger-bar: #dc3545;
+ --phpunit-danger-bar: #fb0000;
 }
 
 body {

@@ -1734,13 +1734,13 @@ input.qty-input[type=number] {
 
     button.btn.btn-outline-danger {
         background: #fff;
-        border: 1px solid #dc3545;
-        color: #dc3545;
+        border: 1px solid #fb0000;
+        color: #fb0000;
 
         &:hover {
-            background: #dc3545;
+            background: #fb0000;
             color: #fff;
-            border-color: #dc3545;
+            border-color: #fb0000;
         }
     }
 }

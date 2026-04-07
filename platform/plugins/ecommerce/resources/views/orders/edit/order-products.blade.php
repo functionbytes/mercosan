@@ -1,3 +1,5 @@
+@php $isInAdmin = $isInAdmin ?? false; @endphp
+
 <x-core::table :hover="false" :striped="false" class="order-products-table">
     <x-core::table.body>
         @foreach ($order->products as $orderProduct)
@@ -100,3 +102,4 @@
         @endforeach
     </x-core::table.body>
 </x-core::table>
+

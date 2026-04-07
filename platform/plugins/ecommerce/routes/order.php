@@ -16,6 +16,18 @@ AdminHelper::registerRoutes(function (): void {
                 'permission' => 'orders.create',
             ]);
 
+            Route::get('manage/{order}', [
+                'as' => 'manage',
+                'uses' => 'OrderController@getManageItems',
+                'permission' => 'orders.edit',
+            ])->wherePrimaryKey();
+
+            Route::post('update-items/{order}', [
+                'as' => 'update-items',
+                'uses' => 'OrderController@postUpdateItems',
+                'permission' => 'orders.edit',
+            ])->wherePrimaryKey();
+
             Route::get('generate-invoice/{order}', [
                 'as' => 'generate-invoice',
                 'uses' => 'OrderController@getGenerateInvoice',
@@ -67,6 +79,12 @@ AdminHelper::registerRoutes(function (): void {
             Route::post('cancel-order/{order}', [
                 'as' => 'cancel',
                 'uses' => 'OrderController@postCancelOrder',
+                'permission' => 'orders.edit',
+            ])->wherePrimaryKey();
+
+            Route::post('add-product/{order}', [
+                'as' => 'add-product',
+                'uses' => 'OrderController@postAddProduct',
                 'permission' => 'orders.edit',
             ])->wherePrimaryKey();
 

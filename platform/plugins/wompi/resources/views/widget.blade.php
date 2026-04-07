@@ -135,7 +135,7 @@
             padding: 1.5rem;
             border-radius: 10px;
             margin: 1rem 0;
-            border-left: 4px solid #dc3545;
+            border-left: 4px solid #fb0000;
         }
         .text-success {
             --bs-text-opacity: 1;

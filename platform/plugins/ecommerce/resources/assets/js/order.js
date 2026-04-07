@@ -375,6 +375,115 @@ class OrderAdminManagement {
                 })
         })
 
+        // --- Agregar producto a orden existente ---
+        let addProductSearchTimer = null
+
+        const renderAddProductItem = (product, addAction) => {
+            const inStock = product.quantity > 0 || !product.with_storehouse_management
+            const stockHtml = product.with_storehouse_management
+                ? (inStock
+                    ? `<small>&nbsp;(${product.quantity} producto(s) disponible)</small>`
+                    : `<div class="text-danger"><small>&nbsp;(Agotado)</small></div>`)
+                : ''
+            const addBtn = inStock
+                ? `<div class="w-100 w-sm-auto col-auto">
+                    <div class="d-flex align-items-center gap-1">
+                        <input type="number" class="form-control form-control-sm add-product-qty-input" value="1" min="1" style="width:60px">
+                        <button class="btn btn-outline-primary btn-sm btn-add-product-item" type="button"
+                            data-id="${product.id}" data-action="${addAction}">
+                            <i class="ti ti-plus icon-sm"></i> Agregar
+                        </button>
+                    </div>
+                   </div>`
+                : ''
+
+            return `<a class="list-group-item list-group-item-action">
+                <div class="row align-items-start">
+                    <div class="col-auto">
+                        <span class="avatar" style="background-image: url('${product.image_url}')"></span>
+                    </div>
+                    <div class="col text-truncate">
+                        <div class="row align-items-center gap-2">
+                            <div class="col d-flex align-content-center flex-wrap">
+                                <span>${product.name}</span>
+                                <div>
+                                    ${stockHtml}
+                                    <span class="text-info ps-1">(${product.formatted_price})</span>
+                                </div>
+                            </div>
+                            ${addBtn}
+                        </div>
+                    </div>
+                </div>
+            </a>`
+        }
+
+        const loadAddProductList = (keyword = '') => {
+            const $modal = $('#add-product-modal')
+            const searchUrl = $modal.find('.box-search-advance.product').data('search-url')
+            const $list = $('#add-product-list')
+
+            $list.html('<a class="list-group-item list-group-item-action disabled text-center py-3"><span class="spinner-border spinner-border-sm me-2"></span>Cargando...</a>')
+            $('#add-product-results').show()
+
+            $.get(searchUrl, { keyword }, (res) => {
+                const products = res.data?.data ?? []
+                const addAction = $modal.find('.box-search-advance.product').data('action')
+                $list.empty()
+
+                if (!products.length) {
+                    $list.html('<a class="list-group-item list-group-item-action disabled text-center py-3">Sin resultados</a>')
+                    return
+                }
+
+                products.forEach((product) => {
+                    $list.append(renderAddProductItem(product, addAction))
+                })
+            })
+        }
+
+        $(document).on('click', '.btn-trigger-add-product', (event) => {
+            event.preventDefault()
+            $('#add-product-search').val('')
+            $('#add-product-results').hide()
+            $('#add-product-list').empty()
+            $('#add-product-modal').modal('show')
+            loadAddProductList()
+        })
+
+        $(document).on('input', '#add-product-search', (event) => {
+            clearTimeout(addProductSearchTimer)
+            const term = $(event.currentTarget).val().trim()
+            addProductSearchTimer = setTimeout(() => loadAddProductList(term), 400)
+        })
+
+        $(document).on('click', '.btn-add-product-item', (event) => {
+            event.preventDefault()
+            const $btn = $(event.currentTarget)
+            const productId = $btn.data('id')
+            const addAction = $btn.data('action')
+            const qty = $btn.closest('.d-flex').find('.add-product-qty-input').val() || 1
+
+            $httpClient
+                .make()
+                .withButtonLoading($btn)
+                .post(addAction, {
+                    product_id: productId,
+                    qty: qty,
+                    _token: $('meta[name="csrf-token"]').attr('content'),
+                })
+                .then(({ data }) => {
+                    if (!data.error) {
+                        Botble.showSuccess(data.message)
+                        $('#add-product-modal').modal('hide')
+                        $('#main-order-content').load(`${window.location.href} #main-order-content > *`)
+                    } else {
+                        Botble.showError(data.message)
+                    }
+                })
+        })
+        // --- Fin agregar producto ---
+
         $(document).on('click', '.btn-trigger-update-shipping-status', (event) => {
             event.preventDefault()
             $('#update-shipping-status-modal').modal('show')

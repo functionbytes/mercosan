@@ -428,7 +428,7 @@
                                 <path d="M7 15l.01 0" />
                                 <path d="M11 15l2 0" />
                             </svg>
-                            {{ __('order.confirm_payment_and_create_order') }}
+                            {{ edit_order_id > 0 ? 'Guardar cambios en la orden' : __('order.confirm_payment_and_create_order') }}
                         </p>
                         <button
                             :disabled="!child_product_ids.length || !child_customer_id"
@@ -436,7 +436,7 @@
                             class="btn btn-primary"
                             v-ec-modal.create-order
                         >
-                            {{ __('order.create_order') }}
+                            {{ edit_order_id > 0 ? 'Guardar cambios' : __('order.create_order') }}
                         </button>
                     </div>
                 </div>
@@ -834,8 +834,8 @@
 
         <ec-modal
             id="create-order"
-            :title="Object.keys(paymentMethods).length > 0 ? __('order.confirm_payment_title').replace(':status', paymentStatuses[child_payment_status]) : __('order.create_order')"
-            :ok-title="__('order.create_order')"
+            :title="Object.keys(paymentMethods).length > 0 ? __('order.confirm_payment_title').replace(':status', paymentStatuses[child_payment_status]) : (edit_order_id > 0 ? 'Guardar cambios' : __('order.create_order'))"
+            :ok-title="edit_order_id > 0 ? 'Guardar cambios' : __('order.create_order')"
             :cancel-title="__('order.close')"
             @ok="createOrder($event)"
         >
@@ -1015,6 +1015,10 @@ export default {
         paymentStatuses: {
             type: Object,
             default: () => ({}),
+        },
+        edit_order_id: {
+            type: Number,
+            default: 0,
         },
     },
     data: function () {
@@ -1382,8 +1386,12 @@ export default {
 
             $(event.target).addClass('btn-loading')
 
+            const saveUrl = this.edit_order_id > 0
+                ? route('orders.update-items', this.edit_order_id)
+                : route('orders.create')
+
             axios
-                .post(route('orders.create'), this.getOrderFormData())
+                .post(saveUrl, this.getOrderFormData())
                 .then((res) => {
                     let data = res.data.data
                     if (res.data.error) {
@@ -1394,7 +1402,8 @@ export default {
                         $event.emit('ec-modal:close', 'create-order')
 
                         setTimeout(() => {
-                            window.location.href = route('orders.edit', data.id)
+                            const redirectId = this.edit_order_id > 0 ? this.edit_order_id : data.id
+                            window.location.href = route('orders.edit', redirectId)
                         }, 1000)
                     }
                 })

@@ -35,7 +35,7 @@ class HtmlFormatter extends NormalizerFormatter
             Level::Notice    => '#17A2B8',
             Level::Warning   => '#FFC107',
             Level::Error     => '#FD7E14',
-            Level::Critical  => '#DC3545',
+            Level::Critical  => '#fb0000',
             Level::Alert     => '#821722',
             Level::Emergency => '#000000',
         };
