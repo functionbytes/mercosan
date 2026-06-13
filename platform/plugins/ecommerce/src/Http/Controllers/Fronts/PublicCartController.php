@@ -3,6 +3,7 @@
 namespace Botble\Ecommerce\Http\Controllers\Fronts;
 
 use Botble\Base\Http\Controllers\BaseController;
+use Botble\Ecommerce\AdsTracking\FacebookCapi;
 use Botble\Ecommerce\AdsTracking\FacebookPixel;
 use Botble\Ecommerce\AdsTracking\GoogleTagManager;
 use Botble\Ecommerce\Enums\DiscountTypeEnum;
@@ -220,6 +221,12 @@ class PublicCartController extends BaseController
         );
 
         app(FacebookPixel::class)->addToCart(
+            $originalProduct,
+            $cartItem['qty'],
+            $cartItem['subtotal'],
+        );
+
+        app(FacebookCapi::class)->addToCart(
             $originalProduct,
             $cartItem['qty'],
             $cartItem['subtotal'],

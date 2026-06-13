@@ -1,0 +1,14 @@
+{
+    "id": "mercosan/discount-extensions",
+    "name": "Discount Extensions",
+    "namespace": "Mercosan\\DiscountExtensions\\",
+    "provider": "Mercosan\\DiscountExtensions\\Providers\\DiscountExtensionsServiceProvider",
+    "author": "Mercosan",
+    "url": "",
+    "version": "1.0.0",
+    "description": "Extiende el sistema de cupones de Botble Ecommerce con tracking granular de uso, max_uses_per_customer configurable y cupones de primera compra (first_order_only).",
+    "minimum_core_version": "7.3.0",
+    "require": [
+        "botble/ecommerce"
+    ]
+}

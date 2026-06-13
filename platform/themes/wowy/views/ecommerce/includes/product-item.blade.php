@@ -67,7 +67,7 @@
                             <i class="fas fa-times"></i>
                         </span>
                     @else
-                        <a aria-label="{{ __('Add To Cart') }}" class="action-btn hover-up add-to-cart-button" data-id="{{ $product->id }}" data-url="{{ route('public.cart.add-to-cart') }}" href="#"><i class="fa fa-shopping-bag"></i></a>
+                        <a aria-label="{{ __('Add To Cart') }}" class="action-btn hover-up add-to-cart-button" data-id="{{ $product->id }}" data-url="{{ route('public.cart.add-to-cart') }}" data-product-name="{{ $product->name }}" data-product-price="{{ $product->front_sale_price }}" href="#"><i class="fa fa-shopping-bag"></i></a>
                     @endif
                 </div>
             @endif

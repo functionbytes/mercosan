@@ -6,6 +6,7 @@ use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Base\Facades\AdminHelper;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Base\Supports\Helper;
+use Botble\Ecommerce\AdsTracking\FacebookCapi;
 use Botble\Ecommerce\AdsTracking\FacebookPixel;
 use Botble\Ecommerce\AdsTracking\GoogleTagManager;
 use Botble\Ecommerce\Events\ProductViewed;
@@ -153,6 +154,7 @@ class HandleFrontPages
 
                 app(GoogleTagManager::class)->viewItem($product);
                 app(FacebookPixel::class)->view($product);
+                app(FacebookCapi::class)->view($product);
 
                 [$productImages, $productVariation, $selectedAttrs] = EcommerceHelper::getProductVariationInfo(
                     $product,

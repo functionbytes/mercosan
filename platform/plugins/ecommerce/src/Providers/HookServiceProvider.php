@@ -20,6 +20,7 @@ use Botble\Base\Supports\TwigCompiler;
 use Botble\Dashboard\Events\RenderingDashboardWidgets;
 use Botble\Dashboard\Supports\DashboardWidgetInstance;
 use Botble\DataSynchronize\Importer\Importer;
+use Botble\Ecommerce\AdsTracking\FacebookCapi;
 use Botble\Ecommerce\AdsTracking\FacebookPixel;
 use Botble\Ecommerce\AdsTracking\GoogleTagManager;
 use Botble\Ecommerce\Cart\CartItem;
@@ -937,6 +938,12 @@ class HookServiceProvider extends ServiceProvider
 
         $this->app->make(GoogleTagManager::class)->pushScriptsToFooter();
         $this->app->make(FacebookPixel::class)->pushScriptsToFooter();
+
+        // Register CAPI singleton and send pending events after response is sent
+        $this->app->singleton(FacebookCapi::class);
+        $this->app->terminating(function () {
+            app(FacebookCapi::class)->sendPendingEvents();
+        });
 
         add_filter('ecommerce_cart_after_item_content', function (?string $html, CartItem $item) {
             $product = Product::query()->find($item->id);

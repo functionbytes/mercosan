@@ -99,6 +99,7 @@ return array(
     'Mollie\\Api\\' => array($vendorDir . '/mollie/mollie-api-php/src'),
     'Mockery\\' => array($vendorDir . '/mockery/mockery/library/Mockery'),
     'Mews\\Purifier\\' => array($vendorDir . '/mews/purifier/src'),
+    'Mercosan\\DiscountExtensions\\' => array($baseDir . '/platform/plugins/discount-extensions/src'),
     'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'Maatwebsite\\Excel\\' => array($vendorDir . '/maatwebsite/excel/src'),

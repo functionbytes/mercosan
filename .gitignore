@@ -40,3 +40,12 @@ storage/framework/laravel-excel/
 .phpactor.json
 
 storage/framework/maintenance.php
+
+# Archivos generados en runtime (ruido en git)
+storage/cache_keys.json
+storage/framework/license-reminder-latest-time.txt
+
+# Artefactos y scripts locales de despliegue/subida
+*.tar.gz
+*.command
+upload_*.log

@@ -38,6 +38,14 @@ class TrackingSettingForm extends SettingForm
                     ->value(get_ecommerce_setting('facebook_pixel_id'))
                     ->helperText(trans('plugins/ecommerce::setting.tracking.form.facebook_pixel_helper'))
             )
+            ->add(
+                'facebook_capi_access_token',
+                TextField::class,
+                TextFieldOption::make()
+                    ->label('Facebook CAPI Access Token')
+                    ->value(get_ecommerce_setting('facebook_capi_access_token'))
+                    ->helperText('Conversions API token (server-side). Genera uno en Meta Business → Events Manager → Settings → Conversions API → Generate Access Token.')
+            )
             ->addCloseCollapsible('facebook_pixel_enabled', '1')
             ->add(
                 'google_tag_manager_enabled',

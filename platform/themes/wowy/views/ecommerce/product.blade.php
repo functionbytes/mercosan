@@ -64,7 +64,7 @@
                 <div class="hr-section"></div>
 
 
-                <form class="add-to-cart-form" method="POST" action="{{ route('public.cart.add-to-cart') }}">
+                <form class="add-to-cart-form" method="POST" action="{{ route('public.cart.add-to-cart') }}" data-product-id="{{ $product->id }}" data-product-name="{{ $product->name }}" data-product-price="{{ $product->front_sale_price }}">
                     @csrf
 
                     @if ($product->variations()->count() > 0)

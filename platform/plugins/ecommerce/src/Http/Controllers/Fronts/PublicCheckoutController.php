@@ -5,6 +5,7 @@ namespace Botble\Ecommerce\Http\Controllers\Fronts;
 use Botble\Base\Facades\BaseHelper;
 use Botble\Base\Http\Controllers\BaseController;
 use Botble\Base\Rules\EmailRule;
+use Botble\Ecommerce\AdsTracking\FacebookCapi;
 use Botble\Ecommerce\AdsTracking\FacebookPixel;
 use Botble\Ecommerce\AdsTracking\GoogleTagManager;
 use Botble\Ecommerce\Enums\DiscountTypeEnum;
@@ -208,6 +209,7 @@ class PublicCheckoutController extends BaseController
 
         app(GoogleTagManager::class)->beginCheckout($productsArray, $orderAmount);
         app(FacebookPixel::class)->checkout($productsArray, $orderAmount);
+        app(FacebookCapi::class)->checkout($productsArray, $orderAmount);
 
         $checkoutView = Theme::getThemeNamespace('views.ecommerce.orders.checkout');
 
@@ -928,6 +930,7 @@ class PublicCheckoutController extends BaseController
         if (session('tracked_start_checkout')) {
             app(GoogleTagManager::class)->purchase($order);
             app(FacebookPixel::class)->purchase($order);
+            app(FacebookCapi::class)->purchase($order);
         }
 
         if (is_plugin_active('marketplace')) {

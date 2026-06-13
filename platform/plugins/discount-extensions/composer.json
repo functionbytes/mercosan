@@ -1,0 +1,15 @@
+{
+    "name": "mercosan/discount-extensions",
+    "description": "Extensiones de cupones para Botble Ecommerce: tracking granular, max_uses_per_customer, first_order_only.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mercosan\\DiscountExtensions\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "botble/ecommerce": "*"
+    }
+}
